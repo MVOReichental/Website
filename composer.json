@@ -1,0 +1,20 @@
+{
+	"name": "mvo/website",
+	"description": "The MVO website",
+	"homepage": "https://musikverein-reichental.de",
+	"minimum-stability": "stable",
+	"license": "proprietary",
+	"authors": [
+		{
+			"name": "Michael Wieland",
+			"email": "git@selfcoders.com"
+		}
+	],
+	"autoload": {
+		"psr-4": {"" : "src/main/php"}
+	},
+	"require": {
+		"altorouter/altorouter": "^1.1",
+		"mustache/mustache": "^2.10"
+	}
+}

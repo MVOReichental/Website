@@ -1,0 +1,120 @@
+[
+	{
+		"title": "Home",
+		"target": "/home",
+		"items": [
+			{
+				"title": "Kontakt",
+				"target": "/kontakt"
+			},
+			{
+				"title": "YouTube",
+				"target": "https://www.youtube.com/user/MVOReichental"
+			},
+			{
+				"title": "Links",
+				"target": "/links"
+			}
+		]
+	},
+	{
+		"title": "Verein",
+		"target": "/vorstand",
+		"items": [
+			{
+				"title": "Chronik",
+				"target": "/chronik"
+			},
+			{
+				"title": "Vereingeschichte",
+				"target": "/vereinsgeschichte"
+			},
+			{
+				"title": "Bisherige erste Vorsitzende",
+				"target": "/bisherige_erste_vorsitzende"
+			},
+			{
+				"title": "Bisherige Dirigenten",
+				"target": "/bisherige_dirigenten"
+			},
+			{
+				"title": "Vorstand",
+				"target": "/vorstand"
+			},
+			{
+				"title": "Beitreten",
+				"target": "/beitreten"
+			},
+			{
+				"title": "Musiker",
+				"target": "/musiker"
+			}
+		]
+	},
+	{
+		"title": "Jugendausbildung",
+		"target": "/jugendausbildung",
+		"items": [
+			{
+				"title": "Ausbildung im Verein",
+				"target": "/jugendausbildung/ausbildung_im_verein"
+			},
+			{
+				"title": "Ausbildungsgruppen",
+				"target": "/jugendausbildung/ausbildungsgruppen"
+			},
+			{
+				"title": "Ausbildungsvereinbarung",
+				"target": "/jugendausbildung/ausbildungsvereinbarung"
+			}
+		]
+	},
+	{
+		"title": "F\u00f6rderverein",
+		"target": "/foerderverein",
+		"items": [
+			{
+				"title": "Warum F\u00f6rderverein?",
+				"target": "/foerderverein/warum_foerderverein"
+			},
+			{
+				"title": "Vorstand",
+				"target": "/foerderverein/vorstand"
+			},
+			{
+				"title": "Kontakt",
+				"target": "/foerderverein/kontakt"
+			}
+		]
+	},
+	{
+		"title": "Termine",
+		"target": "/termine",
+		"items": [
+			{
+				"title": "Aktuell",
+				"target": "/termine/aktuell"
+			},
+			{
+				"include": "de.mvo.website.Dates#getYears",
+				"item": {
+					"title": "{{year}}",
+					"target": "/termine/{{year}}"
+				}
+			}
+		]
+	},
+	{
+		"title": "Fotogalerie",
+		"target": "/fotogalerie",
+		"items": [
+			{
+				"include": "de.mvo.website.Pictures#getYears",
+				"item": {
+					"title": "{{year}}",
+					"target": "/fotogalerie/{{year}}"
+				}
+			}
+		]
+	}
+]
