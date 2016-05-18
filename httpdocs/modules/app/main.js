@@ -3,6 +3,7 @@ moment.locale("de");
 angular.module("mvo", [
 	"ngRoute",
 	"mvo.home",
+	"mvo.imprint",
 	"mvo.dates",
 	"mvo.pictures",
 	"mvo.verein"
@@ -14,10 +15,10 @@ angular.module("mvo", [
 
 		$routeProvider.otherwise(
 			{
-				templateUrl: "modules/not-found/main.html"
+				templateUrl: "modules/app/not-found.html"
 			});
 	}])
-	.controller("AppController", function()
+	.controller("AppController", function($scope)
 	{
-		this.date = new Date();
+		$scope.date = new Date();
 	});
