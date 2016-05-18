@@ -6,6 +6,7 @@ angular.module("mvo", [
 	"mvo.imprint",
 	"mvo.dates",
 	"mvo.pictures",
+	"mvo.foerderverein",
 	"mvo.verein"
 ])
 	.config(["$routeProvider", function($routeProvider) {
@@ -18,7 +19,7 @@ angular.module("mvo", [
 				templateUrl: "modules/app/not-found.html"
 			});
 	}])
-	.controller("AppController", function($scope)
+	.controller("mvo.AppController", function($scope)
 	{
 		$scope.date = new Date();
 	});

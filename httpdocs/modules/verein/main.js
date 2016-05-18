@@ -16,11 +16,11 @@ angular.module("mvo.verein", ["ngRoute"])
 			templateUrl: "/modules/verein/beitreten.html"
 		});
 		$routeProvider.when("/kontakt", {
-			controller: "ContactController",
+			controller: "mvo.verein.ContactController",
 			templateUrl: "/modules/contact/main.html"
 		});
 	}])
-	.controller("ContactController", function($scope)
+	.controller("mvo.verein.ContactController", function($scope)
 	{
 		$scope.address =
 		{

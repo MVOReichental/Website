@@ -4,7 +4,7 @@ angular.module("mvo.dates", ["ngRoute"])
 			redirectTo: "/termine/aktuell"
 		});
 		$routeProvider.when("/termine/aktuell", {
-			controller: "DatesController as datesController",
+			controller: "mvo.dates.DatesController as datesController",
 			templateUrl: "/modules/dates/list.html",
 			resolve : {
 				data: function($http)
@@ -16,7 +16,7 @@ angular.module("mvo.dates", ["ngRoute"])
 			}
 		});
 		$routeProvider.when("/termine/:year", {
-			controller: "DatesController as datesController",
+			controller: "mvo.dates.DatesController as datesController",
 			templateUrl: "/modules/dates/list.html",
 			resolve : {
 				data: function($http, $route)
@@ -28,7 +28,7 @@ angular.module("mvo.dates", ["ngRoute"])
 			}
 		});
 	}])
-	.controller("DatesController", function($scope, $route, data)
+	.controller("mvo.dates.DatesController", function($scope, $route, data)
 	{
 		$scope.sortType = "startDate";
 		$scope.sortReverse = false;
@@ -45,7 +45,7 @@ angular.module("mvo.dates", ["ngRoute"])
 
 		this.dates = data;
 	})
-	.controller("DateYearsController", function($http)
+	.controller("mvo.dates.YearsController", function($http)
 	{
 		var self = this;
 

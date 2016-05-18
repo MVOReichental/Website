@@ -1,7 +1,7 @@
 angular.module("mvo.pictures", ["ngRoute"])
 	.config(["$routeProvider", function($routeProvider) {
 		$routeProvider.when("/fotogalerie", {
-			controller: "YearsController as yearsController",
+			controller: "mvo.pictures.YearsController as yearsController",
 			templateUrl: "/modules/pictures/years.html",
 			resolve : {
 				data: function($http)
@@ -13,7 +13,7 @@ angular.module("mvo.pictures", ["ngRoute"])
 			}
 		});
 		$routeProvider.when("/fotogalerie/:year", {
-			controller: "AlbumsController as albumsController",
+			controller: "mvo.pictures.AlbumsController as albumsController",
 			templateUrl: "/modules/pictures/albums.html",
 			resolve : {
 				data: function($http, $route)
@@ -25,7 +25,7 @@ angular.module("mvo.pictures", ["ngRoute"])
 			}
 		});
 		$routeProvider.when("/fotogalerie/:year/:album", {
-			controller: "AlbumController as albumController",
+			controller: "mvo.pictures.AlbumController as albumController",
 			templateUrl: "/modules/pictures/album.html",
 			resolve : {
 				data: function($http, $route)
@@ -40,16 +40,16 @@ angular.module("mvo.pictures", ["ngRoute"])
 			templateUrl: "/modules/pictures/picture.html"
 		});
 	}])
-	.controller("YearsController", function(data)
+	.controller("mvo.pictures.YearsController", function(data)
 	{
 		this.years = data;
 	})
-	.controller("AlbumsController", function(data)
+	.controller("mvo.pictures.AlbumsController", function(data)
 	{
 		this.year = data.year;
 		this.albums = data.albums;
 	})
-	.controller("AlbumController", function(data)
+	.controller("mvo.pictures.AlbumController", function(data)
 	{
 		this.album = data;
 	});
