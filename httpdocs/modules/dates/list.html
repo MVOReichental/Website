@@ -1,0 +1,49 @@
+<h1 ng-show="datesController.year">Termine - {{datesController.year}}</h1>
+<h1 ng-show="!datesController.year">Unsere n&auml;chsten Termine</h1>
+
+<div class="table-responsive" ng-show="datesController.dates.length">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>
+					<span ng-click="sortType = 'startDate'; sortReverse = !sortReverse">
+						Datum
+						<span ng-show="sortType == 'startDate' && sortReverse" class="fa fa-caret-down"></span>
+						<span ng-show="sortType == 'startDate' && !sortReverse" class="fa fa-caret-up"></span>
+					</span>
+				</th>
+				<th>
+					<span ng-click="sortType = 'startDate'; sortReverse = !sortReverse">
+						Zeit
+						<span ng-show="sortType == 'startDate' && sortReverse" class="fa fa-caret-down"></span>
+						<span ng-show="sortType == 'startDate' && !sortReverse" class="fa fa-caret-up"></span>
+					</span>
+				</th>
+				<th>
+					<span ng-click="sortType = 'event'; sortReverse = !sortReverse">
+						Veranstaltung
+						<span ng-show="sortType == 'event' && sortReverse" class="fa fa-caret-down"></span>
+						<span ng-show="sortType == 'event' && !sortReverse" class="fa fa-caret-up"></span>
+					</span>
+				</th>
+				<th>
+					<span ng-click="sortType = 'location'; sortReverse = !sortReverse">
+						Ort
+						<span ng-show="sortType == 'location' && sortReverse" class="fa fa-caret-down"></span>
+						<span ng-show="sortType == 'location' && !sortReverse" class="fa fa-caret-up"></span>
+					</span>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="date in datesController.dates | orderBy:sortType:sortReverse">
+				<td>{{date.startDate.format("dd DD.MM.YYYY")}}</td>
+				<td>{{date.startDate.format("LT")}}<span ng-if="date.endDate"> - {{date.endDate.format("LT")}}</span></td>
+				<td>{{date.event}}</td>
+				<td>{{date.location}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<div class="alert alert-danger" ng-show="!datesController.dates.length"><i class="fa fa-exclamation-triangle"></i> Keine Termine verf&uuml;gbar</div>

@@ -18,6 +18,10 @@ package {"npm":
   ensure => installed,
 }
 
+package {"php5-cli":
+  ensure => installed,
+}
+
 package {"php5-mysql":
   ensure => "installed",
 }

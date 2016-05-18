@@ -1,0 +1,13 @@
+<h1>Fotogalerie - Jahr {{albumsController.year}}</h1>
+<div class="row">
+	<div class="col-sm-6 col-md-4" ng-repeat="album in albumsController.albums">
+		<a href="#/fotogalerie/{{albumsController.year}}/{{album.id}}">
+			<div class="thumbnail">
+				<img ng-src="pictures/{{album.id}}/small_{{album.cover.file}}.jpg"/>
+				<div class="caption">
+					<h3>{{album.title}}</h3>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>

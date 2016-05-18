@@ -1,0 +1,11 @@
+<h1>Fotogalerie - {{albumController.album.title}}</h1>
+<div class="row">
+	<div class="col-sm-6 col-md-4" ng-repeat="picture in albumController.album.pictures">
+		<div class="thumbnail">
+			<img ng-src="pictures/{{albumController.album.id}}/small_{{picture.file}}.jpg"/>
+			<div class="caption">
+				<h3>{{picture.title}}</h3>
+			</div>
+		</div>
+	</div>
+</div>
