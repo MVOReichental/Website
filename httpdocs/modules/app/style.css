@@ -27,6 +27,11 @@ body
 	margin-bottom: 0;
 }
 
+.pre
+{
+	white-space: pre;
+}
+
 #logo
 {
 	padding: 5px;
