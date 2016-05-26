@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "143613322506155f9243cb40a9ca0d76",
-    "content-hash": "1e9ba3a5e1a9be972aff3854189ebec8",
+    "hash": "d0304036198aea078968a04340685960",
+    "content-hash": "4ff4d20366dd3e9d270f3d94f3058932",
     "packages": [
         {
             "name": "altorouter/altorouter",
@@ -61,12 +61,96 @@
                 "routing"
             ],
             "time": "2015-11-30 00:47:43"
+        },
+        {
+            "name": "mustache/mustache",
+            "version": "v2.10.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bobthecow/mustache.php.git",
+                "reference": "0bb2f76e2f34a8864a32be34c4ec66274d76c05e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bobthecow/mustache.php/zipball/0bb2f76e2f34a8864a32be34c4ec66274d76c05e",
+                "reference": "0bb2f76e2f34a8864a32be34c4ec66274d76c05e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.4"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "~1.6",
+                "phpunit/phpunit": "~3.7|~4.0|~5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Mustache": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Justin Hileman",
+                    "email": "justin@justinhileman.info",
+                    "homepage": "http://justinhileman.com"
+                }
+            ],
+            "description": "A Mustache implementation in PHP.",
+            "homepage": "https://github.com/bobthecow/mustache.php",
+            "keywords": [
+                "mustache",
+                "templating"
+            ],
+            "time": "2016-02-27 19:22:46"
+        },
+        {
+            "name": "programie/pini",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Programie/Pini.git",
+                "reference": "034cf1e3b6082e9e551295024c3a0ba6d297a499"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Programie/Pini/zipball/034cf1e3b6082e9e551295024c3a0ba6d297a499",
+                "reference": "034cf1e3b6082e9e551295024c3a0ba6d297a499",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.3",
+                "satooshi/php-coveralls": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "": "src/main/php"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Michael Wieland",
+                    "email": "pini@selfcoders.com",
+                    "homepage": "http://selfcoders.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A simple PHP class for reading and writing ini files",
+            "time": "2015-11-17 13:24:59"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "programie/pini": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

@@ -1,0 +1,29 @@
+<h1>Unsere n&auml;chsten Termine</h1>
+
+{{#dates.count}}
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Datum</th>
+					<th>Zeit</th>
+					<th>Veranstaltung</th>
+					<th>Ort</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#dates}}
+					<tr>
+						<td>{{startDate.humanReadableDate}}</td>
+						<td>{{startDate.humanReadableTime}}{{#endDate}} - {{humanReadableTime}}{{/endDate}}</td>
+						<td>{{title}}</td>
+						<td>{{location.name}}</td>
+					</tr>
+				{{/dates}}
+			</tbody>
+		</table>
+	</div>
+{{/dates.count}}
+{{^dates.count}}
+	<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Keine Termine verf&uuml;gbar!</div>
+{{/dates.count}}

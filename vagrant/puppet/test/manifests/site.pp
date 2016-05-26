@@ -80,7 +80,7 @@ exec {"npm_install_bower":
 
 exec {"bower_install":
   path        => ["/bin", "/usr/bin", "/usr/local/bin"],
-  cwd         => "/opt/mvo-website/httpdocs",
+  cwd         => "/opt/mvo-website",
   user        => "vagrant",
   command     => "bower install --config.interactive=false",
   environment => ["HOME=/home/vagrant"],

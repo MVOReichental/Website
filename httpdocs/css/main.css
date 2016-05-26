@@ -1,0 +1,54 @@
+@media screen
+{
+	html
+	{
+		position: relative;
+		min-height: 100%;
+	}
+
+	body
+	{
+		margin-bottom: 145px;
+	}
+}
+
+@media print
+{
+	a[href]:after
+	{
+		content: "";
+	}
+}
+
+.footer
+{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 130px;
+	padding: 40px 0;
+	color: #999;
+	text-align: center;
+	background-color: #f9f9f9;
+	border-top: 1px solid #e5e5e5;
+}
+
+.footer *:last-child
+{
+	margin-bottom: 0;
+}
+
+.pre
+{
+	white-space: pre;
+}
+
+#logo
+{
+	padding: 5px;
+}
+
+#logo img
+{
+	height: 40px;
+}

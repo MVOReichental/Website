@@ -2,4 +2,5 @@
 /.vagrant/
 /httpdocs/bower_components/
 /httpdocs/pictures
+/src/main/resources/config.ini
 /vendor/

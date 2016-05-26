@@ -1,0 +1,13 @@
+<h1>Kontakt</h1>
+
+{{#.}}
+	<address>
+		<strong>{{name}}</strong><br/>
+		<span class="pre">{{text}}</span>
+
+		{{#mailbox}}
+			<br/>
+			<a class="contact-mail" data-mailbox="{{mailbox}}"></a>
+		{{/mailbox}}
+	</address>
+{{/.}}

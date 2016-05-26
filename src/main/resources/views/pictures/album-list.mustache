@@ -1,0 +1,16 @@
+<h1>Fotogalerie - Jahr {{year}}</h1>
+
+<div class="row">
+	{{#albums}}
+		<div class="col-sm-6 col-md-4">
+			<a href="#/fotogalerie/{{year}}/{{id}}">
+				<div class="thumbnail">
+					<img ng-src="pictures/{{id}}/small_{{cover.file}}.jpg"/>
+					<div class="caption">
+						<h3>{{title}}</h3>
+					</div>
+				</div>
+			</a>
+		</div>
+	{{/albums}}
+</div>
