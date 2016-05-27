@@ -16,6 +16,7 @@ class Endpoints
 			new Endpoint(HttpMethod::GET, "/", new StaticRenderer("home")),
 			new Endpoint(HttpMethod::GET, "/impressum", new StaticRenderer("imprint")),
 			new Endpoint(HttpMethod::GET, "/beitreten", new StaticRenderer("verein/beitreten")),
+			new Endpoint(HttpMethod::GET, "/beitreten/beitrittserklaerung.pdf", new FileRenderer(RESOURCES_ROOT . "/beitrittserklaerung.pdf", "application/pdf")),
 			new Endpoint(HttpMethod::GET, "/bisherige_dirigenten", new StaticRenderer("verein/bisherige_dirigenten")),
 			new Endpoint(HttpMethod::GET, "/bisherige_erste_vorsitzende", new StaticRenderer("verein/bisherige_erste_vorsitzende")),
 			new Endpoint(HttpMethod::GET, "/chronik", new StaticRenderer("verein/chronik")),
