@@ -1,5 +1,3 @@
-moment.locale("de");
-
 $(function()
 {
 	var at = decodeURIComponent("%40");
