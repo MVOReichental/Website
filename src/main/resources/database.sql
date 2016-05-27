@@ -23,11 +23,17 @@ CREATE TABLE `dates` (
 CREATE TABLE `picturealbums` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `coverPictureId` int(11) unsigned DEFAULT NULL,
+  `year` year NOT NULL,
   `date` date NOT NULL,
+  `name` varchar(200) NOT NULL,
   `title` varchar(200) NOT NULL,
   `text` text DEFAULT NULL,
+  `published` boolean NOT NULL DEFAULT FALSE,
+  `isPublic` boolean NOT NULL DEFAULT FALSE,
+  `isAlbumOfTheYear` boolean NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`id`),
   KEY `coverPictureId` (`coverPictureId`),
+  UNIQUE KEY `year_name` (`year`, `name`),
   CONSTRAINT `picturealbums_ibfk1` FOREIGN KEY (`coverPictureId`) REFERENCES `pictures` (`id`) ON UPDATE CASCADE ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET =utf8;
 
@@ -35,9 +41,11 @@ CREATE TABLE `pictures` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `albumId` int(11) unsigned NOT NULL,
   `file` varchar(32) NOT NULL,
+  `number` int(11) unsigned NOT NULL,
   `title` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `albumId` (`albumId`),
+  UNIQUE KEY `albumId_number` (`albumId`, `number`),
   CONSTRAINT `pictures_ibfk1` FOREIGN KEY (`albumId`) REFERENCES `picturealbums` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

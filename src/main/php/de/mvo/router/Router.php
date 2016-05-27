@@ -30,6 +30,6 @@ class Router extends AltoRouter
 			return null;
 		}
 
-		return new Match($match["params"], $match["target"]);
+		return new Match((object) $match["params"], $match["target"]);
 	}
 }

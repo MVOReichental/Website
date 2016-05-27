@@ -5,7 +5,6 @@ use de\mvo\renderer\Renderer;
 
 class Match
 {
-	public $params;
 	/**
 	 * @var Renderer
 	 */
@@ -13,7 +12,8 @@ class Match
 
 	public function __construct($params, Renderer $renderer)
 	{
-		$this->params = $params;
+		$renderer->setParams($params);
+
 		$this->renderer = $renderer;
 	}
 }

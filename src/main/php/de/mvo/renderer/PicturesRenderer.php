@@ -14,15 +14,21 @@ class PicturesRenderer extends AbstractRenderer
 		{
 			if (isset($this->params->album))
 			{
-				return MustacheRenderer::render("pictures/album", new Album);
+				$album = Album::getByYearAndName($this->params->year, $this->params->album);
+				if ($album === null)
+				{
+					http_response_code(404);
+				}
+
+				return MustacheRenderer::render("pictures/album", $album);
 			}
 			else
 			{
 				return MustacheRenderer::render("pictures/album-list", array
 				(
 					"year" => $this->params->year,
-					"albums" => new AlbumList($this->params->year
-				)));
+					"albums" => new AlbumList($this->params->year)
+				));
 			}
 		}
 		else
