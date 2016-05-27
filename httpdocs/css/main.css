@@ -43,6 +43,19 @@
 	white-space: pre;
 }
 
+@media (min-width: 768px)
+{
+	.dl-wide dt
+	{
+		width: 200px;
+	}
+
+	.dl-wide dd
+	{
+		margin-left: 220px;
+	}
+}
+
 #logo
 {
 	padding: 5px;

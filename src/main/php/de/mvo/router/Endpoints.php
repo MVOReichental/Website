@@ -21,6 +21,8 @@ class Endpoints
 			new Endpoint(HttpMethod::GET, "/vereinsgeschichte", new StaticRenderer("verein/vereinsgeschichte")),
 			new Endpoint(HttpMethod::GET, "/kontakt", new JsonRenderer("contact", "contact")),
 
+			new Endpoint(HttpMethod::GET, "/foerderverein/warum_foerderverein", new StaticRenderer("foerderverein/warum_foerderverein")),
+			new Endpoint(HttpMethod::GET, "/foerderverein/vorstand", new StaticRenderer("foerderverein/vorstand")),
 			new Endpoint(HttpMethod::GET, "/foerderverein/kontakt", new JsonRenderer("contact", "foerderverein/contact")),
 
 			// Dates
