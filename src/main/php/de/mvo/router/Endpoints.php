@@ -26,12 +26,11 @@ class Endpoints
 			// Dates
 			new Endpoint(HttpMethod::GET, "/termine", new DatesRenderer(DatesRenderer::TYPE_HTML)),
 			new Endpoint(HttpMethod::GET, "/termine.ics", new DatesRenderer(DatesRenderer::TYPE_ICAL)),
-			new Endpoint(HttpMethod::GET, "/termine.pdf", new DatesRenderer(DatesRenderer::TYPE_PDF)),
 
 			// Pictures
 			new Endpoint(HttpMethod::GET, "/fotogalerie", new PicturesRenderer),
 			new Endpoint(HttpMethod::GET, "/fotogalerie/[i:year]", new PicturesRenderer),
-			new Endpoint(HttpMethod::GET, "/fotogalerie/[i:year]/[i:album]", new PicturesRenderer)
+			new Endpoint(HttpMethod::GET, "/fotogalerie/[i:year]/[:album]", new PicturesRenderer)
 		);
 	}
 }

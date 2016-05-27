@@ -28,9 +28,6 @@ class DatesRenderer extends AbstractRenderer
 			case self::TYPE_ICAL:
 				// Render iCal
 				return null;
-			case self::TYPE_PDF:
-				// Render PDF
-				return null;
 		}
 	}
 }
