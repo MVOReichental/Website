@@ -2,6 +2,7 @@
 namespace de\mvo\router;
 
 use de\mvo\renderer\DatesRenderer;
+use de\mvo\renderer\FileRenderer;
 use de\mvo\renderer\JsonRenderer;
 use de\mvo\renderer\PicturesRenderer;
 use de\mvo\renderer\StaticRenderer;
@@ -20,6 +21,10 @@ class Endpoints
 			new Endpoint(HttpMethod::GET, "/chronik", new StaticRenderer("verein/chronik")),
 			new Endpoint(HttpMethod::GET, "/vereinsgeschichte", new StaticRenderer("verein/vereinsgeschichte")),
 			new Endpoint(HttpMethod::GET, "/kontakt", new JsonRenderer("contact", "contact")),
+
+			new Endpoint(HttpMethod::GET, "/jugendausbildung/ausbildung_im_verein", new StaticRenderer("jugendausbildung/ausbildung_im_verein")),
+			new Endpoint(HttpMethod::GET, "/jugendausbildung/ausbildungsgruppen", new JsonRenderer("jugendausbildung/ausbildungsgruppen", "jugendausbildung/ausbildungsgruppen")),
+			new Endpoint(HttpMethod::GET, "/jugendausbildung/ausbildungsvereinbarung.pdf", new FileRenderer(RESOURCES_ROOT . "/ausbildungsvereinbarung.pdf", "application/pdf")),
 
 			new Endpoint(HttpMethod::GET, "/foerderverein/warum_foerderverein", new StaticRenderer("foerderverein/warum_foerderverein")),
 			new Endpoint(HttpMethod::GET, "/foerderverein/vorstand", new StaticRenderer("foerderverein/vorstand")),
