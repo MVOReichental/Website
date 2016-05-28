@@ -23,7 +23,7 @@ class Endpoints
 			new Endpoint(HttpMethod::GET, "/bisherige_erste_vorsitzende", new StaticRenderer("verein/bisherige_erste_vorsitzende")),
 			new Endpoint(HttpMethod::GET, "/chronik", new StaticRenderer("verein/chronik")),
 			new Endpoint(HttpMethod::GET, "/vereinsgeschichte", new StaticRenderer("verein/vereinsgeschichte")),
-			new Endpoint(HttpMethod::GET, "/vorstand", new StaticRenderer("verein/vorstand")),
+			new Endpoint(HttpMethod::GET, "/vorstand", new GroupMembersRenderer("Vorstand", "vorstandschaft")),
 			new Endpoint(HttpMethod::GET, "/musiker", new GroupMembersRenderer("Musiker", "musicians")),
 			new Endpoint(HttpMethod::GET, "/kontakt", new JsonRenderer("contact", "contact")),
 
@@ -32,7 +32,7 @@ class Endpoints
 			new Endpoint(HttpMethod::GET, "/jugendausbildung/ausbildungsvereinbarung.pdf", new FileRenderer(RESOURCES_ROOT . "/ausbildungsvereinbarung.pdf", "application/pdf")),
 
 			new Endpoint(HttpMethod::GET, "/foerderverein/warum_foerderverein", new StaticRenderer("foerderverein/warum_foerderverein")),
-			new Endpoint(HttpMethod::GET, "/foerderverein/vorstand", new StaticRenderer("foerderverein/vorstand")),
+			new Endpoint(HttpMethod::GET, "/foerderverein/vorstand", new GroupMembersRenderer("Der Vorstand des Fördervereins", "foerderverein")),
 			new Endpoint(HttpMethod::GET, "/foerderverein/kontakt", new JsonRenderer("contact", "foerderverein/contact")),
 
 			// Dates

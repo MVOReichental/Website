@@ -128,12 +128,6 @@ $group1->permissions->append("groups.musicians.group1");
 $group1->permissions->append("another.permission");
 $rootGroup->addGroup($group1);
 
-$group3 = new Group;
-$group3->title = "Group 3";
-$group3->permissions->append("groups.musicians.group1.group3");
-$group3->permissions->append("sub.permission");
-$group1->addGroup($group3);
-
 $group2 = new Group;
 $group2->title = "Group 2";
 $group2->permissions->append("groups.musicians.group2");
@@ -141,8 +135,19 @@ $group2->permissions->append("permissions.2");
 $rootGroup->addGroup($group2);
 
 $group1->addUser($user1);
-$group3->addUser($user1);
 $group2->addUser($user2);
 $group2->addUser($user3);
+
+$rootGroup = new Group;
+$rootGroup->title = "Vorstandschaft";
+$rootGroup->permissions->append("groups.vorstandschaft");
+$rootGroup->permissions->append("some.other.permission");
+$root->append($rootGroup);
+
+$group1 = new Group;
+$group1->title = "Group 3";
+$group1->permissions->append("groups.vorstandschaft.vorstand");
+$group1->addUser($user1);
+$rootGroup->addGroup($group1);
 
 $root->save();
