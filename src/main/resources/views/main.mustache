@@ -18,61 +18,61 @@
 		<script src="js/main.js"></script>
 	</head>
 	<body>
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="" id="logo"><img src="img/logo.png"/></a>
+				</div>
+				<div class="collapse navbar-collapse" id="navbar">
+					<ul class="nav navbar-nav">
+						<li><a href="">Home</a></li>
+						<li><a href="aktuell">Aktuell</a></li>
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" role="button">Verein <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="chronik">Chronik</a></li>
+								<li><a href="vereinsgeschichte">Vereinsgeschichte</a></li>
+								<li><a href="bisherige_erste_vorsitzende">Bisherige erste Vorsitzende</a></li>
+								<li><a href="bisherige_dirigenten">Bisherige Dirigenten</a></li>
+								<li><a href="vorstand">Vorstand</a></li>
+								<li><a href="beitreten">Beitreten</a></li>
+								<li><a href="musiker">Musiker</a></li>
+								<li><a href="kontakt">Kontakt</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" role="button">Jugendausbildung <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="jugendausbildung/ausbildung_im_verein">Ausbildung im Verein</a></li>
+								<li><a href="jugendausbildung/ausbildungsgruppen">Ausbildungsgruppen</a></li>
+								<li><a href="jugendausbildung/ausbildungsvereinbarung.pdf">Ausbildungsvereinbarung</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" role="button">F&ouml;rderverein <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="foerderverein/warum_foerderverein">Warum F&ouml;rderverein?</a></li>
+								<li><a href="foerderverein/vorstand">Vorstand</a></li>
+								<li><a href="foerderverein/kontakt">Kontakt</a></li>
+							</ul>
+						</li>
+						<li><a href="termine">Termine</a></li>
+						<li><a href="fotogalerie">Fotogalerie</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
 		<div class="container">
 
 			<!--[if lt IE 7]>
-			<p class="browsehappy">Sie verwenden einen <strong>veralteten</strong> Browser. Bitte <a href="http://browsehappy.com/">aktualisieren Sie ihren Browser</a>.</p>
+			<p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Sie verwenden einen <strong>veralteten</strong> Browser. Bitte <a href="http://browsehappy.com/">aktualisieren Sie ihren Browser</a>.</p>
 			<![endif]-->
-
-			<nav class="navbar navbar-default">
-				<div class="container-fluid">
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-						<a class="navbar-brand" href="" id="logo"><img src="img/logo.png"/></a>
-					</div>
-					<div class="collapse navbar-collapse" id="navbar">
-						<ul class="nav navbar-nav">
-							<li><a href="">Home</a></li>
-							<li><a href="aktuell">Aktuell</a></li>
-							<li class="dropdown">
-								<a class="dropdown-toggle" data-toggle="dropdown" role="button">Verein <span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li><a href="chronik">Chronik</a></li>
-									<li><a href="vereinsgeschichte">Vereinsgeschichte</a></li>
-									<li><a href="bisherige_erste_vorsitzende">Bisherige erste Vorsitzende</a></li>
-									<li><a href="bisherige_dirigenten">Bisherige Dirigenten</a></li>
-									<li><a href="vorstand">Vorstand</a></li>
-									<li><a href="beitreten">Beitreten</a></li>
-									<li><a href="musiker">Musiker</a></li>
-									<li><a href="kontakt">Kontakt</a></li>
-								</ul>
-							</li>
-							<li class="dropdown">
-								<a class="dropdown-toggle" data-toggle="dropdown" role="button">Jugendausbildung <span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li><a href="jugendausbildung/ausbildung_im_verein">Ausbildung im Verein</a></li>
-									<li><a href="jugendausbildung/ausbildungsgruppen">Ausbildungsgruppen</a></li>
-									<li><a href="jugendausbildung/ausbildungsvereinbarung.pdf">Ausbildungsvereinbarung</a></li>
-								</ul>
-							</li>
-							<li class="dropdown">
-								<a class="dropdown-toggle" data-toggle="dropdown" role="button">F&ouml;rderverein <span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li><a href="foerderverein/warum_foerderverein">Warum F&ouml;rderverein?</a></li>
-									<li><a href="foerderverein/vorstand">Vorstand</a></li>
-									<li><a href="foerderverein/kontakt">Kontakt</a></li>
-								</ul>
-							</li>
-							<li><a href="termine">Termine</a></li>
-							<li><a href="fotogalerie">Fotogalerie</a></li>
-						</ul>
-					</div>
-				</div>
-			</nav>
 
 			{{{view}}}
 		</div>
