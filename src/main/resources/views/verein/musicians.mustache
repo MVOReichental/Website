@@ -1,0 +1,17 @@
+<h1>Musiker</h1>
+
+{{#groups}}
+	<h2>{{title}}</h2>
+	<div class="row">
+		{{#users}}
+			{{#id}}
+				<div class="col-md-3">
+					<img src="users/{{id}}/profile-picture.jpg?hash={{profilePictureHash}}" class="musicians-img img-thumbnail"/>
+					<div class="caption">
+						<h3>{{firstName}} {{lastName}}</h3>
+					</div>
+				</div>
+			{{/id}}
+		{{/users}}
+	</div>
+{{/groups}}

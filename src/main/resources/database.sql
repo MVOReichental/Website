@@ -49,4 +49,20 @@ CREATE TABLE `pictures` (
   CONSTRAINT `pictures_ibfk1` FOREIGN KEY (`albumId`) REFERENCES `picturealbums` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+CREATE TABLE `users` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) NOT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `newEmail` varchar(100) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `firstName` varchar(100) DEFAULT NULL,
+  `lastName` varchar(100) DEFAULT NULL,
+  `birthDate` date DEFAULT NULL,
+  `lastOnline` datetime DEFAULT NULL,
+  `enabled` boolean NOT NULL DEFAULT TRUE,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

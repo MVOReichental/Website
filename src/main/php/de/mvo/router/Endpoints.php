@@ -4,7 +4,9 @@ namespace de\mvo\router;
 use de\mvo\renderer\DatesRenderer;
 use de\mvo\renderer\FileRenderer;
 use de\mvo\renderer\JsonRenderer;
+use de\mvo\renderer\MusiciansRenderer;
 use de\mvo\renderer\PicturesRenderer;
+use de\mvo\renderer\ProfilePictureRenderer;
 use de\mvo\renderer\StaticRenderer;
 
 class Endpoints
@@ -22,6 +24,7 @@ class Endpoints
 			new Endpoint(HttpMethod::GET, "/chronik", new StaticRenderer("verein/chronik")),
 			new Endpoint(HttpMethod::GET, "/vereinsgeschichte", new StaticRenderer("verein/vereinsgeschichte")),
 			new Endpoint(HttpMethod::GET, "/vorstand", new StaticRenderer("verein/vorstand")),
+			new Endpoint(HttpMethod::GET, "/musiker", new MusiciansRenderer),
 			new Endpoint(HttpMethod::GET, "/kontakt", new JsonRenderer("contact", "contact")),
 
 			new Endpoint(HttpMethod::GET, "/jugendausbildung/ausbildung_im_verein", new StaticRenderer("jugendausbildung/ausbildung_im_verein")),
@@ -39,7 +42,9 @@ class Endpoints
 			// Pictures
 			new Endpoint(HttpMethod::GET, "/fotogalerie", new PicturesRenderer),
 			new Endpoint(HttpMethod::GET, "/fotogalerie/[i:year]", new PicturesRenderer),
-			new Endpoint(HttpMethod::GET, "/fotogalerie/[i:year]/[:album]", new PicturesRenderer)
+			new Endpoint(HttpMethod::GET, "/fotogalerie/[i:year]/[:album]", new PicturesRenderer),
+
+			new Endpoint(HttpMethod::GET, "/users/[i:id]/profile-picture.jpg", new ProfilePictureRenderer)
 		);
 	}
 }

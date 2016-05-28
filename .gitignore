@@ -3,4 +3,5 @@
 /httpdocs/bower_components/
 /httpdocs/pictures
 /src/main/resources/config.ini
+/src/main/resources/permissions.serialized
 /vendor/
