@@ -11,4 +11,6 @@ $(function()
 		$(this).attr("href", protocol + ":" + address);
 		$(this).text(address);
 	});
+
+	$(".photobox-source").photobox();
 });
