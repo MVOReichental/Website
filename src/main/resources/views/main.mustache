@@ -7,14 +7,16 @@
 
 		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
 		<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css"/>
-		<link rel="stylesheet" href="bower_components/photobox/photobox/photobox.css"/>
+		<link rel="stylesheet" href="bower_components/blueimp-gallery/css/blueimp-gallery.min.css"/>
+		<link rel="stylesheet" href="bower_components/blueimp-bootstrap-image-gallery/css/bootstrap-image-gallery.min.css"/>
 		<link rel="stylesheet" href="css/main.css"/>
 		<link rel="stylesheet" href="css/home.css"/>
 		<link rel="stylesheet" href="css/musicians.css"/>
 
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
 		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-		<script src="bower_components/photobox/photobox/jquery.photobox.js"></script>
+		<script src="bower_components/blueimp-gallery/js/blueimp-gallery.min.js"></script>
+		<script src="bower_components/blueimp-bootstrap-image-gallery/js/bootstrap-image-gallery.min.js"></script>
 		<script src="js/main.js"></script>
 	</head>
 	<body>
@@ -68,8 +70,38 @@
 			</div>
 		</nav>
 
-		<div class="container">
+		<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+			<div class="slides"></div>
+			<h3 class="title"></h3>
+			<a class="prev">‹</a>
+			<a class="next">›</a>
+			<a class="close">×</a>
+			<a class="play-pause"></a>
+			<ol class="indicator"></ol>
+			<div class="modal fade">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" aria-hidden="true">&times;</button>
+							<h4 class="modal-title"></h4>
+						</div>
+						<div class="modal-body next"></div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default pull-left prev">
+								<i class="glyphicon glyphicon-chevron-left"></i>
+								Previous
+							</button>
+							<button type="button" class="btn btn-primary next">
+								Next
+								<i class="glyphicon glyphicon-chevron-right"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
+		<div class="container">
 			<!--[if lt IE 7]>
 			<p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Sie verwenden einen <strong>veralteten</strong> Browser. Bitte <a href="http://browsehappy.com/">aktualisieren Sie ihren Browser</a>.</p>
 			<![endif]-->

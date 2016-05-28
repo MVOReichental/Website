@@ -12,5 +12,15 @@ $(function()
 		$(this).text(address);
 	});
 
-	$(".photobox-source").photobox();
+	$(".gallery-source a").on("click", function(event)
+	{
+		event.preventDefault();
+		blueimp.Gallery($(".gallery-source a"),
+		{
+			useBootstrapModal: false,
+			continuous: false,
+			slideshowInterval: 10000,
+			index: $(this)[0]
+		});
+	})
 });

@@ -16,6 +16,7 @@
   "dependencies": {
     "bootstrap": "^3.3.6",
     "font-awesome": "fontawesome#^4.6.3",
-    "photobox": "^1.9.9"
+    "blueimp-bootstrap-image-gallery": "^3.4.2",
+    "blueimp-gallery": "^2.21.2"
   }
 }
