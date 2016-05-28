@@ -1,13 +1,21 @@
 {{%ANCHORED-DOT}}
 
 {{#id}}
-	<h1>Fotogalerie - {{title}} ({{year}})</h1>
+	<ol class="breadcrumb">
+		<li><a href="fotogalerie">Fotogalerie</a></li>
+		<li><a href="fotogalerie/{{year}}">{{year}}</a></li>
+		<li class="active">{{title}}</li>
+	</ol>
+
+	<div class="page-header">
+		<h1>Fotogalerie - {{title}} ({{year}})</h1>
+	</div>
 
 	<div class="row photobox-source">
 		{{#pictures}}
 			<div class="col-sm-6 col-md-4">
 				<a href="pictures/{{albumId}}/large_{{file}}.jpg" class="well well-sm thumbnail">
-					<img src="pictures/{{albumId}}/small_{{file}}.jpg"/>
+					<img src="pictures/{{albumId}}/small_{{file}}.jpg" title="{{.title}}"/>
 					{{#.title}}
 						<div class="caption">
 							<h3>{{.}}</h3>
@@ -22,6 +30,9 @@
 	</div>
 {{/id}}
 {{^id}}
-	<h1>Fotogalerie</h1>
+	<div class="page-header">
+		<h1>Fotogalerie</h1>
+	</div>
+
 	<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Album nicht gefunden!</div>
 {{/id}}
