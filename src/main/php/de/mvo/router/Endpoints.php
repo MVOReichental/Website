@@ -21,6 +21,7 @@ class Endpoints
 			new Endpoint(HttpMethod::GET, "/bisherige_erste_vorsitzende", new StaticRenderer("verein/bisherige_erste_vorsitzende")),
 			new Endpoint(HttpMethod::GET, "/chronik", new StaticRenderer("verein/chronik")),
 			new Endpoint(HttpMethod::GET, "/vereinsgeschichte", new StaticRenderer("verein/vereinsgeschichte")),
+			new Endpoint(HttpMethod::GET, "/vorstand", new StaticRenderer("verein/vorstand")),
 			new Endpoint(HttpMethod::GET, "/kontakt", new JsonRenderer("contact", "contact")),
 
 			new Endpoint(HttpMethod::GET, "/jugendausbildung/ausbildung_im_verein", new StaticRenderer("jugendausbildung/ausbildung_im_verein")),
