@@ -54,6 +54,33 @@
 	}
 }
 
+/* Theme */
+a
+{
+	color: #a4556b;
+}
+a:hover,
+a:focus
+{
+	color: #a00000;
+	text-decoration: underline;
+}
+a.thumbnail:hover,
+a.thumbnail:focus,
+a.thumbnail.active
+{
+	border-color: #a00000;
+}
+.btn-link
+{
+	color: #a4556b;
+}
+.btn-link:hover,
+.btn-link:focus
+{
+	color: #a00000;
+}
+
 .pre
 {
 	white-space: pre;
