@@ -114,6 +114,8 @@ foreach ($users as $user)
 	$user->id = Database::lastInsertId();
 }
 
+$user3->setPassword("test");
+
 $root = new GroupList;
 
 $rootGroup = new Group;

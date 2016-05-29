@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+		<title>Musikverein "Orgelfels" Reichental e.V. - Interner Bereich</title>
+
+		<base href="/"/>
+
+		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css"/>
+		<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css"/>
+		<link rel="stylesheet" href="bower_components/blueimp-gallery/css/blueimp-gallery.min.css"/>
+		<link rel="stylesheet" href="bower_components/blueimp-bootstrap-image-gallery/css/bootstrap-image-gallery.min.css"/>
+		<link rel="stylesheet" href="css/main.css"/>
+		<link rel="stylesheet" href="css/account.css"/>
+
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="bower_components/blueimp-gallery/js/blueimp-gallery.min.js"></script>
+		<script src="bower_components/blueimp-bootstrap-image-gallery/js/bootstrap-image-gallery.min.js"></script>
+		<script src="js/main.js"></script>
+	</head>
+	<body>
+		{{#loggedIn}}
+			<nav class="navbar navbar-inverse navbar-fixed-top">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="intern">Interner Bereich</a>
+					</div>
+					<div class="collapse navbar-collapse" id="navbar">
+						<ul class="nav navbar-nav">
+							<li><a href="intern/mitglieder">Mitgliederliste</a></li>
+							<li><a href="intern/formulare">Formulare</a></li>
+							<li><a href="intern/nachrichten">Nachrichten</a></li>
+							<li><a href="intern/notenverzeichnis">Notenverzeichnis</a></li>
+							<li><a href="intern/termine">Termine</a></li>
+							<li><a href="intern/fotogalerie">Fotogalerie</a></li>
+						</ul>
+
+						<ul class="nav navbar-nav navbar-right">
+							{{#user}}
+								<li class="dropdown">
+									<a class="dropdown-toggle" data-toggle="dropdown" role="button" id="navbar-profile">
+										<img src="users/{{id}}/profile-picture.jpg?hash={{profilePictureHash}}"/>
+										<span class="caret"></span>
+									</a>
+									<ul class="dropdown-menu">
+										<li class="dropdown-header">Angemeldet als <strong>{{firstName}} {{lastName}}</strong></li>
+
+										<li><a href="intern/mitglieder/{{username}}">Dein Profil</a></li>
+
+										<li class="divider"></li>
+
+										<li><a href="intern/profile/settings">Einstellungen</a></li>
+										<li><a href="intern/logout">Abmelden</a></li>
+									</ul>
+								</li>
+							{{/user}}
+						</ul>
+					</div>
+				</div>
+			</nav>
+		{{/loggedIn}}
+
+		<div class="container-fluid">
+			{{{content}}}
+		</div>
+	</body>

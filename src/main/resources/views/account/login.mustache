@@ -1,0 +1,18 @@
+<form id="login-form" method="post" action="intern/login?redirect={{url}}">
+	<h2>
+		Login im internen Bereich<br/>
+		<small>Musikverein "Orgelfels" Reichental e.V.</small>
+	</h2>
+
+	{{#errorMessage}}
+		<div class="alert alert-danger">{{.}}</div>
+	{{/errorMessage}}
+
+	<label for="login-username" class="sr-only">Email address</label>
+	<input type="text" id="login-username" name="username" class="form-control" placeholder="Benutzername" required autofocus/>
+
+	<label for="login-password" class="sr-only">Password</label>
+	<input type="password" id="login-password" name="password" class="form-control" placeholder="Passwort" required/>
+
+	<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+</form>

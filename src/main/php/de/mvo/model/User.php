@@ -2,6 +2,7 @@
 namespace de\mvo\model;
 
 use de\mvo\Database;
+use de\mvo\model\permissions\GroupList;
 use RuntimeException;
 
 class User
@@ -17,6 +18,10 @@ class User
 	/**
 	 * @var string
 	 */
+	private $password;
+	/**
+	 * @var string
+	 */
 	public $email;
 	/**
 	 * @var string
@@ -26,10 +31,32 @@ class User
 	 * @var string
 	 */
 	public $lastName;
+	/**
+	 * @var User
+	 */
+	private static $currentUser;
 
 	public function __construct()
 	{
 		$this->id = (int) $this->id;
+	}
+
+	public static function getCurrent()
+	{
+		if (self::$currentUser === null and isset($_SESSION["userId"]))
+		{
+			self::$currentUser = self::getById($_SESSION["userId"]);
+		}
+
+		return self::$currentUser;
+	}
+
+	public static function logout()
+	{
+		session_unset();
+		session_destroy();
+
+		self::$currentUser = null;
 	}
 
 	/**
@@ -82,6 +109,48 @@ class User
 		}
 
 		return $query->fetchObject(self::class);
+	}
+
+	/**
+	 * @param string $password
+	 *
+	 * @return bool
+	 */
+	public function validatePassword($password)
+	{
+		if (!password_verify($password, $this->password))
+		{
+			return false;
+		}
+
+		if (password_needs_rehash($this->password, PASSWORD_DEFAULT))
+		{
+			$this->setPassword($password);
+		}
+
+		return true;
+	}
+
+	public function setPassword($password)
+	{
+		$this->password = password_hash($password, PASSWORD_DEFAULT);
+
+		$query = Database::prepare("
+			UPDATE `users`
+			SET `password` = :password
+			WHERE `id` = :id
+		");
+
+		$query->execute(array
+		(
+			":password" => $this->password,
+			":id" => $this->id
+		));
+	}
+
+	public function hasPermission($permission)
+	{
+		return GroupList::load()->getPermissionsForUser($this)->hasPermission($permission);
 	}
 
 	public static function getProfilePicturePath($userId)
