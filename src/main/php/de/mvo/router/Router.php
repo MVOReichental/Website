@@ -2,13 +2,12 @@
 namespace de\mvo\router;
 
 use AltoRouter;
-use de\mvo\renderer\Renderer;
 
 class Router extends AltoRouter
 {
-	public function map($method, $route, Renderer $renderer)
+	public function map($method, $route, Target $target)
 	{
-		parent::map($method, $route, $renderer);
+		parent::map($method, $route, $target);
 	}
 
 	public function mapAll($endpoints)
@@ -18,7 +17,7 @@ class Router extends AltoRouter
 		 */
 		foreach ($endpoints as $endpoint)
 		{
-			$this->map($endpoint->method, $endpoint->path, $endpoint->renderer);
+			$this->map($endpoint->method, $endpoint->path, $endpoint->target);
 		}
 	}
 

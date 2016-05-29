@@ -1,7 +1,7 @@
 <?php
-namespace de\mvo\renderer;
+namespace de\mvo\service;
 
-abstract class AbstractRenderer implements Renderer
+abstract class AbstractService
 {
 	public $params;
 

@@ -1,11 +1,11 @@
 <?php
-namespace de\mvo\renderer;
+namespace de\mvo\service;
 
 use de\mvo\model\User;
 
-class ProfilePictureRenderer extends AbstractRenderer
+class ProfilePicture extends AbstractService
 {
-	public function render()
+	public function get()
 	{
 		if (!isset($_GET["hash"]))
 		{
@@ -23,6 +23,7 @@ class ProfilePictureRenderer extends AbstractRenderer
 			return null;
 		}
 
+		header("Content-Type: image/jpeg");
 		readfile($filename);
 		return null;
 	}

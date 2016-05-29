@@ -1,8 +1,6 @@
 <?php
 namespace de\mvo\router;
 
-use de\mvo\renderer\Renderer;
-
 class Endpoint
 {
 	/**
@@ -14,14 +12,14 @@ class Endpoint
 	 */
 	public $path;
 	/**
-	 * @var Renderer
+	 * @var Target
 	 */
-	public $renderer;
+	public $target;
 
-	public function __construct($method, $path, Renderer $renderer)
+	public function __construct($method, $path, Target $target)
 	{
 		$this->method = $method;
 		$this->path = $path;
-		$this->renderer = $renderer;
+		$this->target = $target;
 	}
 }

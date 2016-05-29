@@ -1,5 +1,5 @@
 <?php
-namespace de\mvo\renderer\utils;
+namespace de\mvo;
 
 use Mustache_Engine;
 use Mustache_Loader_FilesystemLoader;

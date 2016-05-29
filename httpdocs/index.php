@@ -1,7 +1,6 @@
 <?php
 use de\mvo\Database;
-use de\mvo\renderer\NotFoundRenderer;
-use de\mvo\renderer\utils\MustacheRenderer;
+use de\mvo\MustacheRenderer;
 use de\mvo\router\Endpoints;
 use de\mvo\router\Router;
 
@@ -18,26 +17,23 @@ try
 	$match = $router->match($_SERVER["PATH_INFO"]);
 	if ($match === null)
 	{
-		$renderer = new NotFoundRenderer;
+		http_response_code(404);
+		$content = file_get_contents(VIEWS_ROOT . "/not-found.html");
 	}
 	else
 	{
-		$renderer = $match->renderer;
+		$content = $match->target->call();
+		if ($content === null)
+		{
+			exit;
+		}
 	}
 
-	$view = $renderer->render();
-	if ($view === null)
-	{
-		echo $view;
-	}
-	else
-	{
-		echo MustacheRenderer::render("main", array
-		(
-			"view" => $view,
-			"currentYear" => date("Y")
-		));
-	}
+	echo MustacheRenderer::render("main", array
+	(
+		"content" => $content,
+		"currentYear" => date("Y")
+	));
 }
 catch (Exception $exception)
 {

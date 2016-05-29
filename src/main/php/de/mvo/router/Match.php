@@ -1,19 +1,16 @@
 <?php
 namespace de\mvo\router;
 
-use de\mvo\renderer\Renderer;
-
 class Match
 {
 	/**
-	 * @var Renderer
+	 * @var Target
 	 */
-	public $renderer;
+	public $target;
 
-	public function __construct($params, Renderer $renderer)
+	public function __construct($params, Target $target)
 	{
-		$renderer->setParams($params);
-
-		$this->renderer = $renderer;
+		$target->params = $params;
+		$this->target = $target;
 	}
 }

@@ -1,13 +1,13 @@
 <?php
-namespace de\mvo\renderer;
+namespace de\mvo\service;
 
 use de\mvo\model\date\DateList;
 use de\mvo\model\pictures\AlbumList;
-use de\mvo\renderer\utils\MustacheRenderer;
+use de\mvo\MustacheRenderer;
 
-class NewsRenderer extends AbstractRenderer
+class News extends AbstractService
 {
-	public function render()
+	public function get()
 	{
 		return MustacheRenderer::render("news", array
 		(
