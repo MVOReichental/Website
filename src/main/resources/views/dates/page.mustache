@@ -8,3 +8,12 @@
 {{^dates.count}}
 	<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Keine Termine verf&uuml;gbar!</div>
 {{/dates.count}}
+
+<h2>Unsere j&auml;hrlichen Veranstaltungen</h2>
+
+{{#yearlyDates}}
+	<p>
+		<strong>{{event}}</strong>{{#when}} <span>{{.}}</span>{{/when}}<br/>
+		<span class="text-muted">{{location}}</span>
+	</p>
+{{/yearlyDates}}
