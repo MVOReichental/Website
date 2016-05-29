@@ -24,7 +24,7 @@ class PicturesRenderer extends AbstractRenderer
 			}
 			else
 			{
-				return MustacheRenderer::render("pictures/album-list", array
+				return MustacheRenderer::render("pictures/albums-overview", array
 				(
 					"year" => $this->params->year,
 					"albums" => new AlbumList($this->params->year)
@@ -33,7 +33,7 @@ class PicturesRenderer extends AbstractRenderer
 		}
 		else
 		{
-			return MustacheRenderer::render("pictures/year-list", array
+			return MustacheRenderer::render("pictures/years-overview", array
 			(
 				"years" => new YearList
 			));

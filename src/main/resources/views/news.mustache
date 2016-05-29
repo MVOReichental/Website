@@ -1,0 +1,19 @@
+<div class="page-header">
+	<h1>Aktuell</h1>
+</div>
+
+{{#dates.count}}
+	<h2>Unsere n&auml;chsten Termine</h2>
+
+	{{> dates/list}}
+
+	<p class="text-muted">Klicken Sie <a href="termine">hier</a> um alle Termine zu sehen.</p>
+{{/dates.count}}
+
+{{#albums.count}}
+	<h2>Neuste Bilder</h2>
+
+	{{> pictures/albums-list}}
+
+	<p class="text-muted">Klicken Sie <a href="fotogalerie">hier</a> um alle Alben zu sehen.</p>
+{{/albums.count}}

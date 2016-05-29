@@ -1,0 +1,10 @@
+<div class="page-header">
+	<h1>Unsere n&auml;chsten Termine</h1>
+</div>
+
+{{#dates.count}}
+	{{> dates/list}}
+{{/dates.count}}
+{{^dates.count}}
+	<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Keine Termine verf&uuml;gbar!</div>
+{{/dates.count}}

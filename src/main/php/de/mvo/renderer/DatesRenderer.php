@@ -24,7 +24,7 @@ class DatesRenderer extends AbstractRenderer
 		switch ($this->type)
 		{
 			case self::TYPE_HTML:
-				return MustacheRenderer::render("dates", array("dates" => $dates));
+				return MustacheRenderer::render("dates/page", array("dates" => $dates));
 			case self::TYPE_ICAL:
 				// Render iCal
 				return null;

@@ -5,6 +5,7 @@ use de\mvo\renderer\DatesRenderer;
 use de\mvo\renderer\FileRenderer;
 use de\mvo\renderer\JsonRenderer;
 use de\mvo\renderer\GroupMembersRenderer;
+use de\mvo\renderer\NewsRenderer;
 use de\mvo\renderer\PicturesRenderer;
 use de\mvo\renderer\ProfilePictureRenderer;
 use de\mvo\renderer\StaticRenderer;
@@ -16,6 +17,7 @@ class Endpoints
 		return array
 		(
 			new Endpoint(HttpMethod::GET, "/", new StaticRenderer("home")),
+			new Endpoint(HttpMethod::GET, "/aktuell", new NewsRenderer),
 			new Endpoint(HttpMethod::GET, "/impressum", new StaticRenderer("imprint")),
 			new Endpoint(HttpMethod::GET, "/beitreten", new StaticRenderer("verein/beitreten")),
 			new Endpoint(HttpMethod::GET, "/beitreten/beitrittserklaerung.pdf", new FileRenderer(RESOURCES_ROOT . "/beitrittserklaerung.pdf", "application/pdf")),
