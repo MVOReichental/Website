@@ -34,12 +34,12 @@ class Target
 			throw new TargetConfigurationException("Class '" . $this->class . "' must be a subclass of '" . AbstractService::class . "'");
 		}
 
-		$instance = $reflectionClass->newInstance();
-
-		if (!method_exists($instance, $this->method))
+		if (!$reflectionClass->hasMethod($this->method))
 		{
 			throw new TargetConfigurationException("Method '" . $this->method . "' not found in class '" . $this->class . "'");
 		}
+
+		$instance = $reflectionClass->newInstance();
 
 		$reflectionMethod = new ReflectionMethod($instance, $this->method);
 
