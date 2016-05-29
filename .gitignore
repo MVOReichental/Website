@@ -4,4 +4,5 @@
 /httpdocs/pictures
 /src/main/resources/config.ini
 /src/main/resources/permissions.serialized
+/src/main/resources/news.html
 /vendor/
