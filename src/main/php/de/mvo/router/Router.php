@@ -21,14 +21,21 @@ class Router extends AltoRouter
 		}
 	}
 
-	public function match($requestUrl = null, $requestMethod = null)
+	public function getMatchingTarget($requestUrl = null, $requestMethod = null)
 	{
-		$match = parent::match($requestUrl, $requestMethod);
+		$match = $this->match($requestUrl, $requestMethod);
 		if ($match === false)
 		{
 			return null;
 		}
 
-		return new Match((object) $match["params"], $match["target"]);
+		/**
+		 * @var $target Target
+		 */
+		$target = $match["target"];
+
+		$target->params = (object) $match["params"];
+
+		return $target;
 	}
 }

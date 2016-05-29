@@ -14,15 +14,15 @@ try
 
 	$router->mapAll(Endpoints::get());
 
-	$match = $router->match($_SERVER["PATH_INFO"]);
-	if ($match === null)
+	$target = $router->getMatchingTarget($_SERVER["PATH_INFO"]);
+	if ($target === null)
 	{
 		http_response_code(404);
 		$content = file_get_contents(VIEWS_ROOT . "/not-found.html");
 	}
 	else
 	{
-		$content = $match->target->call();
+		$content = $target->call();
 		if ($content === null)
 		{
 			exit;

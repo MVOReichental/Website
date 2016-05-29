@@ -39,6 +39,9 @@ class Target
 			throw new TargetConfigurationException("Method '" . $this->method . "' not found in class '" . $this->class . "'");
 		}
 
+		/**
+		 * @var $instance AbstractService
+		 */
 		$instance = $reflectionClass->newInstance();
 
 		$reflectionMethod = new ReflectionMethod($instance, $this->method);
@@ -47,6 +50,8 @@ class Target
 		{
 			throw new TargetConfigurationException("Method '" . $this->method . "' in class '" . $this->class . "' is not public");
 		}
+
+		$instance->params = $this->params;
 
 		return $reflectionMethod->invokeArgs($instance, $this->methodArguments);
 	}
