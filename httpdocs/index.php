@@ -14,7 +14,16 @@ try
 
 	$router->mapAll(Endpoints::get());
 
-	$target = $router->getMatchingTarget($_SERVER["PATH_INFO"]);
+	if (isset($_SERVER["PATH_INFO"]))
+	{
+		$path = $_SERVER["PATH_INFO"];
+	}
+	else
+	{
+		$path = "/";
+	}
+
+	$target = $router->getMatchingTarget($path);
 	if ($target === null)
 	{
 		http_response_code(404);
