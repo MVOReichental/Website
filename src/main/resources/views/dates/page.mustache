@@ -9,6 +9,11 @@
 	<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Keine Termine verf&uuml;gbar!</div>
 {{/dates.count}}
 
+<p class="text-muted">
+	Diese Termine können im iCalendar-Format abgerufen werden, um sie in einer Kalenderanwendung wie z.B. Outlook oder einer Kalender-App auf dem Smartphone anzuzeigen.<br/>
+	F&uuml;gen sie hierzu folgenden Link in der Kalenderanwendung ein: <a href="termine.ics" id="ical-url"></a>
+</p>
+
 <h2>Unsere j&auml;hrlichen Veranstaltungen</h2>
 
 {{#yearlyDates}}
@@ -17,3 +22,8 @@
 		<span class="text-muted">{{location}}</span>
 	</p>
 {{/yearlyDates}}
+
+<script type="text/javascript">
+	var element = $("#ical-url");
+	element.text(element[0].href);
+</script>

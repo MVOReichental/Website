@@ -16,6 +16,7 @@
 	"require": {
 		"altorouter/altorouter": "^1.1",
 		"mustache/mustache": "^2.10",
-		"programie/pini": "dev-master"
+		"programie/pini": "dev-master",
+		"eluceo/ical": "^0.10.0"
 	}
 }
