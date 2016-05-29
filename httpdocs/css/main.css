@@ -49,6 +49,11 @@
 	white-space: pre;
 }
 
+.text-thumbnail
+{
+	float: left;
+}
+
 @media (min-width: 768px)
 {
 	.dl-wide dt
