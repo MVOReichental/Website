@@ -27,7 +27,7 @@ class PicturesRenderer extends AbstractRenderer
 				return MustacheRenderer::render("pictures/albums-overview", array
 				(
 					"year" => $this->params->year,
-					"albums" => new AlbumList($this->params->year)
+					"albums" => AlbumList::getForYear($this->params->year)
 				));
 			}
 		}
