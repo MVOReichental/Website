@@ -17,7 +17,7 @@ try
 
 	$router = new Router;
 
-	$router->mapAll(Endpoints::get());
+	$router->mapAll(new Endpoints);
 
 	if (isset($_SERVER["PATH_INFO"]))
 	{
