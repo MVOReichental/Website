@@ -12,6 +12,15 @@ $(function()
 		$(this).text(address);
 	});
 
+	$(".selectpicker").each(function()
+	{
+		var selection = $(this).data("selection");
+		if (selection !== undefined)
+		{
+			$(this).val(selection);
+		}
+	});
+
 	$(".gallery-source a").on("click", function(event)
 	{
 		event.preventDefault();

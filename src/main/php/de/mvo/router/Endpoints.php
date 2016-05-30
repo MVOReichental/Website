@@ -52,7 +52,9 @@ class Endpoints
 
 			new Endpoint(HttpMethod::GET, "/intern", Target::create()->className(InternHome::class)->method("get")->requireLogin()),
 			new Endpoint(HttpMethod::POST, "/intern/login", Target::create()->className(Account::class)->method("login")),
-			new Endpoint(HttpMethod::GET, "/intern/logout", Target::create()->className(Account::class)->method("logout")->requireLogin())
+			new Endpoint(HttpMethod::GET, "/intern/logout", Target::create()->className(Account::class)->method("logout")->requireLogin()),
+			new Endpoint(HttpMethod::GET, "/intern/profil/einstellungen", Target::create()->className(Account::class)->method("showSettings")->requireLogin()),
+			new Endpoint(HttpMethod::POST, "/intern/profil/einstellungen", Target::create()->className(Account::class)->method("updateSettings")->requireLogin())
 		);
 	}
 }

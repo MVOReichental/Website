@@ -2,7 +2,9 @@
 namespace de\mvo\model;
 
 use de\mvo\Database;
+use de\mvo\model\contacts\Contacts;
 use de\mvo\model\permissions\GroupList;
+use PDOException;
 use RuntimeException;
 
 class User
@@ -133,7 +135,7 @@ class User
 
 	public function setPassword($password)
 	{
-		$this->password = password_hash($password, PASSWORD_DEFAULT);
+		$password = password_hash($password, PASSWORD_DEFAULT);
 
 		$query = Database::prepare("
 			UPDATE `users`
@@ -143,9 +145,49 @@ class User
 
 		$query->execute(array
 		(
-			":password" => $this->password,
+			":password" => $password,
 			":id" => $this->id
 		));
+
+		$this->password = $password;
+	}
+
+	public function setUsername($username)
+	{
+		$query = Database::prepare("
+			UPDATE `users`
+			SET `username` = :username
+			WHERE `id` = :id
+		");
+
+		$query->execute(array
+		(
+			":username" => $username,
+			":id" => $this->id
+		));
+
+		$this->username = $username;
+	}
+
+	public function setName($firstName, $lastName)
+	{
+		$query = Database::prepare("
+			UPDATE `users`
+			SET
+				`firstName` = :firstName,
+				`lastName` = :lastName
+			WHERE `id` = :id
+		");
+
+		$query->execute(array
+		(
+			":firstName" => $firstName,
+			":lastName" => $lastName,
+			":id" => $this->id
+		));
+
+		$this->firstName = $firstName;
+		$this->lastName = $lastName;
 	}
 
 	public function hasPermission($permission)
@@ -167,6 +209,11 @@ class User
 	public function profilePictureHash()
 	{
 		return md5_file(self::getProfilePicturePath($this->id));
+	}
+
+	public function contacts()
+	{
+		return Contacts::forUser($this);
 	}
 
 	public function __sleep()
