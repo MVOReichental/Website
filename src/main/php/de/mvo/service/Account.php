@@ -10,6 +10,33 @@ use stdClass;
 
 class Account extends AbstractService
 {
+	public static function getSettingsPages()
+	{
+		return array
+		(
+			"profilepicture" => array
+			(
+				"title" => "Profilbild"
+			),
+			"account" => array
+			(
+				"title" => "Account"
+			),
+			"password" => array
+			(
+				"title" => "Passwort"
+			),
+			"email" => array
+			(
+				"title" => "Email-Adresse"
+			),
+			"contact" => array
+			(
+				"title" => "Kontakt"
+			)
+		);
+	}
+
 	public function login()
 	{
 		if (!isset($_POST["username"]) or !isset($_POST["password"]))
@@ -45,10 +72,35 @@ class Account extends AbstractService
 	{
 		$user = User::getCurrent();
 
-		return MustacheRenderer::render("account/settings", array
+		$pages = self::getSettingsPages();
+
+		$activePage = null;
+
+		foreach ($pages as $name => &$page)
+		{
+			$page["name"] = $name;
+
+			if ($this->params->page == $page["name"])
+			{
+				$page["active"] = true;
+
+				$activePage = $page;
+			}
+			else
+			{
+				$page["active"] = false;
+			}
+		}
+
+		return MustacheRenderer::render("account/settings/page", array
 		(
-			"user" => $user,
-			"message" => $message
+			"message" => $message,
+			"pages" => array_values($pages),
+			"title" => $activePage["title"],
+			"content" => MustacheRenderer::render("account/settings/" . $activePage["name"], array
+			(
+				"user" => $user
+			))
 		));
 	}
 

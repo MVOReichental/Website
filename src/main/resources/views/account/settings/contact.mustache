@@ -1,0 +1,23 @@
+<form method="post">
+	<input type="hidden" name="form" value="contact"/>
+
+	{{#user.contacts}}
+		<div class="form-group">
+			<select class="selectpicker show-tick" name="type[]" data-selection="{{type}}">
+				<option value="fax">Fax</option>
+				<option value="mobile">Mobil</option>
+				<option value="phone">Telefon</option>
+			</select>
+			<select class="selectpicker show-tick" name="category[]" data-selection="{{category}}">
+				<option value="private">Privat</option>
+				<option value="business">Gesch&auml;ftlich</option>
+			</select>
+
+			<input type="text" class="form-control" name="value[]" value="{{value}}"/>
+
+			<button class="input-group-addon btn btn-danger"><i class="fa fa-remove"></i></button>
+		</div>
+	{{/user.contacts}}
+
+	<button type="submit" class="btn btn-success">Speichern</button>
+</form>

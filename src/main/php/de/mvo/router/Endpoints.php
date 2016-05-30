@@ -12,6 +12,7 @@ use de\mvo\service\Members;
 use de\mvo\service\News;
 use de\mvo\service\Pictures;
 use de\mvo\service\ProfilePicture;
+use de\mvo\service\Redirect;
 use de\mvo\service\StaticView;
 
 class Endpoints extends ArrayObject
@@ -53,8 +54,12 @@ class Endpoints extends ArrayObject
 		$this->append(new Endpoint(HttpMethod::GET, "/intern", Target::create()->className(InternHome::class)->method("get")->requireLogin()));
 		$this->append(new Endpoint(HttpMethod::POST, "/intern/login", Target::create()->className(Account::class)->method("login")));
 		$this->append(new Endpoint(HttpMethod::GET, "/intern/logout", Target::create()->className(Account::class)->method("logout")->requireLogin()));
-		$this->append(new Endpoint(HttpMethod::GET, "/intern/settings", Target::create()->className(Account::class)->method("showSettings")->requireLogin()));
-		$this->append(new Endpoint(HttpMethod::POST, "/intern/settings", Target::create()->className(Account::class)->method("updateSettings")->requireLogin()));
+
+		$settingsPages = array_keys(Account::getSettingsPages());
+		$this->append(new Endpoint(HttpMethod::GET, "/intern/settings", Target::create()->className(Redirect::class)->method("redirect")->arguments("/intern/settings/" . $settingsPages[0])->requireLogin()));
+		$this->append(new Endpoint(HttpMethod::GET, "/intern/settings/[" . implode("|", $settingsPages) . ":page]", Target::create()->className(Account::class)->method("showSettings")->requireLogin()));
+		$this->append(new Endpoint(HttpMethod::POST, "/intern/settings/[" . implode("|", $settingsPages) . ":page]", Target::create()->className(Account::class)->method("updateSettings")->requireLogin()));
+
 		$this->append(new Endpoint(HttpMethod::GET, "/intern/members", Target::create()->className(Members::class)->method("getList")->requireLogin()));
 	}
 }
