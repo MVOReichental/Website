@@ -53,8 +53,8 @@ class Endpoints extends ArrayObject
 		$this->append(new Endpoint(HttpMethod::GET, "/intern", Target::create()->className(InternHome::class)->method("get")->requireLogin()));
 		$this->append(new Endpoint(HttpMethod::POST, "/intern/login", Target::create()->className(Account::class)->method("login")));
 		$this->append(new Endpoint(HttpMethod::GET, "/intern/logout", Target::create()->className(Account::class)->method("logout")->requireLogin()));
-		$this->append(new Endpoint(HttpMethod::GET, "/intern/profil/einstellungen", Target::create()->className(Account::class)->method("showSettings")->requireLogin()));
-		$this->append(new Endpoint(HttpMethod::POST, "/intern/profil/einstellungen", Target::create()->className(Account::class)->method("updateSettings")->requireLogin()));
-		$this->append(new Endpoint(HttpMethod::GET, "/intern/mitglieder", Target::create()->className(Members::class)->method("getList")->requireLogin()));
+		$this->append(new Endpoint(HttpMethod::GET, "/intern/settings", Target::create()->className(Account::class)->method("showSettings")->requireLogin()));
+		$this->append(new Endpoint(HttpMethod::POST, "/intern/settings", Target::create()->className(Account::class)->method("updateSettings")->requireLogin()));
+		$this->append(new Endpoint(HttpMethod::GET, "/intern/members", Target::create()->className(Members::class)->method("getList")->requireLogin()));
 	}
 }
