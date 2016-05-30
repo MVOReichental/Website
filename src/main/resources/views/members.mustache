@@ -1,0 +1,30 @@
+<div class="page-header">
+	<h1>Mitgliederliste</h1>
+</div>
+
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Vorname</th>
+				<th>Nachname</th>
+				<th>Email</th>
+				<th>Telefon</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#members}}
+				<tr>
+					<td>{{firstName}}</td>
+					<td>{{lastName}}</td>
+					<td>{{email}}</td>
+					<td>
+						{{#contacts}}
+							<div>{{type}} ({{category}}): {{value}}</div>
+						{{/contacts}}
+					</td>
+				</tr>
+			{{/members}}
+		</tbody>
+	</table>
+</div>

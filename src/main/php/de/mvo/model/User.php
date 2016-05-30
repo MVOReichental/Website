@@ -4,7 +4,6 @@ namespace de\mvo\model;
 use de\mvo\Database;
 use de\mvo\model\contacts\Contacts;
 use de\mvo\model\permissions\GroupList;
-use PDOException;
 use RuntimeException;
 
 class User
