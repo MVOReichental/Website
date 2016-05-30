@@ -4,6 +4,7 @@ namespace de\mvo\model;
 use de\mvo\Database;
 use de\mvo\model\contacts\Contacts;
 use de\mvo\model\permissions\GroupList;
+use de\mvo\model\permissions\Permissions;
 use RuntimeException;
 
 class User
@@ -32,6 +33,10 @@ class User
 	 * @var string
 	 */
 	public $lastName;
+	/**
+	 * @var Permissions
+	 */
+	private $permissions;
 	/**
 	 * @var User
 	 */
@@ -191,7 +196,17 @@ class User
 
 	public function hasPermission($permission)
 	{
-		return GroupList::load()->getPermissionsForUser($this)->hasPermission($permission);
+		if ($this->permissions === null)
+		{
+			$this->permissions = GroupList::load()->getPermissionsForUser($this);
+		}
+
+		if ($this->permissions->hasPermission("*"))
+		{
+			return true;
+		}
+
+		return $this->permissions->hasPermission($permission);
 	}
 
 	public static function getProfilePicturePath($userId)
