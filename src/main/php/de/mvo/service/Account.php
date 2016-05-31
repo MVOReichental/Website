@@ -117,16 +117,24 @@ class Account extends AbstractService
 					return null;
 				}
 
+				$username = trim($_POST["username"]);
+
+				if (strlen($username) < 3)
+				{
+					$message = array("type" => "danger", "text" => "Der Benutzername muss aus mindestens 3 Zeichen bestehen!");
+					break;
+				}
+
 				try
 				{
-					$user->setUsername($_POST["username"]);
+					$user->setUsername($username);
 				}
 				catch (PDOException $exception)
 				{
 					// Duplicate username
 					if ($exception->errorInfo[1] == 1062)
 					{
-						$message = array("type" => "danger", "text" => "Der Benutzername '" . $_POST["username"] . "' wird bereits verwendet!");
+						$message = array("type" => "danger", "text" => "Der Benutzername '" . $username . "' wird bereits verwendet!");
 						break;
 					}
 				}
