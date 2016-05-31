@@ -3,7 +3,7 @@ $(function()
 	var profilePictureFileInput = $("#settings-profile-profilepicture");
 	profilePictureFileInput.fileupload(
 	{
-		dropZone: $("#settings-profile-profilepicture-img"),
+		dropZone: $(".settings-profile-profilepicture-dropzone"),
 		autoUpload: false,
 		maxFileSize: 999000,
 		formData: function()

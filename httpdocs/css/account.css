@@ -58,6 +58,17 @@
 	border-radius: 3px;
 }
 
+#settings-profile-profilepicture-box-left, #settings-profile-profilepicture-box-right
+{
+	float: left;
+}
+
+#settings-profile-profilepicture-box-left
+{
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
 #settings-profile-profilepicture-img
 {
 	width: 150px;

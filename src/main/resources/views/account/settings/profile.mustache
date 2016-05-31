@@ -4,15 +4,24 @@
 			<h3 class="panel-title">Dein Profil</h3>
 		</div>
 
-		<div class="panel-body">
+		<div class="panel-body settings-profile-profilepicture-dropzone">
 			<div class="form-group">
 				<label for="settings-profile-profilepicture">Profilbild</label>
-				<img src="users/{{user.id}}/profile-picture.jpg?hash={{user.profilePictureHash}}" id="settings-profile-profilepicture-img"/>
 
-				<span class="btn btn-default fileinput-button">
-					<span>Neues Profilbild hochladen</span>
-					<input id="settings-profile-profilepicture" type="file" name="file" data-url="users/{{user.id}}/profile-picture.jpg" accept="image/jpeg"/>
-				</span>
+				<div class="clearfix">
+					<div id="settings-profile-profilepicture-box-left">
+						<img src="users/{{user.id}}/profile-picture.jpg?hash={{user.profilePictureHash}}" id="settings-profile-profilepicture-img"/>
+					</div>
+
+					<div id="settings-profile-profilepicture-box-right">
+						<span class="btn btn-default fileinput-button">
+							<strong>Neues Profilbild hochladen</strong>
+							<input id="settings-profile-profilepicture" type="file" name="file" data-url="users/{{user.id}}/profile-picture.jpg" accept="image/jpeg"/>
+						</span>
+
+						<span class="help-block">Du kannst auch ein Bild von deinem Computer hier hin ziehen.</span>
+					</div>
+				</div>
 			</div>
 
 			<form method="post" id="settings-profile-form" enctype="multipart/form-data">
