@@ -165,7 +165,14 @@ class Account extends AbstractService
 					break;
 				}
 
-				$user->setPassword($_POST["newPassword"]);
+				$newPassword = $_POST["newPassword"];
+				if (strlen($newPassword) < 6)
+				{
+					$message = array("type" => "danger", "text" => "Das Passwort muss aus mindestens 6 Zeichen bestehen!");
+					break;
+				}
+
+				$user->setPassword($newPassword);
 
 				$message = array("type" => "success", "text" => "Das Passwort wurde erfolgreich ge&auml;ndert!");
 				break;
