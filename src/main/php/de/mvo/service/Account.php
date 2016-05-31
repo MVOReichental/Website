@@ -141,7 +141,7 @@ class Account extends AbstractService
 
 				$message = array("type" => "success", "text" => "Der Benutzername wurde erfolgreich ge&auml;ndert!");
 				break;
-			case "account":
+			case "profile":
 				if (!isset($_POST["firstName"]) or !isset($_POST["lastName"]))
 				{
 					http_response_code(400);
@@ -150,7 +150,7 @@ class Account extends AbstractService
 
 				$user->setName($_POST["firstName"], $_POST["lastName"]);
 
-				$message = array("type" => "success", "text" => "Die Accountinformationen wurden erfolgreich aktualisiert.");
+				$message = array("type" => "success", "text" => "Dein Benutzerprofil wurde erfolgreich aktualisiert.");
 				break;
 			case "password":
 				if (!isset($_POST["currentPassword"]) or !isset($_POST["newPassword"]))
