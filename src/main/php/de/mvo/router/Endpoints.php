@@ -50,6 +50,7 @@ class Endpoints extends ArrayObject
 		$this->append(new Endpoint(HttpMethod::GET, "/fotogalerie/[i:year]/[:album]", Target::create()->className(Pictures::class)->method("getAlbum")));
 
 		$this->append(new Endpoint(HttpMethod::GET, "/users/[i:id]/profile-picture.jpg", Target::create()->className(ProfilePicture::class)->method("get")));
+		$this->append(new Endpoint(HttpMethod::POST, "/users/[i:id]/profile-picture.jpg", Target::create()->className(ProfilePicture::class)->method("upload")->requireLogin()));
 
 		$this->append(new Endpoint(HttpMethod::GET, "/intern", Target::create()->className(InternHome::class)->method("get")->requireLogin()));
 		$this->append(new Endpoint(HttpMethod::POST, "/intern/login", Target::create()->className(Account::class)->method("login")));

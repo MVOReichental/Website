@@ -58,8 +58,13 @@
 	border-radius: 3px;
 }
 
-#settings-account-profilepicture-img
+#settings-profile-profilepicture-img
 {
 	width: 150px;
 	border-radius: 3px;
+}
+
+#settings-profile-profilepicture-upload-error
+{
+	display: none;
 }

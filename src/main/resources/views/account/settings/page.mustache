@@ -4,7 +4,7 @@
 </div>
 
 {{#message}}
-	<div class="alert alert-{{type}}"><i class="fa fa-{{icon}}"></i> {{text}}</div>
+	<div class="alert alert-{{type}}"><i class="fa fa-{{icon}}"></i> {{{text}}}</div>
 {{/message}}
 
 <div class="row">
@@ -22,14 +22,6 @@
 	</div>
 
 	<div class="col-md-9">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">{{title}}</h3>
-			</div>
-
-			<div class="panel-body">
-				{{{content}}}
-			</div>
-		</div>
+		{{{content}}}
 	</div>
 </div>
