@@ -15,7 +15,10 @@
 		<tbody>
 			{{#members}}
 				<tr>
-					<td>{{firstName}}</td>
+					<td>
+						<a href="intern/members/{{username}}" class="hidden-print"><i class="fa fa-info-circle"></i></a>
+						{{firstName}}
+					</td>
 					<td>{{lastName}}</td>
 					<td>{{email}}</td>
 					<td>
