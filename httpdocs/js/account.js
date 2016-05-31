@@ -53,8 +53,12 @@ $(function()
 					});
 
 					$("#settings-profile-profilepicture-upload-error").hide();
-					$("#settings-profile-profilepicture-upload").button("reset");
 					$("#settings-profile-profilepicture-crop-modal").modal("show");
+
+					var uploadButton = $("#settings-profile-profilepicture-upload")
+					uploadButton.find(".state-idle").show();
+					uploadButton.find(".state-loading").hide();
+					uploadButton.prop("disabled", false);
 				};
 			};
 			reader.readAsDataURL(data.files[0]);
@@ -79,7 +83,10 @@ $(function()
 		},
 		always: function()
 		{
-			$("#settings-profile-profilepicture-upload").button("reset");
+			var uploadButton = $("#settings-profile-profilepicture-upload")
+			uploadButton.find(".state-idle").show();
+			uploadButton.find(".state-loading").hide();
+			uploadButton.prop("disabled", false);
 
 			// TODO: Re-enable cropping area
 		}
@@ -91,7 +98,11 @@ $(function()
 
 		// TODO: Disable cropping area
 
-		$(this).button("loading");
+		var uploadButton = $("#settings-profile-profilepicture-upload")
+		uploadButton.find(".state-idle").hide();
+		uploadButton.find(".state-loading").show();
+		uploadButton.prop("disabled", true);
+
 		profilePictureFileInput.data("data").submit();
 	});
 
