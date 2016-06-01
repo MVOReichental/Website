@@ -81,4 +81,19 @@ class Messages extends ArrayObject
 
 		return $messages;
 	}
+
+	/**
+	 * @param mixed $index
+	 *
+	 * @return Message|null
+	 */
+	public function offsetGet($index)
+	{
+		if (!$this->offsetExists($index))
+		{
+			return null;
+		}
+
+		return parent::offsetGet($index);
+	}
 }
