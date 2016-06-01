@@ -9,6 +9,7 @@ use de\mvo\service\InternHome;
 use de\mvo\service\JsonView;
 use de\mvo\service\GroupMembers;
 use de\mvo\service\Members;
+use de\mvo\service\Messages;
 use de\mvo\service\News;
 use de\mvo\service\Pictures;
 use de\mvo\service\ProfilePicture;
@@ -63,5 +64,8 @@ class Endpoints extends ArrayObject
 
 		$this->append(new Endpoint(HttpMethod::GET, "/intern/members", Target::create()->className(Members::class)->method("getList")->requireLogin()));
 		$this->append(new Endpoint(HttpMethod::GET, "/intern/members/[:username]", Target::create()->className(Members::class)->method("getDetails")->requireLogin()));
+
+		$this->append(new Endpoint(HttpMethod::GET, "/intern/messages/sent", Target::create()->className(Messages::class)->method("getSentMessages")->requireLogin()));
+		$this->append(new Endpoint(HttpMethod::GET, "/intern/messages/received", Target::create()->className(Messages::class)->method("getReceivedMessages")->requireLogin()));
 	}
 }

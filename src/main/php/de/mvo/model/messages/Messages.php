@@ -56,19 +56,18 @@ class Messages extends ArrayObject
 		return $messages;
 	}
 
-	public static function getByRecipientAndSender(User $recipient, User $sender, $limit = 1000)
+	public static function getByRecipient(User $user, $limit = 1000)
 	{
 		$query = Database::prepare("
 			SELECT *
 			FROM `messagerecipients`
 			LEFT JOIN `messages` ON `messages`.`id` = `messagerecipients`.`messageId`
-			WHERE `messagerecipients`.`userId` = :recipientUserId AND `messages`.`senderUserId` = :senderUserId
+			WHERE `messagerecipients`.`userId` = :recipientUserId
 			ORDER BY `messages`.`id` DESC
 			LIMIT :limit
 		");
 
-		$query->bindValue(":recipientUserId", $recipient->id, PDO::PARAM_INT);
-		$query->bindValue(":senderUserId", $sender->id, PDO::PARAM_INT);
+		$query->bindValue(":recipientUserId", $user->id, PDO::PARAM_INT);
 		$query->bindValue(":limit", $limit, PDO::PARAM_INT);
 
 		$query->execute();
