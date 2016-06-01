@@ -1,7 +1,7 @@
 <?php
 namespace de\mvo\service;
 
-use de\mvo\model\User;
+use de\mvo\model\users\User;
 use de\mvo\MustacheRenderer;
 use de\mvo\service\exception\LoginException;
 use PDOException;

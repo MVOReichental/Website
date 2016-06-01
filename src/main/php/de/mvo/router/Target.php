@@ -1,7 +1,7 @@
 <?php
 namespace de\mvo\router;
 
-use de\mvo\model\User;
+use de\mvo\model\users\User;
 use de\mvo\router\exception\TargetConfigurationException;
 use de\mvo\service\AbstractService;
 use de\mvo\service\exception\LoginException;

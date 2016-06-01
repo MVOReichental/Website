@@ -1,0 +1,38 @@
+<div class="row">
+	<div class="col-md-4">
+		<div id="members-details-user">
+			{{#user}}
+				<img src="users/{{id}}/profile-picture.jpg?hash={{profilePictureHash}}" class="img-rounded" width="200"/>
+				<h3>{{firstName}} {{lastName}}</h3>
+
+				<table class="table table-striped">
+					<tbody>
+						{{#email}}
+							<tr>
+								<td>Email-Adresse</td>
+								<td><i class="fa fa-envelope"></i> <a href="mailto:{{.}}">{{.}}</a></td>
+							</tr>
+						{{/email}}
+						{{#contacts}}
+							<tr>
+								<td>{{type}} ({{category}})</td>
+								<td><i class="fa fa-phone"></i> {{value}}</td>
+							</tr>
+						{{/contacts}}
+						{{#birthDate}}
+							<tr>
+								<td>Geburtsdatum</td>
+								<td><i class="fa fa-calendar"></i> {{humanReadableDate}} ({{yearsTillNow}})</td>
+							</tr>
+						{{/birthDate}}
+					</tbody>
+				</table>
+			{{/user}}
+		</div>
+	</div>
+
+	<div class="col-md-8" id="members-details-messages">
+		<h3>Nachrichten von {{user.firstName}}</h3>
+		{{> messages/list}}
+	</div>
+</div>

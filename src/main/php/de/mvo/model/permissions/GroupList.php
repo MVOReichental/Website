@@ -2,7 +2,7 @@
 namespace de\mvo\model\permissions;
 
 use ArrayObject;
-use de\mvo\model\User;
+use de\mvo\model\users\User;
 use UnexpectedValueException;
 
 class GroupList extends ArrayObject

@@ -3,7 +3,7 @@ namespace de\mvo\model\contacts;
 
 use ArrayObject;
 use de\mvo\Database;
-use de\mvo\model\User;
+use de\mvo\model\users\User;
 
 class Contacts extends ArrayObject
 {

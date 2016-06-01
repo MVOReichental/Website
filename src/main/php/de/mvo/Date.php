@@ -12,16 +12,26 @@ class Date extends DateTime
 
 	public function humanReadableDate()
 	{
-		$date = $this->format("j.m.Y");
+		return $this->format("d.m.Y");
+	}
 
+	public function humanReadableDateWithWeekday()
+	{
 		$weekday = self::getWeekdayName($this->format("N"));
 
-		return $weekday . ", " . $date;
+		return $weekday . ", " . $this->humanReadableDate();
 	}
 
 	public function humanReadableTime()
 	{
 		return $this->format("H:i");
+	}
+
+	public function yearsTillNow()
+	{
+		$now = new self;
+
+		return $now->diff($this)->y;
 	}
 
 	public function __toString()

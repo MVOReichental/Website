@@ -3,6 +3,7 @@ namespace de\mvo\model;
 
 use ArrayObject;
 use de\mvo\Database;
+use de\mvo\model\users\User;
 
 class MembersList extends ArrayObject
 {

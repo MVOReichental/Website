@@ -2,15 +2,11 @@
 use de\mvo\Database;
 use de\mvo\model\permissions\Group;
 use de\mvo\model\permissions\GroupList;
-use de\mvo\model\User;
+use de\mvo\model\users\User;
 
 require_once __DIR__ . "/../bootstrap.php";
 
 Database::init();
-
-Database::query("DELETE FROM `dates`");
-Database::query("DELETE FROM `locations`");
-Database::query("DELETE FROM `users`");
 
 $locations = array
 (
@@ -29,6 +25,9 @@ $dates = array
 	array("+1 hour", "+2 hours", "An event"),
 	array("-15 minutes", "+45 minutes", "Some other event")
 );
+
+Database::query("DELETE FROM `dates`");
+Database::query("DELETE FROM `locations`");
 
 $query = Database::prepare("
 	INSERT INTO `locations`
@@ -91,6 +90,8 @@ $user3->lastName = "User";
 
 $users = array($user1, $user2, $user3);
 
+Database::query("DELETE FROM `users`");
+
 $query = Database::prepare("
 	INSERT INTO `users`
 	SET
@@ -114,6 +115,8 @@ foreach ($users as $user)
 	$user->id = Database::lastInsertId();
 }
 
+$user1->setPassword("my");
+$user2->setPassword("foo");
 $user3->setPassword("test");
 
 $root = new GroupList;

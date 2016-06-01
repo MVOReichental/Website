@@ -1,7 +1,8 @@
 <?php
 namespace de\mvo\model\permissions;
 
-use de\mvo\model\User;
+use de\mvo\model\users\User;
+use de\mvo\model\users\Users;
 
 class Group
 {

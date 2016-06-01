@@ -1,6 +1,6 @@
 <?php
 use de\mvo\Database;
-use de\mvo\model\User;
+use de\mvo\model\users\User;
 use de\mvo\MustacheRenderer;
 use de\mvo\router\Endpoints;
 use de\mvo\router\Router;

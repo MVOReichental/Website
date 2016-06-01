@@ -1,0 +1,7 @@
+@media (min-width: 992px)
+{
+	#members-details-user
+	{
+		position: fixed;
+	}
+}

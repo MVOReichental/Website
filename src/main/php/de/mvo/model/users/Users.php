@@ -1,8 +1,7 @@
 <?php
-namespace de\mvo\model\permissions;
+namespace de\mvo\model\users;
 
 use ArrayObject;
-use de\mvo\model\User;
 
 class Users extends ArrayObject
 {
@@ -15,7 +14,7 @@ class Users extends ArrayObject
 		 */
 		foreach ($this as $thisUser)
 		{
-			if ($thisUser->id == $user->id)
+			if ($thisUser->isEqualTo($user))
 			{
 				return true;
 			}

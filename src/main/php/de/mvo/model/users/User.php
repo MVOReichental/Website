@@ -1,7 +1,8 @@
 <?php
-namespace de\mvo\model;
+namespace de\mvo\model\users;
 
 use de\mvo\Database;
+use de\mvo\Date;
 use de\mvo\model\contacts\Contacts;
 use de\mvo\model\permissions\GroupList;
 use de\mvo\model\permissions\Permissions;
@@ -34,6 +35,10 @@ class User
 	 */
 	public $lastName;
 	/**
+	 * @var Date
+	 */
+	public $birthDate;
+	/**
 	 * @var Permissions
 	 */
 	private $permissions;
@@ -45,6 +50,11 @@ class User
 	public function __construct()
 	{
 		$this->id = (int) $this->id;
+
+		if ($this->birthDate !== null)
+		{
+			$this->birthDate = new Date($this->birthDate);
+		}
 	}
 
 	public static function getCurrent()
@@ -207,6 +217,11 @@ class User
 		}
 
 		return $this->permissions->hasPermission($permission);
+	}
+
+	public function isEqualTo(User $user)
+	{
+		return ($this->id == $user->id);
 	}
 
 	public static function getProfilePicturePath($userId)

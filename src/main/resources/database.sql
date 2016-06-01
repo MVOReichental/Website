@@ -76,4 +76,25 @@ CREATE TABLE `usercontacts` (
   CONSTRAINT `usercontacts_ibfk1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+CREATE TABLE `messages` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `date` datetime NOT NULL,
+  `senderUserId` int(11) unsigned NOT NULL,
+  `text` longtext NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `senderUserId` (`senderUserId`),
+  CONSTRAINT `messages_ibfk1` FOREIGN KEY (`senderUserId`) REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `messagerecipients` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `messageId` int(11) unsigned NOT NULL,
+  `userId` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `messageId_userId` (`messageId`, `userId`),
+  CONSTRAINT `messagerecipients_ibfk1` FOREIGN KEY (`messageId`) REFERENCES `messages` (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
+  CONSTRAINT `messagerecipients_ibfk2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
