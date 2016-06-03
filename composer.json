@@ -17,6 +17,7 @@
 		"altorouter/altorouter": "^1.1",
 		"mustache/mustache": "^2.10",
 		"programie/pini": "dev-master",
-		"eluceo/ical": "^0.10.0"
+		"eluceo/ical": "^0.10.0",
+		"erusev/parsedown": "^1.6"
 	}
 }

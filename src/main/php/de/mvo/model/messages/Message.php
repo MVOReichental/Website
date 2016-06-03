@@ -5,6 +5,7 @@ use de\mvo\Database;
 use de\mvo\Date;
 use de\mvo\model\users\User;
 use de\mvo\model\users\Users;
+use Parsedown;
 
 class Message
 {
@@ -55,5 +56,10 @@ class Message
 		{
 			$this->recipients->append($user);
 		}
+	}
+
+	public function formatText()
+	{
+		return Parsedown::instance()->text($this->text);
 	}
 }
