@@ -137,6 +137,10 @@ class Account extends AbstractService
 						$message = array("type" => "danger", "text" => "Der Benutzername '" . $username . "' wird bereits verwendet!");
 						break;
 					}
+					else
+					{
+						throw $exception;
+					}
 				}
 
 				$message = array("type" => "success", "text" => "Der Benutzername wurde erfolgreich ge&auml;ndert!");
