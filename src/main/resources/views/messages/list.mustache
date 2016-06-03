@@ -2,8 +2,10 @@
 	<ul class="media-list">
 		{{#messages}}
 			<li class="media well">
-				<div class="media-left">
-					<img class="media-object img-rounded" src="users/{{sender.id}}/profile-picture.jpg?hash={{sender.profilePictureHash}}" width="100"/>
+				<div class="media-left gallery-source">
+					<a href="users/{{sender.id}}/profile-picture.jpg?hash={{sender.profilePictureHash}}">
+						<img class="media-object img-rounded" src="users/{{sender.id}}/profile-picture.jpg?hash={{sender.profilePictureHash}}" width="100"/>
+					</a>
 				</div>
 				<div class="media-body">
 					<div class="clearfix">

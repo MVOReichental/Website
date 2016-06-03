@@ -1,8 +1,10 @@
 <div class="row">
 	<div class="col-md-4">
-		<div id="members-details-user">
+		<div id="members-details-user" class="gallery-source">
 			{{#user}}
-				<img src="users/{{id}}/profile-picture.jpg?hash={{profilePictureHash}}" class="img-rounded" width="200"/>
+				<a href="users/{{id}}/profile-picture.jpg?hash={{profilePictureHash}}">
+					<img src="users/{{id}}/profile-picture.jpg?hash={{profilePictureHash}}" class="img-rounded" width="200"/>
+				</a>
 				<h3>{{firstName}} {{lastName}}</h3>
 
 				<table class="table table-striped">
