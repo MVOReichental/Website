@@ -96,6 +96,11 @@ a.thumbnail.active
 	float: left;
 }
 
+.groupmembers-img
+{
+	max-width: 250px;
+}
+
 .container .breadcrumb
 {
 	margin-top: 20px;
