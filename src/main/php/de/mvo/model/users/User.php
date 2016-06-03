@@ -6,6 +6,8 @@ use de\mvo\Date;
 use de\mvo\model\contacts\Contacts;
 use de\mvo\model\permissions\GroupList;
 use de\mvo\model\permissions\Permissions;
+use Kelunik\TwoFactor\Oath;
+use PDOException;
 use RuntimeException;
 
 class User
@@ -38,6 +40,10 @@ class User
 	 * @var Date
 	 */
 	public $birthDate;
+	/**
+	 * @var string
+	 */
+	private $totpKey;
 	/**
 	 * @var Permissions
 	 */
@@ -217,6 +223,94 @@ class User
 		}
 
 		return $this->permissions->hasPermission($permission);
+	}
+
+	public function has2FA()
+	{
+		return $this->totpKey !== null;
+	}
+
+	public function setTotpKey($key)
+	{
+		$query = Database::prepare("
+			UPDATE `users`
+			SET `totpKey` = :totpKey
+			WHERE `id` = :id
+		");
+
+		$query->execute(array
+		(
+			":totpKey" => $key,
+			":id" => $this->id
+		));
+	}
+
+	public function validateTotp($token, $key = null)
+	{
+		if ($key === null)
+		{
+			$key = $this->totpKey;
+		}
+
+		$oath = new Oath;
+
+		if (!$oath->verifyTotp($key, $token))
+		{
+			return false;
+		}
+
+		// Cleanup token lock table
+		Database::query("
+			DELETE FROM `usedtotptokens`
+			WHERE `date` < DATE_SUB(NOW(), INTERVAL 90 SECOND)
+		");
+
+		$query = Database::prepare("
+			SELECT `id` FROM `usedtotptokens`
+			WHERE `userId` = :userId AND `token` = :token
+		");
+
+		$query->execute(array
+		(
+			":userId" => $this->id,
+			":token" => $token
+		));
+
+		if ($query->rowCount())
+		{
+			return false;
+		}
+
+		$query = Database::prepare("
+			INSERT INTO `usedtotptokens`
+			SET
+				`userId` = :userId,
+				`token` = :token,
+				`date` = NOW()
+		");
+
+		try
+		{
+			$query->execute(array
+			(
+				":userId" => $this->id,
+				":token" => $token
+			));
+
+			return true;
+		}
+		catch (PDOException $exception)
+		{
+			// Duplicate token
+			if ($exception->errorInfo[1] == 1062)
+			{
+				return false;
+			}
+			else
+			{
+				throw $exception;
+			}
+		}
 	}
 
 	public function isEqualTo(User $user)

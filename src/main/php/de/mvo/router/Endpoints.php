@@ -62,6 +62,10 @@ class Endpoints extends ArrayObject
 		$this->append(new Endpoint(HttpMethod::GET, "/intern/settings/[" . implode("|", $settingsPages) . ":page]", Target::create()->className(Account::class)->method("showSettings")->requireLogin()));
 		$this->append(new Endpoint(HttpMethod::POST, "/intern/settings/[" . implode("|", $settingsPages) . ":page]", Target::create()->className(Account::class)->method("updateSettings")->requireLogin()));
 
+		$this->append(new Endpoint(HttpMethod::POST, "/intern/settings/2fa/request", Target::create()->className(Account::class)->method("request2faKey")->requireLogin()));
+		$this->append(new Endpoint(HttpMethod::POST, "/intern/settings/2fa/enable", Target::create()->className(Account::class)->method("enable2fa")->requireLogin()));
+		$this->append(new Endpoint(HttpMethod::POST, "/intern/settings/2fa/disable", Target::create()->className(Account::class)->method("disable2fa")->requireLogin()));
+
 		$this->append(new Endpoint(HttpMethod::GET, "/intern/members", Target::create()->className(Members::class)->method("getList")->requireLogin()));
 		$this->append(new Endpoint(HttpMethod::GET, "/intern/members/[:username]", Target::create()->className(Members::class)->method("getDetails")->requireLogin()));
 

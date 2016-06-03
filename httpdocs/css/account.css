@@ -32,18 +32,23 @@
 	z-index: 2;
 }
 
-#login-form input[type="text"]
+#login-username
 {
 	margin-bottom: -1px;
 	border-bottom-right-radius: 0;
 	border-bottom-left-radius: 0;
 }
 
-#login-form input[type="password"]
+#login-password
 {
 	margin-bottom: 10px;
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
+}
+
+#login-2fa-token
+{
+	margin-bottom: 10px;
 }
 
 #navbar-profile
@@ -78,4 +83,9 @@
 #settings-profile-profilepicture-upload-error
 {
 	display: none;
+}
+
+#settings-2fa-qrcode
+{
+	margin-bottom: 30px;
 }

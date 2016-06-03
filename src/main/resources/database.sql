@@ -59,10 +59,21 @@ CREATE TABLE `users` (
   `firstName` varchar(100) DEFAULT NULL,
   `lastName` varchar(100) DEFAULT NULL,
   `birthDate` date DEFAULT NULL,
+  `totpKey` varchar(20) DEFAULT NULL,
   `lastOnline` datetime DEFAULT NULL,
   `enabled` boolean NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `usedtotptokens` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `userId` int(11) unsigned NOT NULL,
+  `token` varchar(6) NOT NULL,
+  `date` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `userId_token` (`userId`, `token`),
+  CONSTRAINT `usedtotptokens_ibfk1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `usercontacts` (

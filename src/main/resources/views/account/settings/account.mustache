@@ -49,3 +49,67 @@
 		</div>
 	</div>
 </div>
+
+<div class="col-md-9">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Zwei-Faktor-Authentifizierung
+				{{#user.has2FA}}
+					<span class="label label-success pull-right">aktiviert</span>
+				{{/user.has2FA}}
+				{{^user.has2FA}}
+					<span class="label label-danger pull-right">deaktiviert</span>
+				{{/user.has2FA}}
+			</h3>
+		</div>
+
+		<div class="panel-body">
+			<p class="help-block">
+				Mit der Zwei-Faktor-Authentifizierung kannst du deinen Benutzeraccount zus&auml;tzlich mit einem sich immer wieder &auml;ndernden Code absichern.<br/>
+				Das Verfahren ist &auml;nlich zu einer TAN beim Online Banking: Jeder Code ist nur einmalig g&uuml;ltig, aber auch nur f&uuml;r eine bestimmte Zeit.<br/>
+				Alles was du hierf&uuml;r brauchst ist eine App wie den <strong>Google Authenticator</strong>, welche die Codes generiert. Diese gibt es sowohl f&uuml;r <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2" target="_blank">Android</a> als auch f&uuml;r iOS.<br/>
+				Bei jedem Login musst du dann zus&auml;tzlich zu deinem Benutzername und Passwort auch den in der App generierten Code eingeben.
+			</p>
+
+			<div class="form-group" id="settings-2fa-password-group">
+				<label for="settings-2fa-password">Aktuelles Passwort</label>
+				<input type="password" class="form-control" id="settings-2fa-password" required/>
+				<span class="help-block"></span>
+			</div>
+
+			<div class="form-group">
+				{{#user.has2FA}}
+					<button type="button" class="btn btn-danger" id="settings-2fa-disable">Deaktivieren</button>
+				{{/user.has2FA}}
+				{{^user.has2FA}}
+					<button type="button" class="btn btn-success" id="settings-2fa-enable">Aktivieren</button>
+				{{/user.has2FA}}
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="settings-2fa-enable-modal" data-backdrop="static">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Zwei-Faktor-Authentifizierung aktivieren</h4>
+			</div>
+			<div class="modal-body">
+				<h4>Scanne den folgenden QRCode mit der Google Authenticator App.</h4>
+				<div id="settings-2fa-qrcode" class="text-center"></div>
+
+				<h4>Gebe anschlie&szlig;end den 6 stelligen Code aus der App in das nachfolgende Feld ein.</h4>
+				<div class="form-group" id="settings-2fa-token-group">
+					<label for="settings-2fa-token">Code</label>
+					<input type="text" class="form-control" id="settings-2fa-token" required/>
+					<span class="help-block"></span>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+				<button type="button" class="btn btn-success" id="settings-2fa-enable-submit">Aktivieren</button>
+			</div>
+		</div>
+	</div>
+</div>

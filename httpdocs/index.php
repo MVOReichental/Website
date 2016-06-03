@@ -60,7 +60,8 @@ try
 		http_response_code(401);
 		$content = MustacheRenderer::render("account/login", array
 		(
-			"url" => $path,
+			"url" => (isset($_GET["redirect"]) and $_GET["redirect"] != "") ? $_GET["redirect"] : $path,
+			"requestToken" => ($exception->getType() == LoginException::REQUIRE_2FA_TOKEN or $exception->getType() == LoginException::INVALID_2FA_TOKEN),
 			"errorMessage" => $exception->getLocalizedMessage()
 		));
 
