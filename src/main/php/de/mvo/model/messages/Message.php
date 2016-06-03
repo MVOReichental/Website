@@ -60,6 +60,13 @@ class Message
 
 	public function formatText()
 	{
-		return Parsedown::instance()->text($this->text);
+		$parsedown = Parsedown::instance("messages");
+
+		$parsedown->setBreaksEnabled(true);
+		$parsedown->setMarkupEscaped(true);
+
+		$text = str_replace("javascript:", "javascript%3A", $this->text);// Escape JavaScript links (e.g. javascript:someFunction())
+
+		return $parsedown->text($text);
 	}
 }
