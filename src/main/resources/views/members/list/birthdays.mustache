@@ -1,0 +1,25 @@
+<div class="table-responsive">
+	<table class="table table-striped sortable">
+		<thead>
+			<tr>
+				<th>Vorname</th>
+				<th>Nachname</th>
+				<th>Geburtstag</th>
+				<th>Alter</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#users}}
+				<tr>
+					<td>
+						<a href="intern/members/{{username}}" class="hidden-print"><i class="fa fa-info-circle"></i></a>
+						{{firstName}}
+					</td>
+					<td>{{lastName}}</td>
+					<td data-value="{{birthDate.month}}{{birthDate.day}}">{{birthDate.day}}.{{birthDate.month}}.</td>
+					<td>{{birthDate.yearsTillNow}}</td>
+				</tr>
+			{{/users}}
+		</tbody>
+	</table>
+</div>

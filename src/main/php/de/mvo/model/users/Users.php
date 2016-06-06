@@ -2,6 +2,7 @@
 namespace de\mvo\model\users;
 
 use ArrayObject;
+use de\mvo\Database;
 
 class Users extends ArrayObject
 {
@@ -21,5 +22,32 @@ class Users extends ArrayObject
 		}
 
 		return false;
+	}
+
+	public function addAll(Users $users)
+	{
+		foreach ($users as $user)
+		{
+			$this->append($user);
+		}
+	}
+
+	public function makeUnique()
+	{
+		$this->exchangeArray(array_unique((array) $this));
+	}
+
+	public static function getAll()
+	{
+		$users = new self;
+
+		$query = Database::query("SELECT * FROM `users`");
+
+		while ($user = $query->fetchObject(User::class))
+		{
+			$users->append($user);
+		}
+
+		return $users;
 	}
 }

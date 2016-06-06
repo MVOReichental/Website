@@ -22,6 +22,7 @@
     "Jcrop": "jcrop#^2.0.4",
     "blueimp-file-upload": "^9.12.3",
     "jquery-ui": "jquery.ui#^1.11.4",
-    "jquery-qrcode": "*"
+    "jquery-qrcode": "*",
+    "bootstrap-sortable": "^2.0.0"
   }
 }

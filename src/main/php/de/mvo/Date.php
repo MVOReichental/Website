@@ -15,6 +15,16 @@ class Date extends DateTime
 		return $this->format("d.m.Y");
 	}
 
+	public function day()
+	{
+		return $this->format("d");
+	}
+
+	public function month()
+	{
+		return $this->format("m");
+	}
+
 	public function humanReadableDateWithWeekday()
 	{
 		$weekday = self::getWeekdayName($this->format("N"));
