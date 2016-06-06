@@ -5,6 +5,7 @@ use de\mvo\MustacheRenderer;
 use de\mvo\router\Endpoints;
 use de\mvo\router\Router;
 use de\mvo\service\exception\LoginException;
+use de\mvo\service\exception\NotFoundException;
 use de\mvo\service\exception\PermissionViolationException;
 
 try
@@ -71,6 +72,11 @@ try
 	{
 		http_response_code(403);
 		$content = file_get_contents(VIEWS_ROOT . "/permission-denied.html");
+	}
+	catch (NotFoundException $exception)
+	{
+		http_response_code(404);
+		$content = file_get_contents(VIEWS_ROOT . "/not-found.html");
 	}
 
 	if ($internalPageRequested and User::getCurrent() !== null)
