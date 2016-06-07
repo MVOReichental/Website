@@ -108,4 +108,14 @@ CREATE TABLE `messagerecipients` (
   CONSTRAINT `messagerecipients_ibfk2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+CREATE TABLE `forms` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `filename` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `title` varchar(200) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

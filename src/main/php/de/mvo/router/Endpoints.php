@@ -5,6 +5,7 @@ use ArrayObject;
 use de\mvo\service\Account;
 use de\mvo\service\Dates;
 use de\mvo\service\File;
+use de\mvo\service\Forms;
 use de\mvo\service\InternHome;
 use de\mvo\service\JsonView;
 use de\mvo\service\GroupMembers;
@@ -72,5 +73,8 @@ class Endpoints extends ArrayObject
 
 		$this->append(new Endpoint(HttpMethod::GET, "/intern/messages/sent", Target::create()->className(Messages::class)->method("getSentMessages")->requireLogin()));
 		$this->append(new Endpoint(HttpMethod::GET, "/intern/messages/received", Target::create()->className(Messages::class)->method("getReceivedMessages")->requireLogin()));
+
+		$this->append(new Endpoint(HttpMethod::GET, "/intern/forms", Target::create()->className(Forms::class)->method("getList")->requireLogin()));
+		$this->append(new Endpoint(HttpMethod::GET, "/intern/forms/[*:filename]", Target::create()->className(Forms::class)->method("download")->requireLogin()));
 	}
 }
