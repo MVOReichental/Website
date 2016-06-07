@@ -67,7 +67,6 @@ class Endpoints extends ArrayObject
 		$this->append(new Endpoint(HttpMethod::POST, "/intern/settings/2fa/disable", Target::create()->className(Account::class)->method("disable2fa")->requireLogin()));
 
 		$membersListViews = array_keys(Members::getListViews());
-		$membersListGroups = array_keys(Members::getListGroups());
 		$this->append(new Endpoint(HttpMethod::GET, "/intern/members/[" . implode("|", $membersListViews) . ":view]/?[:groups]?", Target::create()->className(Members::class)->method("getList")->requireLogin()));
 		$this->append(new Endpoint(HttpMethod::GET, "/intern/members/[:username]", Target::create()->className(Members::class)->method("getDetails")->requireLogin()));
 
