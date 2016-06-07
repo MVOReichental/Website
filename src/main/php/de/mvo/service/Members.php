@@ -123,7 +123,7 @@ class Members extends AbstractService
 		 */
 		foreach ($messages as $message)
 		{
-			if ($message->sender->isEqualTo($currentUser) or $message->recipients->hasUser($currentUser))
+			if ($message->sender->isEqualTo($currentUser) or $message->recipients->hasUser($currentUser) or $currentUser->hasPermission("messages.readAll"))
 			{
 				$filteredMessages->append($message);
 			}

@@ -9,24 +9,33 @@ class InternHome extends AbstractService
 {
 	public function get()
 	{
-		$receivedMessages = Messages::getByRecipient(User::getCurrent(), 1);
-		$sentMessages = Messages::getBySender(User::getCurrent(), 1);
+		$currentUser = User::getCurrent();
 
-		if (!$receivedMessages->count())
+		if ($currentUser->hasPermission("messages.readAll"))
 		{
-			$latestMessage = $sentMessages;
-		}
-		elseif (!$sentMessages->count())
-		{
-			$latestMessage = $receivedMessages;
-		}
-		elseif ($sentMessages->offsetGet(0)->id > $receivedMessages->offsetGet(0)->id)
-		{
-			$latestMessage = $sentMessages;
+			$latestMessage = Messages::getAll(1);
 		}
 		else
 		{
-			$latestMessage = $receivedMessages;
+			$receivedMessages = Messages::getByRecipient($currentUser, 1);
+			$sentMessages = Messages::getBySender($currentUser, 1);
+
+			if (!$receivedMessages->count())
+			{
+				$latestMessage = $sentMessages;
+			}
+			elseif (!$sentMessages->count())
+			{
+				$latestMessage = $receivedMessages;
+			}
+			elseif ($sentMessages->offsetGet(0)->id > $receivedMessages->offsetGet(0)->id)
+			{
+				$latestMessage = $sentMessages;
+			}
+			else
+			{
+				$latestMessage = $receivedMessages;
+			}
 		}
 
 		return MustacheRenderer::render("home-intern", array
