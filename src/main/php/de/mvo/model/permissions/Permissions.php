@@ -5,9 +5,33 @@ use ArrayObject;
 
 class Permissions extends ArrayObject
 {
-	public function hasPermission($permission)
+	public function hasPermission($permission, $requireExactMatch = true)
 	{
-		return in_array($permission, (array) $this);
+		foreach ($this as $thisPermission)
+		{
+			if ($thisPermission == $permission)
+			{
+				return true;
+			}
+
+			if ($requireExactMatch)
+			{
+				continue;
+			}
+
+			$wildcardIndex = strpos($permission, "*");
+			if ($wildcardIndex !== false and substr($thisPermission, 0, $wildcardIndex) == substr($permission, 0, $wildcardIndex))
+			{
+				return true;
+			}
+
+			if ($permission[0] == "@" and preg_match(substr($permission, 1), $thisPermission))
+			{
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	public function addAll(Permissions $permissions)

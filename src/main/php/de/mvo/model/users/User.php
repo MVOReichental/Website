@@ -45,7 +45,7 @@ class User
 	 */
 	private $totpKey;
 	/**
-	 * @var Permissions
+	 * @var Permissions|null|false The permissions of the user, null if not loaded yet, false if the user does not have any permission
 	 */
 	private $permissions;
 	/**
@@ -215,6 +215,15 @@ class User
 		if ($this->permissions === null)
 		{
 			$this->permissions = GroupList::load()->getPermissionsForUser($this);
+			if ($this->permissions === null)
+			{
+				$this->permissions = false;
+			}
+		}
+
+		if ($this->permissions === false)
+		{
+			return false;
 		}
 
 		if ($this->permissions->hasPermission("*"))
@@ -222,7 +231,7 @@ class User
 			return true;
 		}
 
-		return $this->permissions->hasPermission($permission);
+		return $this->permissions->hasPermission($permission, false);
 	}
 
 	public function has2FA()

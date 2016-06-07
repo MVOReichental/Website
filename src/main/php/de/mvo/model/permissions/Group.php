@@ -30,14 +30,14 @@ class Group
 		$this->subGroups = new GroupList;
 	}
 
-	public function getGroupByPermission($permission)
+	public function getGroupByPermission($permission, $requireExactMatch = true)
 	{
-		if ($this->permissions->hasPermission($permission))
+		if ($this->permissions->hasPermission($permission, $requireExactMatch))
 		{
 			return $this;
 		}
 
-		return $this->subGroups->getGroupByPermission($permission);
+		return $this->subGroups->getGroupByPermission($permission, $requireExactMatch);
 	}
 
 	public function addGroup(Group $group)

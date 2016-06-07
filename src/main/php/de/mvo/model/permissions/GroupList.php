@@ -55,17 +55,18 @@ class GroupList extends ArrayObject
 	 * Get the first group matching the given permission string.
 	 *
 	 * @param string $permission The permission to search for
+	 * @param bool $requireExactMatch Whether an exact match is required, false if also the wildcard placeholder "*" and regular expressions (prefixed with "@") are allowed
 	 *
 	 * @return Group|null
 	 */
-	public function getGroupByPermission($permission)
+	public function getGroupByPermission($permission, $requireExactMatch = true)
 	{
 		/**
 		 * @var $group Group
 		 */
 		foreach ($this as $group)
 		{
-			$foundGroup = $group->getGroupByPermission($permission);
+			$foundGroup = $group->getGroupByPermission($permission, $requireExactMatch);
 			if ($foundGroup !== null)
 			{
 				return $foundGroup;
