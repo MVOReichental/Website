@@ -15,7 +15,7 @@ class Messages extends AbstractService
 			"messages" => MessagesList::getBySender(User::getCurrent())
 		));
 	}
-	
+
 	public function getReceivedMessages()
 	{
 		return MustacheRenderer::render("messages/page", array
