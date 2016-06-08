@@ -10,3 +10,13 @@
 {
 	margin-bottom: 15px;
 }
+
+#members-send-message-button
+{
+	display: none;
+}
+
+#members-send-message-recipients
+{
+	margin-bottom: 10px;
+}

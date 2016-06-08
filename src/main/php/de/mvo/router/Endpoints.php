@@ -73,6 +73,7 @@ class Endpoints extends ArrayObject
 
 		$this->append(new Endpoint(HttpMethod::GET, "/intern/messages/sent", Target::create()->className(Messages::class)->method("getSentMessages")->requireLogin()));
 		$this->append(new Endpoint(HttpMethod::GET, "/intern/messages/received", Target::create()->className(Messages::class)->method("getReceivedMessages")->requireLogin()));
+		$this->append(new Endpoint(HttpMethod::POST, "/intern/messages/send", Target::create()->className(Messages::class)->method("sendMessage")->requireLogin()));
 
 		$this->append(new Endpoint(HttpMethod::GET, "/intern/forms", Target::create()->className(Forms::class)->method("getList")->requireLogin()));
 		$this->append(new Endpoint(HttpMethod::GET, "/intern/forms/[*:filename]", Target::create()->className(Forms::class)->method("download")->requireLogin()));

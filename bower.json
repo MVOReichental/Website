@@ -23,6 +23,7 @@
     "blueimp-file-upload": "^9.12.3",
     "jquery-ui": "jquery.ui#^1.11.4",
     "jquery-qrcode": "*",
-    "bootstrap-sortable": "^2.0.0"
+    "bootstrap-sortable": "^2.0.0",
+    "mustache.js": "mustache#^2.2.1"
   }
 }

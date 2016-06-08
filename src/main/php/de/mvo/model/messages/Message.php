@@ -34,6 +34,11 @@ class Message
 
 	public function __construct()
 	{
+		if ($this->id === null)
+		{
+			return;
+		}
+
 		$this->id = (int) $this->id;
 		$this->date = new Date($this->date);
 		$this->sender = User::getById($this->senderUserId);
@@ -58,6 +63,32 @@ class Message
 		}
 	}
 
+	/**
+	 * @param int $id
+	 *
+	 * @return Message|null
+	 */
+	public static function getById($id)
+	{
+		$query = Database::prepare("
+			SELECT *
+			FROM `messages`
+			WHERE `id` = :id
+		");
+
+		$query->execute(array
+		(
+			":id" => $id
+		));
+
+		if (!$query->rowCount())
+		{
+			return null;
+		}
+
+		return $query->fetchObject(self::class);
+	}
+
 	public function formatText()
 	{
 		$parsedown = Parsedown::instance("messages");
@@ -68,5 +99,43 @@ class Message
 		$text = str_replace("javascript:", "javascript%3A", $this->text);// Escape JavaScript links (e.g. javascript:someFunction())
 
 		return $parsedown->text($text);
+	}
+
+	public function saveAsNew()
+	{
+		$query = Database::prepare("
+			INSERT INTO `messages`
+			SET
+				`date` = NOW(),
+				`senderUserId` = :senderUserId,
+				`text` = :text
+		");
+
+		$query->execute(array
+		(
+			":senderUserId" => $this->sender->id,
+			":text" => $this->text
+		));
+
+		$this->id = Database::lastInsertId();
+
+		$query = Database::prepare("
+			INSERT INTO `messagerecipients`
+			SET
+				`messageId` = :messageId,
+				`userId` = :userId
+		");
+
+		/**
+		 * @var $recipient User
+		 */
+		foreach ($this->recipients as $recipient)
+		{
+			$query->execute(array
+			(
+				":messageId" => $this->id,
+				":userId" => $recipient->id
+			));
+		}
 	}
 }
