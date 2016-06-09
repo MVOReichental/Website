@@ -35,6 +35,8 @@ class { "apache":
   mpm_module    => "prefork",
   default_vhost => false,
   manage_user   => false,
+  user          => "vagrant",
+  group         => "vagrant",
 }
 
 apache::vhost {"localhost":
