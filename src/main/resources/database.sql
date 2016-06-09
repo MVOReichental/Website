@@ -88,6 +88,13 @@ CREATE TABLE `usercontacts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+CREATE TABLE `uploads` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `filename` varchar(200) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 CREATE TABLE `messages` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `date` datetime NOT NULL,
@@ -106,6 +113,16 @@ CREATE TABLE `messagerecipients` (
   UNIQUE KEY `messageId_userId` (`messageId`, `userId`),
   CONSTRAINT `messagerecipients_ibfk1` FOREIGN KEY (`messageId`) REFERENCES `messages` (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
   CONSTRAINT `messagerecipients_ibfk2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `messageattachments` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `messageId` int(11) unsigned NOT NULL,
+  `uploadId` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `messageId_uploadId` (`messageId`, `uploadId`),
+  CONSTRAINT `messageattachments_ibfk1` FOREIGN KEY (`messageId`) REFERENCES `messages` (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
+  CONSTRAINT `messageattachments_ibfk2` FOREIGN KEY (`uploadId`) REFERENCES `uploads` (`id`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

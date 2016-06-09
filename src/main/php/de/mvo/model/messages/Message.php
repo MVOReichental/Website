@@ -3,6 +3,8 @@ namespace de\mvo\model\messages;
 
 use de\mvo\Database;
 use de\mvo\Date;
+use de\mvo\model\uploads\Upload;
+use de\mvo\model\uploads\Uploads;
 use de\mvo\model\users\User;
 use de\mvo\model\users\Users;
 use Parsedown;
@@ -29,6 +31,10 @@ class Message
 	 * @var string
 	 */
 	public $text;
+	/**
+	 * @var Uploads
+	 */
+	public $attachments;
 
 	private $senderUserId;
 
@@ -60,6 +66,25 @@ class Message
 		while ($user = $query->fetchObject(User::class))
 		{
 			$this->recipients->append($user);
+		}
+
+		$query = Database::prepare("
+			SELECT `uploads`.*
+			FROM `messageattachments`
+			LEFT JOIN `uploads` ON `uploads`.`id` = `messageattachments`.`uploadId`
+			WHERE `messageId` = :messageId
+		");
+
+		$query->execute(array
+		(
+			":messageId" => $this->id
+		));
+
+		$this->attachments = new Uploads;
+
+		while ($upload = $query->fetchObject(Upload::class))
+		{
+			$this->attachments->append($upload);
 		}
 	}
 
@@ -135,6 +160,25 @@ class Message
 			(
 				":messageId" => $this->id,
 				":userId" => $recipient->id
+			));
+		}
+
+		$query = Database::prepare("
+			INSERT INTO `messageattachments`
+			SET
+				`messageId` = :messageId,
+				`uploadId` = :uploadId
+		");
+
+		/**
+		 * @var $attachment Upload
+		 */
+		foreach ($this->attachments as $attachment)
+		{
+			$query->execute(array
+			(
+				":messageId" => $this->id,
+				":uploadId" => $attachment->id
 			));
 		}
 	}

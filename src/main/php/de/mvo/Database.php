@@ -30,6 +30,11 @@ class Database
 		return self::$pdo->query($statement);
 	}
 
+	public static function pdo()
+	{
+		return self::$pdo;
+	}
+
 	public static function lastInsertId()
 	{
 		return self::$pdo->lastInsertId();

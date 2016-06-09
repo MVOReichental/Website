@@ -23,6 +23,14 @@
 							<a href="intern/members/{{username}}" class="label label-default">{{firstName}} {{lastName}}</a>
 						{{/recipients}}
 					</div>
+					{{#attachments.count}}
+						<div class="clearfix">
+							<strong>Anh&auml;nge:</strong>
+							{{#attachments}}
+								<a href="intern/uploads/{{id}}/{{filename}}" class="label label-default">{{filename}}</a>
+							{{/attachments}}
+						</div>
+					{{/attachments.count}}
 					{{{formatText}}}
 				</div>
 			</li>
