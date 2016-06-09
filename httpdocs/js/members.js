@@ -60,26 +60,53 @@ $(function()
 
 	$("#members-send-message-button").on("click", function()
 	{
+		var recipients = [];
+
+		membersList.find("tbody > tr").each(function()
+		{
+			if (!$(this).find(".members-select-checkbox").prop("checked"))
+			{
+				return;
+			}
+
+			recipients.push(
+			{
+				id: $(this).data("id"),
+				firstName: $(this).find("td.first-name").text(),
+				lastName: $(this).find("td.last-name").text()
+			});
+		});
+
+		Members.showSendMessage(recipients);
+	});
+
+	$("#members-details-send-message-button").on("click", function()
+	{
+		var recipients =
+		[
+			{
+				id: $("#members-details-user").data("id"),
+				firstName: $("#members-details-firstname").text(),
+				lastName: $("#members-details-lastname").text(),
+			}
+		];
+
+		Members.showSendMessage(recipients);
+	});
+});
+
+var Members =
+{
+	showSendMessage : function(recipients)
+	{
 		$.get("templates/recipients.mustache", function(template)
 		{
-			var recipients = [];
 			var recipientUserIds = [];
 
-			membersList.find("tbody > tr").each(function()
+			for (var index = 0; index < recipients.length; index++)
 			{
-				if (!$(this).find(".members-select-checkbox").prop("checked"))
-				{
-					return;
-				}
-
-				recipients.push(
-				{
-					firstName: $(this).find("td.first-name").text(),
-					lastName: $(this).find("td.last-name").text()
-				});
-
-				recipientUserIds.push($(this).data("id"));
-			});
+				recipientUserIds.push(recipients[index].id);
+			}
 
 			$("#members-send-message-recipients").html(Mustache.render(template,
 			{
@@ -92,5 +119,5 @@ $(function()
 
 			var modal = $("#members-send-message-modal").modal("show");
 		});
-	});
-});
+	}
+};

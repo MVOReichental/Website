@@ -1,11 +1,11 @@
 <div class="row">
 	<div class="col-md-4">
-		<div id="members-details-user" class="gallery-source">
-			{{#user}}
+		{{#user}}
+			<div id="members-details-user" class="gallery-source" data-id="{{id}}">
 				<a href="users/{{id}}/profile-picture.jpg?hash={{profilePictureHash}}">
 					<img src="users/{{id}}/profile-picture.jpg?hash={{profilePictureHash}}" class="img-rounded" width="200"/>
 				</a>
-				<h3>{{firstName}} {{lastName}}</h3>
+				<h3><span id="members-details-firstname">{{firstName}}</span> <span id="members-details-lastname">{{lastName}}</span></h3>
 
 				<table class="table table-striped">
 					<tbody>
@@ -29,8 +29,10 @@
 						{{/birthDate}}
 					</tbody>
 				</table>
-			{{/user}}
-		</div>
+
+				<button type="button" class="btn btn-sm btn-success" id="members-details-send-message-button"><i class="fa fa-send"></i> Nachricht senden</button>
+			</div>
+		{{/user}}
 	</div>
 
 	<div class="col-md-8" id="members-details-messages">
@@ -41,3 +43,5 @@
 		{{> messages/list}}
 	</div>
 </div>
+
+{{> messages/send-modal}}
