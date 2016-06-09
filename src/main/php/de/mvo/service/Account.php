@@ -71,8 +71,7 @@ class Account extends AbstractService
 		}
 		else
 		{
-			http_response_code(400);
-			return null;
+			throw new LoginException(LoginException::UNKNOWN_ERROR);
 		}
 
 		if (isset($_GET["redirect"]) and $_GET["redirect"] != "")

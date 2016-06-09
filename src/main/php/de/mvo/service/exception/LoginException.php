@@ -7,6 +7,7 @@ class LoginException extends AccountException
 	const INVALID_CREDENTIALS = "invalid-credentials";
 	const INVALID_2FA_TOKEN = "invalid-2fa-token";
 	const REQUIRE_2FA_TOKEN = "require-2fa-token";
+	const UNKNOWN_ERROR = "unknown-error";
 
 	private $type;
 
@@ -25,6 +26,8 @@ class LoginException extends AccountException
 				return "Der angegebene Code ist ung&uuml;ltig!";
 			case self::REQUIRE_2FA_TOKEN:
 				return null;
+			case self::UNKNOWN_ERROR:
+				return "Ein Fehler ist aufgetreten! Bitte versuche es erneut oder wende dich an den Webmaster.";
 			default:
 				return null;
 		}
