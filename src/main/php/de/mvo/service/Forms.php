@@ -31,7 +31,11 @@ class Forms extends AbstractService
 			throw new PermissionViolationException;
 		}
 
-		$form->stream();
+		if (!$form->stream())
+		{
+			throw new NotFoundException;
+		}
+
 		return null;
 	}
 }

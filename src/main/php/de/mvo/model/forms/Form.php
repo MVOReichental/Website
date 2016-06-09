@@ -73,7 +73,11 @@ class Form
 		$filename = $this->getAbsoluteFilePath();
 
 		$file = fopen($filename, "r");
-		if ($file !== false)
+		if ($file == false)
+		{
+			return false;
+		}
+		else
 		{
 			header("Content-Type: application/octet-stream");
 			header("Content-Length: " . filesize($filename));
@@ -88,6 +92,7 @@ class Form
 			}
 
 			fclose($file);
+			return true;
 		}
 	}
 }
