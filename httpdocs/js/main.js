@@ -24,8 +24,13 @@ $(function()
 	$(".gallery-source a").on("click", function(event)
 	{
 		var allElements = $(this).parent(".gallery-source").find("a").has("img");
+		if (!allElements.length)
+		{
+			return;
+		}
 
 		event.preventDefault();
+
 		blueimp.Gallery(allElements,
 		{
 			useBootstrapModal: false,
