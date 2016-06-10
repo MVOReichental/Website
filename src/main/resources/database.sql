@@ -15,8 +15,8 @@ CREATE TABLE `dates` (
   `title` varchar(200) NOT NULL,
   `locationId` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `locationId` (`locationId`),
-  CONSTRAINT `dates_ibfk1` FOREIGN KEY (`locationId`) REFERENCES `locations` (`id`) ON UPDATE CASCADE
+  KEY (`locationId`),
+  CONSTRAINT FOREIGN KEY (`locationId`) REFERENCES `locations` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -32,9 +32,9 @@ CREATE TABLE `picturealbums` (
   `isPublic` boolean NOT NULL DEFAULT FALSE,
   `isAlbumOfTheYear` boolean NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`id`),
-  KEY `coverPictureId` (`coverPictureId`),
-  UNIQUE KEY `year_name` (`year`, `name`),
-  CONSTRAINT `picturealbums_ibfk1` FOREIGN KEY (`coverPictureId`) REFERENCES `pictures` (`id`) ON UPDATE CASCADE ON DELETE SET NULL
+  KEY (`coverPictureId`),
+  UNIQUE KEY (`year`, `name`),
+  CONSTRAINT FOREIGN KEY (`coverPictureId`) REFERENCES `pictures` (`id`) ON UPDATE CASCADE ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET =utf8;
 
 CREATE TABLE `pictures` (
@@ -44,9 +44,9 @@ CREATE TABLE `pictures` (
   `number` int(11) unsigned NOT NULL,
   `title` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `albumId` (`albumId`),
-  UNIQUE KEY `albumId_number` (`albumId`, `number`),
-  CONSTRAINT `pictures_ibfk1` FOREIGN KEY (`albumId`) REFERENCES `picturealbums` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
+  KEY (`albumId`),
+  UNIQUE KEY (`albumId`, `number`),
+  CONSTRAINT FOREIGN KEY (`albumId`) REFERENCES `picturealbums` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -63,7 +63,7 @@ CREATE TABLE `users` (
   `lastOnline` datetime DEFAULT NULL,
   `enabled` boolean NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`)
+  UNIQUE KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `usedtotptokens` (
@@ -72,8 +72,8 @@ CREATE TABLE `usedtotptokens` (
   `token` varchar(6) NOT NULL,
   `date` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `userId_token` (`userId`, `token`),
-  CONSTRAINT `usedtotptokens_ibfk1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
+  UNIQUE KEY (`userId`, `token`),
+  CONSTRAINT FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `usercontacts` (
@@ -83,8 +83,8 @@ CREATE TABLE `usercontacts` (
   `category` set('private', 'business') NOT NULL,
   `value` varchar(200) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `userId` (`userId`),
-  CONSTRAINT `usercontacts_ibfk1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
+  KEY (`userId`),
+  CONSTRAINT FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -101,8 +101,8 @@ CREATE TABLE `messages` (
   `senderUserId` int(11) unsigned NOT NULL,
   `text` longtext NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `senderUserId` (`senderUserId`),
-  CONSTRAINT `messages_ibfk1` FOREIGN KEY (`senderUserId`) REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE RESTRICT
+  KEY (`senderUserId`),
+  CONSTRAINT FOREIGN KEY (`senderUserId`) REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `messagerecipients` (
@@ -110,9 +110,9 @@ CREATE TABLE `messagerecipients` (
   `messageId` int(11) unsigned NOT NULL,
   `userId` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `messageId_userId` (`messageId`, `userId`),
-  CONSTRAINT `messagerecipients_ibfk1` FOREIGN KEY (`messageId`) REFERENCES `messages` (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
-  CONSTRAINT `messagerecipients_ibfk2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
+  UNIQUE KEY (`messageId`, `userId`),
+  CONSTRAINT FOREIGN KEY (`messageId`) REFERENCES `messages` (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
+  CONSTRAINT FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `messageattachments` (
@@ -120,9 +120,9 @@ CREATE TABLE `messageattachments` (
   `messageId` int(11) unsigned NOT NULL,
   `uploadId` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `messageId_uploadId` (`messageId`, `uploadId`),
-  CONSTRAINT `messageattachments_ibfk1` FOREIGN KEY (`messageId`) REFERENCES `messages` (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
-  CONSTRAINT `messageattachments_ibfk2` FOREIGN KEY (`uploadId`) REFERENCES `uploads` (`id`) ON UPDATE CASCADE ON DELETE RESTRICT
+  UNIQUE KEY (`messageId`, `uploadId`),
+  CONSTRAINT FOREIGN KEY (`messageId`) REFERENCES `messages` (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
+  CONSTRAINT FOREIGN KEY (`uploadId`) REFERENCES `uploads` (`id`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -132,7 +132,7 @@ CREATE TABLE `forms` (
   `name` varchar(100) NOT NULL,
   `title` varchar(200) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
+  UNIQUE KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
