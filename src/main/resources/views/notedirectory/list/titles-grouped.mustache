@@ -1,0 +1,29 @@
+<div class="table-responsive">
+	<table class="table table-striped table-hover" id="notedirectory-list">
+		<thead>
+			<tr>
+				<th>Titel</th>
+				<th>Komponist</th>
+				<th>Bearbeiter</th>
+				<th>Verleger</th>
+			</tr>
+		</thead>
+		{{#categories}}
+			{{#titles.count}}
+				<tbody>
+					<tr>
+						<th colspan="4">{{title}}</th>
+					</tr>
+					{{#titles}}
+						<tr>
+							<td>{{title}}</td>
+							<td>{{composer}}</td>
+							<td>{{arranger}}</td>
+							<td>{{publisher}}</td>
+						</tr>
+					{{/titles}}
+				</tbody>
+			{{/titles.count}}
+		{{/categories}}
+	</table>
+</div>

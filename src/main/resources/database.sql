@@ -135,4 +135,47 @@ CREATE TABLE `forms` (
   UNIQUE KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+CREATE TABLE `notedirectorycategories` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(100) NOT NULL,
+  `order` int(11) unsigned NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `title` (`title`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `notedirectoryprograms` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `year` year NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `title` varchar(200) NOT NULL,
+  `isDefault` boolean NOT NULL DEFAULT FALSE,
+  `showCategories` boolean NOT NULL DEFAULT FALSE,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY (`year`, `name`)
+) Engine=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `notedirectorytitles` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `categoryId` int(11) unsigned NOT NULL,
+  `title` varchar(200) NOT NULL,
+  `composer` varchar(200) DEFAULT NULL,
+  `arranger` varchar(200) DEFAULT NULL,
+  `publisher` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY (`categoryId`),
+  CONSTRAINT FOREIGN KEY (`categoryId`) REFERENCES `notedirectorycategories` (`id`) ON UPDATE CASCADE ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `notedirectoryprogramtitles` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `programId` int(11) unsigned NOT NULL,
+  `titleId` int(11) unsigned NOT NULL,
+  `number` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `programId_titleId` (`programId`, `titleId`),
+  CONSTRAINT FOREIGN KEY (`programId`) REFERENCES `notedirectoryprograms` (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
+  CONSTRAINT FOREIGN KEY (`titleId`) REFERENCES `notedirectorytitles` (`id`) ON UPDATE CASCADE ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

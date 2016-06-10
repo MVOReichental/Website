@@ -12,6 +12,7 @@ use de\mvo\service\GroupMembers;
 use de\mvo\service\Members;
 use de\mvo\service\Messages;
 use de\mvo\service\News;
+use de\mvo\service\NoteDirectory;
 use de\mvo\service\Pictures;
 use de\mvo\service\ProfilePicture;
 use de\mvo\service\Redirect;
@@ -78,6 +79,11 @@ class Endpoints extends ArrayObject
 
 		$this->append(new Endpoint(HttpMethod::GET, "/intern/forms", Target::create()->className(Forms::class)->method("getList")->requireLogin()));
 		$this->append(new Endpoint(HttpMethod::GET, "/intern/forms/[*:filename]", Target::create()->className(Forms::class)->method("download")->requireLogin()));
+
+		$this->append(new Endpoint(HttpMethod::GET, "/intern/notedirectory", Target::create()->className(NoteDirectory::class)->method("redirectToLatestProgram")->permission("notedirectory.view")));
+		$this->append(new Endpoint(HttpMethod::GET, "/intern/notedirectory/programs/[i:year]/[*:name]", Target::create()->className(NoteDirectory::class)->method("getProgram")->permission("notedirectory.view")));
+		$this->append(new Endpoint(HttpMethod::GET, "/intern/notedirectory/titles", Target::create()->className(NoteDirectory::class)->method("getAllTitles")->permission("notedirectory.view")));
+		$this->append(new Endpoint(HttpMethod::GET, "/intern/notedirectory/categories/[i:id]", Target::create()->className(NoteDirectory::class)->method("getTitlesWithCategory")->permission("notedirectory.view")));
 
 		$this->append(new Endpoint(HttpMethod::GET, "/intern/uploads/[i:id]/[*:filename]", Target::create()->className(Uploads::class)->method("get")->requireLogin()));
 	}

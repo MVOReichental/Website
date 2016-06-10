@@ -111,6 +111,11 @@ a.thumbnail.active
 	margin-top: 20px;
 }
 
+.dropdown-menu > li.divider:last-child
+{
+	display: none;
+}
+
 @media (min-width: 768px)
 {
 	.dl-wide dt
