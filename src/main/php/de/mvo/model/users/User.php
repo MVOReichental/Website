@@ -6,11 +6,12 @@ use de\mvo\Date;
 use de\mvo\model\contacts\Contacts;
 use de\mvo\model\permissions\GroupList;
 use de\mvo\model\permissions\Permissions;
+use JsonSerializable;
 use Kelunik\TwoFactor\Oath;
 use PDOException;
 use RuntimeException;
 
-class User
+class User implements JsonSerializable
 {
 	/**
 	 * @var int
@@ -365,5 +366,10 @@ class User
 		{
 			$this->{$name} = $value;
 		}
+	}
+
+	function jsonSerialize()
+	{
+		return $this->id;
 	}
 }

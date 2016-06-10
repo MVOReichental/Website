@@ -3,8 +3,9 @@ namespace de\mvo\model\users;
 
 use ArrayObject;
 use de\mvo\Database;
+use JsonSerializable;
 
-class Users extends ArrayObject
+class Users extends ArrayObject implements JsonSerializable
 {
 	public function hasUser(User $user)
 	{
@@ -49,5 +50,10 @@ class Users extends ArrayObject
 		}
 
 		return $users;
+	}
+
+	function jsonSerialize()
+	{
+		return $this->getArrayCopy();
 	}
 }

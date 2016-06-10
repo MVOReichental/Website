@@ -3,9 +3,10 @@ namespace de\mvo\model\permissions;
 
 use ArrayObject;
 use de\mvo\model\users\User;
+use JsonSerializable;
 use UnexpectedValueException;
 
-class GroupList extends ArrayObject
+class GroupList extends ArrayObject implements JsonSerializable
 {
 	/**
 	 * @var GroupList
@@ -106,5 +107,10 @@ class GroupList extends ArrayObject
 		}
 
 		return null;
+	}
+
+	function jsonSerialize()
+	{
+		return $this->getArrayCopy();
 	}
 }

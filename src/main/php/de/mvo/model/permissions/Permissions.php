@@ -2,8 +2,9 @@
 namespace de\mvo\model\permissions;
 
 use ArrayObject;
+use JsonSerializable;
 
-class Permissions extends ArrayObject
+class Permissions extends ArrayObject implements JsonSerializable
 {
 	public function hasPermission($permission, $requireExactMatch = true)
 	{
@@ -45,5 +46,10 @@ class Permissions extends ArrayObject
 	public function makeUnique()
 	{
 		$this->exchangeArray(array_unique((array) $this));
+	}
+
+	function jsonSerialize()
+	{
+		return $this->getArrayCopy();
 	}
 }
