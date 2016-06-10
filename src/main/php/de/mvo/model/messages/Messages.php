@@ -59,7 +59,7 @@ class Messages extends ArrayObject
 	public static function getByRecipient(User $user, $limit = 1000)
 	{
 		$query = Database::prepare("
-			SELECT *
+			SELECT `messages`.*
 			FROM `messagerecipients`
 			LEFT JOIN `messages` ON `messages`.`id` = `messagerecipients`.`messageId`
 			WHERE `messagerecipients`.`userId` = :recipientUserId
