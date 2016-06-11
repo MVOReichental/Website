@@ -10,18 +10,30 @@ class Pictures extends AbstractService
 {
 	public function getYears()
 	{
+		$years = new YearList;
+		if (!$years->count())
+		{
+			http_response_code(404);
+		}
+
 		return TwigRenderer::render("pictures/years-overview", array
 		(
-			"years" => new YearList
+			"years" => $years
 		));
 	}
 
 	public function getAlbums()
 	{
+		$albums = AlbumList::getForYear($this->params->year);
+		if (!$albums->count())
+		{
+			http_response_code(404);
+		}
+
 		return TwigRenderer::render("pictures/albums-overview", array
 		(
 			"year" => $this->params->year,
-			"albums" => AlbumList::getForYear($this->params->year)
+			"albums" => $albums
 		));
 	}
 
