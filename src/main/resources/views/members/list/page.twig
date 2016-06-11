@@ -12,7 +12,7 @@
 	{% endfor %}
 </div>
 
-{{ content|raw }}
+{% include("members/list/" ~ view ~ ".twig") %}
 
 <div class="btn-group hidden-print">
 	<button type="button" class="btn btn-success" id="members-send-message-button"><i class="fa fa-send"></i> Nachricht senden</button>

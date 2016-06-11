@@ -97,10 +97,8 @@ class Members extends AbstractService
 		(
 			"title" => self::getListViews()[$this->params->view]["title"],
 			"groups" => array_values($groups),
-			"content" => TwigRenderer::render("members/list/" . $this->params->view, array
-			(
-				"users" => $users
-			))
+			"view" => $this->params->view,
+			"users" => $users
 		));
 	}
 

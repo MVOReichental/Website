@@ -122,10 +122,8 @@ class Account extends AbstractService
 			"message" => $message,
 			"pages" => array_values($pages),
 			"title" => $activePage["title"],
-			"content" => TwigRenderer::render("account/settings/" . $activePage["name"], array
-			(
-				"user" => $user
-			))
+			"activePage" => $activePage,
+			"user" => $user
 		));
 	}
 

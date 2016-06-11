@@ -117,10 +117,7 @@ class Messages extends AbstractService
 
 		return TwigRenderer::render("messages/send-success", array
 		(
-			"content" => TwigRenderer::render("messages/list", array
-			(
-				"messages" => new ArrayObject(array($message))
-			))
+			"messages" => new ArrayObject(array($message))
 		));
 	}
 }

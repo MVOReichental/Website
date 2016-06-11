@@ -21,6 +21,6 @@
 	</div>
 
 	<div class="col-md-9">
-		{{ content|raw }}
+		{% include("account/settings/" ~ activePage.name ~ ".twig") %}
 	</div>
 </div>
