@@ -76,6 +76,6 @@ class NoteDirectory extends AbstractService
 			throw new NotFoundException;
 		}
 
-		return self::renderListPage("Details zu " . $title->title, MustacheRenderer::render("notedirectory/list/title-details", $title));
+		return self::renderListPage($title->title, MustacheRenderer::render("notedirectory/list/title-details", $title));
 	}
 }
