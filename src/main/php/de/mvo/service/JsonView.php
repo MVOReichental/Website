@@ -7,9 +7,20 @@ class JsonView extends AbstractService
 {
 	public function get($template, $modelFilename)
 	{
-		return TwigRenderer::render($template, array
-		(
-			"json" => json_decode(file_get_contents(MODELS_ROOT . "/" . $modelFilename . ".json"))
-		));
+		$json = json_decode(file_get_contents(MODELS_ROOT . "/" . $modelFilename . ".json"));
+
+		if (is_array($json))
+		{
+			$context = array
+			(
+				"json" => $json
+			);
+		}
+		else
+		{
+			$context = (array) $json;
+		}
+
+		return TwigRenderer::render($template, $context);
 	}
 }
