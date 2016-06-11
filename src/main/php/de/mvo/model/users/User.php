@@ -349,6 +349,11 @@ class User implements JsonSerializable
 		return Contacts::forUser($this);
 	}
 
+	public function __toString()
+	{
+		return (string) $this->id;
+	}
+
 	public function __sleep()
 	{
 		return array("id");

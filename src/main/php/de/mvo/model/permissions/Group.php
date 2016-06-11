@@ -81,4 +81,21 @@ class Group
 
 		return null;
 	}
+
+	public function getAllUsers()
+	{
+		$users = new Users;
+
+		$users->addAll($this->users);
+
+		/**
+		 * @var $group Group
+		 */
+		foreach ($this->subGroups as $group)
+		{
+			$users->addAll($group->getAllUsers());
+		}
+
+		return $users;
+	}
 }

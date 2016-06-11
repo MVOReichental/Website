@@ -9,7 +9,7 @@ class GroupMembersList extends ArrayObject
 {
 	public function __construct($group)
 	{
-		$rootGroup = GroupList::load()->getGroupByPermission("groups." . $group);
+		$rootGroup = GroupList::load()->getGroupByPermission("group." . $group);
 		if ($rootGroup === null)
 		{
 			return;

@@ -55,7 +55,14 @@ class Members extends AbstractService
 
 		$users = new Users;
 
-		$selectedGroups = array_filter(explode("+", $this->params->groups));
+		if (isset($this->params->groups))
+		{
+			$selectedGroups = array_filter(explode("+", $this->params->groups));
+		}
+		else
+		{
+			$selectedGroups = array();
+		}
 
 		$groups = self::getListGroups();
 
@@ -77,7 +84,7 @@ class Members extends AbstractService
 				$permissionGroup = GroupList::load()->getGroupByPermission("group." . $name);
 				if ($permissionGroup !== null)
 				{
-					$users->addAll($permissionGroup->users);
+					$users->addAll($permissionGroup->getAllUsers());
 				}
 			}
 
