@@ -52,6 +52,18 @@ class GroupList extends ArrayObject implements JsonSerializable
 		file_put_contents(RESOURCES_ROOT . "/permissions.serialized", serialize($this));
 	}
 
+	public static function loadFromArray(array $array)
+	{
+		$groupList = new self;
+
+		foreach ($array as $group)
+		{
+			$groupList->append(Group::loadFromStdClass($group));
+		}
+
+		return $groupList;
+	}
+
 	/**
 	 * Get the first group matching the given permission string.
 	 *

@@ -3,6 +3,7 @@ namespace de\mvo\model\permissions;
 
 use de\mvo\model\users\User;
 use de\mvo\model\users\Users;
+use stdClass;
 
 class Group
 {
@@ -28,6 +29,39 @@ class Group
 		$this->users = new Users;
 		$this->permissions = new Permissions;
 		$this->subGroups = new GroupList;
+	}
+
+	public static function loadFromStdClass(stdClass $object)
+	{
+		$group = new self;
+
+		if (isset($object->title))
+		{
+			$group->title = $object->title;
+		}
+
+		if (isset($object->permissions) and is_array($object->permissions))
+		{
+			foreach ($object->permissions as $permission)
+			{
+				$group->permissions->append($permission);
+			}
+		}
+
+		if (isset($object->users) and is_array($object->users))
+		{
+			foreach ($object->users as $userId)
+			{
+				$group->addUser(User::getById($userId));
+			}
+		}
+
+		if (isset($object->subGroups) and is_array($object->subGroups))
+		{
+			$group->subGroups = GroupList::loadFromArray($object->subGroups);
+		}
+
+		return $group;
 	}
 
 	public function getGroupByPermission($permission, $requireExactMatch = true)

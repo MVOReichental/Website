@@ -1,6 +1,6 @@
 <?php
 use de\mvo\Database;
-use de\mvo\JsonPermissionImporter;
+use de\mvo\model\permissions\GroupList;
 
 require_once __DIR__ . "/../bootstrap.php";
 
@@ -20,4 +20,4 @@ if ($json === null)
 
 Database::init();
 
-JsonPermissionImporter::readGroupList($json)->save();
+GroupList::loadFromArray($json)->save();
