@@ -28,6 +28,7 @@ class AlbumList extends ArrayObject
 			SELECT *
 			FROM `picturealbums`
 			WHERE `year` = :year AND `published` AND `isPublic`
+			ORDER BY `date` ASC
 		");
 
 		$query->bindValue(":year", $year);
