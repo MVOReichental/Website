@@ -22,6 +22,11 @@ class Date extends DateTime
 
 	public function humanReadableTime()
 	{
+		if (!$this->hasTime())
+		{
+			return null;
+		}
+
 		return $this->format("H:i");
 	}
 
