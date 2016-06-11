@@ -14,9 +14,19 @@ CREATE TABLE `dates` (
   `endDate` datetime DEFAULT NULL,
   `title` varchar(200) NOT NULL,
   `locationId` int(11) unsigned DEFAULT NULL,
+  `isPublic` bool NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`id`),
   KEY (`locationId`),
   CONSTRAINT FOREIGN KEY (`locationId`) REFERENCES `locations` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `dategroups` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `dateId` int(11) unsigned NOT NULL,
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY (`dateId`, `name`),
+  CONSTRAINT FOREIGN KEY (`dateId`) REFERENCES `dates` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

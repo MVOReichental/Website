@@ -47,6 +47,8 @@ class Endpoints extends ArrayObject
 		// Dates
 		$this->append(new Endpoint(HttpMethod::GET, "/termine", Target::create()->className(Dates::class)->method("getHtml")));
 		$this->append(new Endpoint(HttpMethod::GET, "/termine.ics", Target::create()->className(Dates::class)->method("getIcal")));
+		$this->append(new Endpoint(HttpMethod::GET, "/intern/dates", Target::create()->className(Dates::class)->method("getHtml")->arguments(true)->requireLogin()));
+		$this->append(new Endpoint(HttpMethod::GET, "/intern/dates.ics", Target::create()->className(Dates::class)->method("getIcal")->arguments(true)->requireLogin()));
 
 		// Pictures
 		$this->append(new Endpoint(HttpMethod::GET, "/fotogalerie", Target::create()->className(Pictures::class)->method("getYears")));

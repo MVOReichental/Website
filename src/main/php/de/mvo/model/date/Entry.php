@@ -1,7 +1,9 @@
 <?php
 namespace de\mvo\model\date;
 
+use ArrayObject;
 use DateInterval;
+use de\mvo\Database;
 use de\mvo\Date;
 
 class Entry
@@ -27,6 +29,14 @@ class Entry
 	 */
 	public $location;
 	/**
+	 * @var bool
+	 */
+	public $isPublic;
+	/**
+	 * @var ArrayObject
+	 */
+	public $groups;
+	/**
 	 * @var int
 	 */
 	private $locationId;
@@ -34,6 +44,7 @@ class Entry
 	public function __construct()
 	{
 		$this->id = (int) $this->id;
+		$this->isPublic  = (bool) $this->isPublic;
 		$this->startDate = new Date($this->startDate);
 
 		if ($this->endDate !== null)
@@ -45,6 +56,27 @@ class Entry
 		{
 			$this->locationId = (int) $this->locationId;
 			$this->location = Location::getById($this->locationId);
+		}
+
+		$this->groups = new ArrayObject;
+
+		if (!$this->isPublic)
+		{
+			$query = Database::prepare("
+				SELECT `name`
+				FROM `dategroups`
+				WHERE `dateId` = :dateId
+			");
+
+			$query->execute(array
+			(
+				":dateId" => $this->id
+			));
+
+			while ($group = $query->fetchColumn(0))
+			{
+				$this->groups->append($group);
+			}
 		}
 	}
 }

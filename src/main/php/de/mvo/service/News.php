@@ -22,7 +22,7 @@ class News extends AbstractService
 		return MustacheRenderer::render("news", array
 		(
 			"news" => $newsContent,
-			"dates" => new DateList(3),
+			"dates" => new DateList(null, 3),
 			"albums" => AlbumList::getLatest(3)
 		));
 	}
