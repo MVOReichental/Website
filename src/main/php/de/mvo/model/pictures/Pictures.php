@@ -27,20 +27,4 @@ class Pictures extends ArrayObject
 			$this->append($picture);
 		}
 	}
-
-	public function getPictureById($id)
-	{
-		/**
-		 * @var $picture Picture
-		 */
-		foreach ($this as $picture)
-		{
-			if ($picture->id == $id)
-			{
-				return $picture;
-			}
-		}
-
-		return null;
-	}
 }

@@ -27,17 +27,15 @@ class Album
 	 */
 	public $cover;
 	/**
-	 * @var Pictures
+	 * @var int
 	 */
-	public $pictures;
 	private $coverPictureId;
 
 	public function __construct()
 	{
 		$this->id = (int) $this->id;
 		$this->date = new Date($this->date);
-		$this->pictures = new Pictures($this->id);
-		$this->cover = $this->pictures->getPictureById($this->coverPictureId);
+		$this->cover = Picture::getById($this->coverPictureId);
 	}
 
 	public function year()
@@ -86,5 +84,10 @@ class Album
 		}
 
 		return $query->fetchObject(self::class);
+	}
+
+	public function pictures()
+	{
+		return new Pictures($this->id);
 	}
 }
