@@ -11,7 +11,7 @@
 		<tbody>
 			{% for entry in dates %}
 				<tr>
-					<td>{{ entry.startDate.humanReadableDateWithWeekday }}</td>
+					<td>{{ entry.startDate.weekday }}, {{ entry.startDate.humanReadableDate }}</td>
 					<td>
 						{{ entry.startDate.humanReadableTime }}
 						{% if entry.endDate %}
