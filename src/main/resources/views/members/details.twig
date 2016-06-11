@@ -16,7 +16,7 @@
 					{% endif %}
 					{% for contact in user.contacts %}
 						<tr>
-							<td>{{ contact.type }} ({{ contact.category }})</td>
+							<td>{{ contact.title }}</td>
 							<td><i class="fa fa-phone"></i> {{ contact.value }}</td>
 						</tr>
 					{% endfor %}

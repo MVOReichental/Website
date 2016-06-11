@@ -24,4 +24,9 @@ class Contact
 	{
 		$this->id = (int) $this->id;
 	}
+
+	public function getTitle()
+	{
+		return $this->type . " (" . $this->category . ")";
+	}
 }

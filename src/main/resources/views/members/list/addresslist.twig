@@ -21,7 +21,7 @@
 					<td>{{ user.email }}</td>
 					<td>
 						{% for contact in user.contacts %}
-							<div>{{ contact.type }} ({{ contact.category }}): {{ contact.value }}</div>
+							<div>{{ contact.title }}: {{ contact.value }}</div>
 						{% endfor %}
 					</td>
 				</tr>
