@@ -7,8 +7,14 @@
 
 	<h1 class="page-header">
 		Fotogalerie<br/>
-		<span class="small">{{ album.title }} ({{ album.year }})</span>
+		<span class="small">{{ album.title }}</span>
 	</h1>
+
+	<h4>Datum: {{ album.date.humanReadableDate }}</h4>
+
+	{% if album.text %}
+		<div class="well">{{ album.text }}</div>
+	{% endif %}
 
 	<div class="row gallery-source">
 		{% for picture in album.pictures %}
