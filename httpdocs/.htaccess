@@ -2,6 +2,8 @@ ErrorDocument 500 /error-500.html
 
 RewriteEngine On
 
+RewriteRule album.json - [F]
+
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule (.*) index.php/$1 [L,QSA]
