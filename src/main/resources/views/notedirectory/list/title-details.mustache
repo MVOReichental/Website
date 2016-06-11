@@ -1,0 +1,36 @@
+<dl class="dl-horizontal">
+	<dt>Titel</dt>
+	<dd>{{title}}</dd>
+
+	<dt>Komponist</dt>
+	<dd>{{composer}}</dd>
+
+	<dt>Bearbeiter</dt>
+	<dd>{{arranger}}</dd>
+
+	<dt>Verleger</dt>
+	<dd>{{publisher}}</dd>
+</dl>
+
+<h3>Programme</h3>
+
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Programm</th>
+				<th>Jahr</th>
+				<th>Nummer</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#programs}}
+				<tr>
+					<td>{{title}}</td>
+					<td>{{year}}</td>
+					<td>{{titles.first.number}}</td>
+				</tr>
+			{{/programs}}
+		</tbody>
+	</table>
+</div>

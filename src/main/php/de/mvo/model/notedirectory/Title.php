@@ -64,4 +64,35 @@ class Title
 			$this->category = $query->fetchObject(Category::class);
 		}
 	}
+
+	/**
+	 * @param int $id
+	 *
+	 * @return Title|null
+	 */
+	public static function getById($id)
+	{
+		$query = Database::prepare("
+			SELECT *
+			FROM `notedirectorytitles`
+			WHERE `id` = :id
+		");
+
+		$query->execute(array
+		(
+			":id" => $id
+		));
+
+		if (!$query->rowCount())
+		{
+			return null;
+		}
+
+		return $query->fetchObject(self::class);
+	}
+
+	public function programs()
+	{
+		return Programs::getProgramsContainingTitle($this);
+	}
 }

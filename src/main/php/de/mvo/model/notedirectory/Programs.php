@@ -24,6 +24,39 @@ class Programs extends ArrayObject
 		return $programs;
 	}
 
+	public static function getProgramsContainingTitle(Title $title)
+	{
+		$query = Database::prepare("
+			SELECT `notedirectoryprograms`.*
+			FROM `notedirectoryprogramtitles`
+			LEFT JOIN `notedirectoryprograms` ON `notedirectoryprograms`.`id` = `programId`
+			WHERE `notedirectoryprogramtitles`.`titleId` = :titleId
+			ORDER BY `year` DESC, `title` ASC
+		");
+
+		$query->execute(array
+		(
+			":titleId" => $title->id
+		));
+
+		$programs = new self;
+
+		/**
+		 * @var $program Program
+		 */
+		while ($program = $query->fetchObject(Program::class))
+		{
+			$titles = new Titles;
+
+			$titles->append($program->titles->getById($title->id));// Force single title
+			$program->titles = $titles;
+
+			$programs->append($program);
+		}
+
+		return $programs;
+	}
+
 	public function getByYear($year)
 	{
 		$programs = new self;

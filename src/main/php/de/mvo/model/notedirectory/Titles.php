@@ -80,4 +80,25 @@ class Titles extends ArrayObject
 
 		return $titles;
 	}
+
+	public function getById($id)
+	{
+		/**
+		 * @var $title Title
+		 */
+		foreach ($this as $title)
+		{
+			if ($title->id == $id)
+			{
+				return $title;
+			}
+		}
+
+		return null;
+	}
+
+	public function first()
+	{
+		return $this->offsetGet(0);
+	}
 }

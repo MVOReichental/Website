@@ -5,6 +5,7 @@ use de\mvo\model\notedirectory\Categories;
 use de\mvo\model\notedirectory\Category;
 use de\mvo\model\notedirectory\Program;
 use de\mvo\model\notedirectory\Programs;
+use de\mvo\model\notedirectory\Title;
 use de\mvo\model\notedirectory\Titles;
 use de\mvo\MustacheRenderer;
 use de\mvo\service\exception\NotFoundException;
@@ -65,5 +66,16 @@ class NoteDirectory extends AbstractService
 		(
 			"categories" => Titles::getAll()->getInCategories()
 		)));
+	}
+
+	public function getTitleDetails()
+	{
+		$title = Title::getById($this->params->id);
+		if ($title === null)
+		{
+			throw new NotFoundException;
+		}
+
+		return self::renderListPage("Details zu " . $title->title, MustacheRenderer::render("notedirectory/list/title-details", $title));
 	}
 }
