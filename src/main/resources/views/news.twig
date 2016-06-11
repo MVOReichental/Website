@@ -1,13 +1,11 @@
-<div class="page-header">
-	<h1>Aktuell</h1>
-</div>
+<h1 class="page-header">Aktuell</h1>
 
 {% if news %}
 	{{ news|raw }}
 {% endif %}
 
 {% if dates.count %}
-	<h2>Unsere n&auml;chsten Termine</h2>
+	<h2 class="page-header">Unsere n&auml;chsten Termine</h2>
 
 	{% include("dates/list.twig") %}
 
@@ -15,7 +13,7 @@
 {% endif %}
 
 {% if albums.count %}
-	<h2>Neuste Bilder</h2>
+	<h2 class="page-header">Neuste Bilder</h2>
 
 	{% include("pictures/albums-list.twig") %}
 

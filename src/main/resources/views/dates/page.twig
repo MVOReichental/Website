@@ -1,6 +1,4 @@
-<div class="page-header">
-	<h1>Unsere n&auml;chsten Termine</h1>
-</div>
+<h1 class="page-header">Unsere n&auml;chsten Termine</h1>
 
 {% if dates.count %}
 	{% include("dates/list.twig") %}
@@ -13,7 +11,7 @@
 	F&uuml;gen sie hierzu folgenden Link in der Kalenderanwendung ein: <a href="termine.ics" id="ical-url"></a>
 </p>
 
-<h2>Unsere j&auml;hrlichen Veranstaltungen</h2>
+<h2 class="page-header">Unsere j&auml;hrlichen Veranstaltungen</h2>
 
 {% for date in yearlyDates %}
 	<p>

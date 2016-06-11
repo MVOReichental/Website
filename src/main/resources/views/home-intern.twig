@@ -1,9 +1,7 @@
-<div class="page-header">
-	<h3>
-		Hallo {{ user.firstName }},<br/>
-		<p class="lead">willkommen im Internen Bereich</p>
-	</h3>
-</div>
+<h3 class="page-header">
+	Hallo {{ user.firstName }},<br/>
+	<span class="lead">willkommen im Internen Bereich</span>
+</h3>
 
 {% if not(user.has2FA) %}
 	<div class="alert alert-warning media">

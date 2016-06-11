@@ -5,12 +5,10 @@
 		<li class="active">{{ album.title }}</li>
 	</ol>
 
-	<div class="page-header">
-		<h1>
-			Fotogalerie<br/>
-			<span class="small">{{ album.title }} ({{ album.year }})</span>
-		</h1>
-	</div>
+	<h1 class="page-header">
+		Fotogalerie<br/>
+		<span class="small">{{ album.title }} ({{ album.year }})</span>
+	</h1>
 
 	<div class="row gallery-source">
 		{% for picture in album.pictures %}
@@ -29,9 +27,7 @@
 		{% endfor %}
 	</div>
 {% else %}
-	<div class="page-header">
-		<h1>Fotogalerie</h1>
-	</div>
+	<h1 class="page-header">Fotogalerie</h1>
 
 	<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Album nicht gefunden!</div>
 {% endif %}
