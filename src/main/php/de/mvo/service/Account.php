@@ -2,8 +2,8 @@
 namespace de\mvo\service;
 
 use de\mvo\model\users\User;
-use de\mvo\MustacheRenderer;
 use de\mvo\service\exception\LoginException;
+use de\mvo\TwigRenderer;
 use Exception;
 use Kelunik\TwoFactor\Oath;
 use PDOException;
@@ -117,12 +117,12 @@ class Account extends AbstractService
 			}
 		}
 
-		return MustacheRenderer::render("account/settings/page", array
+		return TwigRenderer::render("account/settings/page", array
 		(
 			"message" => $message,
 			"pages" => array_values($pages),
 			"title" => $activePage["title"],
-			"content" => MustacheRenderer::render("account/settings/" . $activePage["name"], array
+			"content" => TwigRenderer::render("account/settings/" . $activePage["name"], array
 			(
 				"user" => $user
 			))

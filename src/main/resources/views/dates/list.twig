@@ -1,0 +1,27 @@
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Datum</th>
+				<th>Zeit</th>
+				<th>Veranstaltung</th>
+				<th>Ort</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for entry in dates %}
+				<tr>
+					<td>{{ entry.startDate.humanReadableDateWithWeekday }}</td>
+					<td>
+						{{ entry.startDate.humanReadableDateWithWeekday }}
+						{% if entry.endDate %}
+							- {{ entry.endDate.humanReadableTime }}
+						{% endif %}
+					</td>
+					<td>{{ entry.title }}</td>
+					<td>{{ entry.location.name }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>

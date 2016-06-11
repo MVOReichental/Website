@@ -15,10 +15,10 @@
 	},
 	"require": {
 		"altorouter/altorouter": "^1.1",
-		"mustache/mustache": "^2.10",
 		"programie/pini": "dev-master",
 		"eluceo/ical": "^0.10.0",
 		"erusev/parsedown": "^1.6",
-		"kelunik/two-factor": "^1.0"
+		"kelunik/two-factor": "^1.0",
+		"twig/twig": "^1.24"
 	}
 }

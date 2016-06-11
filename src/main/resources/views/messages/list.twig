@@ -1,0 +1,39 @@
+{% if messages.count %}
+	<ul class="media-list">
+		{% for message in messages %}
+			<li class="media well">
+				<div class="media-left gallery-source">
+					<a href="users/{{ message.sender.id }}/profile-picture.jpg?hash={{ message.sender.profilePictureHash }}">
+						<img class="media-object img-rounded" src="users/{{ message.sender.id }}/profile-picture.jpg?hash={{ message.sender.profilePictureHash }}" width="100"/>
+					</a>
+				</div>
+				<div class="media-body">
+					<div class="clearfix">
+						<strong>Von:</strong> <a href="intern/members/{{ message.sender.username }}" class="label label-default">{{ message.sender.firstName }} {{ message.sender.lastName }}</a>
+
+						<div class="messages-date">
+							<i class="fa fa-clock-o"></i> {{ message.date.humanReadableDate }} um {{ message.date.humanReadableTime }}
+						</div>
+					</div>
+					<div class="clearfix">
+						<strong>An:</strong>
+						{% for recipient in message.recipients %}
+							<a href="intern/members/{{ recipient.username }}" class="label label-default">{{ recipient.firstName }} {{ recipient.lastName }}</a>
+						{% endfor %}
+					</div>
+					{% if message.attachments.count %}
+						<div class="clearfix">
+							<strong>Anh&auml;nge:</strong>
+							{% for attachment in message.attachments %}
+								<a href="intern/uploads/{{ attachment.id }}/{{ attachment.filename }}" class="label label-default">{{ attachment.filename }}</a>
+							{% endfor %}
+						</div>
+					{% endif %}
+					{{ message.formatText|raw }}
+				</div>
+			</li>
+		{% endfor %}
+	</ul>
+{% else %}
+	<div class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Keine Nachrichten verf&uuml;gbar.</div>
+{% endif %}

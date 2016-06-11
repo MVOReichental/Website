@@ -4,7 +4,7 @@ namespace de\mvo\service;
 use de\mvo\model\date\DateList;
 use de\mvo\model\date\Entry;
 use de\mvo\model\users\User;
-use de\mvo\MustacheRenderer;
+use de\mvo\TwigRenderer;
 use Eluceo\iCal\Component\Calendar;
 use Eluceo\iCal\Component\Event;
 
@@ -12,7 +12,7 @@ class Dates extends AbstractService
 {
 	public function getHtml($intern = false)
 	{
-		return MustacheRenderer::render("dates/" . ($intern ? "page-intern" : "page"), array
+		return TwigRenderer::render("dates/" . ($intern ? "page-intern" : "page"), array
 		(
 			"dates" => new DateList($intern ? User::getCurrent() : null),
 			"yearlyDates" => json_decode(file_get_contents(MODELS_ROOT . "/yearly-events.json"))

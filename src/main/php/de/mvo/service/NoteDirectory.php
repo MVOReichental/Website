@@ -7,8 +7,8 @@ use de\mvo\model\notedirectory\Program;
 use de\mvo\model\notedirectory\Programs;
 use de\mvo\model\notedirectory\Title;
 use de\mvo\model\notedirectory\Titles;
-use de\mvo\MustacheRenderer;
 use de\mvo\service\exception\NotFoundException;
+use de\mvo\TwigRenderer;
 
 class NoteDirectory extends AbstractService
 {
@@ -26,7 +26,7 @@ class NoteDirectory extends AbstractService
 
 	private static function renderListPage($title, $list)
 	{
-		return MustacheRenderer::render("notedirectory/list/page", array
+		return TwigRenderer::render("notedirectory/list/page", array
 		(
 			"title" => $title,
 			"otherPrograms" => Programs::getAll()->getGroupedByYear(),
@@ -43,7 +43,10 @@ class NoteDirectory extends AbstractService
 			throw new NotFoundException;
 		}
 
-		return self::renderListPage($program->title . " " . $program->year, MustacheRenderer::render("notedirectory/list/program", $program));
+		return self::renderListPage($program->title . " " . $program->year, TwigRenderer::render("notedirectory/list/program", array
+		(
+			"program" => $program
+		)));
 	}
 
 	public function getTitlesWithCategory()
@@ -54,7 +57,7 @@ class NoteDirectory extends AbstractService
 			throw new NotFoundException;
 		}
 
-		return self::renderListPage($category->title, MustacheRenderer::render("notedirectory/list/titles", array
+		return self::renderListPage($category->title, TwigRenderer::render("notedirectory/list/titles", array
 		(
 			"titles" => Titles::getByCategory($category)
 		)));
@@ -62,7 +65,7 @@ class NoteDirectory extends AbstractService
 
 	public function getAllTitles()
 	{
-		return self::renderListPage("Alle Titel", MustacheRenderer::render("notedirectory/list/titles-grouped", array
+		return self::renderListPage("Alle Titel", TwigRenderer::render("notedirectory/list/titles-grouped", array
 		(
 			"categories" => Titles::getAll()->getInCategories()
 		)));
@@ -76,6 +79,9 @@ class NoteDirectory extends AbstractService
 			throw new NotFoundException;
 		}
 
-		return self::renderListPage($title->title, MustacheRenderer::render("notedirectory/list/title-details", $title));
+		return self::renderListPage($title->title, TwigRenderer::render("notedirectory/list/title-details", array
+		(
+			"title" => $title
+		)));
 	}
 }

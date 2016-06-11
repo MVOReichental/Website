@@ -8,7 +8,7 @@ use de\mvo\model\uploads\Upload;
 use de\mvo\model\uploads\Uploads;
 use de\mvo\model\users\User;
 use de\mvo\model\users\Users;
-use de\mvo\MustacheRenderer;
+use de\mvo\TwigRenderer;
 use de\mvo\UploadHandler;
 use de\mvo\uploadhandler\File;
 use de\mvo\uploadhandler\Files;
@@ -17,7 +17,7 @@ class Messages extends AbstractService
 {
 	public function getSentMessages()
 	{
-		return MustacheRenderer::render("messages/page", array
+		return TwigRenderer::render("messages/page", array
 		(
 			"title" => "Gesendete Nachrichten",
 			"messages" => MessagesList::getBySender(User::getCurrent())
@@ -26,7 +26,7 @@ class Messages extends AbstractService
 
 	public function getReceivedMessages()
 	{
-		return MustacheRenderer::render("messages/page", array
+		return TwigRenderer::render("messages/page", array
 		(
 			"title" => "Empfangene Nachrichten",
 			"messages" => MessagesList::getByRecipient(User::getCurrent())
@@ -61,13 +61,13 @@ class Messages extends AbstractService
 					break;
 				case UPLOAD_ERR_FORM_SIZE:
 				case UPLOAD_ERR_INI_SIZE:
-					return MustacheRenderer::render("messages/send-error", array
+					return TwigRenderer::render("messages/send-error", array
 					(
 						"message" => "Die maximale Dateigr&ouml;&szlig;e wurde erreicht!"
 					));
 					break;
 				default:
-					return MustacheRenderer::render("messages/send-error", array
+					return TwigRenderer::render("messages/send-error", array
 					(
 						"message" => "Beim Hochladen ist ein Fehler aufgetreten!"
 					));
@@ -89,7 +89,7 @@ class Messages extends AbstractService
 			$upload = Upload::add($file->tempName, $file->name);
 			if ($upload === null)
 			{
-				return MustacheRenderer::render("messages/send-error", array
+				return TwigRenderer::render("messages/send-error", array
 				(
 					"message" => "Beim Hochladen ist ein Fehler aufgetreten!"
 				));
@@ -115,9 +115,9 @@ class Messages extends AbstractService
 
 		$message = Message::getById($message->id);
 
-		return MustacheRenderer::render("messages/send-success", array
+		return TwigRenderer::render("messages/send-success", array
 		(
-			"content" => MustacheRenderer::render("messages/list", array
+			"content" => TwigRenderer::render("messages/list", array
 			(
 				"messages" => new ArrayObject(array($message))
 			))

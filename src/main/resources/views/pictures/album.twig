@@ -1,0 +1,34 @@
+{% if album.id %}
+	<ol class="breadcrumb">
+		<li><a href="fotogalerie">Fotogalerie</a></li>
+		<li><a href="fotogalerie/{{ album.year }}">{{ album.year }}</a></li>
+		<li class="active">{{ album.title }}</li>
+	</ol>
+
+	<div class="page-header">
+		<h1>Fotogalerie - {{ album.title }} ({{ album.year }})</h1>
+	</div>
+
+	<div class="row gallery-source">
+		{% for picture in album.pictures %}
+			<div class="col-sm-6 col-md-4">
+				<a href="pictures/{{ picture.albumId }}/large_{{ picture.file }}.jpg" class="thumbnail" title="{{ picture.title }}">
+					<img src="pictures/{{ picture.albumId }}/small_{{ picture.file }}.jpg"/>
+					{% if picture.title %}
+						<div class="caption">
+							<h3>{{ picture.title }}</h3>
+						</div>
+					{% endif %}
+				</a>
+			</div>
+		{% else %}
+			<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Keine Bilder verf&uuml;gbar!</div>
+		{% endfor %}
+	</div>
+{% else %}
+	<div class="page-header">
+		<h1>Fotogalerie</h1>
+	</div>
+
+	<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Album nicht gefunden!</div>
+{% endif %}

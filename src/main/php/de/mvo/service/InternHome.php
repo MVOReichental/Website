@@ -3,7 +3,7 @@ namespace de\mvo\service;
 
 use de\mvo\model\messages\Messages;
 use de\mvo\model\users\User;
-use de\mvo\MustacheRenderer;
+use de\mvo\TwigRenderer;
 
 class InternHome extends AbstractService
 {
@@ -38,7 +38,7 @@ class InternHome extends AbstractService
 			}
 		}
 
-		return MustacheRenderer::render("home-intern", array
+		return TwigRenderer::render("home-intern", array
 		(
 			"user" => User::getCurrent(),
 			"messages" => $latestMessage

@@ -4,13 +4,13 @@ namespace de\mvo\service;
 use de\mvo\model\pictures\Album;
 use de\mvo\model\pictures\AlbumList;
 use de\mvo\model\pictures\YearList;
-use de\mvo\MustacheRenderer;
+use de\mvo\TwigRenderer;
 
 class Pictures extends AbstractService
 {
 	public function getYears()
 	{
-		return MustacheRenderer::render("pictures/years-overview", array
+		return TwigRenderer::render("pictures/years-overview", array
 		(
 			"years" => new YearList
 		));
@@ -18,7 +18,7 @@ class Pictures extends AbstractService
 
 	public function getAlbums()
 	{
-		return MustacheRenderer::render("pictures/albums-overview", array
+		return TwigRenderer::render("pictures/albums-overview", array
 		(
 			"year" => $this->params->year,
 			"albums" => AlbumList::getForYear($this->params->year)
@@ -33,6 +33,9 @@ class Pictures extends AbstractService
 			http_response_code(404);
 		}
 
-		return MustacheRenderer::render("pictures/album", $album);
+		return TwigRenderer::render("pictures/album", array
+		(
+			"album" => $album
+		));
 	}
 }

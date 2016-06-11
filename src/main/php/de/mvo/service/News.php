@@ -3,7 +3,7 @@ namespace de\mvo\service;
 
 use de\mvo\model\date\DateList;
 use de\mvo\model\pictures\AlbumList;
-use de\mvo\MustacheRenderer;
+use de\mvo\TwigRenderer;
 
 class News extends AbstractService
 {
@@ -19,7 +19,7 @@ class News extends AbstractService
 			$newsContent = null;
 		}
 
-		return MustacheRenderer::render("news", array
+		return TwigRenderer::render("news", array
 		(
 			"news" => $newsContent,
 			"dates" => new DateList(null, 3),

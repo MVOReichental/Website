@@ -1,0 +1,9 @@
+<tr>
+	{% if title.number %}
+		<td>{{ title.number }}</td>
+	{% endif %}
+	<td><a href="intern/notedirectory/titles/{{ title.id }}" class="hidden-print"><i class="fa fa-info-circle"></i></a> {{ title.title }}</td>
+	<td>{{ title.composer }}</td>
+	<td>{{ title.arranger }}</td>
+	<td>{{ title.publisher }}</td>
+</tr>

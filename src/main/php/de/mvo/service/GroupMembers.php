@@ -2,13 +2,13 @@
 namespace de\mvo\service;
 
 use de\mvo\model\GroupMembersList;
-use de\mvo\MustacheRenderer;
+use de\mvo\TwigRenderer;
 
 class GroupMembers extends AbstractService
 {
 	public function get($title, $group)
 	{
-		return MustacheRenderer::render("groupmembers", array
+		return TwigRenderer::render("groupmembers", array
 		(
 			"title" => $title,
 			"groups" => new GroupMembersList($group)

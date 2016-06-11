@@ -1,0 +1,68 @@
+<div class="col-md-9">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Dein Profil</h3>
+		</div>
+
+		<div class="panel-body settings-profile-profilepicture-dropzone">
+			<div class="form-group">
+				<label for="settings-profile-profilepicture">Profilbild</label>
+
+				<div class="clearfix">
+					<div id="settings-profile-profilepicture-box-left">
+						<img src="users/{{ user.id }}/profile-picture.jpg?hash={{ user.profilePictureHash }}" id="settings-profile-profilepicture-img"/>
+					</div>
+
+					<div id="settings-profile-profilepicture-box-right">
+						<span class="btn btn-default fileinput-button">
+							<strong>Neues Profilbild hochladen</strong>
+							<input id="settings-profile-profilepicture" type="file" name="file" data-url="users/{{ user.id }}/profile-picture.jpg" accept="image/jpeg"/>
+						</span>
+
+						<span class="help-block">Du kannst auch ein Bild von deinem Computer hier hin ziehen.</span>
+					</div>
+				</div>
+			</div>
+
+			<form method="post" id="settings-profile-form" enctype="multipart/form-data">
+				<input type="hidden" name="form" value="profile"/>
+
+				<div class="form-group">
+					<label for="settings-profile-firstname">Vorname</label>
+					<input type="text" class="form-control" id="settings-profile-firstname" name="firstName" value="{{ user.firstName }}">
+				</div>
+
+				<div class="form-group">
+					<label for="settings-profile-lastname">Nachname</label>
+					<input type="text" class="form-control" id="settings-profile-lastname" name="lastName" value="{{ user.lastName }}">
+				</div>
+
+				<button type="submit" class="btn btn-success">Speichern</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="settings-profile-profilepicture-crop-modal" data-backdrop="static">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Profilbild bearbeiten</h4>
+			</div>
+			<div class="modal-body">
+				<div class="alert alert-danger" id="settings-profile-profilepicture-upload-error">
+					<i class="fa fa-exclamation-triangle"></i> <span></span>
+				</div>
+
+				<img id="settings-profile-profilepicture-crop-img"/>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" id="settings-profile-profilepicture-cancel" data-dismiss="modal">Abbrechen</button>
+				<button type="button" class="btn btn-success" id="settings-profile-profilepicture-upload">
+					<span class="state-loading"><i class="fa fa-spinner fa-spin"></i></span>
+					<span class="state-idle"><i class="fa fa-upload"></i> Hochladen</span>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

@@ -6,8 +6,8 @@ use de\mvo\model\messages\Messages;
 use de\mvo\model\permissions\GroupList;
 use de\mvo\model\users\User;
 use de\mvo\model\users\Users;
-use de\mvo\MustacheRenderer;
 use de\mvo\service\exception\NotFoundException;
+use de\mvo\TwigRenderer;
 
 class Members extends AbstractService
 {
@@ -93,11 +93,11 @@ class Members extends AbstractService
 			$users = Users::getAll();
 		}
 
-		return MustacheRenderer::render("members/list/page", array
+		return TwigRenderer::render("members/list/page", array
 		(
 			"title" => self::getListViews()[$this->params->view]["title"],
 			"groups" => array_values($groups),
-			"content" => MustacheRenderer::render("members/list/" . $this->params->view, array
+			"content" => TwigRenderer::render("members/list/" . $this->params->view, array
 			(
 				"users" => $users
 			))
@@ -129,7 +129,7 @@ class Members extends AbstractService
 			}
 		}
 
-		return MustacheRenderer::render("members/details", array
+		return TwigRenderer::render("members/details", array
 		(
 			"user" => $user,
 			"messages" => $filteredMessages

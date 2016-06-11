@@ -1,18 +1,19 @@
 <?php
 use de\mvo\Database;
 use de\mvo\model\users\User;
-use de\mvo\MustacheRenderer;
 use de\mvo\router\Endpoints;
 use de\mvo\router\Router;
 use de\mvo\service\exception\LoginException;
 use de\mvo\service\exception\NotFoundException;
 use de\mvo\service\exception\PermissionViolationException;
+use de\mvo\TwigRenderer;
 
 try
 {
 	require_once __DIR__ . "/../bootstrap.php";
 
 	Database::init();
+	TwigRenderer::init();
 
 	session_start();
 
@@ -59,7 +60,7 @@ try
 	catch (LoginException $exception)
 	{
 		http_response_code(401);
-		$content = MustacheRenderer::render("account/login", array
+		$content = TwigRenderer::render("account/login", array
 		(
 			"url" => (isset($_GET["redirect"]) and $_GET["redirect"] != "") ? $_GET["redirect"] : $path,
 			"requestToken" => ($exception->getType() == LoginException::REQUIRE_2FA_TOKEN or $exception->getType() == LoginException::INVALID_2FA_TOKEN),
@@ -86,17 +87,16 @@ try
 
 	if ($useInternalMainView)
 	{
-		echo MustacheRenderer::render("main-intern", array
+		echo TwigRenderer::render("main-intern", array
 		(
 			"content" => $content,
 			"currentYear" => date("Y"),
-			"user" => User::getCurrent(),
-			"loggedIn" => (User::getCurrent() !== null)
+			"user" => User::getCurrent()
 		));
 	}
 	else
 	{
-		echo MustacheRenderer::render("main", array
+		echo TwigRenderer::render("main", array
 		(
 			"content" => $content,
 			"currentYear" => date("Y")

@@ -1,0 +1,36 @@
+<dl class="dl-horizontal">
+	<dt>Titel</dt>
+	<dd>{{ title.title }}</dd>
+
+	<dt>Komponist</dt>
+	<dd>{{ title.composer }}</dd>
+
+	<dt>Bearbeiter</dt>
+	<dd>{{ title.arranger }}</dd>
+
+	<dt>Verleger</dt>
+	<dd>{{ title.publisher }}</dd>
+</dl>
+
+<h3>Programme</h3>
+
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Programm</th>
+				<th>Jahr</th>
+				<th>Nummer</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for program in title.programs %}
+				<tr>
+					<td>{{ program.title }}</td>
+					<td>{{ program.year }}</td>
+					<td>{{ program.titles[0].number }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
