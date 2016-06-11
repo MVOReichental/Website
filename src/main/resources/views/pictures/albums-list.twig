@@ -1,14 +1,16 @@
-<div class="row">
-	{% for album in albums %}
-		<div class="col-sm-6 col-md-4">
-			<a href="fotogalerie/{{ album.year }}/{{ album.name }}" class="thumbnail">
-				<img src="pictures/{{ album.id }}/small_{{ album.cover.file }}.jpg"/>
-				<div class="caption">
-					<h3>{{ album.title }}</h3>
-				</div>
-			</a>
-		</div>
-	{% else %}
-		<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Keine Alben verf&uuml;gbar!</div>
-	{% endfor %}
-</div>
+{% if albums.count %}
+	<div class="row">
+		{% for album in albums %}
+			<div class="col-sm-6 col-md-4">
+				<a href="fotogalerie/{{ album.year }}/{{ album.name }}" class="thumbnail">
+					<img src="pictures/{{ album.id }}/small_{{ album.cover.file }}.jpg"/>
+					<div class="caption">
+						<h3>{{ album.title }}</h3>
+					</div>
+				</a>
+			</div>
+		{% endfor %}
+	</div>
+{% else %}
+	<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Keine Alben verf&uuml;gbar!</div>
+{% endif %}

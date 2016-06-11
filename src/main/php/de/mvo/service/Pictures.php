@@ -35,6 +35,8 @@ class Pictures extends AbstractService
 
 		return TwigRenderer::render("pictures/album", array
 		(
+			"year" => $this->params->year,
+			"title" => $album === null ? $this->params->album : $album->title,
 			"album" => $album
 		));
 	}

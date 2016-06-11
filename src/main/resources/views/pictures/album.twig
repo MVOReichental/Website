@@ -1,10 +1,10 @@
-{% if album.id %}
-	<ol class="breadcrumb">
-		<li><a href="fotogalerie">Fotogalerie</a></li>
-		<li><a href="fotogalerie/{{ album.year }}">{{ album.year }}</a></li>
-		<li class="active">{{ album.title }}</li>
-	</ol>
+<ol class="breadcrumb">
+	<li><a href="fotogalerie">Fotogalerie</a></li>
+	<li><a href="fotogalerie/{{ year }}">{{ year }}</a></li>
+	<li class="active">{{ title }}</li>
+</ol>
 
+{% if album.id %}
 	<h1 class="page-header">
 		Fotogalerie<br/>
 		<span class="small">{{ album.title }}</span>
