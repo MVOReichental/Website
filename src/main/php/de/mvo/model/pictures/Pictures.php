@@ -15,6 +15,7 @@ class Pictures extends ArrayObject
 			SELECT *
 			FROM `pictures`
 			WHERE `albumId` = :albumId
+			ORDER BY `number` ASC
 		");
 
 		$query->execute(array
