@@ -33,7 +33,7 @@ class Pictures extends AbstractService
 
 			if ($albums != null and $albums->count())
 			{
-				$albums->sortByDate();
+				$albums->sortByDate(false);
 			}
 			else
 			{
