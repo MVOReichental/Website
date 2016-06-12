@@ -2,52 +2,134 @@
 namespace de\mvo\model\pictures;
 
 use ArrayObject;
-use de\mvo\Database;
-use PDO;
-use PDOStatement;
+use de\mvo\model\users\User;
+use DirectoryIterator;
 
 class AlbumList extends ArrayObject
 {
-	private static function executeQuery(PDOStatement $query)
+	public static function getForYear($year)
 	{
-		$query->execute();
+		$year = (int) $year;
+
+		if (!is_dir(PICTURES_ROOT . "/" . $year))
+		{
+			return null;
+		}
 
 		$list = new self;
 
-		while ($album = $query->fetchObject(Album::class))
+		foreach (new DirectoryIterator(PICTURES_ROOT . "/" . $year) as $item)
 		{
-			$list->append($album);
+			if ($item->isDot())
+			{
+				continue;
+			}
+
+			if (!$item->isDir())
+			{
+				continue;
+			}
+
+			$file = $item->getPath() . "/" . $item->getFilename() . "/album.json";
+			if (!file_exists($file))
+			{
+				continue;
+			}
+
+			$list->append(new Album($year, $item->getFilename()));
 		}
 
 		return $list;
 	}
 
-	public static function getForYear($year)
+	public static function getAll()
 	{
-		$query = Database::prepare("
-			SELECT *
-			FROM `picturealbums`
-			WHERE `year` = :year AND `published` AND `isPublic`
-			ORDER BY `date` ASC
-		");
+		$albums = new self;
 
-		$query->bindValue(":year", $year);
+		/**
+		 * @var $year Year
+		 */
+		foreach (new YearList as $year)
+		{
+			$yearAlbums = $year->albums;
+			if ($yearAlbums === null)
+			{
+				continue;
+			}
 
-		return self::executeQuery($query);
+			/**
+			 * @var $album Album
+			 */
+			foreach ($yearAlbums as $album)
+			{
+				$albums->append($album);
+			}
+		}
+
+		return $albums;
 	}
 
-	public static function getLatest($limit)
+	public function getVisibleToUser(User $user = null)
 	{
-		$query = Database::prepare("
-			SELECT *
-			FROM `picturealbums`
-			WHERE `published` AND `isPublic`
-			ORDER BY `date` DESC
-			LIMIT :limit
-		");
+		$albums = new self;
 
-		$query->bindValue(":limit", $limit, PDO::PARAM_INT);
+		/**
+		 * @var $album Album
+		 */
+		foreach ($this as $album)
+		{
+			if (!$album->isVisibleToUser($user))
+			{
+				continue;
+			}
 
-		return self::executeQuery($query);
+			$albums->append($album);
+		}
+
+		return $albums;
+	}
+
+	/**
+	 * @param string $name
+	 *
+	 * @return Album|null
+	 */
+	public function getAlbum($name)
+	{
+		/**
+		 * @var $album Album
+		 */
+		foreach ($this as $album)
+		{
+			if ($album->name == $name)
+			{
+				return $album;
+			}
+		}
+
+		return null;
+	}
+
+	public function sortByDate($ascending = true)
+	{
+		$this->uasort(function(Album $album1, Album $album2) use ($ascending)
+		{
+			if ($album1->date > $album2->date)
+			{
+				return $ascending ? 1 : -1;
+			}
+
+			if ($album1->date < $album2->date)
+			{
+				return $ascending ? -1 : 1;
+			}
+
+			return 0;
+		});
+	}
+
+	public function slice($offset, $length)
+	{
+		return new self(array_slice($this->getArrayCopy(), $offset, $length));
 	}
 }

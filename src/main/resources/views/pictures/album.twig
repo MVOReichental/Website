@@ -1,10 +1,10 @@
 <ol class="breadcrumb">
-	<li><a href="fotogalerie">Fotogalerie</a></li>
-	<li><a href="fotogalerie/{{ year }}">{{ year }}</a></li>
+	<li><a href="{{ picturesBaseUrl }}">Fotogalerie</a></li>
+	<li><a href="{{ picturesBaseUrl }}/{{ year }}">{{ year }}</a></li>
 	<li class="active">{{ title }}</li>
 </ol>
 
-{% if album.id %}
+{% if album.name %}
 	<h1 class="page-header">
 		Fotogalerie<br/>
 		<span class="small">{{ album.title }}</span>
@@ -19,8 +19,8 @@
 	<div class="row gallery-source">
 		{% for picture in album.pictures %}
 			<div class="col-sm-6 col-md-4">
-				<a href="pictures/{{ picture.albumId }}/large_{{ picture.file }}.jpg" class="thumbnail" title="{{ picture.title }}">
-					<img src="pictures/{{ picture.albumId }}/small_{{ picture.file }}.jpg"/>
+				<a href="pictures/{{ loop.parent.album.year }}/{{ loop.parent.album.name }}/large_{{ picture.file }}.jpg" class="thumbnail" title="{{ picture.title }}">
+					<img src="pictures/{{ loop.parent.album.year }}/{{ loop.parent.album.name }}/small_{{ picture.file }}.jpg"/>
 					{% if picture.title %}
 						<div class="caption">
 							<h3>{{ picture.title }}</h3>

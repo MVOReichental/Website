@@ -2,7 +2,7 @@
 namespace de\mvo\service;
 
 use de\mvo\model\date\DateList;
-use de\mvo\model\pictures\AlbumList;
+use de\mvo\model\pictures\YearList;
 use de\mvo\TwigRenderer;
 
 class News extends AbstractService
@@ -19,11 +19,16 @@ class News extends AbstractService
 			$newsContent = null;
 		}
 
+		$albums = YearList::load()->getAllAlbums();
+
+		$albums->sortByDate(false);
+
 		return TwigRenderer::render("news", array
 		(
 			"news" => $newsContent,
 			"dates" => new DateList(null, 3),
-			"albums" => AlbumList::getLatest(3)
+			"albums" => $albums->getVisibleToUser(null)->slice(0, 3),
+			"picturesBaseUrl" => "fotogalerie"
 		));
 	}
 }

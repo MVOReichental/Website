@@ -1,15 +1,15 @@
 <?php
 namespace de\mvo\model\pictures;
 
-use de\mvo\Database;
 use de\mvo\Date;
+use de\mvo\model\users\User;
 
 class Album
 {
 	/**
 	 * @var int
 	 */
-	public $id;
+	public $year;
 	/**
 	 * @var string
 	 */
@@ -19,6 +19,14 @@ class Album
 	 */
 	public $title;
 	/**
+	 * @var string
+	 */
+	public $text;
+	/**
+	 * @var bool
+	 */
+	public $isPublic;
+	/**
 	 * @var Date
 	 */
 	public $date;
@@ -27,67 +35,53 @@ class Album
 	 */
 	public $cover;
 	/**
-	 * @var int
+	 * @var Pictures
 	 */
-	private $coverPictureId;
+	public $pictures;
 
-	public function __construct()
+	public function __construct($year, $name)
 	{
-		$this->id = (int) $this->id;
-		$this->date = new Date($this->date);
-		$this->cover = Picture::getById($this->coverPictureId);
-	}
+		$this->year = (int) $year;
+		$this->name = basename($name);
 
-	public function year()
-	{
-		return $this->date->format("Y");
-	}
-
-	public static function getById($id)
-	{
-		$query = Database::prepare("
-			SELECT *
-			FROM `picturealbums`
-			WHERE `id` = :id AND `published` AND `isPublic`
-		");
-
-		$query->execute(array
-		(
-			":id" => $id
-		));
-
-		if (!$query->rowCount())
+		$file = PICTURES_ROOT . "/" . $this->year . "/" . $this->name . "/album.json";
+		if (!file_exists($file))
 		{
 			return null;
 		}
 
-		return $query->fetchObject(self::class);
-	}
+		$albumData = json_decode(file_get_contents($file));
 
-	public static function getByYearAndName($year, $name)
-	{
-		$query = Database::prepare("
-			SELECT *
-			FROM `picturealbums`
-			WHERE `year` = :year AND `name` = :name AND `published` AND `isPublic`
-		");
+		$this->title = $albumData->title;
+		$this->text = $albumData->text;
+		$this->isPublic = $albumData->isPublic;
+		$this->date = new Date($albumData->date);
 
-		$query->execute(array
-		(
-			":year" => $year,
-			":name" => $name
-		));
+		$this->pictures = new Pictures;
 
-		if (!$query->rowCount())
+		foreach ($albumData->pictures as $pictureData)
 		{
-			return null;
+			$picture = new Picture;
+
+			$picture->file = $pictureData->file;
+			$picture->title = $pictureData->title;
+
+			$this->pictures->append($picture);
 		}
 
-		return $query->fetchObject(self::class);
+		if ($this->pictures->offsetExists($albumData->coverPicture))
+		{
+			$this->cover = $this->pictures->offsetGet($albumData->coverPicture);
+		}
 	}
 
-	public function pictures()
+	public function isVisibleToUser(User $user = null)
 	{
-		return new Pictures($this->id);
+		if ($this->isPublic)
+		{
+			return true;
+		}
+
+		return $user !== null;
 	}
 }

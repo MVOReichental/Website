@@ -11,11 +11,29 @@ class Year
 	 * @var Album
 	 */
 	public $coverAlbum;
-	private $coverAlbumId;
+	/**
+	 * @var AlbumList|null
+	 */
+	public $albums;
 
-	public function __construct()
+	public function __construct($year)
 	{
-		$this->year = (int) $this->year;
-		$this->coverAlbum = Album::getById($this->coverAlbumId);
+		$this->year = (int) $year;
+
+		$file = PICTURES_ROOT . "/" . $this->year . "/year.json";
+		if (!file_exists($file))
+		{
+			return null;
+		}
+
+		$yearData = json_decode(file_get_contents($file));
+
+		$this->coverAlbum = new Album($this->year, $yearData->coverAlbum);
+		$this->albums = AlbumList::getForYear($this->year);
+	}
+
+	public function __toString()
+	{
+		return (string) $this->year;
 	}
 }
