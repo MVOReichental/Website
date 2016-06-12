@@ -146,7 +146,7 @@ class Dates extends AbstractService
 		{
 			foreach ($_POST["groups"] as $group)
 			{
-				if (!isset(self::getGroups()[$group]))
+				if (!isset(Groups::getAll()[$group]))
 				{
 					continue;
 				}
