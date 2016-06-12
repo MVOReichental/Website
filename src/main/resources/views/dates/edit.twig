@@ -1,0 +1,77 @@
+<h1 class="page-header">
+	{% if entry.id %}
+		Termin bearbeiten
+	{% else %}
+		Neuer Termin
+	{% endif %}
+</h1>
+
+<form action="intern/dates" method="post">
+	{% if entry.id %}
+		<input type="hidden" name="id" value="{{ entry.id }}"/>
+	{% endif %}
+
+	<div class="form-group">
+		<label for="dates-edit-title">Veranstaltung</label>
+		<input type="text" class="form-control" id="dates-edit-title" name="title" value="{{ entry.title }}"/>
+	</div>
+
+	<div class="form-group">
+		<label for="dates-edit-date">Datum</label>
+		<input type="date" class="form-control" id="dates-edit-date" name="date" value="{{ entry.startDate.format("Y-m-d") }}"/>
+	</div>
+
+	<div class="form-group">
+		<div class="row">
+			<div class="col-md-3">
+				<label for="dates-edit-starttime">Von</label>
+				<input type="time" class="form-control" id="dates-edit-starttime" name="startTime" value="{{ entry.startDate.format("H:i") }}"/>
+			</div>
+			<div class="col-md-3">
+				<label for="dates-edit-endtime">Bis</label>
+				<input type="time" class="form-control" id="dates-edit-endtime" name="endTime" value="{{ entry.endDate.format("H:i") }}"/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="dates-edit-location">Ort</label>
+		<input type="text" class="form-control" id="dates-edit-location" name="location" value="{{ entry.location.name }}"/>
+	</div>
+
+	<div class="form-group">
+		<label for="dates-edit-text">Beschreibung</label>
+		<textarea class="form-control" id="dates-edit-text" name="text" rows="5">{{ entry.text }}</textarea>
+	</div>
+
+	<div class="form-group">
+		<label for="dates-edit-groups">Gruppen</label>
+
+		<select class="selectpicker form-control" id="dates-edit-groups" name="groups[]" multiple data-actions-box="true">
+			{% for name, title in groups %}
+				<option value="{{ name }}" {% if name in entry.groups %}selected{% endif %}>{{ title|raw }}</option>
+			{% endfor %}
+		</select>
+	</div>
+
+	<div class="form-group">
+		<strong>Optionen</strong>
+
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" id="dates-edit-public" name="public" value="1" {% if entry.isPublic %}checked{% endif %}/>
+				&Ouml;ffentlich sichtbar
+			</label>
+		</div>
+
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" id="dates-edit-highlight" name="highlight" value="1" {% if entry.highlight %}checked{% endif %}/>
+				Hervorheben
+			</label>
+		</div>
+	</div>
+
+	<button type="submit" class="btn btn-primary">Speichern</button>
+	<a href="intern/dates" class="btn btn-default">Abbrechen</a>
+</form>

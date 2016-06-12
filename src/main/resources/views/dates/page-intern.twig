@@ -1,5 +1,13 @@
 <h1 class="page-header">Termine</h1>
 
+{% if saved %}
+	<div class="alert alert-success"><i class="fa fa-check"></i> Die &Auml;nderungen wurden erfolgreich gespeichert.</div>
+{% endif %}
+
+{% if allowEdit %}
+	<a href="intern/dates/create" class="btn btn-default hidden-print"><i class="fa fa-plus"></i> Neuer Termin</a>
+{% endif %}
+
 {% if dates.count %}
 	{% include("dates/list.twig") %}
 {% else %}

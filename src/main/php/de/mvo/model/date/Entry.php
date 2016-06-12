@@ -2,9 +2,9 @@
 namespace de\mvo\model\date;
 
 use ArrayObject;
-use DateInterval;
 use de\mvo\Database;
 use de\mvo\Date;
+use PDO;
 
 class Entry
 {
@@ -35,13 +35,13 @@ class Entry
 	/**
 	 * @var bool
 	 */
-	public $highlight;
+	public $highlight = false;
 	/**
 	 * @var bool
 	 */
-	public $isPublic;
+	public $isPublic = false;
 	/**
-	 * @var ArrayObject
+	 * @var Groups
 	 */
 	public $groups;
 	/**
@@ -51,6 +51,13 @@ class Entry
 
 	public function __construct()
 	{
+		$this->groups = new Groups;
+
+		if ($this->id === null)
+		{
+			return;
+		}
+
 		$this->id = (int) $this->id;
 		$this->highlight  = (bool) $this->highlight;
 		$this->isPublic  = (bool) $this->isPublic;
@@ -67,25 +74,100 @@ class Entry
 			$this->location = Location::getById($this->locationId);
 		}
 
-		$this->groups = new ArrayObject;
-
 		if (!$this->isPublic)
 		{
+			$this->groups = Groups::getForEntry($this);
+		}
+	}
+
+	/**
+	 * @param int $id
+	 *
+	 * @return Entry|null
+	 */
+	public static function getById($id)
+	{
+		$query = Database::prepare("
+			SELECT *
+			FROM `dates`
+			WHERE `id` = :id
+		");
+
+		$query->execute(array
+		(
+			":id" => $id
+		));
+
+		if (!$query->rowCount())
+		{
+			return null;
+		}
+
+		return $query->fetchObject(self::class);
+	}
+
+	public function delete()
+	{
+		$query = Database::prepare("
+			DELETE FROM `dates`
+			WHERE `id` = :id
+		");
+
+		$query->execute(array
+		(
+			":id" => $this->id
+		));
+	}
+
+	public function save()
+	{
+		if ($this->id === null)
+		{
 			$query = Database::prepare("
-				SELECT `name`
-				FROM `dategroups`
-				WHERE `dateId` = :dateId
+				INSERT INTO `dates`
+				SET
+					`startDate` = :startDate,
+					`endDate` = :endDate,
+					`title` = :title,
+					`description` = :description,
+					`locationId` = :locationId,
+					`highlight` = :highlight,
+					`isPublic` = :isPublic
+			");
+		}
+		else
+		{
+			$query = Database::prepare("
+				UPDATE `dates`
+				SET
+					`startDate` = :startDate,
+					`endDate` = :endDate,
+					`title` = :title,
+					`description` = :description,
+					`locationId` = :locationId,
+					`highlight` = :highlight,
+					`isPublic` = :isPublic
+				WHERE `id` = :id
 			");
 
-			$query->execute(array
-			(
-				":dateId" => $this->id
-			));
-
-			while ($group = $query->fetchColumn(0))
-			{
-				$this->groups->append($group);
-			}
+			$query->bindValue(":id", $this->id, PDO::PARAM_INT);
 		}
+
+		$query->bindValue(":startDate", $this->startDate);
+		$query->bindValue(":endDate", $this->endDate);
+		$query->bindValue(":title", $this->title);
+		$query->bindValue(":description", $this->description);
+		$query->bindValue(":locationId", $this->location->id, PDO::PARAM_INT);
+		$query->bindValue(":highlight", $this->highlight, PDO::PARAM_BOOL);
+		$query->bindValue(":isPublic", $this->isPublic, PDO::PARAM_BOOL);
+
+		$query->execute();
+
+		if ($this->id === null)
+		{
+			$this->id = Database::lastInsertId();
+		}
+		
+		$this->groups->save($this);
 	}
 }

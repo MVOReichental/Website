@@ -38,5 +38,10 @@ $(function()
 			slideshowInterval: 10000,
 			index: $(this)[0]
 		});
-	})
+	});
+
+	$("[data-toggle=\"tooltip\"]").tooltip(
+	{
+		container: "body"
+	});
 });

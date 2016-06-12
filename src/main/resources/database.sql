@@ -5,7 +5,8 @@ CREATE TABLE `locations` (
   `name` varchar(200) NOT NULL,
   `latitude` float DEFAULT NULL,
   `longitude` float DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `dates` (
