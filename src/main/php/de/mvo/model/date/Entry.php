@@ -25,9 +25,17 @@ class Entry
 	 */
 	public $title;
 	/**
+	 * @var string
+	 */
+	public $description;
+	/**
 	 * @var Location
 	 */
 	public $location;
+	/**
+	 * @var bool
+	 */
+	public $highlight;
 	/**
 	 * @var bool
 	 */
@@ -44,6 +52,7 @@ class Entry
 	public function __construct()
 	{
 		$this->id = (int) $this->id;
+		$this->highlight  = (bool) $this->highlight;
 		$this->isPublic  = (bool) $this->isPublic;
 		$this->startDate = new Date($this->startDate);
 
