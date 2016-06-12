@@ -1,7 +1,6 @@
 <?php
 namespace de\mvo\model\date;
 
-use ArrayObject;
 use de\mvo\Database;
 use de\mvo\Date;
 use PDO;
@@ -167,7 +166,7 @@ class Entry
 		{
 			$this->id = Database::lastInsertId();
 		}
-		
+
 		$this->groups->save($this);
 	}
 }
