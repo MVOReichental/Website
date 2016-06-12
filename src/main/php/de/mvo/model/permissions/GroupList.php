@@ -33,10 +33,10 @@ class GroupList extends ArrayObject implements JsonSerializable
 		}
 		else
 		{
-			self::$root = new GroupList;
+			self::$root = new self;
 		}
 
-		if (self::$root instanceof GroupList)
+		if (self::$root instanceof self)
 		{
 			return self::$root;
 		}
