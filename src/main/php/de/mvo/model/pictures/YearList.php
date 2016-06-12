@@ -75,6 +75,7 @@ class YearList extends ArrayObject
 		}
 
 		$list->asort();
+		$list->exchangeArray(array_reverse($list->getArrayCopy()));
 
 		return $list;
 	}
