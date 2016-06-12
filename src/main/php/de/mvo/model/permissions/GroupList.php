@@ -29,7 +29,7 @@ class GroupList extends ArrayObject implements JsonSerializable
 
 		if (file_exists($filename))
 		{
-			self::$root = unserialize(file_get_contents(RESOURCES_ROOT . "/permissions.serialized"));
+			self::$root = unserialize(file_get_contents($filename));
 		}
 		else
 		{
