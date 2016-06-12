@@ -14,18 +14,6 @@ use Eluceo\iCal\Component\Event;
 
 class Dates extends AbstractService
 {
-	private static function getGroups()
-	{
-		return array
-		(
-			"vorstandschaft" => "Vorstandschaft",
-			"sonderaufgaben" => "Sonderaufgaben",
-			"foerderverein" => "F&ouml;rderverein",
-			"dirigentin" => "Dirigentin",
-			"musiker" => "Musiker"
-		);
-	}
-
 	public function getHtml($intern = false)
 	{
 		$user = ($intern ? User::getCurrent() : null);
@@ -181,7 +169,7 @@ class Dates extends AbstractService
 	{
 		return TwigRenderer::render("dates/edit", array
 		(
-			"groups" => self::getGroups()
+			"groups" => Groups::getAll()
 		));
 	}
 
@@ -195,7 +183,7 @@ class Dates extends AbstractService
 
 		return TwigRenderer::render("dates/edit", array
 		(
-			"groups" => self::getGroups(),
+			"groups" => Groups::getAll(),
 			"entry" => $entry
 		));
 	}

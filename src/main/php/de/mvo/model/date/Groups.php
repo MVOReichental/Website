@@ -7,6 +7,18 @@ use stdClass;
 
 class Groups extends ArrayObject
 {
+	public static function getAll()
+	{
+		return array
+		(
+			"vorstandschaft" => "Vorstandschaft",
+			"sonderaufgaben" => "Sonderaufgaben",
+			"foerderverein" => "F&ouml;rderverein",
+			"dirigentin" => "Dirigentin",
+			"musiker" => "Musiker"
+		);
+	}
+
 	public static function getForEntry(Entry $entry)
 	{
 		$groups = new self;
