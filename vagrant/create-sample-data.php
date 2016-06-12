@@ -23,7 +23,8 @@ $dates = array
 	array(date("Y") . "-12-24 22:00", null, "Bar"),
 	array(date("Y") . "-12-31 23:50", null, "Baz"),
 	array("+1 hour", "+2 hours", "An event"),
-	array("-15 minutes", "+45 minutes", "Some other event")
+	array("-15 minutes", "+45 minutes", "Some other event"),
+	array("Tomorrow", null, "My event")
 );
 
 Database::query("DELETE FROM `dates`");
