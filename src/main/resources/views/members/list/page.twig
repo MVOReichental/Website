@@ -1,6 +1,6 @@
 <h1 class="page-header">{{ title }}</h1>
 
-<div class="btn-group hidden-print" id="members-groups">
+<div class="btn-toolbar btn-group hidden-print" id="members-groups">
 	{% for group in groups %}
 		{% if group.active %}
 			<a href="{{ group.url }}" class="btn btn-default active">{{ group.title }}</a>

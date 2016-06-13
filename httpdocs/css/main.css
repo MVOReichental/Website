@@ -116,6 +116,11 @@ a.thumbnail.active
 	display: none;
 }
 
+.btn-toolbar
+{
+	margin-bottom: 10px;
+}
+
 @media (min-width: 768px)
 {
 	.dl-wide dt
