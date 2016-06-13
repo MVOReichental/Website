@@ -157,12 +157,7 @@ class Dates extends AbstractService
 
 		$entry->save();
 
-		return TwigRenderer::render("dates/page-intern", array
-		(
-			"dates" => new DateList(User::getCurrent()),
-			"allowEdit" => true,
-			"saved" => true
-		));
+		return $this->getHtml(true);
 	}
 
 	public function showCreateEntryForm()
