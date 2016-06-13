@@ -58,6 +58,9 @@ class Endpoints extends ArrayObject
 		$this->append(new Endpoint(HttpMethod::GET, "/fotogalerie", Target::create()->className(Pictures::class)->method("getYears")));
 		$this->append(new Endpoint(HttpMethod::GET, "/fotogalerie/[i:year]", Target::create()->className(Pictures::class)->method("getAlbums")));
 		$this->append(new Endpoint(HttpMethod::GET, "/fotogalerie/[i:year]/[:album]", Target::create()->className(Pictures::class)->method("getAlbum")));
+		$this->append(new Endpoint(HttpMethod::GET, "/intern/pictures", Target::create()->className(Pictures::class)->method("getYears")->arguments(true)));
+		$this->append(new Endpoint(HttpMethod::GET, "/intern/pictures/[i:year]", Target::create()->className(Pictures::class)->method("getAlbums")->arguments(true)));
+		$this->append(new Endpoint(HttpMethod::GET, "/intern/pictures/[i:year]/[:album]", Target::create()->className(Pictures::class)->method("getAlbum")->arguments(true)));
 
 		$this->append(new Endpoint(HttpMethod::GET, "/users/[i:id]/profile-picture.jpg", Target::create()->className(ProfilePicture::class)->method("get")));
 		$this->append(new Endpoint(HttpMethod::POST, "/users/[i:id]/profile-picture.jpg", Target::create()->className(ProfilePicture::class)->method("upload")->requireLogin()));
