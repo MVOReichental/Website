@@ -26,7 +26,7 @@ class News extends AbstractService
 		return TwigRenderer::render("news", array
 		(
 			"news" => $newsContent,
-			"dates" => new DateList(null, 3),
+			"dates" => DateList::get(null, 3),
 			"albums" => $albums->getVisibleToUser(null)->slice(0, 3),
 			"picturesBaseUrl" => "fotogalerie"
 		));

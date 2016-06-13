@@ -8,7 +8,7 @@ use PDO;
 
 class DateList extends ArrayObject
 {
-	public function __construct(User $visibleForUser = null, $limit = 1000)
+	public static function get(User $visibleForUser = null, $limit = 1000)
 	{
 		$query = Database::prepare("
 			SELECT *
@@ -22,6 +22,8 @@ class DateList extends ArrayObject
 
 		$query->execute();
 
+		$list = new self;
+
 		/**
 		 * @var $entry Entry
 		 */
@@ -31,7 +33,7 @@ class DateList extends ArrayObject
 			{
 				if (!count($entry->groups))
 				{
-					$this->append($entry);
+					$list->append($entry);
 				}
 				else
 				{
@@ -39,7 +41,7 @@ class DateList extends ArrayObject
 					{
 						if ($visibleForUser->hasPermission("dates.view." . $group))
 						{
-							$this->append($entry);
+							$list->append($entry);
 							break;
 						}
 					}
@@ -49,9 +51,31 @@ class DateList extends ArrayObject
 			{
 				if ($entry->isPublic)
 				{
-					$this->append($entry);
+					$list->append($entry);
 				}
 			}
 		}
+
+		return $list;
+	}
+
+	public function getInGroups(Groups $groups)
+	{
+		$list = new self;
+
+		/**
+		 * @var $entry Entry
+		 */
+		foreach ($this as $entry)
+		{
+			if (!$entry->groups->isAnyIn($groups))
+			{
+				continue;
+			}
+
+			$list->append($entry);
+		}
+
+		return $list;
 	}
 }

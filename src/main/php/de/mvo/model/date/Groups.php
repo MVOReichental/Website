@@ -96,4 +96,22 @@ class Groups extends ArrayObject
 
 		$this->exchangeArray(self::getForEntry($entry)->getArrayCopy());
 	}
+
+	public function has($group)
+	{
+		return in_array($group, $this->getArrayCopy());
+	}
+
+	public function isAnyIn(Groups $groups)
+	{
+		foreach ($this as $group)
+		{
+			if ($groups->has($group))
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
 }

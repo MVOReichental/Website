@@ -18,11 +18,76 @@ class Dates extends AbstractService
 	{
 		$user = ($intern ? User::getCurrent() : null);
 
+		$dates = DateList::get($user);
+
+		if ($user === null)
+		{
+			$groups = null;
+		}
+		else
+		{
+			if (isset($this->params->groups))
+			{
+				$selectedGroups = array_filter(explode("+", $this->params->groups));
+			}
+			else
+			{
+				$selectedGroups = array();
+			}
+
+			$groups = array();
+
+			foreach (Groups::getAll() as $group => $title)
+			{
+				if (!$user->hasPermission("dates.view." . $group))
+				{
+					continue;
+				}
+
+				$groups[$group] = array
+				(
+					"title" => $title,
+					"active" => false
+				);
+
+				$newSelectedGroups = $selectedGroups;
+
+				$enabledGroupIndex = array_search($group, $newSelectedGroups);
+				if ($enabledGroupIndex === false)
+				{
+					$newSelectedGroups[] = $group;
+				}
+				else
+				{
+					unset($newSelectedGroups[$enabledGroupIndex]);
+					$groups[$group]["active"] = true;
+				}
+
+				sort($newSelectedGroups);
+
+				$groups[$group]["url"] = "intern/dates/" . implode("+", array_unique($newSelectedGroups));
+			}
+
+			foreach ($selectedGroups as $group)
+			{
+				if (!isset($groups[$group]))
+				{
+					unset($groups[$group]);
+				}
+			}
+
+			if (!empty($selectedGroups))
+			{
+				$dates = $dates->getInGroups(new Groups($selectedGroups));
+			}
+		}
+
 		return TwigRenderer::render("dates/" . ($intern ? "page-intern" : "page"), array
 		(
-			"dates" => new DateList($user),
+			"dates" => $dates,
 			"yearlyDates" => json_decode(file_get_contents(MODELS_ROOT . "/yearly-events.json")),
-			"allowEdit" => $user === null ? false : $user->hasPermission("dates.edit")
+			"allowEdit" => $user === null ? false : $user->hasPermission("dates.edit"),
+			"groups" => $groups
 		));
 	}
 
@@ -30,7 +95,7 @@ class Dates extends AbstractService
 	{
 		$calendar = new Calendar($_SERVER["HTTP_HOST"]);
 
-		$dates = new DateList($intern ? User::getCurrent() : null);
+		$dates = DateList::get($intern ? User::getCurrent() : null);
 
 		/**
 		 * @var $date Entry

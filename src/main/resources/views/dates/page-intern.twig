@@ -4,9 +4,23 @@
 	<div class="alert alert-success"><i class="fa fa-check"></i> Die &Auml;nderungen wurden erfolgreich gespeichert.</div>
 {% endif %}
 
-{% if allowEdit %}
-	<a href="intern/dates/create" class="btn btn-default hidden-print"><i class="fa fa-plus"></i> Neuer Termin</a>
-{% endif %}
+<div class="btn-toolbar hidden-print">
+	{% if allowEdit %}
+		<div class="btn-group">
+			<a href="intern/dates/create" class="btn btn-default"><i class="fa fa-plus"></i> Neuer Termin</a>
+		</div>
+	{% endif %}
+
+	<div class="btn-group">
+		{% for group in groups %}
+			{% if group.active %}
+				<a href="{{ group.url }}" class="btn btn-default active">{{ group.title|raw }}</a>
+			{% else %}
+				<a href="{{ group.url }}" class="btn btn-default">{{ group.title|raw }}</a>
+			{% endif %}
+		{% endfor %}
+	</div>
+</div>
 
 {% if dates.count %}
 	{% include("dates/list.twig") %}

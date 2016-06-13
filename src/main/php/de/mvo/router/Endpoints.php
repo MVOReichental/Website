@@ -48,6 +48,7 @@ class Endpoints extends ArrayObject
 		$this->append(new Endpoint(HttpMethod::GET, "/termine", Target::create()->className(Dates::class)->method("getHtml")));
 		$this->append(new Endpoint(HttpMethod::GET, "/termine.ics", Target::create()->className(Dates::class)->method("getIcal")));
 		$this->append(new Endpoint(HttpMethod::GET, "/intern/dates", Target::create()->className(Dates::class)->method("getHtml")->arguments(true)->requireLogin()));
+		$this->append(new Endpoint(HttpMethod::GET, "/intern/dates/?[:groups]?", Target::create()->className(Dates::class)->method("getHtml")->arguments(true)->requireLogin()));
 		$this->append(new Endpoint(HttpMethod::GET, "/intern/dates.ics", Target::create()->className(Dates::class)->method("getIcal")->arguments(true)->requireLogin()));
 		$this->append(new Endpoint(HttpMethod::GET, "/intern/dates/edit/[i:id]", Target::create()->className(Dates::class)->method("showEditEntryForm")->arguments(true)->permission("dates.edit")));
 		$this->append(new Endpoint(HttpMethod::GET, "/intern/dates/create", Target::create()->className(Dates::class)->method("showCreateEntryForm")->arguments(true)->permission("dates.edit")));
