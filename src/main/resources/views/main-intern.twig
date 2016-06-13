@@ -7,7 +7,7 @@
 
 		<base href="/"/>
 
-		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="css/bootstrap-customized.css"/>
 		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css"/>
 		<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css"/>
 		<link rel="stylesheet" href="bower_components/blueimp-gallery/css/blueimp-gallery.min.css"/>
@@ -62,18 +62,12 @@
 								</ul>
 							</li>
 							<li><a href="intern/forms"><i class="fa fa-file-text"></i> Formulare</a></li>
-							<li class="dropdown">
-								<a class="dropdown-toggle" data-toggle="dropdown" role="button"><i class="fa fa-comments"></i> Nachrichten <span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li><a href="intern/messages/sent"><i class="fa fa-send"></i> Gesendet</a></li>
-									<li><a href="intern/messages/received"><i class="fa fa-inbox"></i> Empfangen</a></li>
-								</ul>
-							</li>
 							<li><a href="intern/notedirectory"><i class="fa fa-book"></i> Notenverzeichnis</a></li>
+							<li><a href="intern/protocols"><i class="fa fa-list"></i> Protokolle</a></li>
+							<li><a href="intern/roomoccupancyplan"><i class="fa fa-table"></i> Proberaumbelegungsplan</a></li>
 							<li><a href="intern/dates"><i class="fa fa-calendar"></i> Termine</a></li>
 							<li><a href="intern/pictures"><i class="fa fa-camera"></i> Fotogalerie</a></li>
 						</ul>
-
 						<ul class="nav navbar-nav navbar-right">
 							<li class="dropdown">
 								<a class="dropdown-toggle" data-toggle="dropdown" role="button" id="navbar-profile">
@@ -84,6 +78,11 @@
 									<li class="dropdown-header">Angemeldet als <strong>{{ user.firstName }} {{ user.lastName }}</strong></li>
 
 									<li><a href="intern/members/{{ user.username }}"><i class="fa fa-user"></i> Dein Profil</a></li>
+
+									<li class="divider"></li>
+
+									<li><a href="intern/messages/sent"><i class="fa fa-send"></i> Gesendete Nachrichten</a></li>
+									<li><a href="intern/messages/received"><i class="fa fa-inbox"></i> Empfangene Nachrichten</a></li>
 
 									<li class="divider"></li>
 
