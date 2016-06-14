@@ -124,7 +124,7 @@ CREATE TABLE `notedirectorycategories` (
   `title` varchar(100) NOT NULL,
   `order` int(11) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `title` (`title`)
+  UNIQUE KEY (`title`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `notedirectoryprograms` (
@@ -156,7 +156,7 @@ CREATE TABLE `notedirectoryprogramtitles` (
   `titleId` int(11) unsigned NOT NULL,
   `number` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `programId_titleId` (`programId`, `titleId`),
+  UNIQUE KEY (`programId`, `titleId`),
   CONSTRAINT FOREIGN KEY (`programId`) REFERENCES `notedirectoryprograms` (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
   CONSTRAINT FOREIGN KEY (`titleId`) REFERENCES `notedirectorytitles` (`id`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
