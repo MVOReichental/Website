@@ -99,6 +99,6 @@ class Endpoints extends ArrayObject
 
 		$this->append(new Endpoint(HttpMethod::GET, "/intern/protocols", Target::create()->className(Protocols::class)->method("getList")->permission("protocols.view")));
 
-		$this->append(new Endpoint(HttpMethod::GET, "/intern/uploads/[i:id]/[*:filename]", Target::create()->className(Uploads::class)->method("get")->requireLogin()));
+		$this->append(new Endpoint(HttpMethod::GET, "/intern/uploads/[i:id]/[:key]/[*:filename]", Target::create()->className(Uploads::class)->method("get")->requireLogin()));
 	}
 }

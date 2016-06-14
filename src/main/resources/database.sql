@@ -73,8 +73,10 @@ CREATE TABLE `usercontacts` (
 
 CREATE TABLE `uploads` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `key` varchar(8) NOT NULL,
   `filename` varchar(200) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY (`key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

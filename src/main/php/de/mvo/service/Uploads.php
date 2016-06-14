@@ -14,6 +14,11 @@ class Uploads extends AbstractService
 			throw new NotFoundException;
 		}
 
+		if ($upload->key != $this->params->key)
+		{
+			throw new NotFoundException;
+		}
+
 		if (!$upload->stream())
 		{
 			throw new NotFoundException;

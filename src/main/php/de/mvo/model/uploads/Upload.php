@@ -5,11 +5,26 @@ use de\mvo\Database;
 
 class Upload
 {
+	/**
+	 * @var int
+	 */
 	public $id;
+	/**
+	 * @var string
+	 */
+	public $key;
+	/**
+	 * @var string
+	 */
 	public $filename;
 
 	public function __construct()
 	{
+		if ($this->id === null)
+		{
+			return;
+		}
+
 		$this->id = (int) $this->id;
 	}
 
@@ -43,18 +58,22 @@ class Upload
 	{
 		$upload = new Upload;
 
+		$upload->key = substr(md5_file($sourcePath), 0, 8);
 		$upload->filename = $filename;
 
 		Database::pdo()->beginTransaction();
 
 		$query = Database::prepare("
 			INSERT INTO `uploads`
-			SET `filename` = :filename
+			SET
+				`key` = :key,
+				`filename` = :filename
 		");
 
 		$query->execute(array
 		(
-			":filename" => $filename
+			":key" => $upload->key,
+			":filename" => $upload->filename
 		));
 
 		$upload->id = Database::lastInsertId();

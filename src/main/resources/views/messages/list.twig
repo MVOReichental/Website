@@ -25,7 +25,7 @@
 						<div class="clearfix">
 							<strong>Anh&auml;nge:</strong>
 							{% for attachment in message.attachments %}
-								<a href="intern/uploads/{{ attachment.id }}/{{ attachment.filename }}" class="label label-default">{{ attachment.filename }}</a>
+								<a href="intern/uploads/{{ attachment.id }}/{{ attachment.key }}/{{ attachment.filename }}" class="label label-default">{{ attachment.filename }}</a>
 							{% endfor %}
 						</div>
 					{% endif %}
