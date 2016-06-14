@@ -18,3 +18,11 @@
 <h3>Letzte Nachricht</h3>
 
 {% include("messages/list.twig") %}
+
+{% if albums.count %}
+	<h2 class="page-header">Neueste Bilder</h2>
+
+	{% include("pictures/albums-list.twig") %}
+
+	<p class="text-muted">Klicke <a href="{{ picturesBaseUrl }}">hier</a> um weitere Alben zu sehen.</p>
+{% endif %}
