@@ -97,7 +97,9 @@ class Endpoints extends ArrayObject
 		$this->append(new Endpoint(HttpMethod::GET, "/intern/notedirectory/titles/[i:id]", Target::create()->className(NoteDirectory::class)->method("getTitleDetails")->permission("notedirectory.view")));
 		$this->append(new Endpoint(HttpMethod::GET, "/intern/notedirectory/categories/[i:id]", Target::create()->className(NoteDirectory::class)->method("getTitlesWithCategory")->permission("notedirectory.view")));
 
-		$this->append(new Endpoint(HttpMethod::GET, "/intern/protocols", Target::create()->className(Protocols::class)->method("getList")->permission("protocols.view")));
+		$this->append(new Endpoint(HttpMethod::GET, "/intern/protocols", Target::create()->className(Protocols::class)->method("getList")->permission("protocols.view.*")));
+		$this->append(new Endpoint(HttpMethod::POST, "/intern/protocols", Target::create()->className(Protocols::class)->method("upload")->permission("protocols.upload.*")));
+		$this->append(new Endpoint(HttpMethod::GET, "/intern/protocols/upload", Target::create()->className(Protocols::class)->method("showUploadForm")->permission("protocols.upload.*")));
 
 		$this->append(new Endpoint(HttpMethod::GET, "/intern/uploads/[i:id]/[:key]/[*:filename]", Target::create()->className(Uploads::class)->method("get")->requireLogin()));
 	}

@@ -1,21 +1,26 @@
 {% if protocols.count %}
 	<div class="table-responsive">
-		<table class="table table-striped table-hover">
+		<table class="table table-striped table-hover sortable">
 			<thead>
 				<tr>
-					<th class="hidden-print"></th>
-					<th>Datum</th>
 					<th>Titel</th>
-					<th>Gruppen</th>
+					<th>Datum</th>
+					<th data-defaultsort="disabled">Gruppen</th>
 				</tr>
 			</thead>
 			<tbody>
 				{% for protocol in protocols %}
 					<tr data-id="{{ protocol.id }}">
-						<td class="hidden-print"><a href="intern/protocols/{{ protocol.id }}/{{ protocol.upload.filename }}" class="btn btn-success btn-xs"><i class="fa fa-download"></i> Herunterladen</a></td>
-						<td>{{ protocol.date.humanReadableDate }}</td>
-						<td>{{ protocol.title }}</td>
-						<td>{{ protocols.groups }}</td>
+						<td>
+							<a href="intern/uploads/{{ protocol.upload.id }}/{{ protocol.upload.key }}/{{ protocol.upload.filename }}" class="btn btn-success btn-xs hidden-print"><i class="fa fa-download"></i> Herunterladen</a>
+							{{ protocol.title }}
+						</td>
+						<td data-value="{{ protocol.date.format("Ymd") }}">{{ protocol.date.humanReadableDate }}</td>
+						<td>
+							{% for group in protocol.groups %}
+								<span class="label label-default">{{ loop.parent.loop.parent.groups[group]|raw }}</span>
+							{% endfor %}
+						</td>
 					</tr>
 				{% endfor %}
 			</tbody>

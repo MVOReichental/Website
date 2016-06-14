@@ -1,3 +1,17 @@
 <h1 class="page-header">Protokolle</h1>
 
+{% if uploaded %}
+	{% if uploaded.ok %}
+		<div class="alert alert-success"><i class="fa fa-check"></i> Das Protokoll wurde erfolgreich hochgeladen.</div>
+	{% else %}
+		<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Beim Hochladen des Protokolls ist ein Fehler aufgetreten! Bitte versuche es erneut oder wende dich an den Webmaster.</div>
+	{% endif %}
+{% endif %}
+
+{% if allowUpload %}
+	<div class="btn-toolbar hidden-print">
+		<a href="intern/protocols/upload" class="btn btn-default"><i class="fa fa-plus"></i> Protokoll hochladen</a>
+	</div>
+{% endif %}
+
 {% include("protocols/list.twig") %}
