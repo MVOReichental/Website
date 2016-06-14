@@ -161,4 +161,24 @@ CREATE TABLE `notedirectoryprogramtitles` (
   CONSTRAINT FOREIGN KEY (`titleId`) REFERENCES `notedirectorytitles` (`id`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+CREATE TABLE `protocols` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `uploadId` int(11) unsigned NOT NULL,
+  `title` varchar(200) NOT NULL,
+  `date` date NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY (`uploadId`),
+  CONSTRAINT FOREIGN KEY (`uploadId`) REFERENCES `uploads` (`id`) ON UPDATE CASCADE ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `protocolgroups` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `protocolId` int(11) unsigned NOT NULL,
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY (`protocolId`, `name`),
+  CONSTRAINT FOREIGN KEY (`protocolId`) REFERENCES `protocols` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

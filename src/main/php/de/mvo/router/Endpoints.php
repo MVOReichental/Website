@@ -15,6 +15,7 @@ use de\mvo\service\News;
 use de\mvo\service\NoteDirectory;
 use de\mvo\service\Pictures;
 use de\mvo\service\ProfilePicture;
+use de\mvo\service\Protocols;
 use de\mvo\service\Redirect;
 use de\mvo\service\StaticView;
 use de\mvo\service\Uploads;
@@ -95,6 +96,8 @@ class Endpoints extends ArrayObject
 		$this->append(new Endpoint(HttpMethod::GET, "/intern/notedirectory/titles", Target::create()->className(NoteDirectory::class)->method("getAllTitles")->permission("notedirectory.view")));
 		$this->append(new Endpoint(HttpMethod::GET, "/intern/notedirectory/titles/[i:id]", Target::create()->className(NoteDirectory::class)->method("getTitleDetails")->permission("notedirectory.view")));
 		$this->append(new Endpoint(HttpMethod::GET, "/intern/notedirectory/categories/[i:id]", Target::create()->className(NoteDirectory::class)->method("getTitlesWithCategory")->permission("notedirectory.view")));
+
+		$this->append(new Endpoint(HttpMethod::GET, "/intern/protocols", Target::create()->className(Protocols::class)->method("getList")->permission("protocols.view")));
 
 		$this->append(new Endpoint(HttpMethod::GET, "/intern/uploads/[i:id]/[*:filename]", Target::create()->className(Uploads::class)->method("get")->requireLogin()));
 	}
