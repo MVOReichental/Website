@@ -90,7 +90,7 @@ class Account extends AbstractService
 	{
 		User::logout();
 
-		return file_get_contents(VIEWS_ROOT . "/account/logout.html");
+		return TwigRenderer::render("account/logout");
 	}
 
 	public function showSettings($message = null)
