@@ -1,5 +1,5 @@
 <div class="table-responsive">
-	<table class="table table-striped table-hover" id="dates-table">
+	<table class="table table-striped table-hover sortable" id="dates-table">
 		<thead>
 			<tr>
 				<th>Datum</th>
@@ -7,14 +7,14 @@
 				<th>Veranstaltung</th>
 				<th>Ort</th>
 				{% if allowEdit %}
-					<th class="hidden-print"></th>
+					<th class="hidden-print" data-defaultsort="disabled"></th>
 				{% endif %}
 			</tr>
 		</thead>
 		<tbody>
 			{% for entry in dates %}
 				<tr data-id="{{ entry.id }}" class="{% if entry.highlight %}highlight{% endif %}">
-					<td class="dates-date">{{ entry.startDate.weekday }}, {{ entry.startDate.humanReadableDate }}</td>
+					<td class="dates-date" data-value="{{ entry.startDate.format("YmdHi") }}">{{ entry.startDate.weekday }}, {{ entry.startDate.humanReadableDate }}</td>
 					<td>
 						{{ entry.startDate.humanReadableTime }}
 						{% if entry.endDate %}
