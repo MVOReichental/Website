@@ -1,23 +1,41 @@
-<h1 class="page-header">Einstellungen</h1>
+{% extends "base/intern-public-switch.twig" %}
 
-{% if message %}
-	<div class="alert alert-{{ message.type }}"><i class="fa fa-{{ message.icon }}"></i> {{ message.text|raw }}</div>
-{% endif %}
+{% block title %}{{ activePage.title }} - Einstellungen{{ parent() }}{% endblock %}
 
-<div class="row">
-	<div class="col-md-3">
-		<div class="list-group">
-			{% for page in pages %}
-				{% if page.active %}
-					<span class="list-group-item active">{{ page.title }}</span>
-				{% else %}
-					<a class="list-group-item" href="intern/settings/{{ page.name }}">{{ page.title }}</a>
-				{% endif %}
-			{% endfor %}
+{% block stylesheets %}
+	{{ parent() }}
+
+	<link rel="stylesheet" href="css/account.css"/>
+{% endblock %}
+
+{% block scripts %}
+	{{ parent() }}
+
+	<script src="js/account.js"></script>
+{% endblock %}
+
+{% block content %}
+	<h1 class="page-header">Einstellungen</h1>
+
+	{% if message %}
+		<div class="alert alert-{{ message.type }}"><i class="fa fa-{{ message.icon }}"></i> {{ message.text|raw }}</div>
+	{% endif %}
+
+	<div class="row">
+		<div class="col-md-3">
+			<div class="list-group">
+				{% for page in pages %}
+					{% if page.active %}
+						<span class="list-group-item active">{{ page.title }}</span>
+					{% else %}
+						<a class="list-group-item" href="intern/settings/{{ page.name }}">{{ page.title }}</a>
+					{% endif %}
+				{% endfor %}
+			</div>
+		</div>
+
+		<div class="col-md-9">
+			{% include("account/settings/" ~ activePage.name ~ ".twig") %}
 		</div>
 	</div>
-
-	<div class="col-md-9">
-		{% include("account/settings/" ~ activePage.name ~ ".twig") %}
-	</div>
-</div>
+{% endblock %}

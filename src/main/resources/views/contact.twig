@@ -1,13 +1,19 @@
-<h1 class="page-header">Kontakt</h1>
+{% extends "base/intern-public-switch.twig" %}
 
-{% for contact in json %}
-	<address>
-		<strong>{{ contact.name }}</strong><br/>
-		<span class="pre">{{ contact.text }}</span>
+{% block title %}Kontakt{{ parent() }}{% endblock %}
 
-		{% if contact.mailbox %}
-			<br/>
-			<a class="contact-mail" data-mailbox="{{ contact.mailbox }}"></a>
-		{% endif %}
-	</address>
-{% endfor %}
+{% block content %}
+	<h1 class="page-header">Kontakt</h1>
+
+	{% for contact in json %}
+		<address>
+			<strong>{{ contact.name }}</strong><br/>
+			<span class="pre">{{ contact.text }}</span>
+
+			{% if contact.mailbox %}
+				<br/>
+				<a class="contact-mail" data-mailbox="{{ contact.mailbox }}"></a>
+			{% endif %}
+		</address>
+	{% endfor %}
+{% endblock %}

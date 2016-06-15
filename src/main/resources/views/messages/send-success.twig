@@ -1,5 +1,11 @@
-<h1 class="page-header">Nachricht senden</h1>
+{% extends "base/intern-public-switch.twig" %}
 
-<div class="alert alert-success"><i class="fa fa-check-circle"></i> Die Nachricht wurde erfolgreich gesendet.</div>
+{% block title %}Nachricht senden{{ parent() }}{% endblock %}
 
-{% include("messages/list.twig") %}
+{% block content %}
+	<h1 class="page-header">Nachricht senden</h1>
+
+	<div class="alert alert-success"><i class="fa fa-check-circle"></i> Die Nachricht wurde erfolgreich gesendet.</div>
+
+	{% include("messages/list.twig") %}
+{% endblock %}

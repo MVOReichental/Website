@@ -1,3 +1,9 @@
-<h1 class="page-header">{{ title }}</h1>
+{% extends "base/intern-public-switch.twig" %}
 
-{% include("messages/list.twig") %}
+{% block title %}{{ title }}{{ parent() }}{% endblock %}
+
+{% block content %}
+	<h1 class="page-header">{{ title }}</h1>
+
+	{% include("messages/list.twig") %}
+{% endblock %}

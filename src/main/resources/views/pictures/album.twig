@@ -1,39 +1,51 @@
-<ol class="breadcrumb">
-	<li><a href="{{ picturesBaseUrl }}">Fotogalerie</a></li>
-	<li><a href="{{ picturesBaseUrl }}/{{ year }}">{{ year }}</a></li>
-	<li class="active">{{ title }}</li>
-</ol>
+{% extends "base/intern-public-switch.twig" %}
 
-{% if album.name %}
-	<h1 class="page-header">
-		Fotogalerie<br/>
-		<span class="small">{{ album.title }}</span>
-	</h1>
-
-	<h4>Datum: {{ album.date.humanReadableDate }}</h4>
-
-	{% if album.text %}
-		<div class="well">{{ album.text }}</div>
+{% block title %}
+	{% if album.name %}
+		{{ album.title }} -
 	{% endif %}
+	Fotogalerie
+	{{ parent() }}
+{% endblock %}
 
-	<div class="row gallery-source">
-		{% for picture in album.pictures %}
-			<div class="col-sm-6 col-md-4">
-				<a href="pictures/{{ loop.parent.album.year }}/{{ loop.parent.album.name }}/large_{{ picture.file }}.jpg" class="thumbnail" title="{{ picture.title }}">
-					<img src="pictures/{{ loop.parent.album.year }}/{{ loop.parent.album.name }}/small_{{ picture.file }}.jpg"/>
-					{% if picture.title %}
-						<div class="caption">
-							<h3>{{ picture.title }}</h3>
-						</div>
-					{% endif %}
-				</a>
-			</div>
-		{% else %}
-			<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Keine Bilder verf&uuml;gbar!</div>
-		{% endfor %}
-	</div>
-{% else %}
-	<h1 class="page-header">Fotogalerie</h1>
+{% block content %}
+	<ol class="breadcrumb">
+		<li><a href="{{ picturesBaseUrl }}">Fotogalerie</a></li>
+		<li><a href="{{ picturesBaseUrl }}/{{ year }}">{{ year }}</a></li>
+		<li class="active">{{ title }}</li>
+	</ol>
 
-	<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Album nicht gefunden!</div>
-{% endif %}
+	{% if album.name %}
+		<h1 class="page-header">
+			Fotogalerie<br/>
+			<span class="small">{{ album.title }}</span>
+		</h1>
+
+		<h4>Datum: {{ album.date.humanReadableDate }}</h4>
+
+		{% if album.text %}
+			<div class="well">{{ album.text }}</div>
+		{% endif %}
+
+		<div class="row gallery-source">
+			{% for picture in album.pictures %}
+				<div class="col-sm-6 col-md-4">
+					<a href="pictures/{{ loop.parent.album.year }}/{{ loop.parent.album.name }}/large_{{ picture.file }}.jpg" class="thumbnail" title="{{ picture.title }}">
+						<img src="pictures/{{ loop.parent.album.year }}/{{ loop.parent.album.name }}/small_{{ picture.file }}.jpg"/>
+						{% if picture.title %}
+							<div class="caption">
+								<h3>{{ picture.title }}</h3>
+							</div>
+						{% endif %}
+					</a>
+				</div>
+			{% else %}
+				<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Keine Bilder verf&uuml;gbar!</div>
+			{% endfor %}
+		</div>
+	{% else %}
+		<h1 class="page-header">Fotogalerie</h1>
+
+		<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Album nicht gefunden!</div>
+	{% endif %}
+{% endblock %}

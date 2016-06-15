@@ -1,31 +1,37 @@
-<h1 class="page-header">Protokoll hochladen</h1>
+{% extends "base/intern-public-switch.twig" %}
 
-<form action="intern/protocols" method="post" enctype="multipart/form-data">
-	<div class="form-group">
-		<label for="protocols-upload-date">Datum</label>
-		<input type="date" class="form-control" id="protocols-upload-date" name="date" required/>
-	</div>
+{% block title %}Protokoll hochladen{{ parent() }}{% endblock %}
 
-	<div class="form-group">
-		<label for="protocols-upload-file">Datei</label>
-		<input type="file" class="form-control" id="protocols-upload-file" name="file" required/>
-	</div>
+{% block content %}
+	<h1 class="page-header">Protokoll hochladen</h1>
 
-	<div class="form-group">
-		<label for="protocols-upload-title">Titel</label>
-		<input type="text" class="form-control" id="protocols-upload-title" name="title" required/>
-	</div>
+	<form action="intern/protocols" method="post" enctype="multipart/form-data">
+		<div class="form-group">
+			<label for="protocols-upload-date">Datum</label>
+			<input type="date" class="form-control" id="protocols-upload-date" name="date" required/>
+		</div>
 
-	<div class="form-group">
-		<label for="protocols-upload-groups">Gruppen</label>
+		<div class="form-group">
+			<label for="protocols-upload-file">Datei</label>
+			<input type="file" class="form-control" id="protocols-upload-file" name="file" required/>
+		</div>
 
-		<select class="selectpicker form-control" id="protocols-upload-groups" name="groups[]" multiple data-actions-box="true" required>
-			{% for name, title in groups %}
-				<option value="{{ name }}">{{ title|raw }}</option>
-			{% endfor %}
-		</select>
-	</div>
+		<div class="form-group">
+			<label for="protocols-upload-title">Titel</label>
+			<input type="text" class="form-control" id="protocols-upload-title" name="title" required/>
+		</div>
 
-	<button type="submit" class="btn btn-primary"><i class="fa fa-upload"></i> Hochladen</button>
-	<a href="intern/protocols" class="btn btn-default">Abbrechen</a>
-</form>
+		<div class="form-group">
+			<label for="protocols-upload-groups">Gruppen</label>
+
+			<select class="selectpicker form-control" id="protocols-upload-groups" name="groups[]" multiple data-actions-box="true" required>
+				{% for name, title in groups %}
+					<option value="{{ name }}">{{ title|raw }}</option>
+				{% endfor %}
+			</select>
+		</div>
+
+		<button type="submit" class="btn btn-primary"><i class="fa fa-upload"></i> Hochladen</button>
+		<a href="intern/protocols" class="btn btn-default">Abbrechen</a>
+	</form>
+{% endblock %}

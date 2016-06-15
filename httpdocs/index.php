@@ -12,10 +12,10 @@ try
 {
 	require_once __DIR__ . "/../bootstrap.php";
 
+	session_start();
+
 	Database::init();
 	TwigRenderer::init();
-
-	session_start();
 
 	$router = new Router;
 
@@ -30,77 +30,43 @@ try
 		$path = "/";
 	}
 
-	$useInternalMainView = false;
-
-	$internalPageRequested = (substr(ltrim($path, "/"), 0, 6) == "intern");
-
 	try
 	{
 		$target = $router->getMatchingTarget($path);
 		if ($target === null)
 		{
 			// Do not allow guessing internal pages
-			if ($internalPageRequested and User::getCurrent() === null)
+			if (substr(ltrim($path, "/"), 0, 6) == "intern" and User::getCurrent() === null)
 			{
 				throw new LoginException(LoginException::NOT_LOGGED_IN);
 			}
 
-			http_response_code(404);
-			$content = file_get_contents(VIEWS_ROOT . "/not-found.html");
+			throw new NotFoundException;
 		}
 		else
 		{
-			$content = $target->call();
-			if ($content === null)
-			{
-				exit;
-			}
+			echo $target->call();
 		}
 	}
 	catch (LoginException $exception)
 	{
 		http_response_code(401);
-		$content = TwigRenderer::render("account/login", array
+		echo TwigRenderer::render("account/login", array
 		(
 			"url" => (isset($_GET["redirect"]) and $_GET["redirect"] != "") ? $_GET["redirect"] : $path,
 			"requestToken" => ($exception->getType() == LoginException::REQUIRE_2FA_TOKEN or $exception->getType() == LoginException::INVALID_2FA_TOKEN),
 			"errorMessage" => $exception->getLocalizedMessage()
 		));
-
-		$useInternalMainView = true;
 	}
 	catch (PermissionViolationException $exception)
 	{
 		http_response_code(403);
-		$content = file_get_contents(VIEWS_ROOT . "/permission-denied.html");
+		echo TwigRenderer::render("permission-denied");
 	}
 	catch (NotFoundException $exception)
 	{
 		http_response_code(404);
-		$content = file_get_contents(VIEWS_ROOT . "/not-found.html");
-	}
-
-	if ($internalPageRequested and User::getCurrent() !== null)
-	{
-		$useInternalMainView = true;
-	}
-
-	if ($useInternalMainView)
-	{
-		echo TwigRenderer::render("main-intern", array
-		(
-			"content" => $content,
-			"currentYear" => date("Y"),
-			"user" => User::getCurrent()
-		));
-	}
-	else
-	{
-		echo TwigRenderer::render("main", array
-		(
-			"content" => $content,
-			"currentYear" => date("Y")
-		));
+		echo TwigRenderer::render("not-found");
 	}
 }
 catch (Exception $exception)

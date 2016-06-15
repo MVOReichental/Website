@@ -1,38 +1,50 @@
-<h1 class="page-header">
-	Notenverzeichnis<br/>
-	<span class="small">{{ title }}</span>
-</h1>
+{% extends "base/intern-public-switch.twig" %}
 
-<div class="btn-group hidden-print" id="notedirectory-selection">
-	<div class="btn-group">
-		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-			Programme <span class="caret"></span>
-		</button>
-		<ul class="dropdown-menu">
-			{% for year in otherPrograms %}
-				<li class="dropdown-header">{{ year.year }}</li>
-				{% for program in year.programs %}
-					<li>
-						<a href="intern/notedirectory/programs/{{ program.year }}/{{ program.name }}">{{ program.title }}</a>
-					</li>
+{% block title %}{{ title }} - Notenverzeichnis{{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+
+	<link rel="stylesheet" href="css/notedirectory.css"/>
+{% endblock %}
+
+{% block content %}
+	<h1 class="page-header">
+		Notenverzeichnis<br/>
+		<span class="small">{{ title }}</span>
+	</h1>
+
+	<div class="btn-group hidden-print" id="notedirectory-selection">
+		<div class="btn-group">
+			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+				Programme <span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu">
+				{% for year in otherPrograms %}
+					<li class="dropdown-header">{{ year.year }}</li>
+					{% for program in year.programs %}
+						<li>
+							<a href="intern/notedirectory/programs/{{ program.year }}/{{ program.name }}">{{ program.title }}</a>
+						</li>
+					{% endfor %}
+					<li class="divider"></li>
 				{% endfor %}
-				<li class="divider"></li>
-			{% endfor %}
-		</ul>
+			</ul>
+		</div>
+
+		<div class="btn-group">
+			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+				Kategorien <span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu">
+				{% for category in categories %}
+					<li><a href="intern/notedirectory/categories/{{ category.id }}">{{ category.title }}</a></li>
+				{% endfor %}
+			</ul>
+		</div>
+
+		<a href="intern/notedirectory/titles" class="btn btn-default">Alle Titel</a>
 	</div>
 
-	<div class="btn-group">
-		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-			Kategorien <span class="caret"></span>
-		</button>
-		<ul class="dropdown-menu">
-			{% for category in categories %}
-				<li><a href="intern/notedirectory/categories/{{ category.id }}">{{ category.title }}</a></li>
-			{% endfor %}
-		</ul>
-	</div>
-
-	<a href="intern/notedirectory/titles" class="btn btn-default">Alle Titel</a>
-</div>
-
-{{ list|raw }}
+	{{ list|raw }}
+{% endblock %}

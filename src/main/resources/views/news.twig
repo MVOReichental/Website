@@ -1,21 +1,27 @@
-<h1 class="page-header">Aktuell</h1>
+{% extends "base/intern-public-switch.twig" %}
 
-{% if news %}
-	{{ news|raw }}
-{% endif %}
+{% block title %}Aktuell{{ parent() }}{% endblock %}
 
-{% if dates.count %}
-	<h2 class="page-header">Unsere n&auml;chsten Termine</h2>
+{% block content %}
+	<h1 class="page-header">Aktuell</h1>
 
-	{% include("dates/list.twig") %}
+	{% if news %}
+		{{ news|raw }}
+	{% endif %}
 
-	<p class="text-muted">Klicken Sie <a href="termine">hier</a> um weitere Termine zu sehen.</p>
-{% endif %}
+	{% if dates.count %}
+		<h2 class="page-header">Unsere n&auml;chsten Termine</h2>
 
-{% if albums.count %}
-	<h2 class="page-header">Neueste Bilder</h2>
+		{% include("dates/list.twig") %}
 
-	{% include("pictures/albums-list.twig") %}
+		<p class="text-muted">Klicken Sie <a href="termine">hier</a> um weitere Termine zu sehen.</p>
+	{% endif %}
 
-	<p class="text-muted">Klicken Sie <a href="{{ picturesBaseUrl }}">hier</a> um weitere Alben zu sehen.</p>
-{% endif %}
+	{% if albums.count %}
+		<h2 class="page-header">Neueste Bilder</h2>
+
+		{% include("pictures/albums-list.twig") %}
+
+		<p class="text-muted">Klicken Sie <a href="{{ picturesBaseUrl }}">hier</a> um weitere Alben zu sehen.</p>
+	{% endif %}
+{% endblock %}

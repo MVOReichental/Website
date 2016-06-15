@@ -1,29 +1,35 @@
-<h1 class="page-header">Formulare</h1>
+{% extends "base/intern-public-switch.twig" %}
 
-{% if forms.count %}
-	<div class="table-responsive">
-		<table class="table table-striped sortable">
-			<thead>
-				<tr>
-					<th>Name</th>
-					<th>Typ</th>
-					<th>&Auml;nderungsdatum</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for form in forms %}
+{% block title %}Formulare{{ parent() }}{% endblock %}
+
+{% block content %}
+	<h1 class="page-header">Formulare</h1>
+
+	{% if forms.count %}
+		<div class="table-responsive">
+			<table class="table table-striped sortable">
+				<thead>
 					<tr>
-						<td>
-							<a href="intern/forms/{{ form.filename }}" class="btn btn-success btn-xs"><i class="fa fa-download"></i> Herunterladen</a>
-							{{ form.title }}
-						</td>
-						<td>{{ form.type }}</td>
-						<td data-value="{{ form.date }}">{{ form.date.humanReadableDate }}</td>
+						<th>Name</th>
+						<th>Typ</th>
+						<th>&Auml;nderungsdatum</th>
 					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-	</div>
-{% else %}
-	<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Keine Formulare verf&uuml;gbar.</div>
-{% endif %}
+				</thead>
+				<tbody>
+					{% for form in forms %}
+						<tr>
+							<td>
+								<a href="intern/forms/{{ form.filename }}" class="btn btn-success btn-xs"><i class="fa fa-download"></i> Herunterladen</a>
+								{{ form.title }}
+							</td>
+							<td>{{ form.type }}</td>
+							<td data-value="{{ form.date }}">{{ form.date.humanReadableDate }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	{% else %}
+		<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Keine Formulare verf&uuml;gbar.</div>
+	{% endif %}
+{% endblock %}

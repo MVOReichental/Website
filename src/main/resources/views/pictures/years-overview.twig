@@ -1,20 +1,26 @@
-<ol class="breadcrumb">
-	<li class="active">Fotogalerie</li>
-</ol>
+{% extends "base/intern-public-switch.twig" %}
 
-<h1 class="page-header">Fotogalerie</h1>
+{% block title %}Fotogalerie{{ parent() }}{% endblock %}
 
-<div class="row">
-	{% for year in years %}
-		<div class="col-sm-6 col-md-4">
-			<a href="{{ loop.parent.picturesBaseUrl }}/{{ year.year }}" class="thumbnail">
-				<img src="pictures/{{ year.year }}/{{ year.coverAlbum.name }}/small_{{ year.coverAlbum.cover.file }}.jpg"/>
-				<div class="caption">
-					<h3>{{ year.year }}</h3>
-				</div>
-			</a>
-		</div>
-	{% else %}
-		<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Keine Alben verf&uuml;gbar!</div>
-	{% endfor %}
-</div>
+{% block content %}
+	<ol class="breadcrumb">
+		<li class="active">Fotogalerie</li>
+	</ol>
+
+	<h1 class="page-header">Fotogalerie</h1>
+
+	<div class="row">
+		{% for year in years %}
+			<div class="col-sm-6 col-md-4">
+				<a href="{{ loop.parent.picturesBaseUrl }}/{{ year.year }}" class="thumbnail">
+					<img src="pictures/{{ year.year }}/{{ year.coverAlbum.name }}/small_{{ year.coverAlbum.cover.file }}.jpg"/>
+					<div class="caption">
+						<h3>{{ year.year }}</h3>
+					</div>
+				</a>
+			</div>
+		{% else %}
+			<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Keine Alben verf&uuml;gbar!</div>
+		{% endfor %}
+	</div>
+{% endblock %}

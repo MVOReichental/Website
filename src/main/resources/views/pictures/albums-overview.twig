@@ -1,11 +1,17 @@
-<ol class="breadcrumb">
-	<li><a href="{{ picturesBaseUrl }}">Fotogalerie</a></li>
-	<li class="active">{{ year }}</li>
-</ol>
+{% extends "base/intern-public-switch.twig" %}
 
-<h1 class="page-header">
-	Fotogalerie<br/>
-	<span class="small">{{ year }}</span>
-</h1>
+{% block title %}{{ year }} - Fotogalerie{{ parent() }}{% endblock %}
 
-{% include("pictures/albums-list.twig") %}
+{% block content %}
+	<ol class="breadcrumb">
+		<li><a href="{{ picturesBaseUrl }}">Fotogalerie</a></li>
+		<li class="active">{{ year }}</li>
+	</ol>
+
+	<h1 class="page-header">
+		Fotogalerie<br/>
+		<span class="small">{{ year }}</span>
+	</h1>
+
+	{% include("pictures/albums-list.twig") %}
+{% endblock %}

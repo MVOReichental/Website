@@ -1,10 +1,12 @@
 <?php
 namespace de\mvo\service;
 
+use de\mvo\TwigRenderer;
+
 class StaticView extends AbstractService
 {
-	public function get($filename)
+	public function get($name)
 	{
-		return file_get_contents(VIEWS_ROOT . "/" . $filename . ".html");
+		return TwigRenderer::render($name);
 	}
 }

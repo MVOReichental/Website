@@ -1,19 +1,37 @@
-<h1 class="page-header">{{ title }}</h1>
+{% extends "base/intern-public-switch.twig" %}
 
-<div class="btn-toolbar btn-group hidden-print" id="members-groups">
-	{% for group in groups %}
-		{% if group.active %}
-			<a href="{{ group.url }}" class="btn btn-default active">{{ group.title }}</a>
-		{% else %}
-			<a href="{{ group.url }}" class="btn btn-default">{{ group.title }}</a>
-		{% endif %}
-	{% endfor %}
-</div>
+{% block title %}{{ title }}{{ parent() }}{% endblock %}
 
-{% include("members/list/" ~ view ~ ".twig") %}
+{% block stylesheets %}
+	{{ parent() }}
 
-<div class="btn-group hidden-print">
-	<button type="button" class="btn btn-success" id="members-send-message-button"><i class="fa fa-send"></i> Nachricht senden</button>
-</div>
+	<link rel="stylesheet" href="css/members.css"/>
+{% endblock %}
 
-{% include("messages/send-modal.twig") %}
+{% block scripts %}
+	{{ parent() }}
+
+	<script src="js/members.js"></script>
+{% endblock %}
+
+{% block content %}
+	<h1 class="page-header">{{ title }}</h1>
+
+	<div class="btn-toolbar btn-group hidden-print" id="members-groups">
+		{% for group in groups %}
+			{% if group.active %}
+				<a href="{{ group.url }}" class="btn btn-default active">{{ group.title }}</a>
+			{% else %}
+				<a href="{{ group.url }}" class="btn btn-default">{{ group.title }}</a>
+			{% endif %}
+		{% endfor %}
+	</div>
+
+	{% include("members/list/" ~ view ~ ".twig") %}
+
+	<div class="btn-group hidden-print">
+		<button type="button" class="btn btn-success" id="members-send-message-button"><i class="fa fa-send"></i> Nachricht senden</button>
+	</div>
+
+	{% include("messages/send-modal.twig") %}
+{% endblock %}

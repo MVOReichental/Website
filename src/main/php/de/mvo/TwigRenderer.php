@@ -1,6 +1,7 @@
 <?php
 namespace de\mvo;
 
+use de\mvo\model\users\User;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
 
@@ -18,9 +19,22 @@ class TwigRenderer
 			return;
 		}
 
+		if (isset($_SERVER["PATH_INFO"]))
+		{
+			$path = $_SERVER["PATH_INFO"];
+		}
+		else
+		{
+			$path = "";
+		}
+
 		$loader = new Twig_Loader_Filesystem(VIEWS_ROOT);
 
 		self::$twig = new Twig_Environment($loader);
+
+		self::$twig->addGlobal("currentYear", date("Y"));
+		self::$twig->addGlobal("currentUser", User::getCurrent());
+		self::$twig->addGlobal("intern", (substr(ltrim($path, "/"), 0, 6) == "intern" and User::getCurrent()));
 
 		$cache = Config::getInstance()->getValue("twig", "cache");
 		if ($cache !== null)

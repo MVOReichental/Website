@@ -1,28 +1,34 @@
-<h1 class="page-header">Ausbildungsgruppen</h1>
+{% extends "base/intern-public-switch.twig" %}
 
-<strong>Stand: {{ date }}</strong><br/>
+{% block title %}Ausbildungsgruppen{{ parent() }}{% endblock %}
 
-<div class="row">
-	{% for column in columns %}
-		<div class="col-md-6">
-			<h2>{{ column.title }}</h2>
+{% block content %}
+	<h1 class="page-header">Ausbildungsgruppen</h1>
 
-			{% for type in column.types %}
-				{% if type.name %}
-					<h3>{{ type.name }}</h3>
-				{% endif %}
+	<strong>Stand: {{ date }}</strong><br/>
 
-				<dl class="dl-horizontal">
-					{% for group in type.groups %}
-						<dt>{{ group.trainer }}</dt>
-						<dd>
-							{% for student in group.students %}
-								<div>{{ student }}</div>
-							{% endfor %}
-						</dd>
-					{% endfor %}
-				</dl>
-			{% endfor %}
-		</div>
-	{% endfor %}
-</div>
+	<div class="row">
+		{% for column in columns %}
+			<div class="col-md-6">
+				<h2>{{ column.title }}</h2>
+
+				{% for type in column.types %}
+					{% if type.name %}
+						<h3>{{ type.name }}</h3>
+					{% endif %}
+
+					<dl class="dl-horizontal">
+						{% for group in type.groups %}
+							<dt>{{ group.trainer }}</dt>
+							<dd>
+								{% for student in group.students %}
+									<div>{{ student }}</div>
+								{% endfor %}
+							</dd>
+						{% endfor %}
+					</dl>
+				{% endfor %}
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}
