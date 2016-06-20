@@ -111,6 +111,19 @@ $(function()
 		profilePictureFileInput.data("data").jqXHR.abort();
 	});
 
+	$("#settings-password-form").submit(function(event)
+	{
+		if ($("#settings-password-new").val() != $("#settings-password-new-confirm").val())
+		{
+			var box = $("#settings-password-new-box");
+
+			box.addClass("has-error");
+			box.find(".help-block").text("Die Passw\u00f6rter stimmen nicht \u00fcberein!");
+
+			event.preventDefault();
+		}
+	});
+
 	$("#settings-2fa-disable").on("click", function()
 	{
 		var passwordFormGroup = $("#settings-2fa-password-group");
