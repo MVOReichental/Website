@@ -1,4 +1,10 @@
-<div class="col-md-9">
+{% extends "account/settings/page.twig" %}
+
+{% block settingsHeader %}
+	{# TODO: Add success/error alert on save #}
+{% endblock %}
+
+{% block settingsContent %}
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h3 class="panel-title">Email-Adresse &auml;ndern</h3>
@@ -34,4 +40,4 @@
 			</form>
 		</div>
 	</div>
-</div>
+{% endblock %}

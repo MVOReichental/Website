@@ -17,9 +17,7 @@
 {% block content %}
 	<h1 class="page-header">Einstellungen</h1>
 
-	{% if message %}
-		<div class="alert alert-{{ message.type }}"><i class="fa fa-{{ message.icon }}"></i> {{ message.text|raw }}</div>
-	{% endif %}
+	{% block settingsHeader %}{% endblock %}
 
 	<div class="row">
 		<div class="col-md-3">
@@ -35,7 +33,7 @@
 		</div>
 
 		<div class="col-md-9">
-			{% include("account/settings/" ~ activePage.name ~ ".twig") %}
+			{% block settingsContent %}{% endblock %}
 		</div>
 	</div>
 {% endblock %}

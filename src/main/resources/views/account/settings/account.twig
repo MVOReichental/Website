@@ -1,4 +1,28 @@
-<div class="col-md-9">
+{% extends "account/settings/page.twig" %}
+
+{% block settingsHeader %}
+	{% if update.password %}
+		{% if update.password is constant("UPDATE_PASSWORD_OK", this) %}
+			<div class="alert alert-success"><i class="fa fa-check"></i> Das Passwort wurde erfolgreich ge&auml;ndert!</div>
+		{% elseif update.password is constant("UPDATE_PASSWORD_INVALID", this) %}
+			<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Das angegebene Passwort ist nicht g&uuml;tig!</div>
+		{% elseif update.password is constant("UPDATE_PASSWORD_POLICY_ERROR", this) %}
+			<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Das Passwort muss aus mindestens 6 Zeichen und sowohl aus Buchstaben als auch aus Zahlen bestehen!</div>
+		{% else %}
+			<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Ein unbekannter Fehler ist aufgetreten ({{ update.password }})</div>
+		{% endif %}
+	{% elseif update.username %}
+		{% if update.username is constant("UPDATE_USERNAME_OK", this) %}
+			<div class="alert alert-success"><i class="fa fa-check"></i> Der Benutzername wurde erfolgreich ge&auml;ndert!</div>
+		{% elseif update.username is constant("UPDATE_USERNAME_MIN_LENGTH", this) %}
+			<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Der Benutzername muss aus mindestens 3 Zeichen bestehen!</div>
+		{% elseif update.username is constant("UPDATE_USERNAME_ALREADY_IN_USE", this) %}
+			<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Der Benutzername wird bereits verwendet!</div>
+		{% endif%}
+	{% endif %}
+{% endblock %}
+
+{% block settingsContent %}
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h3 class="panel-title">Passwort &auml;ndern</h3>
@@ -27,9 +51,7 @@
 			</form>
 		</div>
 	</div>
-</div>
 
-<div class="col-md-9">
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h3 class="panel-title">Benutzername &auml;ndern</h3>
@@ -48,9 +70,7 @@
 			</form>
 		</div>
 	</div>
-</div>
 
-<div class="col-md-9">
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h3 class="panel-title">Zwei-Faktor-Authentifizierung
@@ -85,29 +105,29 @@
 			</div>
 		</div>
 	</div>
-</div>
 
-<div class="modal fade" id="settings-2fa-enable-modal" data-backdrop="static">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title">Zwei-Faktor-Authentifizierung aktivieren</h4>
-			</div>
-			<div class="modal-body">
-				<h4>Scanne den folgenden QRCode mit der Google Authenticator App.</h4>
-				<div id="settings-2fa-qrcode" class="text-center"></div>
-
-				<h4>Gebe anschlie&szlig;end den 6 stelligen Code aus der App in das nachfolgende Feld ein.</h4>
-				<div class="form-group" id="settings-2fa-token-group">
-					<label for="settings-2fa-token">Code</label>
-					<input type="text" class="form-control" id="settings-2fa-token" required/>
-					<span class="help-block"></span>
+	<div class="modal fade" id="settings-2fa-enable-modal" data-backdrop="static">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Zwei-Faktor-Authentifizierung aktivieren</h4>
 				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
-				<button type="button" class="btn btn-success" id="settings-2fa-enable-submit">Aktivieren</button>
+				<div class="modal-body">
+					<h4>Scanne den folgenden QRCode mit der Google Authenticator App.</h4>
+					<div id="settings-2fa-qrcode" class="text-center"></div>
+
+					<h4>Gebe anschlie&szlig;end den 6 stelligen Code aus der App in das nachfolgende Feld ein.</h4>
+					<div class="form-group" id="settings-2fa-token-group">
+						<label for="settings-2fa-token">Code</label>
+						<input type="text" class="form-control" id="settings-2fa-token" required/>
+						<span class="help-block"></span>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+					<button type="button" class="btn btn-success" id="settings-2fa-enable-submit">Aktivieren</button>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+{% endblock %}

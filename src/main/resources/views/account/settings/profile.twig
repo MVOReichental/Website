@@ -1,4 +1,12 @@
-<div class="col-md-9">
+{% extends "account/settings/page.twig" %}
+
+{% block settingsHeader %}
+	{% if update.profile is constant ("UPDATE_PROFILE_OK", this)%}
+		<div class="alert alert-success"><i class="fa fa-check"></i> Dein Benutzerprofil wurde erfolgreich aktualisiert.</div>
+	{% endif %}
+{% endblock %}
+
+{% block settingsContent %}
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h3 class="panel-title">Dein Profil</h3>
@@ -41,28 +49,28 @@
 			</form>
 		</div>
 	</div>
-</div>
 
-<div class="modal fade" id="settings-profile-profilepicture-crop-modal" data-backdrop="static">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title">Profilbild bearbeiten</h4>
-			</div>
-			<div class="modal-body">
-				<div class="alert alert-danger" id="settings-profile-profilepicture-upload-error">
-					<i class="fa fa-exclamation-triangle"></i> <span></span>
+	<div class="modal fade" id="settings-profile-profilepicture-crop-modal" data-backdrop="static">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Profilbild bearbeiten</h4>
 				</div>
+				<div class="modal-body">
+					<div class="alert alert-danger" id="settings-profile-profilepicture-upload-error">
+						<i class="fa fa-exclamation-triangle"></i> <span></span>
+					</div>
 
-				<img id="settings-profile-profilepicture-crop-img"/>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" id="settings-profile-profilepicture-cancel" data-dismiss="modal">Abbrechen</button>
-				<button type="button" class="btn btn-success" id="settings-profile-profilepicture-upload">
-					<span class="state-loading"><i class="fa fa-spinner fa-spin"></i></span>
-					<span class="state-idle"><i class="fa fa-upload"></i> Hochladen</span>
-				</button>
+					<img id="settings-profile-profilepicture-crop-img"/>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" id="settings-profile-profilepicture-cancel" data-dismiss="modal">Abbrechen</button>
+					<button type="button" class="btn btn-success" id="settings-profile-profilepicture-upload">
+						<span class="state-loading"><i class="fa fa-spinner fa-spin"></i></span>
+						<span class="state-idle"><i class="fa fa-upload"></i> Hochladen</span>
+					</button>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+{% endblock %}

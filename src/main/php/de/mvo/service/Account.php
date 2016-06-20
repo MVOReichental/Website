@@ -10,6 +10,16 @@ use PDOException;
 
 class Account extends AbstractService
 {
+	const UPDATE_PASSWORD_OK = "ok";
+	const UPDATE_PASSWORD_INVALID = "invalid";
+	const UPDATE_PASSWORD_POLICY_ERROR = "policy_error";
+
+	const UPDATE_USERNAME_MIN_LENGTH = "min_length";
+	const UPDATE_USERNAME_ALREADY_IN_USE = "username_already_in_use";
+	const UPDATE_USERNAME_OK = "ok";
+
+	const UPDATE_PROFILE_OK = "ok";
+
 	public static function getSettingsPages()
 	{
 		return array
@@ -93,7 +103,7 @@ class Account extends AbstractService
 		return TwigRenderer::render("account/logout");
 	}
 
-	public function showSettings($message = null)
+	public function showSettings($updateStatus = null)
 	{
 		$user = User::getCurrent();
 
@@ -117,9 +127,10 @@ class Account extends AbstractService
 			}
 		}
 
-		return TwigRenderer::render("account/settings/page", array
+		return TwigRenderer::render("account/settings/" . $activePage["name"], array
 		(
-			"message" => $message,
+			"this" => $this,
+			"update" => $updateStatus,
 			"pages" => array_values($pages),
 			"title" => $activePage["title"],
 			"activePage" => $activePage,
@@ -127,9 +138,57 @@ class Account extends AbstractService
 		));
 	}
 
-	public function updateSettings()
+	private function updateUsername()
 	{
-		if (!isset($_POST["form"]))
+		if (!isset($_POST["username"]))
+		{
+			http_response_code(400);
+			return null;
+		}
+
+		$username = trim($_POST["username"]);
+
+		if (strlen($username) < 3)
+		{
+			return self::UPDATE_USERNAME_MIN_LENGTH;
+		}
+
+		try
+		{
+			User::getCurrent()->setUsername($username);
+		}
+		catch (PDOException $exception)
+		{
+			// Duplicate username
+			if ($exception->errorInfo[1] == 1062)
+			{
+				return self::UPDATE_USERNAME_ALREADY_IN_USE;
+			}
+			else
+			{
+				throw $exception;
+			}
+		}
+
+		return self::UPDATE_USERNAME_OK;
+	}
+
+	private function updateProfile()
+	{
+		if (!isset($_POST["firstName"]) or !isset($_POST["lastName"]))
+		{
+			http_response_code(400);
+			return null;
+		}
+
+		User::getCurrent()->setName($_POST["firstName"], $_POST["lastName"]);
+
+		return self::UPDATE_PROFILE_OK;
+	}
+
+	private function updatePassword()
+	{
+		if (!isset($_POST["currentPassword"]) or !isset($_POST["newPassword"]))
 		{
 			http_response_code(400);
 			return null;
@@ -137,99 +196,60 @@ class Account extends AbstractService
 
 		$user = User::getCurrent();
 
-		switch ($_POST["form"])
+		if (!$user->validatePassword($_POST["currentPassword"]))
 		{
-			case "username":
-				if (!isset($_POST["username"]))
-				{
-					http_response_code(400);
-					return null;
-				}
-
-				$username = trim($_POST["username"]);
-
-				if (strlen($username) < 3)
-				{
-					$message = array("type" => "danger", "text" => "Der Benutzername muss aus mindestens 3 Zeichen bestehen!");
-					break;
-				}
-
-				try
-				{
-					$user->setUsername($username);
-				}
-				catch (PDOException $exception)
-				{
-					// Duplicate username
-					if ($exception->errorInfo[1] == 1062)
-					{
-						$message = array("type" => "danger", "text" => "Der Benutzername '" . $username . "' wird bereits verwendet!");
-						break;
-					}
-					else
-					{
-						throw $exception;
-					}
-				}
-
-				$message = array("type" => "success", "text" => "Der Benutzername wurde erfolgreich ge&auml;ndert!");
-				break;
-			case "profile":
-				if (!isset($_POST["firstName"]) or !isset($_POST["lastName"]))
-				{
-					http_response_code(400);
-					return null;
-				}
-
-				$user->setName($_POST["firstName"], $_POST["lastName"]);
-
-				$message = array("type" => "success", "text" => "Dein Benutzerprofil wurde erfolgreich aktualisiert.");
-				break;
-			case "password":
-				if (!isset($_POST["currentPassword"]) or !isset($_POST["newPassword"]))
-				{
-					http_response_code(400);
-					return null;
-				}
-
-				if (!$user->validatePassword($_POST["currentPassword"]))
-				{
-					$message = array("type" => "danger", "text" => "Das angegebene Passwort ist nicht g&uuml;tig!");
-					break;
-				}
-
-				$newPassword = $_POST["newPassword"];
-				if (!User::checkPasswordPolicy($newPassword))
-				{
-					$message = array("type" => "danger", "text" => "Das Passwort muss aus mindestens 6 Zeichen und sowohl aus Buchstaben als auch aus Zahlen bestehen!");
-					break;
-				}
-
-				$user->setPassword($newPassword);
-
-				$message = array("type" => "success", "text" => "Das Passwort wurde erfolgreich ge&auml;ndert!");
-				break;
-			case "email":
-				$message = null;// TODO
-				break;
-			case "contact":
-				$message = null;// TODO
-				break;
-			default:
-				http_response_code(400);
-				return null;
+			return self::UPDATE_PASSWORD_INVALID;
 		}
 
-		switch ($message["type"])
+		$newPassword = $_POST["newPassword"];
+		if (!User::checkPasswordPolicy($newPassword))
 		{
-			case "danger":
-				$message["icon"] = "exclamation-triangle";
-				break;
-			case "success":
-				$message["icon"] = "info-circle";
+			return self::UPDATE_PASSWORD_POLICY_ERROR;
 		}
 
-		return $this->showSettings($message);
+		$user->setPassword($newPassword);
+
+		return self::UPDATE_PASSWORD_OK;
+	}
+
+	public function updateSettings()
+	{
+		$response = null;
+
+		if (isset($_POST["form"]))
+		{
+			switch ($_POST["form"])
+			{
+				case "username":
+					$response = $this->updateUsername();
+					break;
+				case "profile":
+					$response = $this->updateProfile();
+					break;
+				case "password":
+					$response = $this->updatePassword();
+					break;
+				case "email":
+					$response = null;// TODO
+					break;
+				case "contact":
+					$response = null;// TODO
+					break;
+				default:
+					http_response_code(400);
+					$response = null;
+					break;
+			}
+		}
+		else
+		{
+			http_response_code(400);
+		}
+
+		return $this->showSettings(array
+		(
+			$_POST["form"] => $response
+		));
 	}
 
 	public function request2faKey()
