@@ -13,6 +13,8 @@ use RuntimeException;
 
 class User implements JsonSerializable
 {
+	const MIN_PASSWORD_LENGTH = 6;
+
 	/**
 	 * @var int
 	 */
@@ -132,6 +134,29 @@ class User implements JsonSerializable
 		}
 
 		return $query->fetchObject(self::class);
+	}
+
+	public static function checkPasswordPolicy($password)
+	{
+		// Does not contain at least X characters
+		if (strlen($password) < self::MIN_PASSWORD_LENGTH)
+		{
+			return false;
+		}
+
+		// Does not contain any alphanumeric characters (A-Z or a-z)
+		if (!preg_match("/[a-zA-Z]+/", $password))
+		{
+			return false;
+		}
+
+		// Does not contain any numbers (0-9)
+		if (!preg_match("/[0-9]+/", $password))
+		{
+			return false;
+		}
+
+		return true;
 	}
 
 	/**

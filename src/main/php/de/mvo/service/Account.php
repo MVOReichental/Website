@@ -199,9 +199,9 @@ class Account extends AbstractService
 				}
 
 				$newPassword = $_POST["newPassword"];
-				if (strlen($newPassword) < 6)
+				if (!User::checkPasswordPolicy($newPassword))
 				{
-					$message = array("type" => "danger", "text" => "Das Passwort muss aus mindestens 6 Zeichen bestehen!");
+					$message = array("type" => "danger", "text" => "Das Passwort muss aus mindestens 6 Zeichen und sowohl aus Buchstaben als auch aus Zahlen bestehen!");
 					break;
 				}
 
