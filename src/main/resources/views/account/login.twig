@@ -9,11 +9,8 @@
 {% endblock %}
 
 {% block content %}
-	<form id="login-form" method="post" action="intern/login?redirect={{ url }}">
-		<h2>
-			Login im internen Bereich<br/>
-			<small>Musikverein "Orgelfels" Reichental e.V.</small>
-		</h2>
+	<form class="login-form input-list" id="login-form" method="post" action="intern/login?redirect={{ url }}">
+		<h2>Login im internen Bereich</h2>
 
 		{% if errorMessage %}
 			<div class="alert alert-danger">{{ errorMessage|raw }}</div>
@@ -26,11 +23,15 @@
 			</div>
 
 			<input type="text" id="login-2fa-token" name="2fa-token" class="form-control" placeholder="Code" required/>
+
+			<button class="btn btn-lg btn-primary">Login</button>
 		{% else %}
 			<input type="text" id="login-username" name="username" class="form-control" placeholder="Benutzername" required autofocus/>
 			<input type="password" id="login-password" name="password" class="form-control" placeholder="Passwort" required/>
-		{% endif %}
 
-		<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+			<button class="btn btn-lg btn-primary btn-block">Login</button>
+
+			<a href="intern/reset-password" class="help-block text-center">Passwort vergessen?</a>
+		{% endif %}
 	</form>
 {% endblock %}

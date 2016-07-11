@@ -1,4 +1,4 @@
-#login-form
+.login-form
 {
 	max-width: 500px;
 	padding: 15px;
@@ -30,20 +30,6 @@
 #login-form .form-control:focus
 {
 	z-index: 2;
-}
-
-#login-username
-{
-	margin-bottom: -1px;
-	border-bottom-right-radius: 0;
-	border-bottom-left-radius: 0;
-}
-
-#login-password
-{
-	margin-bottom: 10px;
-	border-top-left-radius: 0;
-	border-top-right-radius: 0;
 }
 
 #login-2fa-token

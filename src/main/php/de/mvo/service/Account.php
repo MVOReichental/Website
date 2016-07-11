@@ -103,6 +103,69 @@ class Account extends AbstractService
 		return TwigRenderer::render("account/logout");
 	}
 
+	public function resetPassword()
+	{
+		if ($_SERVER["REQUEST_METHOD"] == "POST")
+		{
+			$user = User::getByUsername($_POST["username"]);
+			if ($user === null)
+			{
+				return TwigRenderer::render("account/reset-password/request", array
+				(
+					"errorMessage" => "Der Benutzer existiert nicht!"
+				));
+			}
+
+			$user->sendPasswordResetMail();
+
+			return TwigRenderer::render("account/reset-password/send-ok");
+		}
+		else
+		{
+			return TwigRenderer::render("account/reset-password/request");
+		}
+	}
+
+	public function confirmResetPassword()
+	{
+		if ($_SERVER["REQUEST_METHOD"] == "POST")
+		{
+			$user = User::getById($_GET["id"]);
+
+			if ($user->checkPasswordResetKey($_GET["key"]))
+			{
+				$newPassword = $_POST["password"];
+				if (User::checkPasswordPolicy($newPassword))
+				{
+					$user->setPassword($newPassword);
+
+					return TwigRenderer::render("account/reset-password/changed");
+				}
+				else
+				{
+					return TwigRenderer::render("account/reset-password/confirm", array
+					(
+						"passwordPolicyError" => true
+					));
+				}
+			}
+		}
+		else
+		{
+			if (isset($_GET["id"]) and isset($_GET["key"]))
+			{
+				$user = User::getById($_GET["id"]);
+
+				if ($user->checkPasswordResetKey($_GET["key"]))
+				{
+					return TwigRenderer::render("account/reset-password/confirm");
+				}
+			}
+		}
+
+		return TwigRenderer::render("account/reset-password/confirm-error");
+	}
+
 	public function showSettings($updateStatus = null)
 	{
 		$user = User::getCurrent();

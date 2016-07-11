@@ -3,13 +3,18 @@ namespace de\mvo\model\users;
 
 use de\mvo\Database;
 use de\mvo\Date;
+use de\mvo\mail\Message;
+use de\mvo\mail\Sender;
 use de\mvo\model\contacts\Contacts;
 use de\mvo\model\permissions\GroupList;
 use de\mvo\model\permissions\Permissions;
+use de\mvo\TwigRenderer;
+use de\mvo\utils\Url;
 use JsonSerializable;
 use Kelunik\TwoFactor\Oath;
 use PDOException;
 use RuntimeException;
+use Swift_Message;
 
 class User implements JsonSerializable
 {
@@ -27,6 +32,14 @@ class User implements JsonSerializable
 	 * @var string
 	 */
 	private $password;
+	/**
+	 * @var string
+	 */
+	private $resetPasswordKey;
+	/**
+	 * @var Date
+	 */
+	private $resetPasswordDate;
 	/**
 	 * @var string
 	 */
@@ -63,6 +76,11 @@ class User implements JsonSerializable
 		if ($this->birthDate !== null)
 		{
 			$this->birthDate = new Date($this->birthDate);
+		}
+
+		if ($this->resetPasswordDate !== null)
+		{
+			$this->resetPasswordDate = new Date($this->resetPasswordDate);
 		}
 	}
 
@@ -196,6 +214,56 @@ class User implements JsonSerializable
 		));
 
 		$this->password = $password;
+	}
+
+	public function sendPasswordResetMail()
+	{
+		$key = bin2hex(random_bytes(16));
+
+		$query = Database::prepare("
+			UPDATE `users`
+			SET
+				`resetPasswordKey` = :resetPasswordKey,
+				`resetPasswordDate` = NOW()
+			WHERE `id` = :id
+		");
+
+		$query->execute(array
+		(
+			":resetPasswordKey" => $key,
+			":id" => $this->id
+		));
+
+		$sender = new Sender;
+
+		$message = new Message;
+
+		$message->setTo($this->email, $this->getFullName());
+		$message->setBody(TwigRenderer::render("account/reset-password/mail", array
+		(
+			"user" => $this,
+			"url" => Url::getBaseUrl() . "/intern/reset-password/confirm?id=" . $this->id . "&key=" . $key
+		)), "text/html");
+		$message->setSubjectFromHtml($message->getBody());
+
+		$sender->send($message);
+	}
+
+	public function checkPasswordResetKey($key)
+	{
+		if ($this->resetPasswordKey != $key)
+		{
+			return false;
+		}
+
+		// Key should only be valid for 24 hours (1 day)
+		$now = new Date;
+		if ($now->diff($this->resetPasswordDate)->days > 0)
+		{
+			return false;
+		}
+
+		return true;
 	}
 
 	public function setUsername($username)
@@ -372,6 +440,11 @@ class User implements JsonSerializable
 	public function contacts()
 	{
 		return Contacts::forUser($this);
+	}
+
+	public function getFullName()
+	{
+		return $this->firstName . " " . $this->lastName;
 	}
 
 	public function __toString()

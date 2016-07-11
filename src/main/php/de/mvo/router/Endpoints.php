@@ -70,6 +70,10 @@ class Endpoints extends ArrayObject
 		$this->append(new Endpoint(HttpMethod::GET, "/intern", Target::create()->className(InternHome::class)->method("get")->requireLogin()));
 		$this->append(new Endpoint(HttpMethod::POST, "/intern/login", Target::create()->className(Account::class)->method("login")));
 		$this->append(new Endpoint(HttpMethod::GET, "/intern/logout", Target::create()->className(Account::class)->method("logout")->requireLogin()));
+		$this->append(new Endpoint(HttpMethod::GET, "/intern/reset-password", Target::create()->className(Account::class)->method("resetPassword")));
+		$this->append(new Endpoint(HttpMethod::POST, "/intern/reset-password", Target::create()->className(Account::class)->method("resetPassword")));
+		$this->append(new Endpoint(HttpMethod::GET, "/intern/reset-password/confirm", Target::create()->className(Account::class)->method("confirmResetPassword")));
+		$this->append(new Endpoint(HttpMethod::POST, "/intern/reset-password/confirm", Target::create()->className(Account::class)->method("confirmResetPassword")));
 
 		$settingsPages = array_keys(Account::getSettingsPages());
 		$this->append(new Endpoint(HttpMethod::GET, "/intern/settings", Target::create()->className(Redirect::class)->method("redirect")->arguments("/intern/settings/" . $settingsPages[0])->requireLogin()));
