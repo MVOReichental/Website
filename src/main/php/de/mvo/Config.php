@@ -2,6 +2,7 @@
 namespace de\mvo;
 
 use com\selfcoders\pini\Pini;
+use UnexpectedValueException;
 
 class Config extends Pini
 {
@@ -21,13 +22,23 @@ class Config extends Pini
         return self::$pini;
     }
 
-    public function getValue($section, $property)
+    public static function getValue($section, $property, $defaultValue = null)
     {
-        $section = $this->getSection($section);
+        $section = self::getInstance()->getSection($section);
         if ($section === null) {
-            return null;// TODO: Throw exception?
+            return $defaultValue;
         }
 
-        return $section->getPropertyValue($property);// TODO: Throw exception if null?
+        return $section->getPropertyValue($property, $defaultValue);
+    }
+
+    public static function getRequiredValue($section, $property)
+    {
+        $value = self::getValue($section, $property);
+        if ($value === null) {
+            throw new UnexpectedValueException("Configuration property '" . $property . "' in section '" . $section . "' is required but undefined");
+        }
+
+        return $value;
     }
 }

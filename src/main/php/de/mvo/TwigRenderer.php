@@ -32,10 +32,7 @@ class TwigRenderer
         self::$twig->addGlobal("currentUser", User::getCurrent());
         self::$twig->addGlobal("internal", (substr(ltrim($path, "/"), 0, 8) == "internal" and User::getCurrent()));
 
-        $cache = Config::getInstance()->getValue("twig", "cache");
-        if ($cache !== null) {
-            self::$twig->setCache($cache);
-        }
+        self::$twig->setCache(Config::getValue("twig", "cache", false));
     }
 
     public static function render($name, $context = array())

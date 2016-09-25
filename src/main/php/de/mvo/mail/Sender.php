@@ -14,12 +14,10 @@ class Sender
 
     public function __construct()
     {
-        $config = Config::getInstance()->getSection("mail");
+        $smtpTransport = Swift_SmtpTransport::newInstance(Config::getValue("mail", "host", "localhost"), Config::getValue("mail", "port", 25), Config::getValue("mail", "encryption"));
 
-        $smtpTransport = Swift_SmtpTransport::newInstance($config->getPropertyValue("host", "localhost"), $config->getPropertyValue("port", 25), $config->getPropertyValue("encryption"));
-
-        $smtpTransport->setUsername($config->getPropertyValue("username"));
-        $smtpTransport->setPassword($config->getPropertyValue("password"));
+        $smtpTransport->setUsername(Config::getValue("mail", "username"));
+        $smtpTransport->setPassword(Config::getValue("mail", "password"));
 
         $this->mailer = Swift_Mailer::newInstance($smtpTransport);
     }

@@ -12,9 +12,7 @@ class Database
 
     public static function init()
     {
-        $config = Config::getInstance();
-
-        self::$pdo = new PDO($config->getValue("database", "dsn"), $config->getValue("database", "username"), $config->getValue("database", "password"));
+        self::$pdo = new PDO(Config::getRequiredValue("database", "dsn"), Config::getValue("database", "username"), Config::getValue("database", "password"));
 
         self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         self::$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_CLASS);

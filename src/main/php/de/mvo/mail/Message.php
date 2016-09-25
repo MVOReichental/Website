@@ -12,9 +12,7 @@ class Message extends Swift_Message
     {
         parent::__construct($subject, $body, $contentType, $charset);
 
-        $config = Config::getInstance()->getSection("mail");
-
-        $this->setFrom($config->getPropertyValue("from"), $config->getPropertyValue("fromName"));
+        $this->setFrom(Config::getValue("mail", "from"), Config::getValue("mail", "fromName"));
     }
 
     public function setSubjectFromHtml($html)
