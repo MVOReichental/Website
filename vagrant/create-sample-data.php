@@ -31,11 +31,11 @@ Database::query("DELETE FROM `dates`");
 Database::query("DELETE FROM `locations`");
 
 $query = Database::prepare("
-	INSERT INTO `locations`
-	SET
-		`latitude` = :latitude,
-		`longitude` = :longitude,
-		`name` = :name
+    INSERT INTO `locations`
+    SET
+        `latitude` = :latitude,
+        `longitude` = :longitude,
+        `name` = :name
 ");
 
 $locationIds = array();
@@ -52,12 +52,12 @@ foreach ($locations as $location) {
 }
 
 $query = Database::prepare("
-	INSERT INTO `dates`
-	SET
-		`startDate` = :startDate,
-		`endDate` = :endDate,
-		`title` = :title,
-		`locationId` = :locationId
+    INSERT INTO `dates`
+    SET
+        `startDate` = :startDate,
+        `endDate` = :endDate,
+        `title` = :title,
+        `locationId` = :locationId
 ");
 
 foreach ($dates as $date) {
@@ -66,7 +66,7 @@ foreach ($dates as $date) {
     $query->execute(array
     (
         ":startDate" => date("Y-m-d H:i:s", strtotime($date[0])),
-        "endDate" => ($date[1] === null ? null : date("Y-m-d H:i:s", strtotime($date[1]))),
+        ":endDate" => ($date[1] === null ? null : date("Y-m-d H:i:s", strtotime($date[1]))),
         ":title" => $date[2],
         ":locationId" => $locationId
     ));
@@ -92,11 +92,11 @@ $users = array($user1, $user2, $user3);
 Database::query("DELETE FROM `users`");
 
 $query = Database::prepare("
-	INSERT INTO `users`
-	SET
-		`username` = :username,
-		`firstName` = :firstName,
-		`lastName` = :lastName
+    INSERT INTO `users`
+    SET
+        `username` = :username,
+        `firstName` = :firstName,
+        `lastName` = :lastName
 ");
 
 /**
