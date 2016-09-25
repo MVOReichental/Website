@@ -64,6 +64,9 @@ $(function () {
                 case "FILE_SIZE_EXCEEDED":
                     message = "Die maximale Dateigr\u00f6\u00dfe wurde erreicht!";
                     break;
+                case "INVALID_FORMAT":
+                    message = "Der Dateityp wird nicht unterst\u00fctzt!";
+                    break;
             }
 
             $("#settings-profile-profilepicture-upload-error").show().find("span").text(message);

@@ -1,9 +1,9 @@
 <?php
 namespace de\mvo\service;
 
+use de\mvo\image\CropData;
+use de\mvo\image\Image;
 use de\mvo\model\users\User;
-use de\mvo\utils\Image;
-use stdClass;
 
 class ProfilePicture extends AbstractService
 {
@@ -62,38 +62,38 @@ class ProfilePicture extends AbstractService
                 return null;
         }
 
-        $sourceImage = imagecreatefromjpeg($_FILES["file"]["tmp_name"]);
+        $sourceImage = imagecreatefromstring(file_get_contents($_FILES["file"]["tmp_name"]));
+
+        if ($sourceImage === false) {
+            http_response_code(400);
+            echo "INVALID_FORMAT";
+            return null;
+        }
 
         if (isset($_POST["crop"])) {
             $cropData = json_decode($_POST["crop"]);
-            if ($cropData === null or !isset($cropData->width) or !isset($cropData->height) or $cropData->width <= 0 or $cropData->height <= 0) {
-                http_response_code(400);
-                echo "INVALID_CROP_DATA";
-                return null;
-            }
-
-            if (!isset($cropData->x)) {
-                $cropData->x = 0;
-            }
-
-            if (!isset($cropData->y)) {
-                $cropData->y = 0;
+            if ($cropData === null) {
+                $cropData = new CropData;
+                $cropData->setFromImage($sourceImage);
+            } else {
+                $cropData = CropData::readFromObject($cropData);
             }
         } else {
-            $cropData = new stdClass;
-
-            $cropData->x = 0;
-            $cropData->y = 0;
-            $cropData->w = imagesx($sourceImage);
-            $cropData->w = imagesy($sourceImage);
+            $cropData = new CropData;
+            $cropData->setFromImage($sourceImage);
         }
 
-        Image::calculateResize($cropData->width, $cropData->height, 600, 600, $width, $height);
+        if (!$cropData->validate()) {
+            http_response_code(400);
+            echo "INVALID_CROP_DATA";
+            return null;
+        }
 
-        $croppedImage = imagecreatetruecolor($width, $height);
-        if ($croppedImage and imagecopyresampled($croppedImage, $sourceImage, 0, 0, $cropData->x, $cropData->y, $width, $height, $cropData->width, $cropData->height)) {
+        $image = new Image($sourceImage);
+
+        if ($image->crop(600, 600, $cropData)) {
             $filename = PROFILE_PICTURES_ROOT . "/" . User::getCurrent()->id . ".jpg";
-            if (imagejpeg($croppedImage, $filename)) {
+            if ($image->saveAsJpeg($filename, 75)) {
                 echo "OK";
                 return null;
             } else {

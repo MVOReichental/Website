@@ -22,10 +22,12 @@
                     </div>
 
                     <div id="settings-profile-profilepicture-box-right">
-						<span class="btn btn-default fileinput-button">
-							<strong>Neues Profilbild hochladen</strong>
-							<input id="settings-profile-profilepicture" type="file" name="file" data-url="users/{{ user.id }}/profile-picture.jpg" accept="image/jpeg"/>
-						</span>
+                        <span class="btn btn-default fileinput-button">
+                            <strong>Neues Profilbild hochladen</strong>
+                            <input id="settings-profile-profilepicture" type="file" name="file" data-url="users/{{ user.id }}/profile-picture.jpg" accept="image/bmp,image/gif,image/jpeg,image/png"/>
+                        </span>
+
+                        <small class="help-block">Unterst&uuml;tzte Dateiformate: BMP, GIF, JPEG und PNG</small>
 
                         <span class="help-block">Du kannst auch ein Bild von deinem Computer hier hin ziehen.</span>
                     </div>
