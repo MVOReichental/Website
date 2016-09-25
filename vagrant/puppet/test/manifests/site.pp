@@ -1,9 +1,9 @@
 package { "htop":
-  ensure => "installed",
+  ensure => installed,
 }
 
 package { "vim":
-  ensure => "installed",
+  ensure => installed,
 }
 
 package{ "git":
@@ -23,7 +23,11 @@ package { "php5-cli":
 }
 
 package { "php5-mysql":
-  ensure => "installed",
+  ensure => installed,
+}
+
+package { "php5-gd":
+  ensure => installed,
 }
 
 file { "/etc/timezone":
