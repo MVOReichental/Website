@@ -1,25 +1,25 @@
 <div class="modal fade" id="members-send-message-modal">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Nachricht senden</h4>
-			</div>
-			<form method="post" action="intern/messages/send" id="members-send-message-form" enctype="multipart/form-data">
-				<div class="modal-body">
-					<div id="members-send-message-recipients"></div>
-					<input type="hidden" name="recipients" id="members-send-message-recipients-list"/>
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Nachricht senden</h4>
+            </div>
+            <form method="post" action="intern/messages/send" id="members-send-message-form" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div id="members-send-message-recipients"></div>
+                    <input type="hidden" name="recipients" id="members-send-message-recipients-list"/>
 
-					<textarea class="form-control" rows="10" name="text" placeholder="Deine Nachricht"></textarea>
+                    <textarea class="form-control" rows="10" name="text" placeholder="Deine Nachricht"></textarea>
 
-					<div id="members-send-message-attachments">
-						<input type="file" name="files[]" multiple/>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="submit" class="btn btn-success"><i class="fa fa-send"></i> Senden</button>
-				</div>
-			</form>
-		</div>
-	</div>
+                    <div id="members-send-message-attachments">
+                        <input type="file" name="files[]" multiple/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success"><i class="fa fa-send"></i> Senden</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>

@@ -3,35 +3,35 @@
 {% block title %}{{ title }}{{ parent() }}{% endblock %}
 
 {% block stylesheets %}
-	{{ parent() }}
+    {{ parent() }}
 
-	<link rel="stylesheet" href="css/members.css"/>
+    <link rel="stylesheet" href="css/members.css"/>
 {% endblock %}
 
 {% block scripts %}
-	{{ parent() }}
+    {{ parent() }}
 
-	<script src="js/members.js"></script>
+    <script src="js/members.js"></script>
 {% endblock %}
 
 {% block content %}
-	<h1 class="page-header">{{ title }}</h1>
+    <h1 class="page-header">{{ title }}</h1>
 
-	<div class="btn-toolbar btn-group hidden-print" id="members-groups">
-		{% for group in groups %}
-			{% if group.active %}
-				<a href="{{ group.url }}" class="btn btn-default active">{{ group.title }}</a>
-			{% else %}
-				<a href="{{ group.url }}" class="btn btn-default">{{ group.title }}</a>
-			{% endif %}
-		{% endfor %}
-	</div>
+    <div class="btn-toolbar btn-group hidden-print" id="members-groups">
+        {% for group in groups %}
+            {% if group.active %}
+                <a href="{{ group.url }}" class="btn btn-default active">{{ group.title }}</a>
+            {% else %}
+                <a href="{{ group.url }}" class="btn btn-default">{{ group.title }}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
 
-	{% include("members/list/" ~ view ~ ".twig") %}
+    {% include("members/list/" ~ view ~ ".twig") %}
 
-	<div class="btn-group hidden-print">
-		<button type="button" class="btn btn-success" id="members-send-message-button"><i class="fa fa-send"></i> Nachricht senden</button>
-	</div>
+    <div class="btn-group hidden-print">
+        <button type="button" class="btn btn-success" id="members-send-message-button"><i class="fa fa-send"></i> Nachricht senden</button>
+    </div>
 
-	{% include("messages/send-modal.twig") %}
+    {% include("messages/send-modal.twig") %}
 {% endblock %}

@@ -3,30 +3,30 @@ namespace de\mvo\model\contacts;
 
 class Contact
 {
-	/**
-	 * @var int
-	 */
-	public $id;
-	/**
-	 * @var string
-	 */
-	public $type;
-	/**
-	 * @var string
-	 */
-	public $category;
-	/**
-	 * @var string
-	 */
-	public $value;
+    /**
+     * @var int
+     */
+    public $id;
+    /**
+     * @var string
+     */
+    public $type;
+    /**
+     * @var string
+     */
+    public $category;
+    /**
+     * @var string
+     */
+    public $value;
 
-	public function __construct()
-	{
-		$this->id = (int) $this->id;
-	}
+    public function __construct()
+    {
+        $this->id = (int)$this->id;
+    }
 
-	public function getTitle()
-	{
-		return $this->type . " (" . $this->category . ")";
-	}
+    public function getTitle()
+    {
+        return $this->type . " (" . $this->category . ")";
+    }
 }

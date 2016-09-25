@@ -5,8 +5,8 @@ use de\mvo\TwigRenderer;
 
 class StaticView extends AbstractService
 {
-	public function get($name)
-	{
-		return TwigRenderer::render($name);
-	}
+    public function get($name)
+    {
+        return TwigRenderer::render($name);
+    }
 }

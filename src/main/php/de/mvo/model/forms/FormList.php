@@ -7,22 +7,20 @@ use de\mvo\model\users\User;
 
 class FormList extends ArrayObject
 {
-	public static function getFormsAccessibleForUser(User $user)
-	{
-		$forms = new self;
+    public static function getFormsAccessibleForUser(User $user)
+    {
+        $forms = new self;
 
-		$query = Database::query("SELECT * FROM `forms`");
+        $query = Database::query("SELECT * FROM `forms`");
 
-		while ($form = $query->fetchObject(Form::class))
-		{
-			if (!$user->hasPermission("forms." . $form->name))
-			{
-				continue;
-			}
+        while ($form = $query->fetchObject(Form::class)) {
+            if (!$user->hasPermission("forms." . $form->name)) {
+                continue;
+            }
 
-			$forms->append($form);
-		}
+            $forms->append($form);
+        }
 
-		return $forms;
-	}
+        return $forms;
+    }
 }

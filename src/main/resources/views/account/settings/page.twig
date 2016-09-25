@@ -3,37 +3,37 @@
 {% block title %}{{ activePage.title }} - Einstellungen{{ parent() }}{% endblock %}
 
 {% block stylesheets %}
-	{{ parent() }}
+    {{ parent() }}
 
-	<link rel="stylesheet" href="css/account.css"/>
+    <link rel="stylesheet" href="css/account.css"/>
 {% endblock %}
 
 {% block scripts %}
-	{{ parent() }}
+    {{ parent() }}
 
-	<script src="js/account.js"></script>
+    <script src="js/account.js"></script>
 {% endblock %}
 
 {% block content %}
-	<h1 class="page-header">Einstellungen</h1>
+    <h1 class="page-header">Einstellungen</h1>
 
-	{% block settingsHeader %}{% endblock %}
+    {% block settingsHeader %}{% endblock %}
 
-	<div class="row">
-		<div class="col-md-3">
-			<div class="list-group">
-				{% for page in pages %}
-					{% if page.active %}
-						<span class="list-group-item active">{{ page.title }}</span>
-					{% else %}
-						<a class="list-group-item" href="intern/settings/{{ page.name }}">{{ page.title }}</a>
-					{% endif %}
-				{% endfor %}
-			</div>
-		</div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="list-group">
+                {% for page in pages %}
+                    {% if page.active %}
+                        <span class="list-group-item active">{{ page.title }}</span>
+                    {% else %}
+                        <a class="list-group-item" href="intern/settings/{{ page.name }}">{{ page.title }}</a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
 
-		<div class="col-md-9">
-			{% block settingsContent %}{% endblock %}
-		</div>
-	</div>
+        <div class="col-md-9">
+            {% block settingsContent %}{% endblock %}
+        </div>
+    </div>
 {% endblock %}

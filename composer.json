@@ -1,25 +1,27 @@
 {
-	"name": "mvo/website",
-	"description": "The MVO website",
-	"homepage": "https://musikverein-reichental.de",
-	"minimum-stability": "stable",
-	"license": "proprietary",
-	"authors": [
-		{
-			"name": "Michael Wieland",
-			"email": "git@selfcoders.com"
-		}
-	],
-	"autoload": {
-		"psr-4": {"" : "src/main/php"}
-	},
-	"require": {
-		"altorouter/altorouter": "^1.1",
-		"programie/pini": "dev-master",
-		"eluceo/ical": "^0.10.0",
-		"erusev/parsedown": "^1.6",
-		"kelunik/two-factor": "^1.0",
-		"twig/twig": "^1.24",
-		"swiftmailer/swiftmailer": "^5.4"
-	}
+    "name": "mvo/website",
+    "description": "The MVO website",
+    "homepage": "https://musikverein-reichental.de",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Michael Wieland",
+            "email": "git@selfcoders.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "": "src/main/php"
+        }
+    },
+    "require": {
+        "altorouter/altorouter": "^1.1",
+        "programie/pini": "dev-master",
+        "eluceo/ical": "^0.10.0",
+        "erusev/parsedown": "^1.6",
+        "kelunik/two-factor": "^1.0",
+        "twig/twig": "^1.24",
+        "swiftmailer/swiftmailer": "^5.4"
+    }
 }

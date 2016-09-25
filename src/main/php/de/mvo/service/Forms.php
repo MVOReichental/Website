@@ -10,32 +10,29 @@ use de\mvo\TwigRenderer;
 
 class Forms extends AbstractService
 {
-	public function getList()
-	{
-		return TwigRenderer::render("forms", array
-		(
-			"forms" => FormList::getFormsAccessibleForUser(User::getCurrent())
-		));
-	}
+    public function getList()
+    {
+        return TwigRenderer::render("forms", array
+        (
+            "forms" => FormList::getFormsAccessibleForUser(User::getCurrent())
+        ));
+    }
 
-	public function download()
-	{
-		$form = Form::getByFilename($this->params->filename);
-		if ($form === null)
-		{
-			throw new NotFoundException;
-		}
+    public function download()
+    {
+        $form = Form::getByFilename($this->params->filename);
+        if ($form === null) {
+            throw new NotFoundException;
+        }
 
-		if (!User::getCurrent()->hasPermission("forms." . $form->name))
-		{
-			throw new PermissionViolationException;
-		}
+        if (!User::getCurrent()->hasPermission("forms." . $form->name)) {
+            throw new PermissionViolationException;
+        }
 
-		if (!$form->stream())
-		{
-			throw new NotFoundException;
-		}
+        if (!$form->stream()) {
+            throw new NotFoundException;
+        }
 
-		return null;
-	}
+        return null;
+    }
 }

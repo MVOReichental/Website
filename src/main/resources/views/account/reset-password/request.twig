@@ -3,24 +3,24 @@
 {% block title %}Passwort zur&uuml;cksetzen{{ parent() }}{% endblock %}
 
 {% block stylesheets %}
-	{{ parent() }}
+    {{ parent() }}
 
-	<link rel="stylesheet" href="css/account.css"/>
+    <link rel="stylesheet" href="css/account.css"/>
 {% endblock %}
 
 {% block content %}
-	<form class="login-form" method="post" action="intern/reset-password">
-		<h2>Passwort zur&uuml;cksetzen</h2>
+    <form class="login-form" method="post" action="intern/reset-password">
+        <h2>Passwort zur&uuml;cksetzen</h2>
 
-		<p class="help-block">Solltest du dein Passwort vergessen haben, kannst du dieses hier zur&uuml;cksetzen. Gebe hierzu deinen Benutzername ein.</p>
+        <p class="help-block">Solltest du dein Passwort vergessen haben, kannst du dieses hier zur&uuml;cksetzen. Gebe hierzu deinen Benutzername ein.</p>
 
-		{% if errorMessage %}
-			<div class="alert alert-danger">{{ errorMessage|raw }}</div>
-		{% endif %}
+        {% if errorMessage %}
+            <div class="alert alert-danger">{{ errorMessage|raw }}</div>
+        {% endif %}
 
-		<div class="input-group">
-			<input type="text" name="username" class="form-control" placeholder="Benutzername" required autofocus/>
-			<span class="input-group-btn"><button class="btn btn-primary">Weiter</button></span>
-		</div>
-	</form>
+        <div class="input-group">
+            <input type="text" name="username" class="form-control" placeholder="Benutzername" required autofocus/>
+            <span class="input-group-btn"><button class="btn btn-primary">Weiter</button></span>
+        </div>
+    </form>
 {% endblock %}

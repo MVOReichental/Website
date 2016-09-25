@@ -1,9 +1,7 @@
-#dates-remove-error
-{
-	display: none;
+#dates-remove-error {
+    display: none;
 }
 
-#dates-table tr.highlight
-{
-	font-weight: bold;
+#dates-table tr.highlight {
+    font-weight: bold;
 }

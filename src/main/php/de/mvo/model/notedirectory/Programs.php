@@ -6,27 +6,26 @@ use de\mvo\Database;
 
 class Programs extends ArrayObject
 {
-	public static function getAll()
-	{
-		$query = Database::query("
+    public static function getAll()
+    {
+        $query = Database::query("
 			SELECT *
 			FROM `notedirectoryprograms`
 			ORDER BY `year` DESC, `title` ASC
 		");
 
-		$programs = new self;
+        $programs = new self;
 
-		while ($program = $query->fetchObject(Program::class))
-		{
-			$programs->append($program);
-		}
+        while ($program = $query->fetchObject(Program::class)) {
+            $programs->append($program);
+        }
 
-		return $programs;
-	}
+        return $programs;
+    }
 
-	public static function getProgramsContainingTitle(Title $title)
-	{
-		$query = Database::prepare("
+    public static function getProgramsContainingTitle(Title $title)
+    {
+        $query = Database::prepare("
 			SELECT `notedirectoryprograms`.*
 			FROM `notedirectoryprogramtitles`
 			LEFT JOIN `notedirectoryprograms` ON `notedirectoryprograms`.`id` = `programId`
@@ -34,76 +33,71 @@ class Programs extends ArrayObject
 			ORDER BY `year` DESC, `title` ASC
 		");
 
-		$query->execute(array
-		(
-			":titleId" => $title->id
-		));
+        $query->execute(array
+        (
+            ":titleId" => $title->id
+        ));
 
-		$programs = new self;
+        $programs = new self;
 
-		/**
-		 * @var $program Program
-		 */
-		while ($program = $query->fetchObject(Program::class))
-		{
-			$titles = new Titles;
+        /**
+         * @var $program Program
+         */
+        while ($program = $query->fetchObject(Program::class)) {
+            $titles = new Titles;
 
-			$titles->append($program->titles->getById($title->id));// Force single title
-			$program->titles = $titles;
+            $titles->append($program->titles->getById($title->id));// Force single title
+            $program->titles = $titles;
 
-			$programs->append($program);
-		}
+            $programs->append($program);
+        }
 
-		return $programs;
-	}
+        return $programs;
+    }
 
-	public function getByYear($year)
-	{
-		$programs = new self;
+    public function getByYear($year)
+    {
+        $programs = new self;
 
-		/**
-		 * @var $program Program
-		 */
-		foreach ($this as $program)
-		{
-			if ($program->year != $year)
-			{
-				continue;
-			}
+        /**
+         * @var $program Program
+         */
+        foreach ($this as $program) {
+            if ($program->year != $year) {
+                continue;
+            }
 
-			$programs->append($program);
-		}
+            $programs->append($program);
+        }
 
-		return $programs;
-	}
+        return $programs;
+    }
 
-	public function getGroupedByYear()
-	{
-		$group = array();
+    public function getGroupedByYear()
+    {
+        $group = array();
 
-		/**
-		 * @var $program Program
-		 */
-		foreach ($this as $program)
-		{
-			$group[$program->year] = $this->getByYear($program->year);
-		}
+        /**
+         * @var $program Program
+         */
+        foreach ($this as $program) {
+            $group[$program->year] = $this->getByYear($program->year);
+        }
 
-		$years = new ArrayObject;
+        $years = new ArrayObject;
 
-		/**
-		 * @var $programs Programs
-		 */
-		foreach ($group as $year => $programs)
-		{
-			$yearObject = new Year;
+        /**
+         * @var $programs Programs
+         */
+        foreach ($group as $year => $programs) {
+            $yearObject = new Year;
 
-			$yearObject->year = $year;
-			$yearObject->programs = $programs;
+            $yearObject->year = $year;
+            $yearObject->programs = $programs;
 
-			$years->append($yearObject);
-		}
+            $years->append($yearObject);
+        }
 
-		return $years;
-	}
+        return $years;
+    }
 }

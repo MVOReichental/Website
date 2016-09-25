@@ -5,51 +5,50 @@ use de\mvo\Database;
 
 class Category
 {
-	/**
-	 * @var int
-	 */
-	public $id;
-	/**
-	 * @var string
-	 */
-	public $title;
-	/**
-	 * @var int
-	 */
-	public $order;
-	/**
-	 * @var Titles
-	 */
-	public $titles;
+    /**
+     * @var int
+     */
+    public $id;
+    /**
+     * @var string
+     */
+    public $title;
+    /**
+     * @var int
+     */
+    public $order;
+    /**
+     * @var Titles
+     */
+    public $titles;
 
-	/**
-	 * @param int $id
-	 *
-	 * @return Category|null
-	 */
-	public static function getById($id)
-	{
-		$query = Database::prepare("
+    /**
+     * @param int $id
+     *
+     * @return Category|null
+     */
+    public static function getById($id)
+    {
+        $query = Database::prepare("
 			SELECT *
 			FROM `notedirectorycategories`
 			WHERE `id` = :id
 		");
 
-		$query->execute(array
-		(
-			":id" => $id
-		));
+        $query->execute(array
+        (
+            ":id" => $id
+        ));
 
-		if (!$query->rowCount())
-		{
-			return null;
-		}
+        if (!$query->rowCount()) {
+            return null;
+        }
 
-		return $query->fetchObject(self::class);
-	}
+        return $query->fetchObject(self::class);
+    }
 
-	public function isEqualTo(Category $category)
-	{
-		return ($this->id == $category->id);
-	}
+    public function isEqualTo(Category $category)
+    {
+        return ($this->id == $category->id);
+    }
 }

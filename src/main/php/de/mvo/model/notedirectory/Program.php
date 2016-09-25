@@ -5,48 +5,47 @@ use de\mvo\Database;
 
 class Program
 {
-	/**
-	 * @var int
-	 */
-	public $id;
-	/**
-	 * @var int
-	 */
-	public $year;
-	/**
-	 * @var string
-	 */
-	public $name;
-	/**
-	 * @var string
-	 */
-	public $title;
-	/**
-	 * @var Titles
-	 */
-	public $titles;
-	/**
-	 * @var bool
-	 */
-	public $isDefault;
-	/**
-	 * @var bool
-	 */
-	public $showCategories;
+    /**
+     * @var int
+     */
+    public $id;
+    /**
+     * @var int
+     */
+    public $year;
+    /**
+     * @var string
+     */
+    public $name;
+    /**
+     * @var string
+     */
+    public $title;
+    /**
+     * @var Titles
+     */
+    public $titles;
+    /**
+     * @var bool
+     */
+    public $isDefault;
+    /**
+     * @var bool
+     */
+    public $showCategories;
 
-	public function __construct()
-	{
-		if ($this->id === null)
-		{
-			return;
-		}
+    public function __construct()
+    {
+        if ($this->id === null) {
+            return;
+        }
 
-		$this->id = (int) $this->id;
-		$this->year = (int) $this->year;
-		$this->isDefault = (bool) $this->isDefault;
-		$this->showCategories = (bool) $this->showCategories;
+        $this->id = (int)$this->id;
+        $this->year = (int)$this->year;
+        $this->isDefault = (bool)$this->isDefault;
+        $this->showCategories = (bool)$this->showCategories;
 
-		$query = Database::prepare("
+        $query = Database::prepare("
 			SELECT `notedirectorytitles`.*, `number`
 			FROM `notedirectoryprogramtitles`
 			LEFT JOIN `notedirectorytitles` ON `notedirectorytitles`.`id` = `notedirectoryprogramtitles`.`titleId`
@@ -54,25 +53,24 @@ class Program
 			ORDER BY `number`
 		");
 
-		$query->execute(array
-		(
-			":programId" => $this->id
-		));
+        $query->execute(array
+        (
+            ":programId" => $this->id
+        ));
 
-		$this->titles = new Titles;
+        $this->titles = new Titles;
 
-		while ($title = $query->fetchObject(Title::class))
-		{
-			$this->titles->append($title);
-		}
-	}
+        while ($title = $query->fetchObject(Title::class)) {
+            $this->titles->append($title);
+        }
+    }
 
-	/**
-	 * @return Program|null
-	 */
-	public static function getLatest()
-	{
-		$query = Database::query("
+    /**
+     * @return Program|null
+     */
+    public static function getLatest()
+    {
+        $query = Database::query("
 			SELECT *
 			FROM `notedirectoryprograms`
 			WHERE `isDefault`
@@ -80,44 +78,42 @@ class Program
 			LIMIT 1
 		");
 
-		if (!$query->rowCount())
-		{
-			return null;
-		}
+        if (!$query->rowCount()) {
+            return null;
+        }
 
-		return $query->fetchObject(self::class);
-	}
+        return $query->fetchObject(self::class);
+    }
 
-	/**
-	 * @param int $year
-	 * @param string $title
-	 *
-	 * @return Program|null
-	 */
-	public static function getByYearAndName($year, $name)
-	{
-		$query = Database::prepare("
+    /**
+     * @param int $year
+     * @param string $title
+     *
+     * @return Program|null
+     */
+    public static function getByYearAndName($year, $name)
+    {
+        $query = Database::prepare("
 			SELECT *
 			FROM `notedirectoryprograms`
 			WHERE `year` = :year AND `name` = :name
 		");
 
-		$query->execute(array
-		(
-			":year" => $year,
-			":name" => $name
-		));
+        $query->execute(array
+        (
+            ":year" => $year,
+            ":name" => $name
+        ));
 
-		if (!$query->rowCount())
-		{
-			return null;
-		}
+        if (!$query->rowCount()) {
+            return null;
+        }
 
-		return $query->fetchObject(self::class);
-	}
+        return $query->fetchObject(self::class);
+    }
 
-	public function categories()
-	{
-		return $this->titles->getInCategories();
-	}
+    public function categories()
+    {
+        return $this->titles->getInCategories();
+    }
 }

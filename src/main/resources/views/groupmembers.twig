@@ -3,23 +3,23 @@
 {% block title %}{{ title }}{{ parent() }}{% endblock %}
 
 {% block content %}
-	<h1 class="page-header">{{ title }}</h1>
+    <h1 class="page-header">{{ title }}</h1>
 
-	<div class="gallery-source">
-		{% for group in groups %}
-			<h2>{{ group.title }}</h2>
-			<div class="row">
-				{% for user in group.users %}
-					<div class="col-md-3">
-						<a href="users/{{ user.id }}/profile-picture.jpg?hash={{ user.profilePictureHash }}" class="thumbnail groupmembers-img" title="{{ user.firstName }} {{ user.lastName }}">
-							<img src="users/{{ user.id }}/profile-picture.jpg?hash={{ user.profilePictureHash }}"/>
-							<div class="caption">
-								<h3>{{ user.firstName }} {{ user.lastName }}</h3>
-							</div>
-						</a>
-					</div>
-				{% endfor %}
-			</div>
-		{% endfor %}
-	</div>
+    <div class="gallery-source">
+        {% for group in groups %}
+            <h2>{{ group.title }}</h2>
+            <div class="row">
+                {% for user in group.users %}
+                    <div class="col-md-3">
+                        <a href="users/{{ user.id }}/profile-picture.jpg?hash={{ user.profilePictureHash }}" class="thumbnail groupmembers-img" title="{{ user.firstName }} {{ user.lastName }}">
+                            <img src="users/{{ user.id }}/profile-picture.jpg?hash={{ user.profilePictureHash }}"/>
+                            <div class="caption">
+                                <h3>{{ user.firstName }} {{ user.lastName }}</h3>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

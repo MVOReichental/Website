@@ -5,64 +5,59 @@ use ArrayObject;
 
 class Files extends ArrayObject
 {
-	/**
-	 * @var array
-	 */
-	private $item;
+    /**
+     * @var array
+     */
+    private $item;
 
-	/**
-	 * @param array $item One item of the $_FILES array
-	 */
-	public function __construct(array $item)
-	{
-		$this->item = $item;
+    /**
+     * @param array $item One item of the $_FILES array
+     */
+    public function __construct(array $item)
+    {
+        $this->item = $item;
 
-		if (is_array($this->item["name"]))
-		{
-			$this->handleMultipleFiles();
-		}
-		else
-		{
-			$this->handleSingleFile();
-		}
-	}
+        if (is_array($this->item["name"])) {
+            $this->handleMultipleFiles();
+        } else {
+            $this->handleSingleFile();
+        }
+    }
 
-	private function handleMultipleFiles()
-	{
-		foreach (array_keys($this->item["name"]) as $index)
-		{
-			$file = new File;
+    private function handleMultipleFiles()
+    {
+        foreach (array_keys($this->item["name"]) as $index) {
+            $file = new File;
 
-			$file->name = $this->item["name"][$index];
-			$file->type = $this->item["type"][$index];
-			$file->size = $this->item["size"][$index];
-			$file->tempName = $this->item["tmp_name"][$index];
-			$file->error = $this->item["error"][$index];
+            $file->name = $this->item["name"][$index];
+            $file->type = $this->item["type"][$index];
+            $file->size = $this->item["size"][$index];
+            $file->tempName = $this->item["tmp_name"][$index];
+            $file->error = $this->item["error"][$index];
 
-			$this->append($file);
-		}
-	}
+            $this->append($file);
+        }
+    }
 
-	private function handleSingleFile()
-	{
-		$file = new File;
+    private function handleSingleFile()
+    {
+        $file = new File;
 
-		$file->name = $this->item["name"];
-		$file->type = $this->item["type"];
-		$file->size = $this->item["size"];
-		$file->tempName = $this->item["tmp_name"];
-		$file->error = $this->item["error"];
+        $file->name = $this->item["name"];
+        $file->type = $this->item["type"];
+        $file->size = $this->item["size"];
+        $file->tempName = $this->item["tmp_name"];
+        $file->error = $this->item["error"];
 
-		$this->append($file);
-	}
+        $this->append($file);
+    }
 
-	public function append(File $file)
-	{
-		if ($file->error == UPLOAD_ERR_NO_FILE)
-		{
-			return;
-		}
+    public function append(File $file)
+    {
+        if ($file->error == UPLOAD_ERR_NO_FILE) {
+            return;
+        }
 
-		parent::append($file);
-	}
+        parent::append($file);
+    }
 }

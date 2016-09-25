@@ -1,26 +1,26 @@
 [
-	{
-		"when": "am Fastnachtssamstag und -sonntag",
-		"event": "Fastnachtsitzung des F\u00f6rdervereins",
-		"location": "Festhalle Reichental"
-	},
-	{
-		"when": "am Samstag vor Muttertag",
-		"event": "Muttertagskonzert",
-		"location": "Festhalle Reichental"
-	},
-	{
-		"when": "am 1. Sonntag im Juli",
-		"event": "Dorfhock",
-		"location": "Schulhof Reichental"
-	},
-	{
-		"when": "am 2. Sonntag im November",
-		"event": "Herbsfest mit Vorstellung der Jugendarbeit",
-		"location": "Festhalle Reichental"
-	},
-	{
-		"event": "Spielen an Heilig Abend",
-		"location": "Unter den Laternen in Reichental"
-	}
+    {
+        "when": "am Fastnachtssamstag und -sonntag",
+        "event": "Fastnachtsitzung des F\u00f6rdervereins",
+        "location": "Festhalle Reichental"
+    },
+    {
+        "when": "am Samstag vor Muttertag",
+        "event": "Muttertagskonzert",
+        "location": "Festhalle Reichental"
+    },
+    {
+        "when": "am 1. Sonntag im Juli",
+        "event": "Dorfhock",
+        "location": "Schulhof Reichental"
+    },
+    {
+        "when": "am 2. Sonntag im November",
+        "event": "Herbsfest mit Vorstellung der Jugendarbeit",
+        "location": "Festhalle Reichental"
+    },
+    {
+        "event": "Spielen an Heilig Abend",
+        "location": "Unter den Laternen in Reichental"
+    }
 ]

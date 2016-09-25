@@ -3,15 +3,15 @@
 {% block title %}{{ year }} - Fotogalerie{{ parent() }}{% endblock %}
 
 {% block content %}
-	<ol class="breadcrumb">
-		<li><a href="{{ picturesBaseUrl }}">Fotogalerie</a></li>
-		<li class="active">{{ year }}</li>
-	</ol>
+    <ol class="breadcrumb">
+        <li><a href="{{ picturesBaseUrl }}">Fotogalerie</a></li>
+        <li class="active">{{ year }}</li>
+    </ol>
 
-	<h1 class="page-header">
-		Fotogalerie<br/>
-		<span class="small">{{ year }}</span>
-	</h1>
+    <h1 class="page-header">
+        Fotogalerie<br/>
+        <span class="small">{{ year }}</span>
+    </h1>
 
-	{% include("pictures/albums-list.twig") %}
+    {% include("pictures/albums-list.twig") %}
 {% endblock %}

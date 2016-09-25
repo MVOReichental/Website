@@ -12,76 +12,72 @@ use de\mvo\TwigRenderer;
 
 class NoteDirectory extends AbstractService
 {
-	public function redirectToLatestProgram()
-	{
-		$program = Program::getLatest();
-		if ($program === null)
-		{
-			throw new NotFoundException;
-		}
+    public function redirectToLatestProgram()
+    {
+        $program = Program::getLatest();
+        if ($program === null) {
+            throw new NotFoundException;
+        }
 
-		header("Location: /intern/notedirectory/programs/" . $program->year . "/" . $program->name, true, 302);
-		return null;
-	}
+        header("Location: /intern/notedirectory/programs/" . $program->year . "/" . $program->name, true, 302);
+        return null;
+    }
 
-	private static function renderListPage($title, $list)
-	{
-		return TwigRenderer::render("notedirectory/list/page", array
-		(
-			"title" => $title,
-			"otherPrograms" => Programs::getAll()->getGroupedByYear(),
-			"categories" => Categories::getAll(),
-			"list" => $list
-		));
-	}
+    private static function renderListPage($title, $list)
+    {
+        return TwigRenderer::render("notedirectory/list/page", array
+        (
+            "title" => $title,
+            "otherPrograms" => Programs::getAll()->getGroupedByYear(),
+            "categories" => Categories::getAll(),
+            "list" => $list
+        ));
+    }
 
-	public function getProgram()
-	{
-		$program = Program::getByYearAndName($this->params->year, $this->params->name);
-		if ($program === null)
-		{
-			throw new NotFoundException;
-		}
+    public function getProgram()
+    {
+        $program = Program::getByYearAndName($this->params->year, $this->params->name);
+        if ($program === null) {
+            throw new NotFoundException;
+        }
 
-		return self::renderListPage($program->title . " " . $program->year, TwigRenderer::render("notedirectory/list/program", array
-		(
-			"program" => $program
-		)));
-	}
+        return self::renderListPage($program->title . " " . $program->year, TwigRenderer::render("notedirectory/list/program", array
+        (
+            "program" => $program
+        )));
+    }
 
-	public function getTitlesWithCategory()
-	{
-		$category = Category::getById($this->params->id);
-		if ($category === null)
-		{
-			throw new NotFoundException;
-		}
+    public function getTitlesWithCategory()
+    {
+        $category = Category::getById($this->params->id);
+        if ($category === null) {
+            throw new NotFoundException;
+        }
 
-		return self::renderListPage($category->title, TwigRenderer::render("notedirectory/list/titles", array
-		(
-			"titles" => Titles::getByCategory($category)
-		)));
-	}
+        return self::renderListPage($category->title, TwigRenderer::render("notedirectory/list/titles", array
+        (
+            "titles" => Titles::getByCategory($category)
+        )));
+    }
 
-	public function getAllTitles()
-	{
-		return self::renderListPage("Alle Titel", TwigRenderer::render("notedirectory/list/titles-grouped", array
-		(
-			"categories" => Titles::getAll()->getInCategories()
-		)));
-	}
+    public function getAllTitles()
+    {
+        return self::renderListPage("Alle Titel", TwigRenderer::render("notedirectory/list/titles-grouped", array
+        (
+            "categories" => Titles::getAll()->getInCategories()
+        )));
+    }
 
-	public function getTitleDetails()
-	{
-		$title = Title::getById($this->params->id);
-		if ($title === null)
-		{
-			throw new NotFoundException;
-		}
+    public function getTitleDetails()
+    {
+        $title = Title::getById($this->params->id);
+        if ($title === null) {
+            throw new NotFoundException;
+        }
 
-		return self::renderListPage($title->title, TwigRenderer::render("notedirectory/list/title-details", array
-		(
-			"title" => $title
-		)));
-	}
+        return self::renderListPage($title->title, TwigRenderer::render("notedirectory/list/title-details", array
+        (
+            "title" => $title
+        )));
+    }
 }

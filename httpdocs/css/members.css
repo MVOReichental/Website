@@ -1,17 +1,13 @@
-@media (min-width: 992px)
-{
-	#members-details-user
-	{
-		position: fixed;
-	}
+@media (min-width: 992px) {
+    #members-details-user {
+        position: fixed;
+    }
 }
 
-#members-send-message-button
-{
-	display: none;
+#members-send-message-button {
+    display: none;
 }
 
-#members-send-message-recipients
-{
-	margin-bottom: 10px;
+#members-send-message-recipients {
+    margin-bottom: 10px;
 }

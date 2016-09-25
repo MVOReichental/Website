@@ -1,21 +1,21 @@
 [
-	{
-		"name": "postalisch",
-		"text": "F\u00f6rderverein Musikverein \"Orgelfels\" Reichental e.V.\nGuido Wieland\nS\u00fcdhangstr. 25\n76593 Gernsbach - Reichental"
-	},
-	{
-		"name": "Vorstand (Gleichberechtigt)",
-		"text": "Ulrike Brasseur (07224 67274)\nGuido Wieland (07224 40749)",
-		"mailbox": "vorstand-fv"
-	},
-	{
-		"name": "Kassenverwalter",
-		"text": "Florian Wieland",
-		"mailbox": "kassier-fv"
-	},
-	{
-		"name": "Schriftf\u00fchrer",
-		"text": "Patrick Wieland",
-		"mailbox": "schriftfuehrer-fv"
-	}
+    {
+        "name": "postalisch",
+        "text": "F\u00f6rderverein Musikverein \"Orgelfels\" Reichental e.V.\nGuido Wieland\nS\u00fcdhangstr. 25\n76593 Gernsbach - Reichental"
+    },
+    {
+        "name": "Vorstand (Gleichberechtigt)",
+        "text": "Ulrike Brasseur (07224 67274)\nGuido Wieland (07224 40749)",
+        "mailbox": "vorstand-fv"
+    },
+    {
+        "name": "Kassenverwalter",
+        "text": "Florian Wieland",
+        "mailbox": "kassier-fv"
+    },
+    {
+        "name": "Schriftf\u00fchrer",
+        "text": "Patrick Wieland",
+        "mailbox": "schriftfuehrer-fv"
+    }
 ]

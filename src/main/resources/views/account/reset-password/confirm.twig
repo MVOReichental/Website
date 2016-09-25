@@ -3,34 +3,34 @@
 {% block title %}Passwort zur&uuml;cksetzen{{ parent() }}{% endblock %}
 
 {% block stylesheets %}
-	{{ parent() }}
+    {{ parent() }}
 
-	<link rel="stylesheet" href="css/account.css"/>
+    <link rel="stylesheet" href="css/account.css"/>
 {% endblock %}
 
 {% block scripts %}
-	{{ parent() }}
+    {{ parent() }}
 
-	<script src="js/reset-password.js"></script>
+    <script src="js/reset-password.js"></script>
 {% endblock %}
 
 {% block content %}
-	<form class="login-form" id="reset-password-confirm-form" method="post">
-		<h2>Passwort zur&uuml;cksetzen</h2>
+    <form class="login-form" id="reset-password-confirm-form" method="post">
+        <h2>Passwort zur&uuml;cksetzen</h2>
 
-		{% if passwordPolicyError %}
-			<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Das Passwort muss aus mindestens 6 Zeichen und sowohl aus Buchstaben als auch aus Zahlen bestehen!</div>
-		{% endif %}
+        {% if passwordPolicyError %}
+            <div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Das Passwort muss aus mindestens 6 Zeichen und sowohl aus Buchstaben als auch aus Zahlen bestehen!</div>
+        {% endif %}
 
-		<p class="help-block">Lege ein neues Passwort fest.</p>
+        <p class="help-block">Lege ein neues Passwort fest.</p>
 
-		<div id="reset-password-confirm-box" class="input-list">
-			<input type="password" id="reset-password-confirm-password1" name="password" class="form-control" placeholder="Passwort" required autofocus/>
-			<input type="password" id="reset-password-confirm-password2" class="form-control" placeholder="Passwort (wiederholen)" required/>
+        <div id="reset-password-confirm-box" class="input-list">
+            <input type="password" id="reset-password-confirm-password1" name="password" class="form-control" placeholder="Passwort" required autofocus/>
+            <input type="password" id="reset-password-confirm-password2" class="form-control" placeholder="Passwort (wiederholen)" required/>
 
-			<span class="help-block"></span>
-		</div>
+            <span class="help-block"></span>
+        </div>
 
-		<button class="btn btn-lg btn-primary btn-block">Passwort &auml;ndern</button>
-	</form>
+        <button class="btn btn-lg btn-primary btn-block">Passwort &auml;ndern</button>
+    </form>
 {% endblock %}

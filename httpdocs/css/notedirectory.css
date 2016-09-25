@@ -1,17 +1,14 @@
-@media print
-{
-	#notedirectory-list > thead > tr > th,
-	#notedirectory-list > tbody > tr > th,
-	#notedirectory-list > tfoot > tr > th,
-	#notedirectory-list > thead > tr > td,
-	#notedirectory-list > tbody > tr > td,
-	#notedirectory-list > tfoot > tr > td
-	{
-		padding: 3px;
-	}
+@media print {
+    #notedirectory-list > thead > tr > th,
+    #notedirectory-list > tbody > tr > th,
+    #notedirectory-list > tfoot > tr > th,
+    #notedirectory-list > thead > tr > td,
+    #notedirectory-list > tbody > tr > td,
+    #notedirectory-list > tfoot > tr > td {
+        padding: 3px;
+    }
 }
 
-#notedirectory-selection
-{
-	margin-bottom: 20px;
+#notedirectory-selection {
+    margin-bottom: 20px;
 }

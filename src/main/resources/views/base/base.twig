@@ -1,70 +1,70 @@
 <!doctype html>
 <html>
-	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-		<title>{% block title%}{% endblock %} - Musikverein "Orgelfels" Reichental e.V.</title>
+        <title>{% block title %}{% endblock %} - Musikverein "Orgelfels" Reichental e.V.</title>
 
-		<base href="{% block baseUrl %}/{% endblock %}"/>
+        <base href="{% block baseUrl %}/{% endblock %}"/>
 
-		{% block stylesheets %}
+        {% block stylesheets %}
 
-			<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css"/>
-			<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css"/>
-			<link rel="stylesheet" href="bower_components/blueimp-gallery/css/blueimp-gallery.min.css"/>
-			<link rel="stylesheet" href="bower_components/blueimp-bootstrap-image-gallery/css/bootstrap-image-gallery.min.css"/>
-			<link rel="stylesheet" href="bower_components/bootstrap-sortable/Contents/bootstrap-sortable.css"/>
+            <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css"/>
+            <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css"/>
+            <link rel="stylesheet" href="bower_components/blueimp-gallery/css/blueimp-gallery.min.css"/>
+            <link rel="stylesheet" href="bower_components/blueimp-bootstrap-image-gallery/css/bootstrap-image-gallery.min.css"/>
+            <link rel="stylesheet" href="bower_components/bootstrap-sortable/Contents/bootstrap-sortable.css"/>
 
-			<link rel="stylesheet" href="css/main.css"/>
-		{% endblock %}
+            <link rel="stylesheet" href="css/main.css"/>
+        {% endblock %}
 
-		{% block scripts %}
-			<script src="bower_components/jquery/dist/jquery.min.js"></script>
-			<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-			<script src="bower_components/blueimp-gallery/js/blueimp-gallery.min.js"></script>
-			<script src="bower_components/blueimp-bootstrap-image-gallery/js/bootstrap-image-gallery.min.js"></script>
-			<script src="bower_components/bootstrap-sortable/Scripts/bootstrap-sortable.js"></script>
+        {% block scripts %}
+            <script src="bower_components/jquery/dist/jquery.min.js"></script>
+            <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+            <script src="bower_components/blueimp-gallery/js/blueimp-gallery.min.js"></script>
+            <script src="bower_components/blueimp-bootstrap-image-gallery/js/bootstrap-image-gallery.min.js"></script>
+            <script src="bower_components/bootstrap-sortable/Scripts/bootstrap-sortable.js"></script>
 
-			<script src="js/main.js"></script>
-		{% endblock %}
-	</head>
+            <script src="js/main.js"></script>
+        {% endblock %}
+    </head>
 
-	<body>
-		{% block header %}{% endblock %}
+    <body>
+        {% block header %}{% endblock %}
 
-		<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
-			<div class="slides"></div>
-			<h3 class="title"></h3>
-			<a class="prev">‹</a>
-			<a class="next">›</a>
-			<a class="close">×</a>
-			<a class="play-pause"></a>
-			<ol class="indicator"></ol>
-			<div class="modal fade">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" aria-hidden="true">&times;</button>
-							<h4 class="modal-title"></h4>
-						</div>
-						<div class="modal-body next"></div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default pull-left prev">
-								<i class="glyphicon glyphicon-chevron-left"></i>
-								Previous
-							</button>
-							<button type="button" class="btn btn-primary next">
-								Next
-								<i class="glyphicon glyphicon-chevron-right"></i>
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+        <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+            <div class="slides"></div>
+            <h3 class="title"></h3>
+            <a class="prev">‹</a>
+            <a class="next">›</a>
+            <a class="close">×</a>
+            <a class="play-pause"></a>
+            <ol class="indicator"></ol>
+            <div class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title"></h4>
+                        </div>
+                        <div class="modal-body next"></div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default pull-left prev">
+                                <i class="glyphicon glyphicon-chevron-left"></i>
+                                Previous
+                            </button>
+                            <button type="button" class="btn btn-primary next">
+                                Next
+                                <i class="glyphicon glyphicon-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-		{% block body %}{% endblock %}
+        {% block body %}{% endblock %}
 
-		{% block footer %}{% endblock %}
-	</body>
+        {% block footer %}{% endblock %}
+    </body>
 </html>

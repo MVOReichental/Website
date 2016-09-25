@@ -7,37 +7,34 @@ use de\mvo\model\users\User;
 
 class ProtocolsList extends ArrayObject
 {
-	public static function get()
-	{
-		$query = Database::query("SELECT * FROM `protocols`");
+    public static function get()
+    {
+        $query = Database::query("SELECT * FROM `protocols`");
 
-		$list = new self;
+        $list = new self;
 
-		while ($protocol = $query->fetchObject(Protocol::class))
-		{
-			$list->append($protocol);
-		}
+        while ($protocol = $query->fetchObject(Protocol::class)) {
+            $list->append($protocol);
+        }
 
-		return $list;
-	}
+        return $list;
+    }
 
-	public function getVisibleForUser(User $user)
-	{
-		$list = new self;
+    public function getVisibleForUser(User $user)
+    {
+        $list = new self;
 
-		/**
-		 * @var $protocol Protocol
-		 */
-		foreach ($this as $protocol)
-		{
-			if (!$protocol->isVisibleForUser($user))
-			{
-				continue;
-			}
+        /**
+         * @var $protocol Protocol
+         */
+        foreach ($this as $protocol) {
+            if (!$protocol->isVisibleForUser($user)) {
+                continue;
+            }
 
-			$list->append($protocol);
-		}
+            $list->append($protocol);
+        }
 
-		return $list;
-	}
+        return $list;
+    }
 }

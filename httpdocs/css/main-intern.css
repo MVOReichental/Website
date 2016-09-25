@@ -1,19 +1,15 @@
-@media screen
-{
-	body
-	{
-		margin-bottom: 0;
-	}
+@media screen {
+    body {
+        margin-bottom: 0;
+    }
 }
 
-#navbar-profile
-{
-	padding-top: 5px;
-	padding-bottom: 5px;
+#navbar-profile {
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
-#navbar-profile > img
-{
-	height: 40px;
-	border-radius: 3px;
+#navbar-profile > img {
+    height: 40px;
+    border-radius: 3px;
 }

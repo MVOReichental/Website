@@ -11,124 +11,120 @@ use Parsedown;
 
 class Message
 {
-	/**
-	 * @var int
-	 */
-	public $id;
-	/**
-	 * @var Date
-	 */
-	public $date;
-	/**
-	 * @var User
-	 */
-	public $sender;
-	/**
-	 * @var Users
-	 */
-	public $recipients;
-	/**
-	 * @var string
-	 */
-	public $text;
-	/**
-	 * @var Uploads
-	 */
-	public $attachments;
+    /**
+     * @var int
+     */
+    public $id;
+    /**
+     * @var Date
+     */
+    public $date;
+    /**
+     * @var User
+     */
+    public $sender;
+    /**
+     * @var Users
+     */
+    public $recipients;
+    /**
+     * @var string
+     */
+    public $text;
+    /**
+     * @var Uploads
+     */
+    public $attachments;
 
-	private $senderUserId;
+    private $senderUserId;
 
-	public function __construct()
-	{
-		if ($this->id === null)
-		{
-			return;
-		}
+    public function __construct()
+    {
+        if ($this->id === null) {
+            return;
+        }
 
-		$this->id = (int) $this->id;
-		$this->date = new Date($this->date);
-		$this->sender = User::getById($this->senderUserId);
+        $this->id = (int)$this->id;
+        $this->date = new Date($this->date);
+        $this->sender = User::getById($this->senderUserId);
 
-		$query = Database::prepare("
+        $query = Database::prepare("
 			SELECT `users`.*
 			FROM `messagerecipients`
 			LEFT JOIN `users` ON `users`.`id` = `messagerecipients`.`userId`
 			WHERE `messageId` = :messageId
 		");
 
-		$query->execute(array
-		(
-			":messageId" => $this->id
-		));
+        $query->execute(array
+        (
+            ":messageId" => $this->id
+        ));
 
-		$this->recipients = new Users;
+        $this->recipients = new Users;
 
-		while ($user = $query->fetchObject(User::class))
-		{
-			$this->recipients->append($user);
-		}
+        while ($user = $query->fetchObject(User::class)) {
+            $this->recipients->append($user);
+        }
 
-		$query = Database::prepare("
+        $query = Database::prepare("
 			SELECT `uploads`.*
 			FROM `messageattachments`
 			LEFT JOIN `uploads` ON `uploads`.`id` = `messageattachments`.`uploadId`
 			WHERE `messageId` = :messageId
 		");
 
-		$query->execute(array
-		(
-			":messageId" => $this->id
-		));
+        $query->execute(array
+        (
+            ":messageId" => $this->id
+        ));
 
-		$this->attachments = new Uploads;
+        $this->attachments = new Uploads;
 
-		while ($upload = $query->fetchObject(Upload::class))
-		{
-			$this->attachments->append($upload);
-		}
-	}
+        while ($upload = $query->fetchObject(Upload::class)) {
+            $this->attachments->append($upload);
+        }
+    }
 
-	/**
-	 * @param int $id
-	 *
-	 * @return Message|null
-	 */
-	public static function getById($id)
-	{
-		$query = Database::prepare("
+    /**
+     * @param int $id
+     *
+     * @return Message|null
+     */
+    public static function getById($id)
+    {
+        $query = Database::prepare("
 			SELECT *
 			FROM `messages`
 			WHERE `id` = :id
 		");
 
-		$query->execute(array
-		(
-			":id" => $id
-		));
+        $query->execute(array
+        (
+            ":id" => $id
+        ));
 
-		if (!$query->rowCount())
-		{
-			return null;
-		}
+        if (!$query->rowCount()) {
+            return null;
+        }
 
-		return $query->fetchObject(self::class);
-	}
+        return $query->fetchObject(self::class);
+    }
 
-	public function formatText()
-	{
-		$parsedown = Parsedown::instance("messages");
+    public function formatText()
+    {
+        $parsedown = Parsedown::instance("messages");
 
-		$parsedown->setBreaksEnabled(true);
-		$parsedown->setMarkupEscaped(true);
+        $parsedown->setBreaksEnabled(true);
+        $parsedown->setMarkupEscaped(true);
 
-		$text = str_replace("javascript:", "javascript%3A", $this->text);// Escape JavaScript links (e.g. javascript:someFunction())
+        $text = str_replace("javascript:", "javascript%3A", $this->text);// Escape JavaScript links (e.g. javascript:someFunction())
 
-		return $parsedown->text($text);
-	}
+        return $parsedown->text($text);
+    }
 
-	public function saveAsNew()
-	{
-		$query = Database::prepare("
+    public function saveAsNew()
+    {
+        $query = Database::prepare("
 			INSERT INTO `messages`
 			SET
 				`date` = NOW(),
@@ -136,50 +132,48 @@ class Message
 				`text` = :text
 		");
 
-		$query->execute(array
-		(
-			":senderUserId" => $this->sender->id,
-			":text" => $this->text
-		));
+        $query->execute(array
+        (
+            ":senderUserId" => $this->sender->id,
+            ":text" => $this->text
+        ));
 
-		$this->id = Database::lastInsertId();
+        $this->id = Database::lastInsertId();
 
-		$query = Database::prepare("
+        $query = Database::prepare("
 			INSERT INTO `messagerecipients`
 			SET
 				`messageId` = :messageId,
 				`userId` = :userId
 		");
 
-		/**
-		 * @var $recipient User
-		 */
-		foreach ($this->recipients as $recipient)
-		{
-			$query->execute(array
-			(
-				":messageId" => $this->id,
-				":userId" => $recipient->id
-			));
-		}
+        /**
+         * @var $recipient User
+         */
+        foreach ($this->recipients as $recipient) {
+            $query->execute(array
+            (
+                ":messageId" => $this->id,
+                ":userId" => $recipient->id
+            ));
+        }
 
-		$query = Database::prepare("
+        $query = Database::prepare("
 			INSERT INTO `messageattachments`
 			SET
 				`messageId` = :messageId,
 				`uploadId` = :uploadId
 		");
 
-		/**
-		 * @var $attachment Upload
-		 */
-		foreach ($this->attachments as $attachment)
-		{
-			$query->execute(array
-			(
-				":messageId" => $this->id,
-				":uploadId" => $attachment->id
-			));
-		}
-	}
+        /**
+         * @var $attachment Upload
+         */
+        foreach ($this->attachments as $attachment) {
+            $query->execute(array
+            (
+                ":messageId" => $this->id,
+                ":uploadId" => $attachment->id
+            ));
+        }
+    }
 }

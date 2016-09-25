@@ -3,32 +3,32 @@
 {% block title %}Home{{ parent() }}{% endblock %}
 
 {% block content %}
-	<h3 class="page-header">
-		Hallo {{ currentUser.firstName }},<br/>
-		<span class="lead">willkommen im Internen Bereich</span>
-	</h3>
+    <h3 class="page-header">
+        Hallo {{ currentUser.firstName }},<br/>
+        <span class="lead">willkommen im Internen Bereich</span>
+    </h3>
 
-	{% if not(currentUser.has2FA) %}
-		<div class="alert alert-warning media">
-			<div class="media-left media-middle">
-				<i class="fa fa-exclamation-triangle fa-3x"></i>
-			</div>
-			<div class="media-body">
-				Du verwendest aktuell <strong>keine</strong> Zwei-Faktor-Authentifizierung. Durch die Verwendung der Zwei-Faktor-Authentifizierung wird dein Benutzeraccount zus&auml;tzlich zu deinen bisherigen Anmeldedaten mit einem Code gesch&uuml;tzt.<br/>
-				Die Zwei-Faktor-Authentifizierung kannst du in den <a href="intern/settings/account">Accounteinstellungen</a> aktivieren.
-			</div>
-		</div>
-	{% endif %}
+    {% if not(currentUser.has2FA) %}
+        <div class="alert alert-warning media">
+            <div class="media-left media-middle">
+                <i class="fa fa-exclamation-triangle fa-3x"></i>
+            </div>
+            <div class="media-body">
+                Du verwendest aktuell <strong>keine</strong> Zwei-Faktor-Authentifizierung. Durch die Verwendung der Zwei-Faktor-Authentifizierung wird dein Benutzeraccount zus&auml;tzlich zu deinen bisherigen Anmeldedaten mit einem Code gesch&uuml;tzt.<br/>
+                Die Zwei-Faktor-Authentifizierung kannst du in den <a href="intern/settings/account">Accounteinstellungen</a> aktivieren.
+            </div>
+        </div>
+    {% endif %}
 
-	<h3>Letzte Nachricht</h3>
+    <h3>Letzte Nachricht</h3>
 
-	{% include("messages/list.twig") %}
+    {% include("messages/list.twig") %}
 
-	{% if albums.count %}
-		<h3 class="page-header">Neueste Bilder</h3>
+    {% if albums.count %}
+        <h3 class="page-header">Neueste Bilder</h3>
 
-		{% include("pictures/albums-list.twig") %}
+        {% include("pictures/albums-list.twig") %}
 
-		<p class="text-muted">Klicke <a href="{{ picturesBaseUrl }}">hier</a> um weitere Alben zu sehen.</p>
-	{% endif %}
+        <p class="text-muted">Klicke <a href="{{ picturesBaseUrl }}">hier</a> um weitere Alben zu sehen.</p>
+    {% endif %}
 {% endblock %}

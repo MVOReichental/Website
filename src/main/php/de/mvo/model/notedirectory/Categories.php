@@ -6,21 +6,20 @@ use de\mvo\Database;
 
 class Categories extends ArrayObject
 {
-	public static function getAll()
-	{
-		$query = Database::query("
+    public static function getAll()
+    {
+        $query = Database::query("
 			SELECT *
 			FROM `notedirectorycategories`
 			ORDER BY `order` ASC
 		");
 
-		$categories = new self;
+        $categories = new self;
 
-		while ($category = $query->fetchObject(Category::class))
-		{
-			$categories->append($category);
-		}
+        while ($category = $query->fetchObject(Category::class)) {
+            $categories->append($category);
+        }
 
-		return $categories;
-	}
+        return $categories;
+    }
 }

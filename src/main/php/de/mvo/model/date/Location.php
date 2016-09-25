@@ -6,97 +6,89 @@ use PDO;
 
 class Location
 {
-	/**
-	 * @var int
-	 */
-	public $id;
-	/**
-	 * @var string
-	 */
-	public $name;
-	/**
-	 * @var float
-	 */
-	public $latitude;
-	/**
-	 * @var float
-	 */
-	public $longitude;
+    /**
+     * @var int
+     */
+    public $id;
+    /**
+     * @var string
+     */
+    public $name;
+    /**
+     * @var float
+     */
+    public $latitude;
+    /**
+     * @var float
+     */
+    public $longitude;
 
-	public function __construct()
-	{
-		if ($this->id === null)
-		{
-			return;
-		}
+    public function __construct()
+    {
+        if ($this->id === null) {
+            return;
+        }
 
-		$this->id = (int) $this->id;
+        $this->id = (int)$this->id;
 
-		if ($this->latitude !== null)
-		{
-			$this->latitude = (float) $this->latitude;
-		}
+        if ($this->latitude !== null) {
+            $this->latitude = (float)$this->latitude;
+        }
 
-		if ($this->longitude !== null)
-		{
-			$this->longitude = (float) $this->longitude;
-		}
-	}
+        if ($this->longitude !== null) {
+            $this->longitude = (float)$this->longitude;
+        }
+    }
 
-	/**
-	 * @param int $id
-	 *
-	 * @return Location|null
-	 */
-	public static function getById($id)
-	{
-		$query = Database::prepare("SELECT * FROM `locations` WHERE `id` = :id");
+    /**
+     * @param int $id
+     *
+     * @return Location|null
+     */
+    public static function getById($id)
+    {
+        $query = Database::prepare("SELECT * FROM `locations` WHERE `id` = :id");
 
-		$query->execute(array
-		(
-			":id" => $id
-		));
+        $query->execute(array
+        (
+            ":id" => $id
+        ));
 
-		if (!$query->rowCount())
-		{
-			return null;
-		}
+        if (!$query->rowCount()) {
+            return null;
+        }
 
-		return $query->fetchObject(self::class);
-	}
+        return $query->fetchObject(self::class);
+    }
 
-	public static function getByName($name)
-	{
-		$query = Database::prepare("SELECT * FROM `locations` WHERE `name` = :name");
+    public static function getByName($name)
+    {
+        $query = Database::prepare("SELECT * FROM `locations` WHERE `name` = :name");
 
-		$query->execute(array
-		(
-			":name" => $name
-		));
+        $query->execute(array
+        (
+            ":name" => $name
+        ));
 
-		if (!$query->rowCount())
-		{
-			return null;
-		}
+        if (!$query->rowCount()) {
+            return null;
+        }
 
-		return $query->fetchObject(self::class);
-	}
+        return $query->fetchObject(self::class);
+    }
 
-	public function save()
-	{
-		if ($this->id === null)
-		{
-			$query = Database::prepare("
+    public function save()
+    {
+        if ($this->id === null) {
+            $query = Database::prepare("
 				INSERT INTO `locations`
 				SET
 					`name` = :name,
 					`latitude` = :latitude,
 					`longitude` = :longitude
 			");
-		}
-		else
-		{
-			$query = Database::prepare("
+        } else {
+            $query = Database::prepare("
 				UPDATE `locations`
 				SET
 					`name` = :name,
@@ -105,18 +97,17 @@ class Location
 				WHERE `id` = :id
 			");
 
-			$query->bindValue(":id", $this->id, PDO::PARAM_INT);
-		}
+            $query->bindValue(":id", $this->id, PDO::PARAM_INT);
+        }
 
-		$query->bindValue(":name", $this->name);
-		$query->bindValue(":latitude", $this->latitude);
-		$query->bindValue(":longitude", $this->longitude);
+        $query->bindValue(":name", $this->name);
+        $query->bindValue(":latitude", $this->latitude);
+        $query->bindValue(":longitude", $this->longitude);
 
-		$query->execute();
+        $query->execute();
 
-		if ($this->id === null)
-		{
-			$this->id = Database::lastInsertId();
-		}
-	}
+        if ($this->id === null) {
+            $this->id = Database::lastInsertId();
+        }
+    }
 }

@@ -3,35 +3,35 @@
 {% block title %}Login{{ parent() }}{% endblock %}
 
 {% block stylesheets %}
-	{{ parent() }}
+    {{ parent() }}
 
-	<link rel="stylesheet" href="css/account.css"/>
+    <link rel="stylesheet" href="css/account.css"/>
 {% endblock %}
 
 {% block content %}
-	<form class="login-form input-list" id="login-form" method="post" action="intern/login?redirect={{ url }}">
-		<h2>Login im internen Bereich</h2>
+    <form class="login-form input-list" id="login-form" method="post" action="intern/login?redirect={{ url }}">
+        <h2>Login im internen Bereich</h2>
 
-		{% if errorMessage %}
-			<div class="alert alert-danger">{{ errorMessage|raw }}</div>
-		{% endif %}
+        {% if errorMessage %}
+            <div class="alert alert-danger">{{ errorMessage|raw }}</div>
+        {% endif %}
 
-		{% if requestToken %}
-			<div class="alert alert-info">
-				Bei deinem Account ist die Zwei-Faktor-Authentifizierung aktiviert.<br/>
-				Gebe den aus der App generierten Code in das nachfolgende Feld ein.
-			</div>
+        {% if requestToken %}
+            <div class="alert alert-info">
+                Bei deinem Account ist die Zwei-Faktor-Authentifizierung aktiviert.<br/>
+                Gebe den aus der App generierten Code in das nachfolgende Feld ein.
+            </div>
 
-			<input type="text" id="login-2fa-token" name="2fa-token" class="form-control" placeholder="Code" required/>
+            <input type="text" id="login-2fa-token" name="2fa-token" class="form-control" placeholder="Code" required/>
 
-			<button class="btn btn-lg btn-primary">Login</button>
-		{% else %}
-			<input type="text" id="login-username" name="username" class="form-control" placeholder="Benutzername" required autofocus/>
-			<input type="password" id="login-password" name="password" class="form-control" placeholder="Passwort" required/>
+            <button class="btn btn-lg btn-primary">Login</button>
+        {% else %}
+            <input type="text" id="login-username" name="username" class="form-control" placeholder="Benutzername" required autofocus/>
+            <input type="password" id="login-password" name="password" class="form-control" placeholder="Passwort" required/>
 
-			<button class="btn btn-lg btn-primary btn-block">Login</button>
+            <button class="btn btn-lg btn-primary btn-block">Login</button>
 
-			<a href="intern/reset-password" class="help-block text-center">Passwort vergessen?</a>
-		{% endif %}
-	</form>
+            <a href="intern/reset-password" class="help-block text-center">Passwort vergessen?</a>
+        {% endif %}
+    </form>
 {% endblock %}
