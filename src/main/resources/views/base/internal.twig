@@ -46,10 +46,18 @@
                                 <li><a href="internal/members/birthdays">Geburtstage</a></li>
                             </ul>
                         </li>
-                        <li><a href="internal/forms"><i class="fa fa-file-text"></i> Formulare</a></li>
-                        <li><a href="internal/notedirectory"><i class="fa fa-book"></i> Notenverzeichnis</a></li>
-                        <li><a href="internal/protocols"><i class="fa fa-list"></i> Protokolle</a></li>
-                        <li><a href="internal/roomoccupancyplan"><i class="fa fa-table"></i> Proberaumbelegungsplan</a></li>
+                        {% if currentUser.hasPermission("forms.*") %}
+                            <li><a href="internal/forms"><i class="fa fa-file-text"></i> Formulare</a></li>
+                        {% endif %}
+                        {% if currentUser.hasPermission("notedirectory.*") %}
+                            <li><a href="internal/notedirectory"><i class="fa fa-book"></i> Notenverzeichnis</a></li>
+                        {% endif %}
+                        {% if currentUser.hasPermission("protocols.*") %}
+                            <li><a href="internal/protocols"><i class="fa fa-list"></i> Protokolle</a></li>
+                        {% endif %}
+                        {% if currentUser.hasPermission("roomoccupancyplan.*") %}
+                            <li><a href="internal/roomoccupancyplan"><i class="fa fa-table"></i> Proberaumbelegungsplan</a></li>
+                        {% endif %}
                         <li><a href="internal/dates"><i class="fa fa-calendar"></i> Termine</a></li>
                         <li><a href="internal/pictures"><i class="fa fa-camera"></i> Fotogalerie</a></li>
                     </ul>
