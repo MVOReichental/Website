@@ -14,7 +14,7 @@ class FormList extends ArrayObject
         $query = Database::query("SELECT * FROM `forms`");
 
         while ($form = $query->fetchObject(Form::class)) {
-            if (!$user->hasPermission("forms." . $form->name)) {
+            if (!$user->hasPermission("forms.view." . $form->name)) {
                 continue;
             }
 

@@ -25,7 +25,7 @@ class Forms extends AbstractService
             throw new NotFoundException;
         }
 
-        if (!User::getCurrent()->hasPermission("forms." . $form->name)) {
+        if (!User::getCurrent()->hasPermission("forms.view." . $form->name)) {
             throw new PermissionViolationException;
         }
 
