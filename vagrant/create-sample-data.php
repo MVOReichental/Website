@@ -87,7 +87,12 @@ $user3->username = "test";
 $user3->firstName = "Test";
 $user3->lastName = "User";
 
-$users = array($user1, $user2, $user3);
+$adminUser = new User;
+$adminUser->username = "admin";
+$adminUser->firstName = "Super";
+$adminUser->lastName = "Admin";
+
+$users = array($user1, $user2, $user3, $adminUser);
 
 Database::query("DELETE FROM `users`");
 
@@ -116,6 +121,7 @@ foreach ($users as $user) {
 $user1->setPassword("my");
 $user2->setPassword("foo");
 $user3->setPassword("test");
+$adminUser->setPassword("admin");
 
 $root = new GroupList;
 
@@ -152,5 +158,12 @@ $group1->title = "Group 3";
 $group1->permissions->append("group.vorstandschaft.vorstand");
 $group1->addUser($user1);
 $rootGroup->addGroup($group1);
+
+$adminGroup = new Group;
+$adminGroup->title = "Admin";
+$adminGroup->permissions->append("group.admin");
+$adminGroup->permissions->append("*");
+$adminGroup->addUser($adminUser);
+$rootGroup->addGroup($adminGroup);
 
 $root->save();
