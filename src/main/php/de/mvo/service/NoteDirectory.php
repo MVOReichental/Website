@@ -19,7 +19,7 @@ class NoteDirectory extends AbstractService
             throw new NotFoundException;
         }
 
-        header("Location: /intern/notedirectory/programs/" . $program->year . "/" . $program->name, true, 302);
+        header("Location: /internal/notedirectory/programs/" . $program->year . "/" . $program->name, true, 302);
         return null;
     }
 

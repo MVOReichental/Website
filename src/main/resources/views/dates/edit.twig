@@ -1,4 +1,4 @@
-{% extends "base/intern-public-switch.twig" %}
+{% extends "base/internal-public-switch.twig" %}
 
 {% block title %}
     {% if entry.id %}
@@ -25,7 +25,7 @@
         {% endif %}
     </h1>
 
-    <form action="intern/dates" method="post">
+    <form action="internal/dates" method="post">
         {% if entry.id %}
             <input type="hidden" name="id" value="{{ entry.id }}"/>
         {% endif %}
@@ -92,6 +92,6 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Speichern</button>
-        <a href="intern/dates" class="btn btn-default">Abbrechen</a>
+        <a href="internal/dates" class="btn btn-default">Abbrechen</a>
     </form>
 {% endblock %}

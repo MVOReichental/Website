@@ -1,4 +1,4 @@
-{% extends "base/intern-public-switch.twig" %}
+{% extends "base/internal-public-switch.twig" %}
 
 {% block title %}Termine{{ parent() }}{% endblock %}
 
@@ -24,7 +24,7 @@
     <div class="btn-toolbar hidden-print">
         {% if allowEdit %}
             <div class="btn-group">
-                <a href="intern/dates/create" class="btn btn-default"><i class="fa fa-plus"></i> Neuer Termin</a>
+                <a href="internal/dates/create" class="btn btn-default"><i class="fa fa-plus"></i> Neuer Termin</a>
             </div>
         {% endif %}
 
@@ -47,7 +47,7 @@
 
     <p class="text-muted hidden-print">
         Diese Termine können im iCalendar-Format abgerufen werden, um sie in einer Kalenderanwendung wie z.B. Outlook oder einer Kalender-App auf dem Smartphone anzuzeigen.<br/>
-        F&uuml;ge hierzu folgenden Link in der Kalenderanwendung ein: <a href="intern/dates.ics" id="ical-url"></a>
+        F&uuml;ge hierzu folgenden Link in der Kalenderanwendung ein: <a href="internal/dates.ics" id="ical-url"></a>
     </p>
 
     <script type="text/javascript">

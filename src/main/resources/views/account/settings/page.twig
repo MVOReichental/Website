@@ -1,4 +1,4 @@
-{% extends "base/intern-public-switch.twig" %}
+{% extends "base/internal-public-switch.twig" %}
 
 {% block title %}{{ activePage.title }} - Einstellungen{{ parent() }}{% endblock %}
 
@@ -26,7 +26,7 @@
                     {% if page.active %}
                         <span class="list-group-item active">{{ page.title }}</span>
                     {% else %}
-                        <a class="list-group-item" href="intern/settings/{{ page.name }}">{{ page.title }}</a>
+                        <a class="list-group-item" href="internal/settings/{{ page.name }}">{{ page.title }}</a>
                     {% endif %}
                 {% endfor %}
             </div>

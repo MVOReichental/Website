@@ -51,7 +51,7 @@ class Members extends AbstractService
 
     public function getList()
     {
-        $baseUrl = "intern/members";
+        $baseUrl = "internal/members";
 
         $users = new Users;
 

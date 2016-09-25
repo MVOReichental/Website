@@ -6,7 +6,7 @@ use de\mvo\model\pictures\YearList;
 use de\mvo\model\users\User;
 use de\mvo\TwigRenderer;
 
-class InternHome extends AbstractService
+class InternalHome extends AbstractService
 {
     public function get()
     {
@@ -33,7 +33,7 @@ class InternHome extends AbstractService
 
         $albums->sortByDate(false);
 
-        return TwigRenderer::render("home-intern", array
+        return TwigRenderer::render("home-internal", array
         (
             "user" => User::getCurrent(),
             "messages" => $latestMessage,

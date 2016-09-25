@@ -12,7 +12,7 @@
                 {% for protocol in protocols %}
                     <tr data-id="{{ protocol.id }}">
                         <td>
-                            <a href="intern/uploads/{{ protocol.upload.id }}/{{ protocol.upload.key }}/{{ protocol.upload.filename }}" class="btn btn-success btn-xs hidden-print"><i class="fa fa-download"></i> Herunterladen</a>
+                            <a href="internal/uploads/{{ protocol.upload.id }}/{{ protocol.upload.key }}/{{ protocol.upload.filename }}" class="btn btn-success btn-xs hidden-print"><i class="fa fa-download"></i> Herunterladen</a>
                             {{ protocol.title }}
                         </td>
                         <td data-value="{{ protocol.date.format("Ymd") }}">{{ protocol.date.humanReadableDate }}</td>

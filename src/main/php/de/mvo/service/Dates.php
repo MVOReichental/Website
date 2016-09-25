@@ -14,9 +14,9 @@ use Eluceo\iCal\Component\Event;
 
 class Dates extends AbstractService
 {
-    public function getHtml($intern = false)
+    public function getHtml($internal = false)
     {
-        $user = ($intern ? User::getCurrent() : null);
+        $user = ($internal ? User::getCurrent() : null);
 
         $dates = DateList::get($user);
 
@@ -54,7 +54,7 @@ class Dates extends AbstractService
 
                 sort($newSelectedGroups);
 
-                $groups[$group]["url"] = "intern/dates/" . implode("+", array_unique($newSelectedGroups));
+                $groups[$group]["url"] = "internal/dates/" . implode("+", array_unique($newSelectedGroups));
             }
 
             foreach ($selectedGroups as $group) {
@@ -68,7 +68,7 @@ class Dates extends AbstractService
             }
         }
 
-        return TwigRenderer::render("dates/" . ($intern ? "page-intern" : "page"), array
+        return TwigRenderer::render("dates/" . ($internal ? "page-internal" : "page"), array
         (
             "dates" => $dates,
             "yearlyDates" => json_decode(file_get_contents(MODELS_ROOT . "/yearly-events.json")),
@@ -77,11 +77,11 @@ class Dates extends AbstractService
         ));
     }
 
-    public function getIcal($intern = false)
+    public function getIcal($internal = false)
     {
         $calendar = new Calendar($_SERVER["HTTP_HOST"]);
 
-        $dates = DateList::get($intern ? User::getCurrent() : null);
+        $dates = DateList::get($internal ? User::getCurrent() : null);
 
         /**
          * @var $date Entry

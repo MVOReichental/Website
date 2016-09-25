@@ -7,7 +7,7 @@ use de\mvo\TwigRenderer;
 
 class Pictures extends AbstractService
 {
-    public function getYears($intern = false)
+    public function getYears($internal = false)
     {
         $years = YearList::load();
         if (!$years->count()) {
@@ -16,18 +16,18 @@ class Pictures extends AbstractService
 
         return TwigRenderer::render("pictures/years-overview", array
         (
-            "picturesBaseUrl" => $intern ? "intern/pictures" : "fotogalerie",
+            "picturesBaseUrl" => $internal ? "internal/pictures" : "fotogalerie",
             "years" => $years
         ));
     }
 
-    public function getAlbums($intern = false)
+    public function getAlbums($internal = false)
     {
         $albums = null;
 
         $year = YearList::load()->getYear($this->params->year);
         if ($year !== null) {
-            $albums = $year->albums->getVisibleToUser($intern ? User::getCurrent() : null);
+            $albums = $year->albums->getVisibleToUser($internal ? User::getCurrent() : null);
 
             if ($albums != null and $albums->count()) {
                 $albums->sortByDate(false);
@@ -40,13 +40,13 @@ class Pictures extends AbstractService
 
         return TwigRenderer::render("pictures/albums-overview", array
         (
-            "picturesBaseUrl" => $intern ? "intern/pictures" : "fotogalerie",
+            "picturesBaseUrl" => $internal ? "internal/pictures" : "fotogalerie",
             "year" => $this->params->year,
             "albums" => $albums
         ));
     }
 
-    public function getAlbum($intern = false)
+    public function getAlbum($internal = false)
     {
         $album = null;
 
@@ -57,7 +57,7 @@ class Pictures extends AbstractService
                 $album = $albums->getAlbum($this->params->album);
                 if ($album === null) {
                     http_response_code(404);
-                } elseif (!$album->isVisibleToUser($intern ? User::getCurrent() : null)) {
+                } elseif (!$album->isVisibleToUser($internal ? User::getCurrent() : null)) {
                     $album = null;
                     http_response_code(404);
                 }
@@ -70,7 +70,7 @@ class Pictures extends AbstractService
 
         return TwigRenderer::render("pictures/album", array
         (
-            "picturesBaseUrl" => $intern ? "intern/pictures" : "fotogalerie",
+            "picturesBaseUrl" => $internal ? "internal/pictures" : "fotogalerie",
             "year" => $this->params->year,
             "title" => $album === null ? $this->params->album : $album->title,
             "album" => $album

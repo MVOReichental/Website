@@ -1,4 +1,4 @@
-{% extends "base/intern-public-switch.twig" %}
+{% extends "base/internal-public-switch.twig" %}
 
 {% block title %}Formulare{{ parent() }}{% endblock %}
 
@@ -19,7 +19,7 @@
                     {% for form in forms %}
                         <tr>
                             <td>
-                                <a href="intern/forms/{{ form.filename }}" class="btn btn-success btn-xs"><i class="fa fa-download"></i> Herunterladen</a>
+                                <a href="internal/forms/{{ form.filename }}" class="btn btn-success btn-xs"><i class="fa fa-download"></i> Herunterladen</a>
                                 {{ form.title }}
                             </td>
                             <td>{{ form.type }}</td>

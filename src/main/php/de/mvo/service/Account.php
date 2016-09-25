@@ -78,7 +78,7 @@ class Account extends AbstractService
         if (isset($_GET["redirect"]) and $_GET["redirect"] != "") {
             header("Location: " . $_GET["redirect"], true, 302);
         } else {
-            header("Location: /intern", true, 302);
+            header("Location: /internal", true, 302);
         }
 
         return null;

@@ -12,7 +12,7 @@ $(function () {
 
     $("#dates-remove-confirm").on("click", function () {
         $.ajax({
-            url: "intern/dates/" + $("#dates-remove-modal").data("id"),
+            url: "internal/dates/" + $("#dates-remove-modal").data("id"),
             method: "DELETE",
             success: function () {
                 document.location.reload(true);

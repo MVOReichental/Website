@@ -1,4 +1,4 @@
-{% extends "base/intern-public-switch.twig" %}
+{% extends "base/internal-public-switch.twig" %}
 
 {% block title %}Login{{ parent() }}{% endblock %}
 
@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block content %}
-    <form class="login-form input-list" id="login-form" method="post" action="intern/login?redirect={{ url }}">
+    <form class="login-form input-list" id="login-form" method="post" action="internal/login?redirect={{ url }}">
         <h2>Login im internen Bereich</h2>
 
         {% if errorMessage %}
@@ -31,7 +31,7 @@
 
             <button class="btn btn-lg btn-primary btn-block">Login</button>
 
-            <a href="intern/reset-password" class="help-block text-center">Passwort vergessen?</a>
+            <a href="internal/reset-password" class="help-block text-center">Passwort vergessen?</a>
         {% endif %}
     </form>
 {% endblock %}

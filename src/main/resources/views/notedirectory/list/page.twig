@@ -1,4 +1,4 @@
-{% extends "base/intern-public-switch.twig" %}
+{% extends "base/internal-public-switch.twig" %}
 
 {% block title %}{{ title }} - Notenverzeichnis{{ parent() }}{% endblock %}
 
@@ -24,7 +24,7 @@
                     <li class="dropdown-header">{{ year.year }}</li>
                     {% for program in year.programs %}
                         <li>
-                            <a href="intern/notedirectory/programs/{{ program.year }}/{{ program.name }}">{{ program.title }}</a>
+                            <a href="internal/notedirectory/programs/{{ program.year }}/{{ program.name }}">{{ program.title }}</a>
                         </li>
                     {% endfor %}
                     <li class="divider"></li>
@@ -38,12 +38,12 @@
             </button>
             <ul class="dropdown-menu">
                 {% for category in categories %}
-                    <li><a href="intern/notedirectory/categories/{{ category.id }}">{{ category.title }}</a></li>
+                    <li><a href="internal/notedirectory/categories/{{ category.id }}">{{ category.title }}</a></li>
                 {% endfor %}
             </ul>
         </div>
 
-        <a href="intern/notedirectory/titles" class="btn btn-default">Alle Titel</a>
+        <a href="internal/notedirectory/titles" class="btn btn-default">Alle Titel</a>
     </div>
 
     {{ list|raw }}

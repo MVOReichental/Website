@@ -9,7 +9,7 @@
                 </div>
                 <div class="media-body">
                     <div class="clearfix">
-                        <strong>Von:</strong> <a href="intern/members/{{ message.sender.username }}" class="label label-default">{{ message.sender.firstName }} {{ message.sender.lastName }}</a>
+                        <strong>Von:</strong> <a href="internal/members/{{ message.sender.username }}" class="label label-default">{{ message.sender.firstName }} {{ message.sender.lastName }}</a>
 
                         <div class="messages-date">
                             <i class="fa fa-clock-o"></i> {{ message.date.humanReadableDate }} um {{ message.date.humanReadableTime }}
@@ -18,14 +18,14 @@
                     <div class="clearfix">
                         <strong>An:</strong>
                         {% for recipient in message.recipients %}
-                            <a href="intern/members/{{ recipient.username }}" class="label label-default">{{ recipient.firstName }} {{ recipient.lastName }}</a>
+                            <a href="internal/members/{{ recipient.username }}" class="label label-default">{{ recipient.firstName }} {{ recipient.lastName }}</a>
                         {% endfor %}
                     </div>
                     {% if message.attachments.count %}
                         <div class="clearfix">
                             <strong>Anh&auml;nge:</strong>
                             {% for attachment in message.attachments %}
-                                <a href="intern/uploads/{{ attachment.id }}/{{ attachment.key }}/{{ attachment.filename }}" class="label label-default">{{ attachment.filename }}</a>
+                                <a href="internal/uploads/{{ attachment.id }}/{{ attachment.key }}/{{ attachment.filename }}" class="label label-default">{{ attachment.filename }}</a>
                             {% endfor %}
                         </div>
                     {% endif %}

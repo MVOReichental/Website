@@ -1,4 +1,4 @@
-{% extends "base/intern-public-switch.twig" %}
+{% extends "base/internal-public-switch.twig" %}
 
 {% block title %}Passwort zur&uuml;cksetzen{{ parent() }}{% endblock %}
 
@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block content %}
-    <form class="login-form" method="post" action="intern/reset-password">
+    <form class="login-form" method="post" action="internal/reset-password">
         <h2>Passwort zur&uuml;cksetzen</h2>
 
         <p class="help-block">Solltest du dein Passwort vergessen haben, kannst du dieses hier zur&uuml;cksetzen. Gebe hierzu deinen Benutzername ein.</p>

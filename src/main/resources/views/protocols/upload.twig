@@ -1,11 +1,11 @@
-{% extends "base/intern-public-switch.twig" %}
+{% extends "base/internal-public-switch.twig" %}
 
 {% block title %}Protokoll hochladen{{ parent() }}{% endblock %}
 
 {% block content %}
     <h1 class="page-header">Protokoll hochladen</h1>
 
-    <form action="intern/protocols" method="post" enctype="multipart/form-data">
+    <form action="internal/protocols" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="protocols-upload-date">Datum</label>
             <input type="date" class="form-control" id="protocols-upload-date" name="date" required/>
@@ -32,6 +32,6 @@
         </div>
 
         <button type="submit" class="btn btn-primary"><i class="fa fa-upload"></i> Hochladen</button>
-        <a href="intern/protocols" class="btn btn-default">Abbrechen</a>
+        <a href="internal/protocols" class="btn btn-default">Abbrechen</a>
     </form>
 {% endblock %}

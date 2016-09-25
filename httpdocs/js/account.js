@@ -121,7 +121,7 @@ $(function () {
         }
 
         $.ajax({
-            url: "intern/settings/2fa/disable",
+            url: "internal/settings/2fa/disable",
             method: "POST",
             data: {
                 "password": password
@@ -156,7 +156,7 @@ $(function () {
         }
 
         $.ajax({
-            url: "intern/settings/2fa/request",
+            url: "internal/settings/2fa/request",
             method: "POST",
             data: {
                 "password": password
@@ -193,7 +193,7 @@ $(function () {
         }
 
         $.ajax({
-            url: "intern/settings/2fa/enable",
+            url: "internal/settings/2fa/enable",
             method: "POST",
             data: {
                 "token": token

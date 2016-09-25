@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="bower_components/bootstrap-select/dist/css/bootstrap-select.min.css"/>
     <link rel="stylesheet" href="bower_components/Jcrop/css/Jcrop.min.css"/>
 
-    <link rel="stylesheet" href="css/main-intern.css"/>
+    <link rel="stylesheet" href="css/main-internal.css"/>
 {% endblock %}
 
 {% block scripts %}
@@ -35,23 +35,23 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="intern">Interner Bereich</a>
+                    <a class="navbar-brand" href="internal">Interner Bereich</a>
                 </div>
                 <div class="collapse navbar-collapse" id="navbar">
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" role="button"><i class="fa fa-users"></i> Mitglieder <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="intern/members/addresslist">Adressenliste</a></li>
-                                <li><a href="intern/members/birthdays">Geburtstage</a></li>
+                                <li><a href="internal/members/addresslist">Adressenliste</a></li>
+                                <li><a href="internal/members/birthdays">Geburtstage</a></li>
                             </ul>
                         </li>
-                        <li><a href="intern/forms"><i class="fa fa-file-text"></i> Formulare</a></li>
-                        <li><a href="intern/notedirectory"><i class="fa fa-book"></i> Notenverzeichnis</a></li>
-                        <li><a href="intern/protocols"><i class="fa fa-list"></i> Protokolle</a></li>
-                        <li><a href="intern/roomoccupancyplan"><i class="fa fa-table"></i> Proberaumbelegungsplan</a></li>
-                        <li><a href="intern/dates"><i class="fa fa-calendar"></i> Termine</a></li>
-                        <li><a href="intern/pictures"><i class="fa fa-camera"></i> Fotogalerie</a></li>
+                        <li><a href="internal/forms"><i class="fa fa-file-text"></i> Formulare</a></li>
+                        <li><a href="internal/notedirectory"><i class="fa fa-book"></i> Notenverzeichnis</a></li>
+                        <li><a href="internal/protocols"><i class="fa fa-list"></i> Protokolle</a></li>
+                        <li><a href="internal/roomoccupancyplan"><i class="fa fa-table"></i> Proberaumbelegungsplan</a></li>
+                        <li><a href="internal/dates"><i class="fa fa-calendar"></i> Termine</a></li>
+                        <li><a href="internal/pictures"><i class="fa fa-camera"></i> Fotogalerie</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
@@ -62,17 +62,17 @@
                             <ul class="dropdown-menu">
                                 <li class="dropdown-header">Angemeldet als <strong>{{ currentUser.firstName }} {{ currentUser.lastName }}</strong></li>
 
-                                <li><a href="intern/members/{{ currentUser.username }}"><i class="fa fa-user"></i> Dein Profil</a></li>
+                                <li><a href="internal/members/{{ currentUser.username }}"><i class="fa fa-user"></i> Dein Profil</a></li>
 
                                 <li class="divider"></li>
 
-                                <li><a href="intern/messages/sent"><i class="fa fa-send"></i> Gesendete Nachrichten</a></li>
-                                <li><a href="intern/messages/received"><i class="fa fa-inbox"></i> Empfangene Nachrichten</a></li>
+                                <li><a href="internal/messages/sent"><i class="fa fa-send"></i> Gesendete Nachrichten</a></li>
+                                <li><a href="internal/messages/received"><i class="fa fa-inbox"></i> Empfangene Nachrichten</a></li>
 
                                 <li class="divider"></li>
 
-                                <li><a href="intern/settings"><i class="fa fa-cogs"></i> Einstellungen</a></li>
-                                <li><a href="intern/logout"><i class="fa fa-sign-out"></i> Abmelden</a></li>
+                                <li><a href="internal/settings"><i class="fa fa-cogs"></i> Einstellungen</a></li>
+                                <li><a href="internal/logout"><i class="fa fa-sign-out"></i> Abmelden</a></li>
                             </ul>
                         </li>
                     </ul>

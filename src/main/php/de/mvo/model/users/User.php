@@ -231,7 +231,7 @@ class User implements JsonSerializable
         $message->setBody(TwigRenderer::render("account/reset-password/mail", array
         (
             "user" => $this,
-            "url" => Url::getBaseUrl() . "/intern/reset-password/confirm?id=" . $this->id . "&key=" . $key
+            "url" => Url::getBaseUrl() . "/internal/reset-password/confirm?id=" . $this->id . "&key=" . $key
         )), "text/html");
         $message->setSubjectFromHtml($message->getBody());
 

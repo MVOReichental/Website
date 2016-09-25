@@ -30,7 +30,7 @@ class TwigRenderer
 
         self::$twig->addGlobal("currentYear", date("Y"));
         self::$twig->addGlobal("currentUser", User::getCurrent());
-        self::$twig->addGlobal("intern", (substr(ltrim($path, "/"), 0, 6) == "intern" and User::getCurrent()));
+        self::$twig->addGlobal("internal", (substr(ltrim($path, "/"), 0, 8) == "internal" and User::getCurrent()));
 
         $cache = Config::getInstance()->getValue("twig", "cache");
         if ($cache !== null) {

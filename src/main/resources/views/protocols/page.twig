@@ -1,4 +1,4 @@
-{% extends "base/intern-public-switch.twig" %}
+{% extends "base/internal-public-switch.twig" %}
 
 {% block title %}Protokolle{{ parent() }}{% endblock %}
 
@@ -15,7 +15,7 @@
 
     {% if allowUpload %}
         <div class="btn-toolbar hidden-print">
-            <a href="intern/protocols/upload" class="btn btn-default"><i class="fa fa-plus"></i> Protokoll hochladen</a>
+            <a href="internal/protocols/upload" class="btn btn-default"><i class="fa fa-plus"></i> Protokoll hochladen</a>
         </div>
     {% endif %}
 
