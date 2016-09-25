@@ -24,10 +24,10 @@ class Groups extends ArrayObject
         $groups = new self;
 
         $query = Database::prepare("
-				SELECT `name`
-				FROM `dategroups`
-				WHERE `dateId` = :dateId
-			");
+                SELECT `name`
+                FROM `dategroups`
+                WHERE `dateId` = :dateId
+            ");
 
         $query->execute(array
         (
@@ -46,10 +46,10 @@ class Groups extends ArrayObject
         $newGroups = $this->getArrayCopy();
 
         $query = Database::prepare("
-			SELECT *
-			FROM `dategroups`
-			WHERE `dateId` = :dateId
-		");
+            SELECT *
+            FROM `dategroups`
+            WHERE `dateId` = :dateId
+        ");
 
         $query->execute(array
         (
@@ -57,9 +57,9 @@ class Groups extends ArrayObject
         ));
 
         $deleteQuery = Database::prepare("
-			DELETE FROM `dategroups`
-			WHERE `id` = :id
-		");
+            DELETE FROM `dategroups`
+            WHERE `id` = :id
+        ");
 
         while ($row = $query->fetchObject(stdClass::class)) {
             $index = array_search($row->group, $newGroups);
@@ -74,11 +74,11 @@ class Groups extends ArrayObject
         }
 
         $query = Database::prepare("
-			INSERT INTO `dategroups`
-			SET
-				`dateId` = :dateId,
-				`name` = :name
-		");
+            INSERT INTO `dategroups`
+            SET
+                `dateId` = :dateId,
+                `name` = :name
+        ");
 
         foreach ($newGroups as $group) {
             $query->execute(array

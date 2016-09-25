@@ -11,11 +11,11 @@ class Messages extends ArrayObject
     public static function getAll($limit = 1000)
     {
         $query = Database::prepare("
-			SELECT *
-			FROM `messages`
-			ORDER BY `id` DESC
-			LIMIT :limit
-		");
+            SELECT *
+            FROM `messages`
+            ORDER BY `id` DESC
+            LIMIT :limit
+        ");
 
         $query->bindValue(":limit", $limit, PDO::PARAM_INT);
 
@@ -33,12 +33,12 @@ class Messages extends ArrayObject
     public static function getBySender(User $user, $limit = 1000)
     {
         $query = Database::prepare("
-			SELECT *
-			FROM `messages`
-			WHERE `senderUserId` = :senderUserId
-			ORDER BY `id` DESC
-			LIMIT :limit
-		");
+            SELECT *
+            FROM `messages`
+            WHERE `senderUserId` = :senderUserId
+            ORDER BY `id` DESC
+            LIMIT :limit
+        ");
 
         $query->bindValue(":senderUserId", $user->id, PDO::PARAM_INT);
         $query->bindValue(":limit", $limit, PDO::PARAM_INT);
@@ -57,13 +57,13 @@ class Messages extends ArrayObject
     public static function getByRecipient(User $user, $limit = 1000)
     {
         $query = Database::prepare("
-			SELECT `messages`.*
-			FROM `messagerecipients`
-			LEFT JOIN `messages` ON `messages`.`id` = `messagerecipients`.`messageId`
-			WHERE `messagerecipients`.`userId` = :recipientUserId
-			ORDER BY `messages`.`id` DESC
-			LIMIT :limit
-		");
+            SELECT `messages`.*
+            FROM `messagerecipients`
+            LEFT JOIN `messages` ON `messages`.`id` = `messagerecipients`.`messageId`
+            WHERE `messagerecipients`.`userId` = :recipientUserId
+            ORDER BY `messages`.`id` DESC
+            LIMIT :limit
+        ");
 
         $query->bindValue(":recipientUserId", $user->id, PDO::PARAM_INT);
         $query->bindValue(":limit", $limit, PDO::PARAM_INT);

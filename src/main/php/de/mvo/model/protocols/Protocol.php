@@ -59,12 +59,12 @@ class Protocol
     public function save()
     {
         $query = Database::prepare("
-			INSERT INTO `protocols`
-			SET
-				`uploadId` = :uploadId,
-				`title` = :title,
-				`date` = :date
-		");
+            INSERT INTO `protocols`
+            SET
+                `uploadId` = :uploadId,
+                `title` = :title,
+                `date` = :date
+        ");
 
         $query->execute(array
         (
@@ -76,11 +76,11 @@ class Protocol
         $this->id = Database::lastInsertId();
 
         $query = Database::prepare("
-			INSERT INTO `protocolgroups`
-			SET
-				`protocolId` = :protocolId,
-				`name` = :name
-		");
+            INSERT INTO `protocolgroups`
+            SET
+                `protocolId` = :protocolId,
+                `name` = :name
+        ");
 
         foreach ($this->groups as $group) {
             $query->execute(array

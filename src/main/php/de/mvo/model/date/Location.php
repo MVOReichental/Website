@@ -81,21 +81,21 @@ class Location
     {
         if ($this->id === null) {
             $query = Database::prepare("
-				INSERT INTO `locations`
-				SET
-					`name` = :name,
-					`latitude` = :latitude,
-					`longitude` = :longitude
-			");
+                INSERT INTO `locations`
+                SET
+                    `name` = :name,
+                    `latitude` = :latitude,
+                    `longitude` = :longitude
+            ");
         } else {
             $query = Database::prepare("
-				UPDATE `locations`
-				SET
-					`name` = :name,
-					`latitude` = :latitude,
-					`longitude` = :longitude
-				WHERE `id` = :id
-			");
+                UPDATE `locations`
+                SET
+                    `name` = :name,
+                    `latitude` = :latitude,
+                    `longitude` = :longitude
+                WHERE `id` = :id
+            ");
 
             $query->bindValue(":id", $this->id, PDO::PARAM_INT);
         }

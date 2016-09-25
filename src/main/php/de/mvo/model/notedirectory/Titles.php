@@ -9,10 +9,10 @@ class Titles extends ArrayObject
     public static function getAll()
     {
         $query = Database::query("
-			SELECT *
-			FROM `notedirectorytitles`
-			ORDER BY `title` ASC
-		");
+            SELECT *
+            FROM `notedirectorytitles`
+            ORDER BY `title` ASC
+        ");
 
         $titles = new self;
 
@@ -26,11 +26,11 @@ class Titles extends ArrayObject
     public static function getByCategory(Category $category)
     {
         $query = Database::prepare("
-			SELECT *
-			FROM `notedirectorytitles`
-			WHERE `categoryId` = :categoryId
-			ORDER BY `title` ASC
-		");
+            SELECT *
+            FROM `notedirectorytitles`
+            WHERE `categoryId` = :categoryId
+            ORDER BY `title` ASC
+        ");
 
         $query->execute(array
         (

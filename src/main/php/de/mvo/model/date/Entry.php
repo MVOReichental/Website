@@ -83,10 +83,10 @@ class Entry
     public static function getById($id)
     {
         $query = Database::prepare("
-			SELECT *
-			FROM `dates`
-			WHERE `id` = :id
-		");
+            SELECT *
+            FROM `dates`
+            WHERE `id` = :id
+        ");
 
         $query->execute(array
         (
@@ -103,9 +103,9 @@ class Entry
     public function delete()
     {
         $query = Database::prepare("
-			DELETE FROM `dates`
-			WHERE `id` = :id
-		");
+            DELETE FROM `dates`
+            WHERE `id` = :id
+        ");
 
         $query->execute(array
         (
@@ -117,29 +117,29 @@ class Entry
     {
         if ($this->id === null) {
             $query = Database::prepare("
-				INSERT INTO `dates`
-				SET
-					`startDate` = :startDate,
-					`endDate` = :endDate,
-					`title` = :title,
-					`description` = :description,
-					`locationId` = :locationId,
-					`highlight` = :highlight,
-					`isPublic` = :isPublic
-			");
+                INSERT INTO `dates`
+                SET
+                    `startDate` = :startDate,
+                    `endDate` = :endDate,
+                    `title` = :title,
+                    `description` = :description,
+                    `locationId` = :locationId,
+                    `highlight` = :highlight,
+                    `isPublic` = :isPublic
+            ");
         } else {
             $query = Database::prepare("
-				UPDATE `dates`
-				SET
-					`startDate` = :startDate,
-					`endDate` = :endDate,
-					`title` = :title,
-					`description` = :description,
-					`locationId` = :locationId,
-					`highlight` = :highlight,
-					`isPublic` = :isPublic
-				WHERE `id` = :id
-			");
+                UPDATE `dates`
+                SET
+                    `startDate` = :startDate,
+                    `endDate` = :endDate,
+                    `title` = :title,
+                    `description` = :description,
+                    `locationId` = :locationId,
+                    `highlight` = :highlight,
+                    `isPublic` = :isPublic
+                WHERE `id` = :id
+            ");
 
             $query->bindValue(":id", $this->id, PDO::PARAM_INT);
         }

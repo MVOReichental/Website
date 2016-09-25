@@ -9,10 +9,10 @@ class Categories extends ArrayObject
     public static function getAll()
     {
         $query = Database::query("
-			SELECT *
-			FROM `notedirectorycategories`
-			ORDER BY `order` ASC
-		");
+            SELECT *
+            FROM `notedirectorycategories`
+            ORDER BY `order` ASC
+        ");
 
         $categories = new self;
 

@@ -49,11 +49,11 @@ class Message
         $this->sender = User::getById($this->senderUserId);
 
         $query = Database::prepare("
-			SELECT `users`.*
-			FROM `messagerecipients`
-			LEFT JOIN `users` ON `users`.`id` = `messagerecipients`.`userId`
-			WHERE `messageId` = :messageId
-		");
+            SELECT `users`.*
+            FROM `messagerecipients`
+            LEFT JOIN `users` ON `users`.`id` = `messagerecipients`.`userId`
+            WHERE `messageId` = :messageId
+        ");
 
         $query->execute(array
         (
@@ -67,11 +67,11 @@ class Message
         }
 
         $query = Database::prepare("
-			SELECT `uploads`.*
-			FROM `messageattachments`
-			LEFT JOIN `uploads` ON `uploads`.`id` = `messageattachments`.`uploadId`
-			WHERE `messageId` = :messageId
-		");
+            SELECT `uploads`.*
+            FROM `messageattachments`
+            LEFT JOIN `uploads` ON `uploads`.`id` = `messageattachments`.`uploadId`
+            WHERE `messageId` = :messageId
+        ");
 
         $query->execute(array
         (
@@ -93,10 +93,10 @@ class Message
     public static function getById($id)
     {
         $query = Database::prepare("
-			SELECT *
-			FROM `messages`
-			WHERE `id` = :id
-		");
+            SELECT *
+            FROM `messages`
+            WHERE `id` = :id
+        ");
 
         $query->execute(array
         (
@@ -125,12 +125,12 @@ class Message
     public function saveAsNew()
     {
         $query = Database::prepare("
-			INSERT INTO `messages`
-			SET
-				`date` = NOW(),
-				`senderUserId` = :senderUserId,
-				`text` = :text
-		");
+            INSERT INTO `messages`
+            SET
+                `date` = NOW(),
+                `senderUserId` = :senderUserId,
+                `text` = :text
+        ");
 
         $query->execute(array
         (
@@ -141,11 +141,11 @@ class Message
         $this->id = Database::lastInsertId();
 
         $query = Database::prepare("
-			INSERT INTO `messagerecipients`
-			SET
-				`messageId` = :messageId,
-				`userId` = :userId
-		");
+            INSERT INTO `messagerecipients`
+            SET
+                `messageId` = :messageId,
+                `userId` = :userId
+        ");
 
         /**
          * @var $recipient User
@@ -159,11 +159,11 @@ class Message
         }
 
         $query = Database::prepare("
-			INSERT INTO `messageattachments`
-			SET
-				`messageId` = :messageId,
-				`uploadId` = :uploadId
-		");
+            INSERT INTO `messageattachments`
+            SET
+                `messageId` = :messageId,
+                `uploadId` = :uploadId
+        ");
 
         /**
          * @var $attachment Upload

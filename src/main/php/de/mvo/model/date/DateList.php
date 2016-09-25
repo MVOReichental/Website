@@ -11,12 +11,12 @@ class DateList extends ArrayObject
     public static function get(User $visibleForUser = null, $limit = 1000)
     {
         $query = Database::prepare("
-			SELECT *
-			FROM `dates`
-			WHERE `startDate` >= NOW() OR (`endDate` IS NOT NULL AND `endDate` > NOW())
-			ORDER BY `startDate` ASC
-			LIMIT :limit
-		");
+            SELECT *
+            FROM `dates`
+            WHERE `startDate` >= NOW() OR (`endDate` IS NOT NULL AND `endDate` > NOW())
+            ORDER BY `startDate` ASC
+            LIMIT :limit
+        ");
 
         $query->bindValue(":limit", $limit, PDO::PARAM_INT);
 

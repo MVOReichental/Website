@@ -35,10 +35,10 @@ class Upload
     public static function getById($id)
     {
         $query = Database::prepare("
-			SELECT *
-			FROM `uploads`
-			WHERE `id` = :id
-		");
+            SELECT *
+            FROM `uploads`
+            WHERE `id` = :id
+        ");
 
         $query->execute(array
         (
@@ -62,11 +62,11 @@ class Upload
         Database::pdo()->beginTransaction();
 
         $query = Database::prepare("
-			INSERT INTO `uploads`
-			SET
-				`key` = :key,
-				`filename` = :filename
-		");
+            INSERT INTO `uploads`
+            SET
+                `key` = :key,
+                `filename` = :filename
+        ");
 
         $query->execute(array
         (

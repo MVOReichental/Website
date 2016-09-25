@@ -106,10 +106,10 @@ class User implements JsonSerializable
     public static function getById($id)
     {
         $query = Database::prepare("
-			SELECT *
-			FROM `users`
-			WHERE `id` = :id
-		");
+            SELECT *
+            FROM `users`
+            WHERE `id` = :id
+        ");
 
         $query->execute(array
         (
@@ -131,10 +131,10 @@ class User implements JsonSerializable
     public static function getByUsername($username)
     {
         $query = Database::prepare("
-			SELECT *
-			FROM `users`
-			WHERE `username` = :username
-		");
+            SELECT *
+            FROM `users`
+            WHERE `username` = :username
+        ");
 
         $query->execute(array
         (
@@ -191,10 +191,10 @@ class User implements JsonSerializable
         $password = password_hash($password, PASSWORD_DEFAULT);
 
         $query = Database::prepare("
-			UPDATE `users`
-			SET `password` = :password
-			WHERE `id` = :id
-		");
+            UPDATE `users`
+            SET `password` = :password
+            WHERE `id` = :id
+        ");
 
         $query->execute(array
         (
@@ -210,12 +210,12 @@ class User implements JsonSerializable
         $key = bin2hex(random_bytes(16));
 
         $query = Database::prepare("
-			UPDATE `users`
-			SET
-				`resetPasswordKey` = :resetPasswordKey,
-				`resetPasswordDate` = NOW()
-			WHERE `id` = :id
-		");
+            UPDATE `users`
+            SET
+                `resetPasswordKey` = :resetPasswordKey,
+                `resetPasswordDate` = NOW()
+            WHERE `id` = :id
+        ");
 
         $query->execute(array
         (
@@ -256,10 +256,10 @@ class User implements JsonSerializable
     public function setUsername($username)
     {
         $query = Database::prepare("
-			UPDATE `users`
-			SET `username` = :username
-			WHERE `id` = :id
-		");
+            UPDATE `users`
+            SET `username` = :username
+            WHERE `id` = :id
+        ");
 
         $query->execute(array
         (
@@ -273,12 +273,12 @@ class User implements JsonSerializable
     public function setName($firstName, $lastName)
     {
         $query = Database::prepare("
-			UPDATE `users`
-			SET
-				`firstName` = :firstName,
-				`lastName` = :lastName
-			WHERE `id` = :id
-		");
+            UPDATE `users`
+            SET
+                `firstName` = :firstName,
+                `lastName` = :lastName
+            WHERE `id` = :id
+        ");
 
         $query->execute(array
         (
@@ -319,10 +319,10 @@ class User implements JsonSerializable
     public function setTotpKey($key)
     {
         $query = Database::prepare("
-			UPDATE `users`
-			SET `totpKey` = :totpKey
-			WHERE `id` = :id
-		");
+            UPDATE `users`
+            SET `totpKey` = :totpKey
+            WHERE `id` = :id
+        ");
 
         $query->execute(array
         (
@@ -345,14 +345,14 @@ class User implements JsonSerializable
 
         // Cleanup token lock table
         Database::query("
-			DELETE FROM `usedtotptokens`
-			WHERE `date` < DATE_SUB(NOW(), INTERVAL 90 SECOND)
-		");
+            DELETE FROM `usedtotptokens`
+            WHERE `date` < DATE_SUB(NOW(), INTERVAL 90 SECOND)
+        ");
 
         $query = Database::prepare("
-			SELECT `id` FROM `usedtotptokens`
-			WHERE `userId` = :userId AND `token` = :token
-		");
+            SELECT `id` FROM `usedtotptokens`
+            WHERE `userId` = :userId AND `token` = :token
+        ");
 
         $query->execute(array
         (
@@ -365,12 +365,12 @@ class User implements JsonSerializable
         }
 
         $query = Database::prepare("
-			INSERT INTO `usedtotptokens`
-			SET
-				`userId` = :userId,
-				`token` = :token,
-				`date` = NOW()
-		");
+            INSERT INTO `usedtotptokens`
+            SET
+                `userId` = :userId,
+                `token` = :token,
+                `date` = NOW()
+        ");
 
         try {
             $query->execute(array

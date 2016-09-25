@@ -48,10 +48,10 @@ class Title
         $this->number = (int)$this->number;
 
         $query = Database::prepare("
-			SELECT *
-			FROM `notedirectorycategories`
-			WHERE `id` = :id
-		");
+            SELECT *
+            FROM `notedirectorycategories`
+            WHERE `id` = :id
+        ");
 
         $query->execute(array
         (
@@ -71,10 +71,10 @@ class Title
     public static function getById($id)
     {
         $query = Database::prepare("
-			SELECT *
-			FROM `notedirectorytitles`
-			WHERE `id` = :id
-		");
+            SELECT *
+            FROM `notedirectorytitles`
+            WHERE `id` = :id
+        ");
 
         $query->execute(array
         (

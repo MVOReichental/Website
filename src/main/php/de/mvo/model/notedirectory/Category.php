@@ -30,10 +30,10 @@ class Category
     public static function getById($id)
     {
         $query = Database::prepare("
-			SELECT *
-			FROM `notedirectorycategories`
-			WHERE `id` = :id
-		");
+            SELECT *
+            FROM `notedirectorycategories`
+            WHERE `id` = :id
+        ");
 
         $query->execute(array
         (

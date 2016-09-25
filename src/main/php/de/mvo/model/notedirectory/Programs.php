@@ -9,10 +9,10 @@ class Programs extends ArrayObject
     public static function getAll()
     {
         $query = Database::query("
-			SELECT *
-			FROM `notedirectoryprograms`
-			ORDER BY `year` DESC, `title` ASC
-		");
+            SELECT *
+            FROM `notedirectoryprograms`
+            ORDER BY `year` DESC, `title` ASC
+        ");
 
         $programs = new self;
 
@@ -26,12 +26,12 @@ class Programs extends ArrayObject
     public static function getProgramsContainingTitle(Title $title)
     {
         $query = Database::prepare("
-			SELECT `notedirectoryprograms`.*
-			FROM `notedirectoryprogramtitles`
-			LEFT JOIN `notedirectoryprograms` ON `notedirectoryprograms`.`id` = `programId`
-			WHERE `notedirectoryprogramtitles`.`titleId` = :titleId
-			ORDER BY `year` DESC, `title` ASC
-		");
+            SELECT `notedirectoryprograms`.*
+            FROM `notedirectoryprogramtitles`
+            LEFT JOIN `notedirectoryprograms` ON `notedirectoryprograms`.`id` = `programId`
+            WHERE `notedirectoryprogramtitles`.`titleId` = :titleId
+            ORDER BY `year` DESC, `title` ASC
+        ");
 
         $query->execute(array
         (

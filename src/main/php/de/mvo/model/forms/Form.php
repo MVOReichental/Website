@@ -25,10 +25,10 @@ class Form
     public static function getByFilename($filename)
     {
         $query = Database::prepare("
-			SELECT *
-			FROM `forms`
-			WHERE `filename` = :filename
-		");
+            SELECT *
+            FROM `forms`
+            WHERE `filename` = :filename
+        ");
 
         $query->execute(array
         (

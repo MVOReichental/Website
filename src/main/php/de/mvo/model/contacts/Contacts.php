@@ -12,10 +12,10 @@ class Contacts extends ArrayObject
         $contacts = new self;
 
         $query = Database::prepare("
-			SELECT *
-			FROM `usercontacts`
-			WHERE `userId` = :userId
-		");
+            SELECT *
+            FROM `usercontacts`
+            WHERE `userId` = :userId
+        ");
 
         $query->execute(array
         (

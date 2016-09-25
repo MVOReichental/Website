@@ -46,12 +46,12 @@ class Program
         $this->showCategories = (bool)$this->showCategories;
 
         $query = Database::prepare("
-			SELECT `notedirectorytitles`.*, `number`
-			FROM `notedirectoryprogramtitles`
-			LEFT JOIN `notedirectorytitles` ON `notedirectorytitles`.`id` = `notedirectoryprogramtitles`.`titleId`
-			WHERE `programId` = :programId
-			ORDER BY `number`
-		");
+            SELECT `notedirectorytitles`.*, `number`
+            FROM `notedirectoryprogramtitles`
+            LEFT JOIN `notedirectorytitles` ON `notedirectorytitles`.`id` = `notedirectoryprogramtitles`.`titleId`
+            WHERE `programId` = :programId
+            ORDER BY `number`
+        ");
 
         $query->execute(array
         (
@@ -71,12 +71,12 @@ class Program
     public static function getLatest()
     {
         $query = Database::query("
-			SELECT *
-			FROM `notedirectoryprograms`
-			WHERE `isDefault`
-			ORDER BY `year` DESC
-			LIMIT 1
-		");
+            SELECT *
+            FROM `notedirectoryprograms`
+            WHERE `isDefault`
+            ORDER BY `year` DESC
+            LIMIT 1
+        ");
 
         if (!$query->rowCount()) {
             return null;
@@ -94,10 +94,10 @@ class Program
     public static function getByYearAndName($year, $name)
     {
         $query = Database::prepare("
-			SELECT *
-			FROM `notedirectoryprograms`
-			WHERE `year` = :year AND `name` = :name
-		");
+            SELECT *
+            FROM `notedirectoryprograms`
+            WHERE `year` = :year AND `name` = :name
+        ");
 
         $query->execute(array
         (

@@ -18,10 +18,10 @@ class Groups extends ArrayObject
     public static function getForProtocol(Protocol $protocol)
     {
         $query = Database::prepare("
-			SELECT `name`
-			FROM `protocolgroups`
-			WHERE `protocolId` = :protocolId
-		");
+            SELECT `name`
+            FROM `protocolgroups`
+            WHERE `protocolId` = :protocolId
+        ");
 
         $query->execute(array
         (
