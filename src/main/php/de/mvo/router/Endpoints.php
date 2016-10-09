@@ -49,6 +49,7 @@ class Endpoints extends ArrayObject
         $this->append(new Endpoint(HttpMethod::GET, "/termine", Target::create()->className(Dates::class)->method("getHtml")));
         $this->append(new Endpoint(HttpMethod::GET, "/termine.ics", Target::create()->className(Dates::class)->method("getIcal")));
         $this->append(new Endpoint(HttpMethod::GET, "/internal/dates", Target::create()->className(Dates::class)->method("getHtml")->arguments(true)->requireLogin()));
+        $this->append(new Endpoint(HttpMethod::GET, "/internal/dates/autocompletion", Target::create()->className(Dates::class)->method("getAutoCompletionList")->requireLogin()));
         $this->append(new Endpoint(HttpMethod::GET, "/internal/dates/create", Target::create()->className(Dates::class)->method("showCreateEntryForm")->arguments(true)->permission("dates.edit")));
         $this->append(new Endpoint(HttpMethod::GET, "/internal/dates/?[:groups]?", Target::create()->className(Dates::class)->method("getHtml")->arguments(true)->requireLogin()));
         $this->append(new Endpoint(HttpMethod::GET, "/internal/dates.ics", Target::create()->className(Dates::class)->method("getIcal")->arguments(true)->requireLogin()));

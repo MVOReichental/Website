@@ -8,7 +8,7 @@ use PDO;
 
 class DateList extends ArrayObject
 {
-    public static function get(User $visibleForUser = null, $limit = 1000)
+    public static function get($limit = 1000)
     {
         $query = Database::prepare("
             SELECT *
@@ -28,21 +28,61 @@ class DateList extends ArrayObject
          * @var $entry Entry
          */
         while ($entry = $query->fetchObject(Entry::class)) {
-            if ($visibleForUser !== null) {
-                if (!count($entry->groups)) {
-                    $list->append($entry);
-                } else {
-                    foreach ($entry->groups as $group) {
-                        if ($visibleForUser->hasPermission("dates.view." . $group)) {
-                            $list->append($entry);
-                            break;
-                        }
+            $list->append($entry);
+        }
+
+        return $list;
+    }
+
+    public static function getAll()
+    {
+        $query = Database::query("
+            SELECT *
+            FROM `dates`
+        ");
+
+        $list = new self;
+
+        /**
+         * @var $entry Entry
+         */
+        while ($entry = $query->fetchObject(Entry::class)) {
+            $list->append($entry);
+        }
+
+        return $list;
+    }
+
+    public function visibleForUser(User $user)
+    {
+        $list = new self;
+
+        foreach ($this as $entry) {
+            if (!count($entry->groups)) {
+                $list->append($entry);
+            } else {
+                foreach ($entry->groups as $group) {
+                    if ($user->hasPermission("dates.view." . $group)) {
+                        $list->append($entry);
+                        break;
                     }
                 }
-            } else {
-                if ($entry->isPublic) {
-                    $list->append($entry);
-                }
+            }
+        }
+
+        return $list;
+    }
+
+    public function publiclyVisible()
+    {
+        $list = new self;
+
+        /**
+         * @var $entry Entry
+         */
+        foreach ($this as $entry) {
+            if ($entry->isPublic) {
+                $list->append($entry);
             }
         }
 

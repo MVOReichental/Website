@@ -16,9 +16,13 @@ class Dates extends AbstractService
 {
     public function getHtml($internal = false)
     {
-        $user = ($internal ? User::getCurrent() : null);
+        $user = User::getCurrent();
 
-        $dates = DateList::get($user);
+        if ($internal and $user !== null) {
+            $dates = DateList::get()->visibleForUser($user);
+        } else {
+            $dates = DateList::get()->publiclyVisible();
+        }
 
         if ($user === null) {
             $groups = null;
@@ -81,7 +85,12 @@ class Dates extends AbstractService
     {
         $calendar = new Calendar($_SERVER["HTTP_HOST"]);
 
-        $dates = DateList::get($internal ? User::getCurrent() : null);
+        $user = User::getCurrent();
+        if ($internal and $user !== null) {
+            $dates = DateList::get()->visibleForUser($user);
+        } else {
+            $dates = DateList::get()->publiclyVisible();
+        }
 
         /**
          * @var $date Entry
@@ -102,6 +111,20 @@ class Dates extends AbstractService
 
         header("Content-Type: text/calendar; charset=utf-8");
         echo $calendar->render();
+        return null;
+    }
+
+    public function getAutoCompletionList()
+    {
+        $groupedEntries = array();
+
+        foreach (DateList::getAll()->visibleForUser(User::getCurrent()) as $entry) {
+            $entry->name = $entry->title;// Required for Bootstrap-3-Typeahead
+            $groupedEntries[$entry->title] = $entry;
+        }
+
+        header("Content-Type: application/json");
+        echo json_encode(array_values($groupedEntries));
         return null;
     }
 
