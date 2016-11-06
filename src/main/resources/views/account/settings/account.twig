@@ -1,5 +1,14 @@
 {% extends "account/settings/page.twig" %}
 
+{% block scripts %}
+    {{ parent() }}
+
+    <script src="bower_components/pwstrength-bootstrap/dist/pwstrength-bootstrap.min.js"></script>
+    <script src="bower_components/zxcvbn/dist/zxcvbn.js"></script>
+
+    <script src="js/password-validation.js"></script>
+{% endblock %}
+
 {% block settingsHeader %}
     {% if update.password %}
         {% if update.password is constant("UPDATE_PASSWORD_OK", this) %}
@@ -40,12 +49,12 @@
                 <div id="settings-password-new-box">
                     <div class="form-group">
                         <label for="settings-password-new">Neues Passwort</label>
-                        <input type="password" class="form-control" id="settings-password-new" name="newPassword" required/>
+                        <input type="password" class="form-control password-meter" id="settings-password-new" name="newPassword" required/>
                     </div>
 
                     <div class="form-group">
                         <label for="settings-password-new-confirm">Neues Passwort (best&auml;tigen)</label>
-                        <input type="password" class="form-control" id="settings-password-new-confirm" required/>
+                        <input type="password" class="form-control password-meter" id="settings-password-new-confirm" required/>
                     </div>
 
                     <span class="help-block"></span>

@@ -11,7 +11,11 @@
 {% block scripts %}
     {{ parent() }}
 
+    <script src="bower_components/pwstrength-bootstrap/dist/pwstrength-bootstrap.min.js"></script>
+    <script src="bower_components/zxcvbn/dist/zxcvbn.js"></script>
+
     <script src="js/reset-password.js"></script>
+    <script src="js/password-validation.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -25,8 +29,8 @@
         <p class="help-block">Lege ein neues Passwort fest.</p>
 
         <div id="reset-password-confirm-box" class="input-list">
-            <input type="password" id="reset-password-confirm-password1" name="password" class="form-control" placeholder="Passwort" required autofocus/>
-            <input type="password" id="reset-password-confirm-password2" class="form-control" placeholder="Passwort (wiederholen)" required/>
+            <input type="password" id="reset-password-confirm-password1" class="form-control password-meter" placeholder="Passwort" name="password" required autofocus/>
+            <input type="password" id="reset-password-confirm-password2" class="form-control password-meter" placeholder="Passwort (wiederholen)" required/>
 
             <span class="help-block"></span>
         </div>
