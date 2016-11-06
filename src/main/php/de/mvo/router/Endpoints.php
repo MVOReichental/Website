@@ -108,5 +108,8 @@ class Endpoints extends ArrayObject
         $this->append(new Endpoint(HttpMethod::GET, "/internal/protocols/upload", Target::create()->className(Protocols::class)->method("showUploadForm")->permission("protocols.upload.*")));
 
         $this->append(new Endpoint(HttpMethod::GET, "/internal/uploads/[i:id]/[:key]/[*:filename]", Target::create()->className(Uploads::class)->method("get")->requireLogin()));
+
+        // Required for session keep alive
+        $this->append(new Endpoint(HttpMethod::GET, "/nop", Target::create()->className(StaticView::class)->method("getEmpty")));
     }
 }

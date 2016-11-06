@@ -5,6 +5,11 @@ use de\mvo\TwigRenderer;
 
 class StaticView extends AbstractService
 {
+    public function getEmpty()
+    {
+        return "";
+    }
+
     public function get($name)
     {
         return TwigRenderer::render($name);
