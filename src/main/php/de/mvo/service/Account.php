@@ -18,6 +18,11 @@ class Account extends AbstractService
     const UPDATE_USERNAME_ALREADY_IN_USE = "username_already_in_use";
     const UPDATE_USERNAME_OK = "ok";
 
+    const UPDATE_EMAIL_INVALID_PASSWORD = "invalid_password";
+    const UPDATE_EMAIL_UNCHANGED = "unchanged";
+    const UPDATE_EMAIL_INVALID = "invalid";
+    const UPDATE_EMAIL_OK = "ok";
+
     const UPDATE_PROFILE_OK = "ok";
 
     public static function getSettingsPages()
@@ -141,6 +146,22 @@ class Account extends AbstractService
         return TwigRenderer::render("account/reset-password/confirm-error");
     }
 
+    public function confirmEmailChange()
+    {
+        $user = User::getById($_GET["id"]);
+
+        if (!$user->checkEmailChangeKey($_GET["key"])) {
+            return TwigRenderer::render("account/change-email/invalid-request");
+        }
+
+        $user->setEmail($user->newEmail);
+
+        return TwigRenderer::render("account/change-email/confirm", array
+        (
+            "email" => $user->email
+        ));
+    }
+
     public function showSettings($updateStatus = null)
     {
         $user = User::getCurrent();
@@ -234,6 +255,33 @@ class Account extends AbstractService
         return self::UPDATE_PASSWORD_OK;
     }
 
+    private function updateEmailAddress()
+    {
+        if (!isset($_POST["password"]) or !isset($_POST["email"])) {
+            http_response_code(400);
+            return null;
+        }
+
+        $user = User::getCurrent();
+
+        if (!$user->validatePassword($_POST["password"])) {
+            return self::UPDATE_EMAIL_INVALID_PASSWORD;
+        }
+
+        if ($user->email === $_POST["email"]) {
+            return self::UPDATE_EMAIL_UNCHANGED;
+        }
+
+        if (filter_var($_POST["email"], FILTER_VALIDATE_EMAIL) === false) {
+            return self::UPDATE_EMAIL_INVALID;
+        }
+
+        $user->setNewEmailAddress($_POST["email"]);
+        $user->sendEmailChangeMail();
+
+        return self::UPDATE_EMAIL_OK;
+    }
+
     public function updateSettings()
     {
         $response = null;
@@ -250,7 +298,7 @@ class Account extends AbstractService
                     $response = $this->updatePassword();
                     break;
                 case "email":
-                    $response = null;// TODO
+                    $response = $this->updateEmailAddress();
                     break;
                 case "contact":
                     $response = null;// TODO

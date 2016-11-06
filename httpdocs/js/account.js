@@ -109,6 +109,17 @@ $(function () {
         }
     });
 
+    $("#settings-email-form").submit(function (event) {
+       if ($("#settings-email-new").val() != $("#settings-email-new-confirm").val()){
+           var box = $("#settings-email-new-box");
+
+           box.addClass("has-error");
+           box.find(".help-block").text("Die Email-Adressen stimmen nicht \u00fcberein!");
+
+           event.preventDefault();
+       }
+    });
+
     $("#settings-2fa-disable").on("click", function () {
         var passwordFormGroup = $("#settings-2fa-password-group");
         passwordFormGroup.removeClass("has-error");

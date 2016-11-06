@@ -75,6 +75,7 @@ class Endpoints extends ArrayObject
         $this->append(new Endpoint(HttpMethod::POST, "/internal/reset-password", Target::create()->className(Account::class)->method("resetPassword")));
         $this->append(new Endpoint(HttpMethod::GET, "/internal/reset-password/confirm", Target::create()->className(Account::class)->method("confirmResetPassword")));
         $this->append(new Endpoint(HttpMethod::POST, "/internal/reset-password/confirm", Target::create()->className(Account::class)->method("confirmResetPassword")));
+        $this->append(new Endpoint(HttpMethod::GET, "/internal/change-email/confirm", Target::create()->className(Account::class)->method("confirmEmailChange")));
 
         $settingsPages = array_keys(Account::getSettingsPages());
         $this->append(new Endpoint(HttpMethod::GET, "/internal/settings", Target::create()->className(Redirect::class)->method("redirect")->arguments("/internal/settings/" . $settingsPages[0])->requireLogin()));

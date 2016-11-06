@@ -1,7 +1,17 @@
 {% extends "account/settings/page.twig" %}
 
 {% block settingsHeader %}
-    {# TODO: Add success/error alert on save #}
+    {% if update.email %}
+        {% if update.email is constant("UPDATE_EMAIL_OK", this) %}
+            <div class="alert alert-success"><i class="fa fa-check"></i> Es wurde eine Email an deine neue Email-Adresse gesendet. Bitte klicke auf den Link in dieser Email um deine Email-Adresse zu best&auml;tigen.</div>
+        {% elseif update.email is constant("UPDATE_EMAIL_INVALID_PASSWORD", this) %}
+            <div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Das angegebene Passwort ist nicht g&uuml;tig!</div>
+        {% elseif update.email is constant("UPDATE_EMAIL_UNCHANGED", this) %}
+            <div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Die neue Email-Adresse unterscheidet sich nicht von deiner aktuellen Email-Adresse!</div>
+        {% elseif update.email is constant("UPDATE_EMAIL_INVALID", this) %}
+            <div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Die angegebene Email-Adresse ist ung&uuml;ltig!</div>
+        {% endif %}
+    {% endif %}
 {% endblock %}
 
 {% block settingsContent %}
@@ -11,7 +21,7 @@
         </div>
 
         <div class="panel-body">
-            <form method="post">
+            <form method="post" id="settings-email-form">
                 <input type="hidden" name="form" value="email"/>
 
                 <div class="form-group">
@@ -24,17 +34,19 @@
                     <input type="email" class="form-control" id="settings-email-current" value="{{ user.email }}" readonly/>
                 </div>
 
-                <div class="form-group">
-                    <label for="settings-email-new">Neue Email-Adresse</label>
-                    <input type="email" class="form-control" id="settings-email-new" name="email" required/>
-                </div>
+                <div id="settings-email-new-box">
+                    <div class="form-group">
+                        <label for="settings-email-new">Neue Email-Adresse</label>
+                        <input type="email" class="form-control" id="settings-email-new" name="email" required/>
+                    </div>
 
-                <div class="form-group">
-                    <label for="settings-email-new-confirm">Neue Email-Adresse (best&auml;tigen)</label>
-                    <input type="email" class="form-control" id="settings-email-new-confirm" required/>
-                </div>
+                    <div class="form-group">
+                        <label for="settings-email-new-confirm">Neue Email-Adresse (best&auml;tigen)</label>
+                        <input type="email" class="form-control" id="settings-email-new-confirm" required/>
+                    </div>
 
-                <!-- TODO: Verify new email address with confirmed new email address (JS) -->
+                    <span class="help-block"></span>
+                </div>
 
                 <button type="submit" class="btn btn-success">Speichern</button>
             </form>

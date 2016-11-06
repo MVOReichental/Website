@@ -1,0 +1,15 @@
+{% extends "base/internal-public-switch.twig" %}
+
+{% block title %}Email-Adresse &auml;ndern{{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="css/account.css"/>
+{% endblock %}
+
+{% block content %}
+    <h1 class="page-header">Email-Adresse &auml;ndern</h1>
+
+    <div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Der Link zum &Auml;ndern der Email-Adresse ist nicht g&uuml;ltig.</div>
+{% endblock %}

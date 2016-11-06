@@ -38,6 +38,8 @@ CREATE TABLE `users` (
   `username` varchar(100) NOT NULL,
   `email` varchar(100) DEFAULT NULL,
   `newEmail` varchar(100) DEFAULT NULL,
+  `newEmailKey` varchar(32) DEFAULT NULL,
+  `newEmailDate` datetime DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `resetPasswordKey` varchar(32) DEFAULT NULL,
   `resetPasswordDate` datetime DEFAULT NULL,

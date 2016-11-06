@@ -14,6 +14,7 @@ use JsonSerializable;
 use Kelunik\TwoFactor\Oath;
 use PDOException;
 use RuntimeException;
+use UnexpectedValueException;
 
 class User implements JsonSerializable
 {
@@ -32,17 +33,29 @@ class User implements JsonSerializable
      */
     private $password;
     /**
-     * @var string
+     * @var string|null
      */
     private $resetPasswordKey;
     /**
-     * @var Date
+     * @var Date|null
      */
     private $resetPasswordDate;
     /**
      * @var string
      */
     public $email;
+    /**
+     * @var string|null
+     */
+    public $newEmail;
+    /**
+     * @var string|null
+     */
+    private $newEmailKey;
+    /**
+     * @var Date|null
+     */
+    private $newEmailDate;
     /**
      * @var string
      */
@@ -78,6 +91,10 @@ class User implements JsonSerializable
 
         if ($this->resetPasswordDate !== null) {
             $this->resetPasswordDate = new Date($this->resetPasswordDate);
+        }
+
+        if ($this->newEmailDate !== null) {
+            $this->newEmailDate = new Date($this->newEmailDate);
         }
     }
 
@@ -251,6 +268,101 @@ class User implements JsonSerializable
         }
 
         return true;
+    }
+
+    public function setNewEmailAddress($newEmail)
+    {
+        $this->newEmail = $newEmail;
+
+        $query = Database::prepare("
+            UPDATE `users`
+            SET `newEmail` = :newEmail
+            WHERE `id` = :id
+        ");
+
+        $query->execute(array
+        (
+            ":newEmail" => $newEmail,
+            ":id" => $this->id
+        ));
+    }
+
+    public function sendEmailChangeMail()
+    {
+        if ($this->newEmail === null) {
+            throw new UnexpectedValueException("New email address not defined yet");
+        }
+
+        $key = bin2hex(random_bytes(16));
+
+        $query = Database::prepare("
+            UPDATE `users`
+            SET
+                `newEmailKey` = :newEmailKey,
+                `newEmailDate` = NOW()
+            WHERE `id` = :id
+        ");
+
+        $query->execute(array
+        (
+            ":newEmailKey" => $key,
+            ":id" => $this->id
+        ));
+
+        $sender = new Sender;
+
+        $message = new Message;
+
+        $message->setTo($this->newEmail, $this->getFullName());
+        $message->setBody(TwigRenderer::render("account/change-email/confirm-mail", array
+        (
+            "user" => $this,
+            "url" => Url::getBaseUrl() . "/internal/change-email/confirm?id=" . $this->id . "&key=" . $key
+        )), "text/html");
+        $message->setSubjectFromHtml($message->getBody());
+
+        $sender->send($message);
+    }
+
+    public function checkEmailChangeKey($key)
+    {
+        if ($this->newEmailKey != $key) {
+            return false;
+        }
+
+        // Key should only be valid for 24 hours (1 day)
+        $now = new Date;
+        if ($now->diff($this->newEmailDate)->days > 0) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        // For security reasons, reset newEmail fields
+        $this->newEmail = null;
+        $this->newEmailKey = null;
+        $this->newEmailDate = null;
+
+        $query = Database::prepare("
+            UPDATE `users`
+            SET
+                `email` = :email,
+                `newEmail` = NULL,
+                `newEmailKey` = NULL,
+                `newEmailDate` = NULL
+            WHERE `id` = :id
+        ");
+
+        $query->execute(array
+        (
+            ":email" => $email,
+            ":id" => $this->id
+        ));
     }
 
     public function setUsername($username)

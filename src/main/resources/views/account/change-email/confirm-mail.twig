@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Email-Adresse &auml;ndern</title>
+    </head>
+
+    <body>
+        Hallo {{ user.firstName }},<br/>
+        <br/>
+        du hast auf der Website des Musikvereins "Orgelfels" Reichental e.V. die &Auml;nderung deiner Email-Adresse angefordert.<br/>
+        <br/>
+        Solltest du dies nicht angefordert haben, l&ouml;sche bitte diese Email.<br/>
+        Zum Best&auml;tigen deiner neuen Email-Adresse ({{ user.newEmail }}), klicke bitte <a href="{{ url }}">hier</a>.<br/>
+        <br/>
+        Dieser Link ist nur f&uuml;r 24 Stunden g&uuml;ltig!
+    </body>
+</html>

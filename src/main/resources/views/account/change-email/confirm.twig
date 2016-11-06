@@ -1,0 +1,15 @@
+{% extends "base/internal-public-switch.twig" %}
+
+{% block title %}Email-Adresse &auml;ndern{{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="css/account.css"/>
+{% endblock %}
+
+{% block content %}
+    <h1 class="page-header">Email-Adresse &auml;ndern</h1>
+
+    <div class="alert alert-success"><i class="fa fa-check"></i> Deine Email-Adresse wurde erfolgreich auf <strong>{{ email }}</strong> ge&auml;ndert.</div>
+{% endblock %}
