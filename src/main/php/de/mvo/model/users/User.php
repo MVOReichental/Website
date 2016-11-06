@@ -209,7 +209,10 @@ class User implements JsonSerializable
 
         $query = Database::prepare("
             UPDATE `users`
-            SET `password` = :password
+            SET
+                `password` = :password,
+                `resetPasswordKey` = NULL,
+                `resetPasswordDate` = NULL
             WHERE `id` = :id
         ");
 
@@ -220,6 +223,10 @@ class User implements JsonSerializable
         ));
 
         $this->password = $password;
+
+        // For security reasons, reset resetPassword fields
+        $this->resetPasswordKey = null;
+        $this->resetPasswordDate = null;
     }
 
     public function sendPasswordResetMail()
