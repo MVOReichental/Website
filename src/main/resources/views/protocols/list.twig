@@ -3,19 +3,18 @@
         <table class="table table-striped table-hover sortable">
             <thead>
                 <tr>
-                    <th>Titel</th>
+                    <th style="width:1%;"></th>
                     <th>Datum</th>
+                    <th>Titel</th>
                     <th data-defaultsort="disabled">Gruppen</th>
                 </tr>
             </thead>
             <tbody>
                 {% for protocol in protocols %}
                     <tr data-id="{{ protocol.id }}">
-                        <td>
-                            <a href="internal/uploads/{{ protocol.upload.id }}/{{ protocol.upload.key }}/{{ protocol.upload.filename }}" class="btn btn-success btn-xs hidden-print"><i class="fa fa-download"></i> Herunterladen</a>
-                            {{ protocol.title }}
-                        </td>
+                        <td><a href="internal/uploads/{{ protocol.upload.id }}/{{ protocol.upload.key }}/{{ protocol.upload.filename }}" class="btn btn-success btn-xs hidden-print"><i class="fa fa-download"></i> Herunterladen</a></td>
                         <td data-value="{{ protocol.date.format("Ymd") }}">{{ protocol.date.humanReadableDate }}</td>
+                        <td>{{ protocol.title }}</td>
                         <td>
                             {% for group in protocol.groups %}
                                 <span class="label label-default">{{ loop.parent.loop.parent.groups[group]|raw }}</span>
