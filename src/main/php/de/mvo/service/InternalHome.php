@@ -12,21 +12,17 @@ class InternalHome extends AbstractService
     {
         $currentUser = User::getCurrent();
 
-        if ($currentUser->hasPermission("messages.readAll")) {
-            $latestMessage = Messages::getAll(1);
-        } else {
-            $receivedMessages = Messages::getByRecipient($currentUser, 1);
-            $sentMessages = Messages::getBySender($currentUser, 1);
+        $receivedMessages = Messages::getByRecipient($currentUser, 1);
+        $sentMessages = Messages::getBySender($currentUser, 1);
 
-            if (!$receivedMessages->count()) {
-                $latestMessage = $sentMessages;
-            } elseif (!$sentMessages->count()) {
-                $latestMessage = $receivedMessages;
-            } elseif ($sentMessages->offsetGet(0)->id > $receivedMessages->offsetGet(0)->id) {
-                $latestMessage = $sentMessages;
-            } else {
-                $latestMessage = $receivedMessages;
-            }
+        if (!$receivedMessages->count()) {
+            $latestMessage = $sentMessages;
+        } elseif (!$sentMessages->count()) {
+            $latestMessage = $receivedMessages;
+        } elseif ($sentMessages->offsetGet(0)->id > $receivedMessages->offsetGet(0)->id) {
+            $latestMessage = $sentMessages;
+        } else {
+            $latestMessage = $receivedMessages;
         }
 
         $albums = YearList::load()->getAllAlbums();
