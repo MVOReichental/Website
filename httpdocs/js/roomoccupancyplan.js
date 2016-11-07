@@ -41,16 +41,44 @@ $(function () {
 
             modal.modal("show");
         },
-        eventDrop: function (event) {
-            $.post("internal/roomoccupancyplan/entries/" + event.id + "/move-resize", {
-                start: event.start.format(),
-                end: event.end.format()
+        eventDrop: function (event, delta, revertFunc) {
+            $.ajax({
+                url: "internal/roomoccupancyplan/entries/" + event.id + "/move-resize",
+                method: "POST",
+                data: {
+                    start: event.start.format(),
+                    end: event.end.format()
+                },
+                error: function () {
+                    revertFunc();
+
+                    $.notify({
+                        icon: "fa fa-exclamation-triangle",
+                        message: "Verschieben fehlgeschlagen"
+                    }, {
+                        type: "danger"
+                    });
+                }
             });
         },
-        eventResize: function (event) {
-            $.post("internal/roomoccupancyplan/entries/" + event.id + "/move-resize", {
-                start: event.start.format(),
-                end: event.end.format()
+        eventResize: function (event, delta, revertFunc) {
+            $.ajax({
+                url: "internal/roomoccupancyplan/entries/" + event.id + "/move-resize",
+                method: "POST",
+                data: {
+                    start: event.start.format(),
+                    end: event.end.format()
+                },
+                error: function () {
+                    revertFunc();
+
+                    $.notify({
+                        icon: "fa fa-exclamation-triangle",
+                        message: "\u00c4ndern der L\u00e4nge fehlgeschlagen"
+                    }, {
+                        type: "danger"
+                    });
+                }
             });
         }
     });
@@ -76,10 +104,18 @@ $(function () {
                 repeatWeekly: $("#roomoccupancyplan-edit-repeat-weekly").is(":checked") ? 1 : 0,
                 repeatTillDate: $("#roomoccupancyplan-edit-repeat-till-date").val()
             },
-            success: function() {
+            success: function () {
                 container.fullCalendar("refetchEvents");
 
                 $("#roomoccupancyplan-edit-modal").modal("hide");
+            },
+            error: function() {
+                $.notify({
+                    icon: "fa fa-exclamation-triangle",
+                    message: "Der Eintrag konnte nicht gespeichert werden"
+                }, {
+                    type: "danger"
+                });
             }
         });
     });
