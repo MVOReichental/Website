@@ -135,6 +135,7 @@ $group1 = new Group;
 $group1->title = "Group 1";
 $group1->permissions->append("group.musicians.group1");
 $group1->permissions->append("another.permission");
+$group1->permissions->append("roomoccupancyplan.view");
 $rootGroup->addGroup($group1);
 
 $group2 = new Group;
