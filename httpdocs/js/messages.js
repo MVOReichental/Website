@@ -6,12 +6,20 @@ $(function () {
         modal.modal("show");
     });
 
-    $("#messages-hide-confirm-button").on("click", function() {
+    $("#messages-hide-confirm-button").on("click", function () {
         $.ajax({
             url: "internal/messages/" + $("#messages-hide-modal").data("id") + "/hide-for-user",
             method: "POST",
-            success: function() {
+            success: function () {
                 document.location.reload();
+            },
+            error: function () {
+                $.notify({
+                    icon: "fa fa-exclamation-triangle",
+                    message: "Beim Ausblenden ist ein Fehler aufgetreten!"
+                }, {
+                    type: "danger"
+                });
             }
         });
     });

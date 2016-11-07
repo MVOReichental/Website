@@ -34,8 +34,13 @@ $(function () {
             success: function () {
                 document.location.reload(true);
             },
-            fail: function () {
-                $("#dates-remove-error").show().find("span").text("Beim Entfernen ist ein Fehler aufgetreten!");
+            error: function () {
+                $.notify({
+                    icon: "fa fa-exclamation-triangle",
+                    message: "Beim Entfernen ist ein Fehler aufgetreten!"
+                }, {
+                    type: "danger"
+                });
             }
         });
     });
