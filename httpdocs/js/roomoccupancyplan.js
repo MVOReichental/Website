@@ -8,6 +8,10 @@ $(function () {
         editable: container.data("editable"),
         selectable: container.data("editable"),
         selectHelper: true,
+        allDaySlot: false,
+        scrollTime: "10:00:00",
+        slotDuration: "00:15:00",
+        slotLabelFormat: "H:mm",
         select: function (start, end) {
             var modal = $("#roomoccupancyplan-edit-modal");
 
