@@ -61,7 +61,7 @@ $(function () {
         var id = $("#roomoccupancyplan-edit-modal").data("id");
         var url = "internal/roomoccupancyplan/entries";
 
-        if (id !== null) {
+        if (id) {
             url += "/" + id;
         }
 
