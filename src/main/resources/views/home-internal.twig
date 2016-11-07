@@ -2,6 +2,12 @@
 
 {% block title %}Home{{ parent() }}{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="css/messages.css"/>
+{% endblock %}
+
 {% block content %}
     <h3 class="page-header">
         Hallo {{ currentUser.firstName }},<br/>
