@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="css/messages.css"/>
 {% endblock %}
 
+{% block scripts %}
+    {{ parent() }}
+
+    <script src="js/messages.js"></script>
+{% endblock %}
+
 {% block content %}
     <h1 class="page-header">{{ title }}</h1>
 

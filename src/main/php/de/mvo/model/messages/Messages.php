@@ -35,7 +35,7 @@ class Messages extends ArrayObject
         $query = Database::prepare("
             SELECT *
             FROM `messages`
-            WHERE `senderUserId` = :senderUserId
+            WHERE `senderUserId` = :senderUserId AND `visibleToSender`
             ORDER BY `id` DESC
             LIMIT :limit
         ");
@@ -60,7 +60,7 @@ class Messages extends ArrayObject
             SELECT `messages`.*
             FROM `messagerecipients`
             LEFT JOIN `messages` ON `messages`.`id` = `messagerecipients`.`messageId`
-            WHERE `messagerecipients`.`userId` = :recipientUserId
+            WHERE `messagerecipients`.`userId` = :recipientUserId AND `messagerecipients`.`visible`
             ORDER BY `messages`.`id` DESC
             LIMIT :limit
         ");

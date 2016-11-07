@@ -32,6 +32,10 @@ class Message
      */
     public $text;
     /**
+     * @var bool
+     */
+    public $visibleToSender;
+    /**
      * @var Uploads
      */
     public $attachments;
@@ -45,6 +49,7 @@ class Message
         }
 
         $this->id = (int)$this->id;
+        $this->visibleToSender = (bool)$this->visibleToSender;
         $this->date = new Date($this->date);
         $this->sender = User::getById($this->senderUserId);
 
@@ -175,5 +180,41 @@ class Message
                 ":uploadId" => $attachment->id
             ));
         }
+    }
+
+    /**
+     * @param bool $state
+     */
+    public function setVisibleToSender($state)
+    {
+        $query = Database::prepare("
+            UPDATE `messages`
+            SET `visibleToSender` = :visibleToSender
+            WHERE `id` = :id
+        ");
+
+        $query->execute(array
+        (
+            ":visibleToSender" => (int)$state,
+            ":id" => $this->id
+        ));
+
+        $this->visibleToSender = $state;
+    }
+
+    public function setVisibleToRecipient(User $user, $state)
+    {
+        $query = Database::prepare("
+            UPDATE `messagerecipients`
+            SET `visible` = :visible
+            WHERE `messageId` = :messageId AND `userId` = :userId
+        ");
+
+        $query->execute(array
+        (
+            ":visible" => (int)$state,
+            ":messageId" => $this->id,
+            ":userId" => $user->id
+        ));
     }
 }

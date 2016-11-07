@@ -1,7 +1,8 @@
 {% if messages.count %}
     <ul class="media-list">
         {% for message in messages %}
-            <li class="media well">
+            <li class="media well messages-list" data-id="{{ message.id }}">
+                <div class="messages-hide-button" data-toggle="tooltip" title="Nachricht ausblenden"><i class="fa fa-trash"></i></div>
                 <div class="media-left gallery-source">
                     <a href="users/{{ message.sender.id }}/profile-picture.jpg?hash={{ message.sender.profilePictureHash }}">
                         <img class="media-object img-rounded" src="users/{{ message.sender.id }}/profile-picture.jpg?hash={{ message.sender.profilePictureHash }}" width="100"/>
@@ -34,6 +35,24 @@
             </li>
         {% endfor %}
     </ul>
+
+    <div class="modal fade" id="messages-hide-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Nachricht ausblenden</h4>
+                </div>
+                <div class="modal-body">
+                    Bist du dir sicher, dass du die Nachricht ausblenden m&ouml;chtest?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="messages-hide-confirm-button">Nachricht ausblenden</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+                </div>
+            </div>
+        </div>
+    </div>
 {% else %}
     <div class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Keine Nachrichten verf&uuml;gbar.</div>
 {% endif %}

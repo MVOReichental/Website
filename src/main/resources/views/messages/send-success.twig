@@ -2,6 +2,18 @@
 
 {% block title %}Nachricht senden{{ parent() }}{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="css/messages.css"/>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+
+    <script src="js/messages.js"></script>
+{% endblock %}
+
 {% block content %}
     <h1 class="page-header">Nachricht senden</h1>
 

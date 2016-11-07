@@ -89,6 +89,7 @@ CREATE TABLE `messages` (
   `date` datetime NOT NULL,
   `senderUserId` int(11) unsigned NOT NULL,
   `text` longtext NOT NULL,
+  `visibleToSender` boolean DEFAULT TRUE,
   PRIMARY KEY (`id`),
   KEY (`senderUserId`),
   CONSTRAINT FOREIGN KEY (`senderUserId`) REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE RESTRICT
@@ -98,6 +99,7 @@ CREATE TABLE `messagerecipients` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `messageId` int(11) unsigned NOT NULL,
   `userId` int(11) unsigned NOT NULL,
+  `visible` boolean DEFAULT TRUE,
   PRIMARY KEY (`id`),
   UNIQUE KEY (`messageId`, `userId`),
   CONSTRAINT FOREIGN KEY (`messageId`) REFERENCES `messages` (`id`) ON UPDATE CASCADE ON DELETE CASCADE,

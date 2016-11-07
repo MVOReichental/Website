@@ -1,3 +1,26 @@
 .messages-date {
     float: right;
 }
+
+.messages-hide-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding-left: 10px;
+    padding-right: 5px;
+    background: #c3c3c3;
+    border-bottom-left-radius: 4px;
+    opacity: 0.5;
+    cursor: pointer;
+    transition: opacity .25s ease-in-out;
+    -moz-transition: opacity .25s ease-in-out;
+    -webkit-transition: opacity .25s ease-in-out;
+}
+
+.messages-hide-button:hover {
+    opacity: 1;
+}
+
+.messages-list {
+    position: relative;
+}

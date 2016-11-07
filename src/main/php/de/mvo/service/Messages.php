@@ -8,6 +8,7 @@ use de\mvo\model\uploads\Upload;
 use de\mvo\model\uploads\Uploads;
 use de\mvo\model\users\User;
 use de\mvo\model\users\Users;
+use de\mvo\service\exception\NotFoundException;
 use de\mvo\TwigRenderer;
 use de\mvo\uploadhandler\File;
 use de\mvo\uploadhandler\Files;
@@ -110,5 +111,23 @@ class Messages extends AbstractService
         (
             "messages" => new ArrayObject(array($message))
         ));
+    }
+
+    public function hideMessageForUser()
+    {
+        $currentUser = User::getCurrent();
+
+        $message = Message::getById($this->params->id);
+        if ($message === null) {
+            throw new NotFoundException;
+        }
+
+        if ($message->sender->isEqualTo($currentUser)) {
+            $message->setVisibleToSender(false);
+        }
+
+        if ($message->recipients->hasUser($currentUser)) {
+            $message->setVisibleToRecipient($currentUser, false);
+        }
     }
 }
