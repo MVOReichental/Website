@@ -187,4 +187,16 @@ CREATE TABLE `protocolgroups` (
   CONSTRAINT FOREIGN KEY (`protocolId`) REFERENCES `protocols` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+CREATE TABLE `roomoccupancyplan` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `startTime` time NOT NULL,
+  `endTime` time NOT NULL,
+  `date` date NOT NULL,
+  `repeatTillDate` date DEFAULT NULL,
+  `repeatWeekly` boolean NOT NULL DEFAULT TRUE,
+  `title` varchar(200) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

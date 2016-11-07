@@ -26,6 +26,7 @@
     "bootstrap-sortable": "^2.0.0",
     "mustache.js": "mustache#^2.2.1",
     "bootstrap3-typeahead": "^4.0.2",
-    "pwstrength-bootstrap": "^2.0.3"
+    "pwstrength-bootstrap": "^2.0.3",
+    "fullcalendar": "^3.0.1"
   }
 }

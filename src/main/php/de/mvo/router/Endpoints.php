@@ -17,6 +17,7 @@ use de\mvo\service\Pictures;
 use de\mvo\service\ProfilePicture;
 use de\mvo\service\Protocols;
 use de\mvo\service\Redirect;
+use de\mvo\service\RoomOccupancyPlan;
 use de\mvo\service\StaticView;
 use de\mvo\service\Uploads;
 
@@ -106,6 +107,10 @@ class Endpoints extends ArrayObject
         $this->append(new Endpoint(HttpMethod::GET, "/internal/protocols", Target::create()->className(Protocols::class)->method("getList")->permission("protocols.view.*")));
         $this->append(new Endpoint(HttpMethod::POST, "/internal/protocols", Target::create()->className(Protocols::class)->method("upload")->permission("protocols.upload.*")));
         $this->append(new Endpoint(HttpMethod::GET, "/internal/protocols/upload", Target::create()->className(Protocols::class)->method("showUploadForm")->permission("protocols.upload.*")));
+
+        $this->append(new Endpoint(HttpMethod::GET, "/internal/roomoccupancyplan", Target::create()->className(RoomOccupancyPlan::class)->method("getCalendar")->requireLogin()));
+        $this->append(new Endpoint(HttpMethod::GET, "/internal/roomoccupancyplan/entries.json", Target::create()->className(RoomOccupancyPlan::class)->method("getEntries")->requireLogin()));
+        $this->append(new Endpoint(HttpMethod::POST, "/internal/roomoccupancyplan/entries/[i:id]", Target::create()->className(RoomOccupancyPlan::class)->method("editEntry")->requireLogin()));
 
         $this->append(new Endpoint(HttpMethod::GET, "/internal/uploads/[i:id]/[:key]/[*:filename]", Target::create()->className(Uploads::class)->method("get")->requireLogin()));
 

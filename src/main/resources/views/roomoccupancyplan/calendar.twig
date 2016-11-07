@@ -1,0 +1,25 @@
+{% extends "base/internal-public-switch.twig" %}
+
+{% block title %}Proberaumbelegungsplan{{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.min.css"/>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+    <script src="bower_components/fullcalendar/dist/locale/de.js"></script>
+
+    <script src="js/roomoccupancyplan.js"></script>
+{% endblock %}
+
+{% block content %}
+    <h1 class="page-header">Proberaumbelegungsplan</h1>
+
+    <div id="roomoccupancyplan-calendar"></div>
+{% endblock %}
