@@ -111,7 +111,7 @@ class Endpoints extends ArrayObject
 
         $this->append(new Endpoint(HttpMethod::GET, "/internal/roomoccupancyplan", Target::create()->className(RoomOccupancyPlan::class)->method("getCalendar")->requireLogin()));
         $this->append(new Endpoint(HttpMethod::GET, "/internal/roomoccupancyplan/entries.json", Target::create()->className(RoomOccupancyPlan::class)->method("getEntries")->requireLogin()));
-        $this->append(new Endpoint(HttpMethod::POST, "/internal/roomoccupancyplan/entries/[i:id]", Target::create()->className(RoomOccupancyPlan::class)->method("editEntry")->requireLogin()));
+        $this->append(new Endpoint(HttpMethod::POST, "/internal/roomoccupancyplan/entries/[i:id]", Target::create()->className(RoomOccupancyPlan::class)->method("editEntry")->permission("roomoccupancyplan.edit")));
 
         $this->append(new Endpoint(HttpMethod::GET, "/internal/uploads/[i:id]/[:key]/[*:filename]", Target::create()->className(Uploads::class)->method("get")->requireLogin()));
 
