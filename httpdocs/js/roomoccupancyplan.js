@@ -109,7 +109,7 @@ $(function () {
 
                 $("#roomoccupancyplan-edit-modal").modal("hide");
             },
-            error: function() {
+            error: function () {
                 $.notify({
                     icon: "fa fa-exclamation-triangle",
                     message: "Der Eintrag konnte nicht gespeichert werden"

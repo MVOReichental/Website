@@ -1,5 +1,5 @@
-$(function() {
-    setInterval(function(){
+$(function () {
+    setInterval(function () {
         $.get("nop");
     }, 600000);
 });
