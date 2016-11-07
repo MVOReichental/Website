@@ -21,5 +21,5 @@
 {% block content %}
     <h1 class="page-header">Proberaumbelegung</h1>
 
-    <div id="roomoccupancyplan-calendar"></div>
+    <div id="roomoccupancyplan-calendar" data-editable="{{ currentUser.hasPermission("roomoccupancyplan.edit") }}"></div>
 {% endblock %}
