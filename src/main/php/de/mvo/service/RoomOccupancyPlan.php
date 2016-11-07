@@ -24,8 +24,9 @@ class RoomOccupancyPlan extends AbstractService
 
         $requestedStartDate = new Date($_GET["start"]);
         $requestedEndDate = new Date($_GET["end"]);
+        $requestedEndDate->sub(new DateInterval("P1D"));// FullCalendar uses the exclusive date end
 
-        $startWeekday = $requestedStartDate->format("N");
+        $requestedStartWeekday = (int)$requestedStartDate->format("N");
 
         $entries = array();
 
@@ -35,15 +36,15 @@ class RoomOccupancyPlan extends AbstractService
         foreach (Entries::getInRange($requestedStartDate, $requestedEndDate) as $entry) {
             $date = clone $entry->date;
 
-            $weekday = $date->format("N");
+            $weekday = (int)$date->format("N");
 
             if ($entry->repeatWeekly or $entry->endDate !== null) {
-                $date = $requestedStartDate;
+                $date = clone $requestedStartDate;
 
-                if ($weekday > $startWeekday) {
-                    $date->add(new DateInterval(sprintf("P%dD", $weekday - $startWeekday)));
-                } elseif ($weekday < $startWeekday) {
-                    $date->sub(new DateInterval(sprintf("P%dD", $startWeekday - $weekday)));
+                if ($weekday > $requestedStartWeekday) {
+                    $date->add(new DateInterval(sprintf("P%dD", $weekday - $requestedStartWeekday)));
+                } elseif ($weekday < $requestedStartWeekday) {
+                    $date->sub(new DateInterval(sprintf("P%dD", $requestedStartWeekday - $weekday)));
                 }
             }
 
@@ -64,9 +65,12 @@ class RoomOccupancyPlan extends AbstractService
             $entries[] = array
             (
                 "id" => $entry->id,
+                "date" => $entry->date->format("Y-m-d"),
                 "start" => $startDate->format("c"),
                 "end" => $endDate->format("c"),
-                "title" => $entry->title
+                "title" => $entry->title,
+                "repeatWeekly" => $entry->repeatWeekly,
+                "repeatTillDate" => $entry->repeatTillDate === null ? null : $entry->repeatTillDate->format("Y-m-d")
             );
         }
 
@@ -75,7 +79,7 @@ class RoomOccupancyPlan extends AbstractService
         return json_encode($entries);
     }
 
-    public function editEntry()
+    public function moveResizeEntry()
     {
         $entry = Entry::getById($this->params->id);
 
@@ -102,6 +106,56 @@ class RoomOccupancyPlan extends AbstractService
 
         $entry->startTime = $startDate->format("H:i:s");
         $entry->endTime = $endDate->format("H:i:s");
+
+        $entry->save();
+    }
+
+    public function editEntry()
+    {
+        $entry = Entry::getById($this->params->id);
+
+        if ($entry === null) {
+            throw new NotFoundException;
+        }
+
+        if (!isset($_POST["title"]) or !isset($_POST["date"]) or !isset($_POST["start"]) or !isset($_POST["end"])) {
+            http_response_code(400);
+            return;
+        }
+
+        $entry->title = $_POST["title"];
+        $entry->date = new Date($_POST["date"]);
+        $entry->startTime = $_POST["start"];
+        $entry->endTime = $_POST["end"];
+        $entry->repeatWeekly = (bool)$_POST["repeatWeekly"];
+
+        if (isset($_POST["repeatTillDate"]) and $_POST["repeatTillDate"] !== "") {
+            $entry->repeatTillDate = new Date($_POST["repeatTillDate"]);
+        } else {
+            $entry->repeatTillDate = null;
+        }
+
+        $entry->save();
+    }
+
+    public function createEntry()
+    {
+        if (!isset($_POST["title"]) or !isset($_POST["date"]) or !isset($_POST["start"]) or !isset($_POST["end"])) {
+            http_response_code(400);
+            return;
+        }
+
+        $entry = new Entry;
+
+        $entry->title = $_POST["title"];
+        $entry->date = new Date($_POST["date"]);
+        $entry->startTime = $_POST["start"];
+        $entry->endTime = $_POST["end"];
+        $entry->repeatWeekly = (bool)$_POST["repeatWeekly"];
+
+        if (isset($_POST["repeatTillDate"]) and $_POST["repeatTillDate"] !== "") {
+            $entry->repeatTillDate = new Date($_POST["repeatTillDate"]);
+        }
 
         $entry->save();
     }
