@@ -20,6 +20,7 @@ use de\mvo\service\Redirect;
 use de\mvo\service\RoomOccupancyPlan;
 use de\mvo\service\StaticView;
 use de\mvo\service\Uploads;
+use de\mvo\service\UserManagement;
 use de\mvo\service\Visits;
 
 class Endpoints extends ArrayObject
@@ -120,6 +121,7 @@ class Endpoints extends ArrayObject
 
         // Admin
         $this->append(new Endpoint(HttpMethod::GET, "/internal/admin/visits", Target::create()->className(Visits::class)->method("getPage")->permission("admin.visits")));
+        $this->append(new Endpoint(HttpMethod::GET, "/internal/admin/usermanagement", Target::create()->className(UserManagement::class)->method("getPage")->permission("admin.userManagement")));
 
         // Required for session keep alive
         $this->append(new Endpoint(HttpMethod::GET, "/nop", Target::create()->className(StaticView::class)->method("getEmpty")));
