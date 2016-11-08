@@ -1,6 +1,7 @@
 <?php
 use de\mvo\Database;
 use de\mvo\model\users\User;
+use de\mvo\model\visits\Visit;
 use de\mvo\router\Endpoints;
 use de\mvo\router\Router;
 use de\mvo\service\exception\LoginException;
@@ -15,6 +16,8 @@ try {
 
     Database::init();
     TwigRenderer::init();
+
+    Visit::track();
 
     $router = new Router;
 

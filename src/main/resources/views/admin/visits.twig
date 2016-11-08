@@ -1,0 +1,62 @@
+{% extends "base/internal-public-switch.twig" %}
+
+{% block title %}Besucherstatistik{{ parent() }}{% endblock %}
+
+{% block content %}
+    <h1 class="page-header">Besucherstatistik</h1>
+
+    <div class="alert alert-info">
+        <i class="fa fa-info-circle"></i>
+
+        {% if currentUsers == 0 %}
+            Derzeit sind <strong>keine</strong> Benutzer online.
+        {% elseif currentUsers == 1 %}
+            Derzeit ist <strong>1</strong> Benutzer online.
+        {% else %}
+            Derzeit sind <strong>{{ currentUsers }}</strong> Benutzer online.
+        {% endif %}
+    </div>
+
+    <table class="table table-striped table-responsive">
+        <thead>
+            <tr>
+                <th>Zeit</th>
+                <th>G&auml;ste</th>
+                <th>Angemeldete Benutzer</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>Heute</td>
+                <td>{{ stats.today.guests }}</td>
+                <td>{{ stats.today.users }}</td>
+            </tr>
+            <tr>
+                <td>Gestern</td>
+                <td>{{ stats.yesterday.guests }}</td>
+                <td>{{ stats.yesterday.users }}</td>
+            </tr>
+            <tr>
+                <td>Diese Woche</td>
+                <td>{{ stats.currentWeek.guests }}</td>
+                <td>{{ stats.currentWeek.users }}</td>
+            </tr>
+            <tr>
+                <td>Vorherige Woche</td>
+                <td>{{ stats.previousWeek.guests }}</td>
+                <td>{{ stats.previousWeek.users }}</td>
+            </tr>
+            <tr>
+                <td>Diesen Monat</td>
+                <td>{{ stats.currentMonth.guests }}</td>
+                <td>{{ stats.currentMonth.users }}</td>
+            </tr>
+            <tr>
+                <td>Vorherigen Monat</td>
+                <td>{{ stats.previousMonth.guests }}</td>
+                <td>{{ stats.previousMonth.users }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

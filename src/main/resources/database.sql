@@ -201,4 +201,17 @@ CREATE TABLE `roomoccupancyplan` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+CREATE TABLE `visits` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `ip` varchar(50) NOT NULL,
+  `date` date NOT NULL,
+  `firstVisit` time NOT NULL,
+  `lastVisit` time NOT NULL,
+  `userId` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY (`ip`, `date`, `userId`),
+  CONSTRAINT FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
