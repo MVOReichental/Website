@@ -8,6 +8,17 @@
     <link rel="stylesheet" href="css/dates.css"/>
 {% endblock %}
 
+{% block scripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        $(function () {
+            var element = $("#ical-url");
+            element.text(element[0].href);
+        });
+    </script>
+{% endblock %}
+
 {% block content %}
     <h1 class="page-header">Unsere n&auml;chsten Termine</h1>
 
@@ -19,7 +30,7 @@
 
     <p class="text-muted hidden-print">
         Diese Termine können im iCalendar-Format abgerufen werden, um sie in einer Kalenderanwendung wie z.B. Outlook oder einer Kalender-App auf dem Smartphone anzuzeigen.<br/>
-        F&uuml;gen sie hierzu folgenden Link in der Kalenderanwendung ein: <a href="termine.ics" id="ical-url"></a>
+        F&uuml;gen Sie hierzu folgenden Link in der Kalenderanwendung ein: <a href="termine.ics" id="ical-url"></a>
     </p>
 
     <h2 class="page-header">Unsere j&auml;hrlichen Veranstaltungen</h2>
@@ -27,15 +38,9 @@
     {% for date in yearlyDates %}
         <p>
             <strong>{{ date.event }}</strong>
-            {% if date.when %} <span>{{ date.when }}</span>
-            {% endif %}
+            {% if date.when %} <span>{{ date.when }}</span>{% endif %}
             <br/>
             <span class="text-muted">{{ date.location }}</span>
         </p>
     {% endfor %}
-
-    <script type="text/javascript">
-        var element = $("#ical-url");
-        element.text(element[0].href);
-    </script>
 {% endblock %}
