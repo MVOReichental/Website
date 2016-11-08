@@ -20,3 +20,8 @@
 
    * `protocols.upload.$group`
    * `protocols.view.$group`
+
+# Room Occupancy Plan
+
+   * `roomoccupancyplan.edit`
+   * `roomoccupancyplan.view`
