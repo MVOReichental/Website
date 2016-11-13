@@ -8,7 +8,7 @@ class UserManagement extends AbstractService
 {
     public function getPage()
     {
-        return TwigRenderer::render("admin/usermanagement", array
+        return TwigRenderer::render("admin/usermanagement/page", array
         (
             "users" => Users::getAll()
         ));

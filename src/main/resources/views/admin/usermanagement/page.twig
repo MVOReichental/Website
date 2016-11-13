@@ -1,0 +1,13 @@
+{% extends "base/internal-public-switch.twig" %}
+
+{% block title %}Benutzerverwaltung{{ parent() }}{% endblock %}
+
+{% block content %}
+    <h1 class="page-header">Benutzerverwaltung</h1>
+
+    {{ include("admin/usermanagement/user-list.twig", {enabled: true}) }}
+
+    <h3 class="page-header">Deaktivierte Benutzer</h3>
+
+    {{ include("admin/usermanagement/user-list.twig", {enabled: false}) }}
+{% endblock %}
