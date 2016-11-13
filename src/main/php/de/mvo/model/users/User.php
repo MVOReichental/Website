@@ -69,6 +69,10 @@ class User implements JsonSerializable
      */
     public $birthDate;
     /**
+     * @var bool
+     */
+    public $enabled;
+    /**
      * @var string
      */
     private $totpKey;
@@ -83,7 +87,12 @@ class User implements JsonSerializable
 
     public function __construct()
     {
+        if ($this->id === null) {
+            return;
+        }
+
         $this->id = (int)$this->id;
+        $this->enabled = (bool)$this->enabled;
 
         if ($this->birthDate !== null) {
             $this->birthDate = new Date($this->birthDate);

@@ -3,6 +3,7 @@ namespace de\mvo\service\exception;
 
 class LoginException extends AccountException
 {
+    const USER_DISABLED = "user-disabled";
     const NOT_LOGGED_IN = "not-logged-in";
     const INVALID_CREDENTIALS = "invalid-credentials";
     const INVALID_2FA_TOKEN = "invalid-2fa-token";
@@ -19,6 +20,8 @@ class LoginException extends AccountException
     public function getLocalizedMessage()
     {
         switch ($this->type) {
+            case self::USER_DISABLED:
+                return "Der Benutzer ist deaktiviert!";
             case self::INVALID_CREDENTIALS:
                 return "Der angegebene Benutzername oder das Passwort ist falsch!";
             case self::INVALID_2FA_TOKEN:

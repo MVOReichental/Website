@@ -52,8 +52,13 @@ class Account extends AbstractService
     {
         if (isset($_POST["username"]) and isset($_POST["password"])) {
             $user = User::getByUsername($_POST["username"]);
+
             if ($user === null or !$user->validatePassword($_POST["password"])) {
                 throw new LoginException(LoginException::INVALID_CREDENTIALS);
+            }
+
+            if (!$user->enabled) {
+                throw new LoginException(LoginException::USER_DISABLED);
             }
 
             if ($user->has2FA()) {
