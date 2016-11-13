@@ -110,7 +110,14 @@ class User implements JsonSerializable
     public static function getCurrent()
     {
         if (self::$currentUser === null and isset($_SESSION["userId"])) {
-            self::$currentUser = self::getById($_SESSION["userId"]);
+            $user = self::getById($_SESSION["userId"]);
+
+            if (!$user->enabled) {
+                session_destroy();
+                $user = null;
+            }
+
+            self::$currentUser = $user;
         }
 
         return self::$currentUser;
