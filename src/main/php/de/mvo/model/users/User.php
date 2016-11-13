@@ -543,11 +543,13 @@ class User implements JsonSerializable
         $query = Database::prepare("
             UPDATE `users`
             SET `lastOnline` = :date
+            WHERE `id` = :id
         ");
 
         $query->execute(array
         (
-            ":date" => $this->lastOnline->format("c")
+            ":date" => $this->lastOnline->format("c"),
+            ":id" => $this->id
         ));
     }
 
