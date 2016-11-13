@@ -82,7 +82,12 @@ class UserManagement extends AbstractService
         $user->firstName = $_POST["firstName"];
         $user->lastName = $_POST["lastName"];
         $user->email = $_POST["email"];
-        $user->enabled = (bool)$_POST["enabled"];
+
+        if (isset($_POST["enabled"])) {
+            $user->enabled = (bool)$_POST["enabled"];
+        } else {
+            $user->enabled = false;
+        }
 
         $birthDate = $_POST["birthDate"];
         if ($birthDate !== null and $birthDate !== "") {
