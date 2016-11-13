@@ -1,6 +1,7 @@
 @media screen {
-    body {
-        margin-bottom: 0;
+    #footer {
+        color: #999;
+        background-color: #f5f5f5;
     }
 }
 
