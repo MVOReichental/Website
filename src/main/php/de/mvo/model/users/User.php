@@ -590,6 +590,19 @@ class User implements JsonSerializable
         $_SESSION["userId"] = $this->id;
     }
 
+    public function isOnline()
+    {
+        if ($this->lastOnline === null) {
+            return false;
+        }
+
+        if ((new Date)->getTimestamp() - $this->lastOnline->getTimestamp() > 600) {
+            return false;
+        }
+
+        return true;
+    }
+
     public function __toString()
     {
         return (string)$this->id;

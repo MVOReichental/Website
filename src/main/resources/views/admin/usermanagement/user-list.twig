@@ -14,7 +14,12 @@
                 <td>{{ user.firstName }}</td>
                 <td>{{ user.lastName }}</td>
                 <td>{{ user.email }}</td>
-                <td>{{ user.lastOnline }}</td>
+                <td>
+                    {{ user.lastOnline.format("d.m.Y H:i") }}
+                    {% if user.isOnline %}
+                        <span class="label label-success">online</span>
+                    {% endif %}
+                </td>
             </tr>
         {% endfor %}
     </tbody>
