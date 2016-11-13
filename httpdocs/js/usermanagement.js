@@ -11,6 +11,10 @@ $(function () {
         }
     });
 
+    $("#usermanagement-edit-username-from-name").on("click", function () {
+        $("#usermanagement-edit-username").val($("#usermanagement-edit-firstname").val() + " " + $("#usermanagement-edit-lastname").val());
+    });
+
     $("#usermanagement-edit-send-credentials").on("change", function () {
         if (!$(this).is(":checked")) {
             return;

@@ -36,7 +36,13 @@
 
         <div class="form-group">
             <label for="usermanagement-edit-username">Benutzername:</label>
-            <input type="text" class="form-control" id="usermanagement-edit-username" name="username" value="{{ user.username }}"/>
+            <div class="input-group">
+                <input type="text" class="form-control" id="usermanagement-edit-username" name="username" value="{{ user.username }}"/>
+                <span class="input-group-btn">
+                    <button id="usermanagement-edit-username-from-name" class="btn btn-default" type="button" data-toggle="tooltip" title="Von Vorname und Nachname &uuml;bernehmen"><i class="fa fa-reply"></i></button>
+                </span>
+            </div>
+
             <span class="help-block"></span>
         </div>
 
