@@ -121,7 +121,7 @@ class User implements JsonSerializable
             $user = self::getById($_SESSION["userId"]);
 
             if ($user === null or !$user->enabled) {
-                session_destroy();
+                unset($_SESSION["userId"]);
                 $user = null;
             }
 
@@ -137,8 +137,7 @@ class User implements JsonSerializable
 
     public static function logout()
     {
-        session_unset();
-        session_destroy();
+        unset($_SESSION["userId"]);
 
         self::$currentUser = null;
     }
