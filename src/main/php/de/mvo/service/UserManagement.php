@@ -2,6 +2,7 @@
 namespace de\mvo\service;
 
 use de\mvo\Date;
+use de\mvo\model\exception\DuplicateEntryException;
 use de\mvo\model\users\User;
 use de\mvo\model\users\Users;
 use de\mvo\service\exception\NotFoundException;
@@ -37,9 +38,18 @@ class UserManagement extends AbstractService
 
         self::setUserDataFromPostData($user);
 
-        $user->save();
+        try {
+            $user->save();
+        } catch (DuplicateEntryException $exception) {
+            return TwigRenderer::render("admin/usermanagement/edit", array
+            (
+                "user" => $user,
+                "showDuplicateUsernameError" => true
+            ));
+        }
 
         header("Location: /internal/admin/usermanagement");
+        return null;
     }
 
     public function updateUser()
@@ -52,9 +62,18 @@ class UserManagement extends AbstractService
 
         self::setUserDataFromPostData($user);
 
-        $user->save();
+        try {
+            $user->save();
+        } catch (DuplicateEntryException $exception) {
+            return TwigRenderer::render("admin/usermanagement/edit", array
+            (
+                "user" => $user,
+                "showDuplicateUsernameError" => true
+            ));
+        }
 
         header("Location: /internal/admin/usermanagement");
+        return null;
     }
 
     private static function setUserDataFromPostData(User $user)

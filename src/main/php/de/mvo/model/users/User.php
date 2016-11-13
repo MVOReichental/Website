@@ -6,6 +6,7 @@ use de\mvo\Date;
 use de\mvo\mail\Message;
 use de\mvo\mail\Sender;
 use de\mvo\model\contacts\Contacts;
+use de\mvo\model\exception\DuplicateEntryException;
 use de\mvo\model\permissions\GroupList;
 use de\mvo\model\permissions\Permissions;
 use de\mvo\TwigRenderer;
@@ -605,8 +606,9 @@ class User implements JsonSerializable
 
     public function save()
     {
-        if ($this->id === null) {
-            $query = Database::prepare("
+        try {
+            if ($this->id === null) {
+                $query = Database::prepare("
                 INSERT INTO `users`
                 SET
                     `username` = :username,
@@ -617,19 +619,19 @@ class User implements JsonSerializable
                     `enabled` = :enabled
             ");
 
-            $query->execute(array
-            (
-                ":username" => $this->username,
-                ":email" => $this->email,
-                ":firstName" => $this->firstName,
-                ":lastName" => $this->lastName,
-                ":birthDate" => $this->birthDate === null ? null : $this->birthDate->format("Y-m-d"),
-                ":enabled" => (int)$this->enabled
-            ));
+                $query->execute(array
+                (
+                    ":username" => $this->username,
+                    ":email" => $this->email,
+                    ":firstName" => $this->firstName,
+                    ":lastName" => $this->lastName,
+                    ":birthDate" => $this->birthDate === null ? null : $this->birthDate->format("Y-m-d"),
+                    ":enabled" => (int)$this->enabled
+                ));
 
-            $this->id = (int)Database::lastInsertId();
-        } else {
-            $query = Database::prepare("
+                $this->id = (int)Database::lastInsertId();
+            } else {
+                $query = Database::prepare("
                 UPDATE `users`
                 SET
                     `username` = :username,
@@ -641,16 +643,23 @@ class User implements JsonSerializable
                 WHERE `id` = :id
             ");
 
-            $query->execute(array
-            (
-                ":username" => $this->username,
-                ":email" => $this->email,
-                ":firstName" => $this->firstName,
-                ":lastName" => $this->lastName,
-                ":birthDate" => $this->birthDate === null ? null : $this->birthDate->format("Y-m-d"),
-                ":enabled" => (int)$this->enabled,
-                ":id" => $this->id
-            ));
+                $query->execute(array
+                (
+                    ":username" => $this->username,
+                    ":email" => $this->email,
+                    ":firstName" => $this->firstName,
+                    ":lastName" => $this->lastName,
+                    ":birthDate" => $this->birthDate === null ? null : $this->birthDate->format("Y-m-d"),
+                    ":enabled" => (int)$this->enabled,
+                    ":id" => $this->id
+                ));
+            }
+        } catch (PDOException $exception) {
+            if ($exception->errorInfo[1] == 1062) {
+                throw new DuplicateEntryException;
+            } else {
+                throw $exception;
+            }
         }
     }
 

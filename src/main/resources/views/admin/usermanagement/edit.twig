@@ -25,6 +25,10 @@
         {% endif %}
     </h1>
 
+    {% if showDuplicateUsernameError %}
+        <div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Der Benutzername wird bereits verwendet!</div>
+    {% endif %}
+
     <form id="usermanagement-edit-form" method="post">
         {% if user.id %}
             <input type="hidden" name="id" value="{{ user.id }}"/>
@@ -88,7 +92,7 @@
                     <h4 class="modal-title">Zugangsdaten versenden</h4>
                 </div>
                 <div class="modal-body">
-                    Beim Speichern werden dem Benutzer neue Zugangsdaten versendet.<br/>
+                    Beim Speichern werden dem Benutzer neue Zugangsdaten zugesendet.<br/>
                     Die aktuellen Zugangsdaten sind anschlie&szlig;end nicht mehr g&uuml;ltig.
                 </div>
                 <div class="modal-footer">
