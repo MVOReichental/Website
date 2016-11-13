@@ -63,7 +63,7 @@ class Account extends AbstractService
                 throw new LoginException(LoginException::REQUIRE_2FA_TOKEN);
             }
 
-            $_SESSION["userId"] = $user->id;
+            $user->doLogin();
         } elseif (isset($_SESSION["2faLoginUserId"]) and isset($_POST["2fa-token"])) {
             $user = User::getById($_SESSION["2faLoginUserId"]);
             if ($user === null) {
@@ -76,7 +76,7 @@ class Account extends AbstractService
 
             unset($_SESSION["2faLoginUserId"]);
 
-            $_SESSION["userId"] = $user->id;
+            $user->doLogin();
         } else {
             throw new LoginException(LoginException::UNKNOWN_ERROR);
         }

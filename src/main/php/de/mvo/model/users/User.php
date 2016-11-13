@@ -69,6 +69,10 @@ class User implements JsonSerializable
      */
     public $birthDate;
     /**
+     * @var Date
+     */
+    public $lastOnline;
+    /**
      * @var bool
      */
     public $enabled;
@@ -98,6 +102,10 @@ class User implements JsonSerializable
             $this->birthDate = new Date($this->birthDate);
         }
 
+        if ($this->lastOnline !== null) {
+            $this->lastOnline = new Date($this->lastOnline);
+        }
+
         if ($this->resetPasswordDate !== null) {
             $this->resetPasswordDate = new Date($this->resetPasswordDate);
         }
@@ -112,9 +120,13 @@ class User implements JsonSerializable
         if (self::$currentUser === null and isset($_SESSION["userId"])) {
             $user = self::getById($_SESSION["userId"]);
 
-            if (!$user->enabled) {
+            if ($user === null or !$user->enabled) {
                 session_destroy();
                 $user = null;
+            }
+
+            if ($user !== null) {
+                $user->doLogin();
             }
 
             self::$currentUser = $user;
@@ -525,6 +537,21 @@ class User implements JsonSerializable
         }
     }
 
+    public function updateLastOnline()
+    {
+        $this->lastOnline = new Date;
+
+        $query = Database::prepare("
+            UPDATE `users`
+            SET `lastOnline` = :date
+        ");
+
+        $query->execute(array
+        (
+            ":date" => $this->lastOnline->format("c")
+        ));
+    }
+
     public function isEqualTo(User $user)
     {
         return ($this->id == $user->id);
@@ -553,6 +580,13 @@ class User implements JsonSerializable
     public function getFullName()
     {
         return $this->firstName . " " . $this->lastName;
+    }
+
+    public function doLogin()
+    {
+        $this->updateLastOnline();
+
+        $_SESSION["userId"] = $this->id;
     }
 
     public function __toString()
