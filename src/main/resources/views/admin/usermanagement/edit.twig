@@ -1,0 +1,100 @@
+{% extends "base/internal-public-switch.twig" %}
+
+{% block title %}
+    {% if user.id %}
+        Benutzer bearbeiten
+    {% else %}
+        Neuer Benutzer
+    {% endif %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+
+    <script src="js/usermanagement.js"></script>
+{% endblock %}
+
+{% block content %}
+    <h1 class="page-header">
+        {% if user.id %}
+            Benutzer bearbeiten
+        {% else %}
+            Neuer Benutzer
+        {% endif %}
+    </h1>
+
+    <form id="usermanagement-edit-form" method="post">
+        {% if user.id %}
+            <input type="hidden" name="id" value="{{ user.id }}"/>
+        {% endif %}
+
+        <div class="form-group">
+            <label for="usermanagement-edit-username">Benutzername:</label>
+            <input type="text" class="form-control" id="usermanagement-edit-username" name="username" value="{{ user.username }}"/>
+            <span class="help-block"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="usermanagement-edit-firstname">Vorname:</label>
+            <input type="text" class="form-control" id="usermanagement-edit-firstname" name="firstName" value="{{ user.firstName }}"/>
+        </div>
+
+        <div class="form-group">
+            <label for="usermanagement-edit-lastname">Nachname:</label>
+            <input type="text" class="form-control" id="usermanagement-edit-lastname" name="lastName" value="{{ user.lastName }}"/>
+        </div>
+
+        <div class="form-group">
+            <label for="usermanagement-edit-birthdate">Geburtsdatum:</label>
+            <input type="date" class="form-control" id="usermanagement-edit-birthdate" name="birthDate" value="{{ user.birthDate.format("Y-m-d") }}"/>
+        </div>
+
+        <div class="form-group">
+            <label for="usermanagement-edit-email">Email-Adresse:</label>
+            <input type="email" class="form-control" id="usermanagement-edit-email" name="email" value="{{ user.email }}"/>
+        </div>
+
+        <div class="form-group">
+            <strong>Optionen</strong>
+
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="enabled" value="1" {% if user.enabled %}checked{% endif %}/>
+                    Aktiviert
+                </label>
+            </div>
+
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" id="usermanagement-edit-send-credentials" name="sendCredentials" value="1"/>
+                    Zugangsdaten versenden
+                </label>
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button type="submit" class="btn btn-primary">Speichern</button>
+            <a href="internal/admin/usermanagement" class="btn btn-default">Abbrechen</a>
+        </div>
+    </form>
+
+    <div class="modal fade" id="usermanagement-send-credentials-modal" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Zugangsdaten versenden</h4>
+                </div>
+                <div class="modal-body">
+                    Beim Speichern werden dem Benutzer neue Zugangsdaten versendet.<br/>
+                    Die aktuellen Zugangsdaten sind anschlie&szlig;end nicht mehr g&uuml;ltig.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

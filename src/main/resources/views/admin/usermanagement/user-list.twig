@@ -5,6 +5,7 @@
             <th>Nachname</th>
             <th>Email-Adresse</th>
             <th>Zuletzt Online</th>
+            <th></th>
         </tr>
     </thead>
 
@@ -20,6 +21,7 @@
                         <span class="label label-success">online</span>
                     {% endif %}
                 </td>
+                <td><a href="internal/admin/usermanagement/user/{{ user.id }}" class="btn btn-default btn-xs edit" data-toggle="tooltip" title="Bearbeiten"><i class="fa fa-edit"></i></a></td>
             </tr>
         {% endfor %}
     </tbody>

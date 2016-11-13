@@ -603,6 +603,57 @@ class User implements JsonSerializable
         return true;
     }
 
+    public function save()
+    {
+        if ($this->id === null) {
+            $query = Database::prepare("
+                INSERT INTO `users`
+                SET
+                    `username` = :username,
+                    `email` = :email,
+                    `firstName` = :firstName,
+                    `lastName` = :lastName,
+                    `birthDate` = :birthDate,
+                    `enabled` = :enabled
+            ");
+
+            $query->execute(array
+            (
+                ":username" => $this->username,
+                ":email" => $this->email,
+                ":firstName" => $this->firstName,
+                ":lastName" => $this->lastName,
+                ":birthDate" => $this->birthDate === null ? null : $this->birthDate->format("Y-m-d"),
+                ":enabled" => (int)$this->enabled
+            ));
+
+            $this->id = (int)Database::lastInsertId();
+        } else {
+            $query = Database::prepare("
+                UPDATE `users`
+                SET
+                    `username` = :username,
+                    `email` = :email,
+                    `firstName` = :firstName,
+                    `lastName` = :lastName,
+                    `birthDate` = :birthDate,
+                    `enabled` = :enabled
+                WHERE `id` = :id
+            ");
+
+            $query->execute(array
+            (
+                ":username" => $this->username,
+                ":email" => $this->email,
+                ":firstName" => $this->firstName,
+                ":lastName" => $this->lastName,
+                ":birthDate" => $this->birthDate === null ? null : $this->birthDate->format("Y-m-d"),
+                ":enabled" => (int)$this->enabled,
+                ":id" => $this->id
+            ));
+        }
+    }
+
     public function __toString()
     {
         return (string)$this->id;

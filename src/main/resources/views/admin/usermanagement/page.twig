@@ -5,6 +5,8 @@
 {% block content %}
     <h1 class="page-header">Benutzerverwaltung</h1>
 
+    <a href="internal/admin/usermanagement/user" class="btn btn-default"><i class="fa fa-plus"></i> Neuer Benutzer</a>
+
     {{ include("admin/usermanagement/user-list.twig", {enabled: true}) }}
 
     <h3 class="page-header">Deaktivierte Benutzer</h3>
