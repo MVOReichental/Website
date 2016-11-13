@@ -596,7 +596,7 @@ class User implements JsonSerializable
             return false;
         }
 
-        if ((new Date)->getTimestamp() - $this->lastOnline->getTimestamp() > 600) {
+        if ((new Date)->getTimestamp() - $this->lastOnline->getTimestamp() > 300) {
             return false;
         }
 
