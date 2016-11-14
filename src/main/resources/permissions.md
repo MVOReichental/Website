@@ -1,3 +1,8 @@
+# Admin
+
+   * `admin.userManagement`
+   * `admin.visits`
+
 # Dates
 
    * `dates.edit`
