@@ -45,7 +45,7 @@ class Endpoints extends ArrayObject
         $this->append(new Endpoint(HttpMethod::GET, "/jugendausbildung/ausbildungsvereinbarung.pdf", Target::create()->className(File::class)->method("get")->arguments(RESOURCES_ROOT . "/ausbildungsvereinbarung.pdf", "application/pdf")));
 
         $this->append(new Endpoint(HttpMethod::GET, "/foerderverein/warum_foerderverein", Target::create()->className(StaticView::class)->method("get")->arguments("foerderverein/warum_foerderverein")));
-        $this->append(new Endpoint(HttpMethod::GET, "/foerderverein/vorstand", Target::create()->className(GroupMembers::class)->method("get")->arguments("Der Vorstand des Fördervereins", "foerderverein")));
+        $this->append(new Endpoint(HttpMethod::GET, "/foerderverein/vorstand", Target::create()->className(GroupMembers::class)->method("get")->arguments("Der Vorstand des F&ouml;rdervereins", "foerderverein")));
         $this->append(new Endpoint(HttpMethod::GET, "/foerderverein/kontakt", Target::create()->className(JsonView::class)->method("get")->arguments("contact", "foerderverein/contact")));
 
         // Dates

@@ -3,7 +3,7 @@
 {% block title %}{{ title }}{{ parent() }}{% endblock %}
 
 {% block content %}
-    <h1 class="page-header">{{ title }}</h1>
+    <h1 class="page-header">{{ title|raw }}</h1>
 
     <div class="gallery-source">
         {% for group in groups if group.users.enabledUsers.count %}
