@@ -30,12 +30,18 @@ class ProfilePicture extends AbstractService
 
     public function upload()
     {
-        $user = User::getCurrent();
+        $currentUser = User::getCurrent();
 
-        if ($this->params->id != $user->id and !$user->hasPermission("admin.userManagement")) {
-            http_response_code(403);
-            echo "DIFFERENT_USER_ID_UPDATE";
-            return null;
+        if ($this->params->id == $currentUser->id) {
+            $user = $currentUser;
+        } else {
+            if ($currentUser->hasPermission("admin.userManagement")) {
+                $user = User::getById($this->params->id);
+            } else {
+                http_response_code(403);
+                echo "DIFFERENT_USER_ID_UPDATE";
+                return null;
+            }
         }
 
         if (!isset($_FILES["file"])) {
@@ -92,7 +98,7 @@ class ProfilePicture extends AbstractService
         $image = new Image($sourceImage);
 
         if ($image->crop(600, 600, $cropData)) {
-            $filename = PROFILE_PICTURES_ROOT . "/" . User::getCurrent()->id . ".jpg";
+            $filename = PROFILE_PICTURES_ROOT . "/" . $user->id . ".jpg";
             if ($image->saveAsJpeg($filename, 75)) {
                 echo "OK";
                 return null;
