@@ -48,7 +48,7 @@ class Image
      */
     public function crop($maxWidth, $maxHeight, CropData $cropData)
     {
-        self::calculateResize($this->getWidth(), $this->getHeight(), $maxWidth, $maxHeight, $newWidth, $newHeight);
+        self::calculateResize($cropData->width, $cropData->height, $maxWidth, $maxHeight, $newWidth, $newHeight);
 
         $croppedImage = imagecreatetruecolor($newWidth, $newHeight);
         if ($croppedImage === false) {
