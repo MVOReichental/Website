@@ -124,6 +124,7 @@ class Endpoints extends ArrayObject
         $this->append(new Endpoint(HttpMethod::GET, "/internal/admin/usermanagement", Target::create()->className(UserManagement::class)->method("getPage")->permission("admin.userManagement")));
         $this->append(new Endpoint(HttpMethod::GET, "/internal/admin/usermanagement/user", Target::create()->className(UserManagement::class)->method("getEditPage")->permission("admin.userManagement")));
         $this->append(new Endpoint(HttpMethod::GET, "/internal/admin/usermanagement/user/[i:id]", Target::create()->className(UserManagement::class)->method("getEditPage")->permission("admin.userManagement")));
+        $this->append(new Endpoint(HttpMethod::GET, "/internal/admin/usermanagement/user/[i:id]/profile-picture", Target::create()->className(UserManagement::class)->method("getProfilePicturePage")->permission("admin.userManagement")));
         $this->append(new Endpoint(HttpMethod::POST, "/internal/admin/usermanagement/user", Target::create()->className(UserManagement::class)->method("createUser")->permission("admin.userManagement")));
         $this->append(new Endpoint(HttpMethod::POST, "/internal/admin/usermanagement/user/[i:id]", Target::create()->className(UserManagement::class)->method("updateUser")->permission("admin.userManagement")));
 

@@ -22,11 +22,29 @@ class UserManagement extends AbstractService
     {
         if (isset($this->params->id)) {
             $user = User::getById($this->params->id);
+
+            if ($user === null) {
+                throw new NotFoundException;
+            }
         } else {
             $user = null;
         }
 
         return TwigRenderer::render("admin/usermanagement/edit", array
+        (
+            "user" => $user
+        ));
+    }
+
+    public function getProfilePicturePage()
+    {
+        $user = User::getById($this->params->id);
+
+        if ($user === null) {
+            throw new NotFoundException;
+        }
+
+        return TwigRenderer::render("admin/usermanagement/profile-picture", array
         (
             "user" => $user
         ));

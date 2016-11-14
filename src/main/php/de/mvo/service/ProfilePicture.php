@@ -32,7 +32,7 @@ class ProfilePicture extends AbstractService
     {
         $user = User::getCurrent();
 
-        if ($this->params->id != $user->id) {
+        if ($this->params->id != $user->id and !$user->hasPermission("admin.userManagement")) {
             http_response_code(403);
             echo "DIFFERENT_USER_ID_UPDATE";
             return null;

@@ -1,0 +1,38 @@
+{% extends "base/internal-public-switch.twig" %}
+
+{% block title %}Profilbild bearbeiten {{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="css/edit-profilepicture.css"/>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+
+    <script src="js/edit-profilepicture.js"></script>
+{% endblock %}
+
+{% block content %}
+    <h1 class="page-header">Profilbild von Benutzer bearbeiten</h1>
+
+    <div class="edit-profilepicture-dropzone">
+        <div class="edit-profilepicture-box-left">
+            <img src="users/{{ user.id }}/profile-picture.jpg?hash={{ user.profilePictureHash }}" class="edit-profilepicture-img"/>
+        </div>
+
+        <div class="edit-profilepicture-box-right">
+            <div class="btn btn-default fileinput-button">
+                <strong>Neues Profilbild hochladen</strong>
+                <input class="edit-profilepicture" type="file" name="file" data-url="users/{{ user.id }}/profile-picture.jpg" accept="image/bmp,image/gif,image/jpeg,image/png"/>
+            </div>
+
+            <small class="help-block">Unterst&uuml;tzte Dateiformate: BMP, GIF, JPEG und PNG</small>
+
+            <span class="help-block">Du kannst auch ein Bild von deinem Computer hier hin ziehen.</span>
+        </div>
+    </div>
+
+    {{ include("edit-profilepicture-modal.twig") }}
+{% endblock %}

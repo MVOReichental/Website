@@ -1,0 +1,17 @@
+.edit-profilepicture-box-left, .edit-profilepicture-box-right {
+    float: left;
+}
+
+.edit-profilepicture-box-left {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.edit-profilepicture-img {
+    width: 150px;
+    border-radius: 3px;
+}
+
+.edit-profilepicture-crop-modal > .upload-error {
+    display: none;
+}

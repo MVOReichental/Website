@@ -21,7 +21,12 @@
                         <span class="label label-success">online</span>
                     {% endif %}
                 </td>
-                <td><a href="internal/admin/usermanagement/user/{{ user.id }}" class="btn btn-default btn-xs edit" data-toggle="tooltip" title="Bearbeiten"><i class="fa fa-edit"></i></a></td>
+                <td>
+                    <div class="btn-group btn-group-xs">
+                        <a href="internal/admin/usermanagement/user/{{ user.id }}" class="btn btn-default" data-toggle="tooltip" title="Bearbeiten"><i class="fa fa-edit"></i></a>
+                        <a href="internal/admin/usermanagement/user/{{ user.id }}/profile-picture" class="btn btn-default" data-toggle="tooltip" title="Profilbild bearbeiten"><i class="fa fa-camera"></i></a>
+                    </div>
+                </td>
             </tr>
         {% endfor %}
     </tbody>
