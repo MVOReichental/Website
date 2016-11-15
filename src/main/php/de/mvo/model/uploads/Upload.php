@@ -91,6 +91,11 @@ class Upload
         return UPLOADS_ROOT . "/" . $this->id;
     }
 
+    public function getUrl()
+    {
+        return sprintf("/internal/uploads/%d/%s/%s", $this->id, $this->key, $this->filename);
+    }
+
     public function stream()
     {
         $filename = $this->getAbsoluteFilePath();

@@ -118,6 +118,7 @@ class Endpoints extends ArrayObject
         $this->append(new Endpoint(HttpMethod::POST, "/internal/roomoccupancyplan/entries", Target::create()->className(RoomOccupancyPlan::class)->method("createEntry")->permission("roomoccupancyplan.edit")));
 
         $this->append(new Endpoint(HttpMethod::GET, "/internal/uploads/[i:id]/[:key]/[*:filename]", Target::create()->className(Uploads::class)->method("get")->requireLogin()));
+        $this->append(new Endpoint(HttpMethod::POST, "/internal/upload", Target::create()->className(Uploads::class)->method("upload")->requireLogin()));
 
         // Admin
         $this->append(new Endpoint(HttpMethod::GET, "/internal/admin/visits", Target::create()->className(Visits::class)->method("getPage")->permission("admin.visits")));
@@ -127,6 +128,8 @@ class Endpoints extends ArrayObject
         $this->append(new Endpoint(HttpMethod::GET, "/internal/admin/usermanagement/user/[i:id]/profile-picture", Target::create()->className(UserManagement::class)->method("getProfilePicturePage")->permission("admin.userManagement")));
         $this->append(new Endpoint(HttpMethod::POST, "/internal/admin/usermanagement/user", Target::create()->className(UserManagement::class)->method("createUser")->permission("admin.userManagement")));
         $this->append(new Endpoint(HttpMethod::POST, "/internal/admin/usermanagement/user/[i:id]", Target::create()->className(UserManagement::class)->method("updateUser")->permission("admin.userManagement")));
+        $this->append(new Endpoint(HttpMethod::GET, "/internal/admin/newseditor", Target::create()->className(News::class)->method("get")->arguments(true)->permission("admin.newsEditor")));
+        $this->append(new Endpoint(HttpMethod::POST, "/internal/admin/newseditor", Target::create()->className(News::class)->method("save")->permission("admin.newsEditor")));
 
         // Required for session keep alive
         $this->append(new Endpoint(HttpMethod::GET, "/nop", Target::create()->className(StaticView::class)->method("getEmpty")));

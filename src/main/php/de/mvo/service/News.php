@@ -7,7 +7,7 @@ use de\mvo\TwigRenderer;
 
 class News extends AbstractService
 {
-    public function get()
+    public function get($allowEdit = false)
     {
         $newsFile = RESOURCES_ROOT . "/news.html";
         if (file_exists($newsFile)) {
@@ -22,10 +22,19 @@ class News extends AbstractService
 
         return TwigRenderer::render("news", array
         (
-            "news" => $newsContent,
+            "news" => array
+            (
+                "allowEdit" => $allowEdit,
+                "content" => $newsContent
+            ),
             "dates" => DateList::get(3)->publiclyVisible(),
             "albums" => $albums->getVisibleToUser(null)->slice(0, 3),
             "picturesBaseUrl" => "fotogalerie"
         ));
+    }
+
+    public function save()
+    {
+        file_put_contents(RESOURCES_ROOT . "/news.html", $_POST["editabledata"]);
     }
 }

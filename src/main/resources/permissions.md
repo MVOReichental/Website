@@ -1,5 +1,6 @@
 # Admin
 
+   * `admin.newsEditor`
    * `admin.userManagement`
    * `admin.visits`
 

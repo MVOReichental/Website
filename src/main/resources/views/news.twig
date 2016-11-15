@@ -2,12 +2,30 @@
 
 {% block title %}Aktuell{{ parent() }}{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="css/news.css"/>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+
+    {% if news.allowEdit %}
+        <script src="bower_components/ckeditor/ckeditor.js"></script>
+        <script src="bower_components/ckeditor/adapters/jquery.js"></script>
+        <script src="js/newseditor.js"></script>
+    {% endif %}
+{% endblock %}
+
 {% block content %}
     <h1 class="page-header">Aktuell</h1>
 
-    {% if news %}
-        {{ news|raw }}
-    {% endif %}
+    <div id="news-content" {% if news.allowEdit %}contenteditable{% endif %}>
+        {% if news.content %}
+            {{ news.content|raw }}
+        {% endif %}
+    </div>
 
     {% if dates.count %}
         <h2 class="page-header">Unsere n&auml;chsten Termine</h2>
