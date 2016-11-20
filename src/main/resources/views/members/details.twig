@@ -55,7 +55,7 @@
         <div class="col-md-8" id="members-details-messages">
             <h3 class="page-header">Nachrichten von {{ user.firstName }}</h3>
 
-            <p class="text-muted"><strong>Hinweis:</strong> Du siehst nur deine bzw. an dich gesendete Nachrichten.</p>
+            <p class="text-muted"><strong>Hinweis:</strong> Du siehst Nachrichten welche du an {{ user.firstName }} gesendet bzw. von {{ user.firstName }} erhalten hast.</p>
 
             {% include("messages/list.twig") %}
         </div>
