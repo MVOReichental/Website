@@ -112,10 +112,14 @@ class UserManagement extends AbstractService
         $user->lastName = $_POST["lastName"];
         $user->email = $_POST["email"];
 
-        if (isset($_POST["enabled"])) {
-            $user->enabled = (bool)$_POST["enabled"];
+        if (User::getCurrent()->isEqualTo($user)) {
+            $user->enabled = true;
         } else {
-            $user->enabled = false;
+            if (isset($_POST["enabled"])) {
+                $user->enabled = (bool)$_POST["enabled"];
+            } else {
+                $user->enabled = false;
+            }
         }
 
         $birthDate = $_POST["birthDate"];
