@@ -23,6 +23,25 @@ class Users extends ArrayObject implements JsonSerializable
         return false;
     }
 
+    /**
+     * Remove any user instance from this list.
+     *
+     * @param User $user The user to remove
+     */
+    public function removeUser(User $user)
+    {
+        $iterator = $this->getIterator();
+
+        /**
+         * @var $thisUser User
+         */
+        foreach ($iterator as $index => $thisUser) {
+            if ($thisUser->isEqualTo($user)) {
+                $iterator->offsetUnset($index);
+            }
+        }
+    }
+
     public function addAll(Users $users)
     {
         foreach ($users as $user) {

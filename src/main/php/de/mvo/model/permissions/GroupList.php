@@ -58,6 +58,13 @@ class GroupList extends ArrayObject implements JsonSerializable
         return $groupList;
     }
 
+    public function addAll(GroupList $groupList)
+    {
+        foreach ($groupList as $group) {
+            $this->append($group);
+        }
+    }
+
     /**
      * Get the first group matching the given permission string.
      *
@@ -105,6 +112,51 @@ class GroupList extends ArrayObject implements JsonSerializable
             $permissions->makeUnique();
 
             return $permissions;
+        }
+
+        return null;
+    }
+
+    /**
+     * @param User $user
+     * @return GroupList
+     */
+    public function getGroupsWithUser(User $user)
+    {
+        $groupList = new self;
+
+        /**
+         * @var $group Group
+         */
+        foreach ($this as $group) {
+            if ($group->users->hasUser($user)) {
+                $groupList->append($group);
+            }
+
+            $groupList->addAll($group->subGroups->getGroupsWithUser($user));
+        }
+
+        return $groupList;
+    }
+
+    /**
+     * @param string $id
+     * @return Group|null
+     */
+    public function getGroupById($id)
+    {
+        /**
+         * @var $group Group
+         */
+        foreach ($this as $group) {
+            if ($group->id === $id) {
+                return $group;
+            }
+
+            $foundGroup = $group->subGroups->getGroupById($id);
+            if ($foundGroup !== null) {
+                return $foundGroup;
+            }
         }
 
         return null;

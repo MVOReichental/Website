@@ -3,6 +3,7 @@ namespace de\mvo\service;
 
 use de\mvo\Date;
 use de\mvo\model\exception\DuplicateEntryException;
+use de\mvo\model\permissions\GroupList;
 use de\mvo\model\users\User;
 use de\mvo\model\users\Users;
 use de\mvo\service\exception\NotFoundException;
@@ -66,6 +67,8 @@ class UserManagement extends AbstractService
             ));
         }
 
+        GroupList::load()->save();
+
         header("Location: /internal/admin/usermanagement");
         return null;
     }
@@ -90,8 +93,16 @@ class UserManagement extends AbstractService
             ));
         }
 
+        GroupList::load()->save();
+
         header("Location: /internal/admin/usermanagement");
         return null;
+    }
+
+    public function getPermissionGroupsTree()
+    {
+        header("Content-Type: application/json");
+        return json_encode(GroupList::load());
     }
 
     private static function setUserDataFromPostData(User $user)
@@ -111,5 +122,7 @@ class UserManagement extends AbstractService
         if ($birthDate !== null and $birthDate !== "") {
             $user->birthDate = new Date($birthDate);
         }
+
+        $user->setPermissionGroupsById(explode(",", $_POST["permissionGroups"]));
     }
 }

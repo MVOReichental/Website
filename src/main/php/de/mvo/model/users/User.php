@@ -7,6 +7,7 @@ use de\mvo\mail\Message;
 use de\mvo\mail\Sender;
 use de\mvo\model\contacts\Contacts;
 use de\mvo\model\exception\DuplicateEntryException;
+use de\mvo\model\permissions\Group;
 use de\mvo\model\permissions\GroupList;
 use de\mvo\model\permissions\Permissions;
 use de\mvo\TwigRenderer;
@@ -436,6 +437,49 @@ class User implements JsonSerializable
 
         $this->firstName = $firstName;
         $this->lastName = $lastName;
+    }
+
+    public function getPermissionGroupIds()
+    {
+        $ids = array();
+
+        /**
+         * @var $group Group
+         */
+        foreach (GroupList::load()->getGroupsWithUser($this) as $group) {
+            $ids[] = $group->id;
+        }
+
+        return $ids;
+    }
+
+    public function setPermissionGroupsById(array $groupIds)
+    {
+        $groupList = GroupList::load();
+
+        $existingGroups = $groupList->getGroupsWithUser($this);
+
+        /**
+         * @var $group Group
+         */
+        foreach ($existingGroups as $group) {
+            if (!in_array($group->id, $groupIds)) {
+                $group->users->removeUser($this);
+            }
+        }
+
+        foreach ($groupIds as $groupId) {
+            $group = $groupList->getGroupById($groupId);
+
+            // Silently continue if the requested group does not exist
+            if ($group === null) {
+                continue;
+            }
+
+            if (!$group->users->hasUser($this)) {
+                $group->users->append($this);
+            }
+        }
     }
 
     public function hasPermission($permission)

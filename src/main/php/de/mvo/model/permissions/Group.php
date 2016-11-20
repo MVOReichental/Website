@@ -7,6 +7,7 @@ use stdClass;
 
 class Group
 {
+    public $id;
     /**
      * @var string
      */
@@ -26,6 +27,8 @@ class Group
 
     public function __construct()
     {
+        $this->createId();
+
         $this->users = new Users;
         $this->permissions = new Permissions;
         $this->subGroups = new GroupList;
@@ -34,6 +37,10 @@ class Group
     public static function loadFromStdClass(stdClass $object)
     {
         $group = new self;
+
+        if (isset($object->id)) {
+            $group->id = $object->id;
+        }
 
         if (isset($object->title)) {
             $group->title = $object->title;
@@ -92,7 +99,7 @@ class Group
         }
 
         if ($this->users->hasUser($user)) {
-            $permissions->addAll($this->permissions);
+            $permissions->addAll($this->getAllPermissions());
 
             $foundPermissions = true;
         }
@@ -120,5 +127,26 @@ class Group
         }
 
         return $users;
+    }
+
+    public function getAllPermissions()
+    {
+        $permissions = new Permissions;
+
+        $permissions->addAll($this->permissions);
+
+        /**
+         * @var $group Group
+         */
+        foreach ($this->subGroups as $group) {
+            $permissions->addAll($group->getAllPermissions());
+        }
+
+        return $permissions;
+    }
+
+    public function createId()
+    {
+        $this->id = uniqid();
     }
 }

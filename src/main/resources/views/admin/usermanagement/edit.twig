@@ -10,9 +10,20 @@
     {{ parent() }}
 {% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="bower_components/jstree-bootstrap-theme/dist/themes/proton/style.min.css"/>
+
+    <link rel="stylesheet" href="css/usermanagement.css"/>
+{% endblock %}
+
 {% block scripts %}
     {{ parent() }}
 
+    <script src="bower_components/jstree-bootstrap-theme/dist/jstree.min.js"></script>
+
+    <script src="js/permissions.js"></script>
     <script src="js/usermanagement.js"></script>
 {% endblock %}
 
@@ -34,53 +45,68 @@
             <input type="hidden" name="id" value="{{ user.id }}"/>
         {% endif %}
 
-        <div class="form-group">
-            <label for="usermanagement-edit-username">Benutzername:</label>
-            <div class="input-group">
-                <input type="text" class="form-control" id="usermanagement-edit-username" name="username" value="{{ user.username }}"/>
-                <span class="input-group-btn">
-                    <button id="usermanagement-edit-username-from-name" class="btn btn-default" type="button" data-toggle="tooltip" title="Von Vorname und Nachname &uuml;bernehmen"><i class="fa fa-reply"></i></button>
-                </span>
-            </div>
+        <input type="hidden" id="usermanagement-edit-permission-groups" name="permissionGroups" value="{{ user.permissionGroupIds|join(',') }}"/>
 
-            <span class="help-block"></span>
-        </div>
+        <div>
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#usermanagement-edit-tab-general" data-toggle="tab">Allgemein</a></li>
+                <li><a href="#usermanagement-edit-tab-permissiongroups" data-toggle="tab">Bereichtigungsgruppen</a></li>
+            </ul>
 
-        <div class="form-group">
-            <label for="usermanagement-edit-firstname">Vorname:</label>
-            <input type="text" class="form-control" id="usermanagement-edit-firstname" name="firstName" value="{{ user.firstName }}"/>
-        </div>
+            <div class="tab-content">
+                <div class="tab-pane active" id="usermanagement-edit-tab-general">
+                    <div class="form-group">
+                        <label for="usermanagement-edit-username">Benutzername:</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="usermanagement-edit-username" name="username" value="{{ user.username }}"/>
+                            <div class="input-group-btn">
+                                <button id="usermanagement-edit-username-from-name" class="btn btn-default" type="button" data-toggle="tooltip" title="Von Vorname und Nachname &uuml;bernehmen"><i class="fa fa-reply"></i></button>
+                            </div>
+                        </div>
 
-        <div class="form-group">
-            <label for="usermanagement-edit-lastname">Nachname:</label>
-            <input type="text" class="form-control" id="usermanagement-edit-lastname" name="lastName" value="{{ user.lastName }}"/>
-        </div>
+                        <span class="help-block"></span>
+                    </div>
 
-        <div class="form-group">
-            <label for="usermanagement-edit-birthdate">Geburtsdatum:</label>
-            <input type="date" class="form-control" id="usermanagement-edit-birthdate" name="birthDate" value="{{ user.birthDate.format("Y-m-d") }}"/>
-        </div>
+                    <div class="form-group">
+                        <label for="usermanagement-edit-firstname">Vorname:</label>
+                        <input type="text" class="form-control" id="usermanagement-edit-firstname" name="firstName" value="{{ user.firstName }}"/>
+                    </div>
 
-        <div class="form-group">
-            <label for="usermanagement-edit-email">Email-Adresse:</label>
-            <input type="email" class="form-control" id="usermanagement-edit-email" name="email" value="{{ user.email }}"/>
-        </div>
+                    <div class="form-group">
+                        <label for="usermanagement-edit-lastname">Nachname:</label>
+                        <input type="text" class="form-control" id="usermanagement-edit-lastname" name="lastName" value="{{ user.lastName }}"/>
+                    </div>
 
-        <div class="form-group">
-            <strong>Optionen</strong>
+                    <div class="form-group">
+                        <label for="usermanagement-edit-birthdate">Geburtsdatum:</label>
+                        <input type="date" class="form-control" id="usermanagement-edit-birthdate" name="birthDate" value="{{ user.birthDate.format("Y-m-d") }}"/>
+                    </div>
 
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="enabled" value="1" {% if user.enabled %}checked{% endif %}/>
-                    Aktiviert
-                </label>
-            </div>
+                    <div class="form-group">
+                        <label for="usermanagement-edit-email">Email-Adresse:</label>
+                        <input type="email" class="form-control" id="usermanagement-edit-email" name="email" value="{{ user.email }}"/>
+                    </div>
 
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" id="usermanagement-edit-send-credentials" name="sendCredentials" value="1"/>
-                    Zugangsdaten versenden
-                </label>
+                    <div class="form-group">
+                        <strong>Optionen</strong>
+
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="enabled" value="1" {% if user.enabled %}checked{% endif %}/>
+                                Aktiviert
+                            </label>
+                        </div>
+
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="usermanagement-edit-send-credentials" name="sendCredentials" value="1"/>
+                                Zugangsdaten versenden
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="usermanagement-edit-tab-permissiongroups"></div>
             </div>
         </div>
 

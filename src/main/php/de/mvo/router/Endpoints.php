@@ -123,6 +123,7 @@ class Endpoints extends ArrayObject
         // Admin
         $this->append(new Endpoint(HttpMethod::GET, "/internal/admin/visits", Target::create()->className(Visits::class)->method("getPage")->permission("admin.visits")));
         $this->append(new Endpoint(HttpMethod::GET, "/internal/admin/usermanagement", Target::create()->className(UserManagement::class)->method("getPage")->permission("admin.userManagement")));
+        $this->append(new Endpoint(HttpMethod::GET, "/internal/admin/usermanagement/permission-groups", Target::create()->className(UserManagement::class)->method("getPermissionGroupsTree")->permission("admin.userManagement")));
         $this->append(new Endpoint(HttpMethod::GET, "/internal/admin/usermanagement/user", Target::create()->className(UserManagement::class)->method("getEditPage")->permission("admin.userManagement")));
         $this->append(new Endpoint(HttpMethod::GET, "/internal/admin/usermanagement/user/[i:id]", Target::create()->className(UserManagement::class)->method("getEditPage")->permission("admin.userManagement")));
         $this->append(new Endpoint(HttpMethod::GET, "/internal/admin/usermanagement/user/[i:id]/profile-picture", Target::create()->className(UserManagement::class)->method("getProfilePicturePage")->permission("admin.userManagement")));
