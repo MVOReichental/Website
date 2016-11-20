@@ -110,6 +110,7 @@ class Members extends AbstractService
         }
 
         $messages = Messages::getBySender($user);
+        $messages->addAll(Messages::getByRecipient($user));
 
         $filteredMessages = new Messages;
 
@@ -117,7 +118,7 @@ class Members extends AbstractService
          * @var $message Message
          */
         foreach ($messages as $message) {
-            if ($message->sender->isEqualTo($currentUser) or $message->recipients->hasUser($currentUser) or $currentUser->hasPermission("messages.readAll")) {
+            if ($message->sender->isEqualTo($currentUser) or $message->recipients->hasUser($currentUser)) {
                 $filteredMessages->append($message);
             }
         }

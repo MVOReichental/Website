@@ -79,6 +79,34 @@ class Messages extends ArrayObject
         return $messages;
     }
 
+    public function hasMessage(Message $message)
+    {
+        /**
+         * @var $thisMessage Message
+         */
+        foreach ($this as $thisMessage) {
+            if ($thisMessage->id == $message->id) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function addAll(Messages $messages)
+    {
+        /**
+         * @var $message Message
+         */
+        foreach ($messages as $message) {
+            if ($this->hasMessage($message)) {
+                continue;
+            }
+
+            $this->append($message);
+        }
+    }
+
     /**
      * @param mixed $index
      *
