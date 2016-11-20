@@ -40,6 +40,18 @@
         <div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Der Benutzername wird bereits verwendet!</div>
     {% endif %}
 
+    {% if user.id == currentUser.id %}
+        <div class="alert alert-warning">
+            <div class="media">
+                <div class="media-left media-middle"><i class="fa fa-exclamation-triangle fa-2x"></i></div>
+                <div class="media-body">
+                    <h4 class="media-heading">Du bearbeitest aktuell deinen Benutzer.</h4>
+                    &Auml;nderungen k&ouml;nnen dazu f&uuml;hren, dass du dich nicht mehr anmelden kannst oder du keine Administrationsrechte mehr hast!
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
     <form id="usermanagement-edit-form" method="post">
         {% if user.id %}
             <input type="hidden" name="id" value="{{ user.id }}"/>
@@ -92,7 +104,7 @@
 
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" name="enabled" value="1" {% if user.enabled %}checked{% endif %}/>
+                                <input type="checkbox" name="enabled" value="1" {% if user.enabled %}checked{% endif %} {% if user.id == currentUser.id %}disabled{% endif %}/>
                                 Aktiviert
                             </label>
                         </div>
