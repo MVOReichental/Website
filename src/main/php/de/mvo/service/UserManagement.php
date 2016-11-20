@@ -55,22 +55,7 @@ class UserManagement extends AbstractService
     {
         $user = new User;
 
-        self::setUserDataFromPostData($user);
-
-        try {
-            $user->save();
-        } catch (DuplicateEntryException $exception) {
-            return TwigRenderer::render("admin/usermanagement/edit", array
-            (
-                "user" => $user,
-                "showDuplicateUsernameError" => true
-            ));
-        }
-
-        GroupList::load()->save();
-
-        header("Location: /internal/admin/usermanagement");
-        return null;
+        return self::completeUserUpdate($user);
     }
 
     public function updateUser()
@@ -81,22 +66,7 @@ class UserManagement extends AbstractService
             throw new NotFoundException;
         }
 
-        self::setUserDataFromPostData($user);
-
-        try {
-            $user->save();
-        } catch (DuplicateEntryException $exception) {
-            return TwigRenderer::render("admin/usermanagement/edit", array
-            (
-                "user" => $user,
-                "showDuplicateUsernameError" => true
-            ));
-        }
-
-        GroupList::load()->save();
-
-        header("Location: /internal/admin/usermanagement");
-        return null;
+        return self::completeUserUpdate($user);
     }
 
     public function getPermissionGroupsTree()
@@ -105,7 +75,7 @@ class UserManagement extends AbstractService
         return json_encode(GroupList::load());
     }
 
-    private static function setUserDataFromPostData(User $user)
+    private static function completeUserUpdate(User $user)
     {
         $user->username = $_POST["username"];
         $user->firstName = $_POST["firstName"];
@@ -128,5 +98,24 @@ class UserManagement extends AbstractService
         }
 
         $user->setPermissionGroupsById(explode(",", $_POST["permissionGroups"]));
+
+        try {
+            $user->save();
+        } catch (DuplicateEntryException $exception) {
+            return TwigRenderer::render("admin/usermanagement/edit", array
+            (
+                "user" => $user,
+                "showDuplicateUsernameError" => true
+            ));
+        }
+
+        if (isset($_POST["sendCredentials"]) and $_POST["sendCredentials"]) {
+            $user->sendAccountCreatedMail();
+        }
+
+        GroupList::load()->save();
+
+        header("Location: /internal/admin/usermanagement");
+        return null;
     }
 }

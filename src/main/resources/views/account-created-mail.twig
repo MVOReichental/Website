@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Zugangsdaten f&uuml;r den internen Bereich</title>
+    </head>
+
+    <body>
+        <p>Hallo {{ user.firstName }},</p>
+
+        <p>dein Account f&uuml;r den internen Bereich des Musikvereins "Orgelfels" Reichental e.V. wurde erstellt.</p>
+
+        <p>Du kannst dich &uuml;ber <a href="{{ url }}">diesen Link</a> mit dem folgenden Benutzernamen und Passwort einloggen:</p>
+
+        <p><b>Benutzername:</b> {{ user.username }}</p>
+
+        <p><b>Passwort:</b> {{ password }}</p>
+    </body>
+</html>

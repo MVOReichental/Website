@@ -260,6 +260,10 @@ class User implements JsonSerializable
 
     public function sendPasswordResetMail()
     {
+        if ($this->email === null) {
+            throw new UnexpectedValueException("Email address not defined");
+        }
+
         $key = bin2hex(random_bytes(16));
 
         $query = Database::prepare("
@@ -304,6 +308,32 @@ class User implements JsonSerializable
         }
 
         return true;
+    }
+
+    public function sendAccountCreatedMail()
+    {
+        if ($this->email === null) {
+            throw new UnexpectedValueException("Email address not defined");
+        }
+
+        $password = substr(str_shuffle("abcdefghkmnpqrstuvwxyzABCDEFGHKMNPQRSTUVWXYZ23456789_-"), 0, 10);
+
+        $this->setPassword($password);
+
+        $sender = new Sender;
+
+        $message = new Message;
+
+        $message->setTo($this->email, $this->getFullName());
+        $message->setBody(TwigRenderer::render("account-created-mail", array
+        (
+            "user" => $this,
+            "password" => $password,
+            "url" => Url::getBaseUrl() . "/internal"
+        )), "text/html");
+        $message->setSubjectFromHtml($message->getBody());
+
+        $sender->send($message);
     }
 
     public function setNewEmailAddress($newEmail)
