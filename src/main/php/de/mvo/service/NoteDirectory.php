@@ -7,15 +7,40 @@ use de\mvo\model\notedirectory\Program;
 use de\mvo\model\notedirectory\Programs;
 use de\mvo\model\notedirectory\Title;
 use de\mvo\model\notedirectory\Titles;
+use de\mvo\model\users\User;
 use de\mvo\service\exception\NotFoundException;
 use de\mvo\TwigRenderer;
 
 class NoteDirectory extends AbstractService
 {
+    public static function getEditorPages()
+    {
+        return array
+        (
+            "titles" => array
+            (
+                "title" => "Titel"
+            ),
+            "programs" => array
+            (
+                "title" => "Programme"
+            ),
+            "categories" => array
+            (
+                "title" => "Kategorien"
+            )
+        );
+    }
+
     public function redirectToLatestProgram()
     {
         $program = Program::getLatest();
         if ($program === null) {
+            if (User::getCurrent()->hasPermission("notedirectory.edit")) {
+                header("Location: /internal/notedirectory/editor");
+                return null;
+            }
+
             throw new NotFoundException;
         }
 
@@ -79,5 +104,42 @@ class NoteDirectory extends AbstractService
         (
             "title" => $title
         )));
+    }
+
+    public function getEditPage()
+    {
+        $pages = self::getEditorPages();
+
+        $activePage = null;
+
+        foreach ($pages as $name => &$page) {
+            $page["name"] = $name;
+
+            if ($this->params->page == $page["name"]) {
+                $page["active"] = true;
+
+                $activePage = $page;
+            } else {
+                $page["active"] = false;
+            }
+        }
+
+        $context = array
+        (
+            "pages" => array_values($pages),
+            "title" => $activePage["title"],
+            "activePage" => $activePage
+        );
+
+        switch ($activePage["name"]) {
+            case "titles":
+                $context["titles"] = Titles::getAll();
+                break;
+            case "programs":
+                $context["programs"] = Programs::getAll();
+                break;
+        }
+
+        return TwigRenderer::render("notedirectory/editor/" . $activePage["name"], $context);
     }
 }

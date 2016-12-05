@@ -16,6 +16,9 @@
 
     <div class="btn-group hidden-print" id="notedirectory-selection">
         <div class="btn-group">
+            {% if currentUser.hasPermission("notedirectory.edit") %}
+                <a href="internal/notedirectory/editor" class="btn btn-default hidden-print">Editor</a>
+            {% endif %}
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                 Programme <span class="caret"></span>
             </button>

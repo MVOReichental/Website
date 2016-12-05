@@ -101,11 +101,14 @@ class Endpoints extends ArrayObject
         $this->append(new Endpoint(HttpMethod::GET, "/internal/forms", Target::create()->className(Forms::class)->method("getList")->requireLogin()));
         $this->append(new Endpoint(HttpMethod::GET, "/internal/forms/[*:filename]", Target::create()->className(Forms::class)->method("download")->requireLogin()));
 
+        $noteDirectoryEditorPages = array_keys(NoteDirectory::getEditorPages());
         $this->append(new Endpoint(HttpMethod::GET, "/internal/notedirectory", Target::create()->className(NoteDirectory::class)->method("redirectToLatestProgram")->permission("notedirectory.view")));
         $this->append(new Endpoint(HttpMethod::GET, "/internal/notedirectory/programs/[i:year]/[*:name]", Target::create()->className(NoteDirectory::class)->method("getProgram")->permission("notedirectory.view")));
         $this->append(new Endpoint(HttpMethod::GET, "/internal/notedirectory/titles", Target::create()->className(NoteDirectory::class)->method("getAllTitles")->permission("notedirectory.view")));
         $this->append(new Endpoint(HttpMethod::GET, "/internal/notedirectory/titles/[i:id]", Target::create()->className(NoteDirectory::class)->method("getTitleDetails")->permission("notedirectory.view")));
         $this->append(new Endpoint(HttpMethod::GET, "/internal/notedirectory/categories/[i:id]", Target::create()->className(NoteDirectory::class)->method("getTitlesWithCategory")->permission("notedirectory.view")));
+        $this->append(new Endpoint(HttpMethod::GET, "/internal/notedirectory/editor", Target::create()->className(Redirect::class)->method("redirect")->arguments("/internal/notedirectory/editor/" . $noteDirectoryEditorPages[0])->permission("notedirectory.edit")));
+        $this->append(new Endpoint(HttpMethod::GET, "/internal/notedirectory/editor/[" . implode("|", $noteDirectoryEditorPages) . ":page]", Target::create()->className(NoteDirectory::class)->method("getEditPage")->permission("notedirectory.edit")));
 
         $this->append(new Endpoint(HttpMethod::GET, "/internal/protocols", Target::create()->className(Protocols::class)->method("getList")->permission("protocols.view.*")));
         $this->append(new Endpoint(HttpMethod::POST, "/internal/protocols", Target::create()->className(Protocols::class)->method("upload")->permission("protocols.upload.*")));
