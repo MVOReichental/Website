@@ -72,6 +72,24 @@ class Users extends ArrayObject implements JsonSerializable
         return $users;
     }
 
+    public function disabledUsers()
+    {
+        $users = new self;
+
+        /**
+         * @var $user User
+         */
+        foreach ($this as $user) {
+            if ($user->enabled) {
+                continue;
+            }
+
+            $users->append($user);
+        }
+
+        return $users;
+    }
+
     public static function getAll()
     {
         $users = new self;

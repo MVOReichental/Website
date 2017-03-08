@@ -7,9 +7,11 @@
 
     <a href="internal/admin/usermanagement/user" class="btn btn-default"><i class="fa fa-plus"></i> Neuer Benutzer</a>
 
-    {{ include("admin/usermanagement/user-list.twig", {enabled: true}) }}
+    {{ include("admin/usermanagement/user-list.twig", {users: users.enabledUsers}) }}
 
-    <h3 class="page-header">Deaktivierte Benutzer</h3>
+    {% if users.disabledUsers.count %}
+        <h3 class="page-header">Deaktivierte Benutzer</h3>
 
-    {{ include("admin/usermanagement/user-list.twig", {enabled: false}) }}
+        {{ include("admin/usermanagement/user-list.twig", {users: users.disabledUsers}) }}
+    {% endif %}
 {% endblock %}
