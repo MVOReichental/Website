@@ -6,7 +6,7 @@ package { "vim":
   ensure => installed,
 }
 
-package{ "git":
+package { "git":
   ensure => installed,
 }
 
