@@ -33,7 +33,7 @@ try {
         $target = $router->getMatchingTarget($path);
         if ($target === null) {
             // Do not allow guessing internal pages
-            if (substr(ltrim($path, "/"), 0, 8) == "internal" and User::getCurrent() === null) {
+            if (explode("/", ltrim($path, "/"), 2)[0] == "internal" and User::getCurrent() === null) {
                 throw new LoginException(LoginException::NOT_LOGGED_IN);
             }
 
