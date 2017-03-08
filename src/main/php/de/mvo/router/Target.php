@@ -65,6 +65,12 @@ class Target
             if ($this->requiredPermission !== null and !$user->hasPermission($this->requiredPermission)) {
                 throw new PermissionViolationException($this->requiredPermission);
             }
+
+            // Force user to change password if required
+            if ($user->requirePasswordChange and !in_array($_SERVER["REQUEST_URI"], array("/internal/settings/account", "/internal/logout"))) {
+                header("Location: /internal/settings/account");
+                return "";
+            }
         }
 
         $reflectionClass = new ReflectionClass($this->class);

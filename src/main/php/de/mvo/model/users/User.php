@@ -43,6 +43,10 @@ class User implements JsonSerializable
      */
     private $resetPasswordDate;
     /**
+     * @var bool
+     */
+    public $requirePasswordChange;
+    /**
      * @var string
      */
     public $email;
@@ -99,6 +103,7 @@ class User implements JsonSerializable
 
         $this->id = (int)$this->id;
         $this->enabled = (bool)$this->enabled;
+        $this->requirePasswordChange = (bool)$this->requirePasswordChange;
 
         if ($this->birthDate !== null) {
             $this->birthDate = new Date($this->birthDate);
@@ -232,7 +237,7 @@ class User implements JsonSerializable
         return true;
     }
 
-    public function setPassword($password)
+    public function setPassword($password, $requireChange = false)
     {
         $password = password_hash($password, PASSWORD_DEFAULT);
 
@@ -241,17 +246,20 @@ class User implements JsonSerializable
             SET
                 `password` = :password,
                 `resetPasswordKey` = NULL,
-                `resetPasswordDate` = NULL
+                `resetPasswordDate` = NULL,
+                `requirePasswordChange` = :requirePasswordChange
             WHERE `id` = :id
         ");
 
         $query->execute(array
         (
             ":password" => $password,
+            ":requirePasswordChange" => $requireChange,
             ":id" => $this->id
         ));
 
         $this->password = $password;
+        $this->requirePasswordChange = $requireChange;
 
         // For security reasons, reset resetPassword fields
         $this->resetPasswordKey = null;
@@ -318,7 +326,7 @@ class User implements JsonSerializable
 
         $password = substr(str_shuffle("abcdefghkmnpqrstuvwxyzABCDEFGHKMNPQRSTUVWXYZ23456789_-"), 0, 10);
 
-        $this->setPassword($password);
+        $this->setPassword($password, true);
 
         $sender = new Sender;
 

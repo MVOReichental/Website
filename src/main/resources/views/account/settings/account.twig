@@ -10,6 +10,9 @@
 {% endblock %}
 
 {% block settingsHeader %}
+    {% if user.requirePasswordChange %}
+        <div class="alert alert-info"><i class="fa fa-info-circle"></i> Du musst ein neues Passwort vergeben bevor du den internen Bereich nutzen kannst.</div>
+    {% endif %}
     {% if update.password %}
         {% if update.password is constant("UPDATE_PASSWORD_OK", this) %}
             <div class="alert alert-success"><i class="fa fa-check"></i> Das Passwort wurde erfolgreich ge&auml;ndert!</div>

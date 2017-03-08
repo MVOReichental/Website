@@ -43,6 +43,7 @@ CREATE TABLE `users` (
   `password` varchar(255) DEFAULT NULL,
   `resetPasswordKey` varchar(32) DEFAULT NULL,
   `resetPasswordDate` datetime DEFAULT NULL,
+  `requirePasswordChange` boolean NOT NULL DEFAULT FALSE,
   `firstName` varchar(100) DEFAULT NULL,
   `lastName` varchar(100) DEFAULT NULL,
   `birthDate` date DEFAULT NULL,

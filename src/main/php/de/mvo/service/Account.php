@@ -62,8 +62,6 @@ class Account extends AbstractService
 
                 throw new LoginException(LoginException::REQUIRE_2FA_TOKEN);
             }
-
-            $user->doLogin();
         } elseif (isset($_SESSION["2faLoginUserId"]) and isset($_POST["2fa-token"])) {
             $user = User::getById($_SESSION["2faLoginUserId"]);
             if ($user === null) {
@@ -75,11 +73,11 @@ class Account extends AbstractService
             }
 
             unset($_SESSION["2faLoginUserId"]);
-
-            $user->doLogin();
         } else {
             throw new LoginException(LoginException::UNKNOWN_ERROR);
         }
+
+        $user->doLogin();
 
         if (isset($_GET["redirect"]) and $_GET["redirect"] != "") {
             header("Location: " . $_GET["redirect"], true, 302);
