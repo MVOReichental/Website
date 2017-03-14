@@ -32,7 +32,7 @@
 
         {% include("dates/list.twig") %}
 
-        <p class="text-muted">Klicken Sie <a href="termine">hier</a> um weitere Termine zu sehen.</p>
+        <p class="text-muted hidden-print">Klicken Sie <a href="termine">hier</a> um weitere Termine zu sehen.</p>
     {% endif %}
 
     {% if albums.count %}
@@ -40,6 +40,6 @@
 
         {% include("pictures/albums-list.twig") %}
 
-        <p class="text-muted">Klicken Sie <a href="{{ picturesBaseUrl }}">hier</a> um weitere Alben zu sehen.</p>
+        <p class="text-muted hidden-print">Klicken Sie <a href="{{ picturesBaseUrl }}">hier</a> um weitere Alben zu sehen.</p>
     {% endif %}
 {% endblock %}
