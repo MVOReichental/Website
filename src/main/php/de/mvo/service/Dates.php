@@ -76,7 +76,7 @@ class Dates extends AbstractService
         (
             "dates" => $dates,
             "yearlyDates" => json_decode(file_get_contents(MODELS_ROOT . "/yearly-events.json")),
-            "allowEdit" => $user === null ? false : $user->hasPermission("dates.edit"),
+            "allowEdit" => $internal and ($user === null ? false : $user->hasPermission("dates.edit")),
             "groups" => $groups
         ));
     }
