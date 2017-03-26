@@ -1,0 +1,24 @@
+<tr class="settings-contact">
+    <td>
+        <select class="selectpicker show-tick" name="type[]">
+            <option value="fax" {% if contact.type == "fax" %}selected{% endif %}>Fax</option>
+            <option value="mobile" {% if contact.type == "mobile" %}selected{% endif %}>Mobil</option>
+            <option value="phone" {% if contact.type == "phone" %}selected{% endif %}>Telefon</option>
+        </select>
+    </td>
+
+    <td>
+        <select class="selectpicker show-tick" name="category[]">
+            <option value="private" {% if contact.category == "private" %}selected{% endif %}>Privat</option>
+            <option value="business" {% if contact.category == "business" %}selected{% endif %}>Gesch&auml;ftlich</option>
+        </select>
+    </td>
+
+    <td><input type="text" class="form-control" name="value[]" value="{{ contact.value }}"/></td>
+
+    <td>
+        {% if contact.id %}
+            <button type="button" class="btn btn-danger settings-contact-remove"><i class="fa fa-remove"></i></button>
+        {% endif %}
+    </td>
+</tr>

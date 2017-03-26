@@ -1,7 +1,13 @@
 {% extends "account/settings/page.twig" %}
 
 {% block settingsHeader %}
-    {# TODO: Add success/error alert on save #}
+    {% if update.contact %}
+        {% if update.contact is constant("UPDATE_CONTACT_OK", this) %}
+            <div class="alert alert-success"><i class="fa fa-check"></i> Deine Kontaktdaten wurden erfolgreich aktualisiert.</div>
+        {% elseif update.contact is constant("UPDATE_CONTACT_INVALID_ID", this) %}
+            <div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Beim Aktualisieren der Kontaktdaten ist ein Fehler aufgetreten! Bitte versuche es erneut.</div>
+        {% endif %}
+    {% endif %}
 {% endblock %}
 
 {% block settingsContent %}
@@ -14,23 +20,15 @@
             <form method="post">
                 <input type="hidden" name="form" value="contact"/>
 
-                {% for contact in user.contacts %}
-                    <div class="form-group">
-                        <select class="selectpicker show-tick" name="type[]" data-selection="{{ contact.type }}">
-                            <option value="fax">Fax</option>
-                            <option value="mobile">Mobil</option>
-                            <option value="phone">Telefon</option>
-                        </select>
-                        <select class="selectpicker show-tick" name="category[]" data-selection="{{ contact.category }}">
-                            <option value="private">Privat</option>
-                            <option value="business">Gesch&auml;ftlich</option>
-                        </select>
+                <table class="table">
+                    {% for contact in user.contacts %}
+                        <input type="hidden" name="id[]" value="{{ contact.id }}"/>
 
-                        <input type="text" class="form-control" name="value[]" value="{{ contact.value }}"/>
+                        {{ include("account/settings/single-contact.twig") }}
+                    {% endfor %}
 
-                        <button class="input-group-addon btn btn-danger"><i class="fa fa-remove"></i></button>
-                    </div>
-                {% endfor %}
+                    {{ include("account/settings/single-contact.twig") }}
+                </table>
 
                 <button type="submit" class="btn btn-success">Speichern</button>
             </form>

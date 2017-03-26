@@ -127,4 +127,8 @@ $(function () {
             }
         });
     });
+
+    $(".settings-contact-remove").on("click", function() {
+        $(this).closest(".settings-contact").remove();
+    });
 });

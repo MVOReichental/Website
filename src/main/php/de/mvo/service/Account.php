@@ -1,6 +1,8 @@
 <?php
 namespace de\mvo\service;
 
+use de\mvo\model\contacts\Contact;
+use de\mvo\model\contacts\Contacts;
 use de\mvo\model\users\User;
 use de\mvo\service\exception\LoginException;
 use de\mvo\TwigRenderer;
@@ -22,6 +24,9 @@ class Account extends AbstractService
     const UPDATE_EMAIL_UNCHANGED = "unchanged";
     const UPDATE_EMAIL_INVALID = "invalid";
     const UPDATE_EMAIL_OK = "ok";
+
+    const UPDATE_CONTACT_INVALID_ID = "invalid_id";
+    const UPDATE_CONTACT_OK = "ok";
 
     const UPDATE_PROFILE_OK = "ok";
 
@@ -281,6 +286,68 @@ class Account extends AbstractService
         return self::UPDATE_EMAIL_OK;
     }
 
+    private function updateContacts()
+    {
+        if (!isset($_POST["value"]) or !is_array($_POST["value"])) {
+            http_response_code(400);
+            return null;
+        }
+
+        $user = User::getCurrent();
+
+        $oldContacts = Contacts::forUser($user);
+        $newContacts = new Contacts;
+
+        foreach ($_POST["value"] as $index => $value) {
+            if (!$value) {
+                continue;
+            }
+
+            if (isset($_POST["id"][$index])) {
+                $contact = Contact::getById($_POST["id"][$index]);
+
+                if ($contact === null or !$contact->user->isEqualTo($user)) {
+                    return self::UPDATE_CONTACT_INVALID_ID;
+                }
+            } else {
+                $contact = new Contact;
+
+                $contact->user = $user;
+            }
+
+            if (!isset($_POST["type"][$index]) or !isset($_POST["category"][$index])) {
+                http_response_code(400);
+                return null;
+            }
+
+            $contact->type = $_POST["type"][$index];
+            $contact->category = $_POST["category"][$index];
+            $contact->value = $value;
+
+            $contact->save();
+
+            $newContacts->append($contact);
+        }
+
+        // Delete removed contacts
+        foreach ($oldContacts as $contact) {
+            $found = false;
+
+            foreach ($newContacts as $newContact) {
+                if ($newContact->id = $contact) {
+                    $found = true;
+                    break;
+                }
+            }
+
+            if (!$found) {
+                $contact->remove();
+            }
+        }
+
+        return self::UPDATE_CONTACT_OK;
+    }
+
     public function updateSettings()
     {
         $response = null;
@@ -300,7 +367,7 @@ class Account extends AbstractService
                     $response = $this->updateEmailAddress();
                     break;
                 case "contact":
-                    $response = null;// TODO
+                    $response = $this->updateContacts();
                     break;
                 default:
                     http_response_code(400);
