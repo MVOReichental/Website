@@ -5,17 +5,17 @@
     },
     {
         "name": "Vorstand (Gleichberechtigt)",
-        "text": "Erhard Klumpp (07224 65 26 83)\nBirgit Gerweck (07224 99 69 822)",
+        "text": "Birgit Gerweck (07224 99 69 822)\nEdith Wieland (07224 69 70 467)",
         "mailbox": "vorstand"
     },
     {
         "name": "Musikervorstand",
-        "text": "Karl Fortenbacher\nDaniela Zapf",
+        "text": "Katrin H\u00f6rth\nJasmin Melcher",
         "mailbox": "musikervorstand"
     },
     {
-        "name": "Kassenverwalterin",
-        "text": "Katrin H\u00f6rth",
+        "name": "Kassenverwalter",
+        "text": "Florian Wieland",
         "mailbox": "kassier"
     },
     {
@@ -25,7 +25,7 @@
     },
     {
         "name": "Jugendleiterin",
-        "text": "Gisela Wieland",
+        "text": "Gisela Wieland\nDavid Brasseur",
         "mailbox": "jugendleiter"
     },
     {
