@@ -1,9 +1,8 @@
 <tr class="settings-contact">
     <td>
         <select class="selectpicker show-tick" name="type[]">
-            <option value="fax" {% if contact.type == "fax" %}selected{% endif %}>Fax</option>
-            <option value="mobile" {% if contact.type == "mobile" %}selected{% endif %}>Mobil</option>
             <option value="phone" {% if contact.type == "phone" %}selected{% endif %}>Telefon</option>
+            <option value="mobile" {% if contact.type == "mobile" %}selected{% endif %}>Mobil</option>
         </select>
     </td>
 

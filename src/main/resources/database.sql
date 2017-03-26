@@ -67,7 +67,7 @@ CREATE TABLE `usedtotptokens` (
 CREATE TABLE `usercontacts` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `userId` int(11) unsigned NOT NULL,
-  `type` set('phone', 'fax', 'mobile') NOT NULL,
+  `type` set('phone', 'mobile') NOT NULL,
   `category` set('private', 'business') NOT NULL,
   `value` varchar(200) NOT NULL,
   PRIMARY KEY (`id`),
