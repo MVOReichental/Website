@@ -29,8 +29,10 @@ class TwigRenderer
         self::$twig = new Twig_Environment($loader);
 
         self::$twig->addGlobal("currentYear", date("Y"));
+        self::$twig->addGlobal("currentFormattedDate", date("d.m.Y"));
         self::$twig->addGlobal("currentUser", User::getCurrent());
         self::$twig->addGlobal("internal", (substr(ltrim($path, "/"), 0, 8) == "internal" and User::getCurrent()));
+        self::$twig->addGlobal("path", $path);
 
         self::$twig->setCache(Config::getValue("twig", "cache", false));
     }

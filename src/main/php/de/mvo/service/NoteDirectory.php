@@ -5,6 +5,7 @@ use de\mvo\model\notedirectory\Categories;
 use de\mvo\model\notedirectory\Category;
 use de\mvo\model\notedirectory\Program;
 use de\mvo\model\notedirectory\Programs;
+use de\mvo\model\notedirectory\SingleModel;
 use de\mvo\model\notedirectory\Title;
 use de\mvo\model\notedirectory\Titles;
 use de\mvo\model\users\User;
@@ -19,14 +20,20 @@ class NoteDirectory extends AbstractService
         (
             "titles" => array
             (
+                "singleEditView" => "title-editor",
+                "modelClass" => Title::class,
                 "title" => "Titel"
             ),
             "programs" => array
             (
+                "singleEditView" => "program-editor",
+                "modelClass" => Program::class,
                 "title" => "Programme"
             ),
             "categories" => array
             (
+                "singleEditView" => "category-editor",
+                "modelClass" => Category::class,
                 "title" => "Kategorien"
             )
         );
@@ -141,5 +148,41 @@ class NoteDirectory extends AbstractService
         }
 
         return TwigRenderer::render("notedirectory/editor/" . $activePage["name"], $context);
+    }
+
+    private static function getEditorPage($page, $id, $createNewOnSave)
+    {
+        $pageConfig = self::getEditorPages()[$page];
+
+        if ($id === null) {
+            $modelData = null;
+        } else {
+            /**
+             * @var $modelClass SingleModel
+             */
+            $modelClass = $pageConfig["modelClass"];
+
+            $modelData = $modelClass::getById($id);
+
+            if ($modelData === null) {
+                throw new NotFoundException;
+            }
+        }
+
+        return TwigRenderer::render("notedirectory/editor/" . $pageConfig["singleEditView"], array
+        (
+            "data" => $modelData,
+            "createNewOnSave" => $createNewOnSave
+        ));
+    }
+
+    public function getEditExistingPage($createNewOnSave = false)
+    {
+        return self::getEditorPage($this->params->page, $this->params->id, $createNewOnSave);
+    }
+
+    public function getEditNewPage()
+    {
+        return self::getEditorPage($this->params->page, null, true);
     }
 }

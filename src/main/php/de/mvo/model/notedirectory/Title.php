@@ -3,7 +3,7 @@ namespace de\mvo\model\notedirectory;
 
 use de\mvo\Database;
 
-class Title
+class Title implements SingleModel
 {
     /**
      * @var int

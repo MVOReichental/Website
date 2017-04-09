@@ -1,0 +1,40 @@
+{% extends "base/internal-public-switch.twig" %}
+
+{% block title %}Titel bearbeiten - Notenverzeichniseditor{{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="css/notedirectoryeditor.css"/>
+{% endblock %}
+
+{% block content %}
+    <h1 class="page-header">Notenverzeichniseditor - Titel bearbeiten</h1>
+
+    <form action="{{ path }}" method="post">
+        <div class="form-group">
+            <label for="title-editor-title">Titel</label>
+            <input type="text" class="form-control" id="title-editor-title" name="title" value="{{ data.title }}"/>
+        </div>
+
+        <div class="form-group">
+            <label for="title-editor-composer">Komponist</label>
+            <input type="text" class="form-control" id="title-editor-composer" name="composer" value="{{ data.composer }}"/>
+        </div>
+
+        <div class="form-group">
+            <label for="title-editor-arranger">Bearbeiter</label>
+            <input type="text" class="form-control" id="title-editor-arranger" name="arranger" value="{{ data.arranger }}"/>
+        </div>
+
+        <div class="form-group">
+            <label for="title-editor-publisher">Verleger</label>
+            <input type="text" class="form-control" id="title-editor-publisher" name="publisher" value="{{ data.publisher }}"/>
+        </div>
+
+        <div class="btn-group">
+            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Speichern</button>
+            <a href="internal/notedirectory/editor/titles" class="btn btn-default"><i class="fa fa-remove"></i> Abbrechen</a>
+        </div>
+    </form>
+{% endblock %}

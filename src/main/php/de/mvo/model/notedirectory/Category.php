@@ -3,7 +3,7 @@ namespace de\mvo\model\notedirectory;
 
 use de\mvo\Database;
 
-class Category
+class Category implements SingleModel
 {
     /**
      * @var int

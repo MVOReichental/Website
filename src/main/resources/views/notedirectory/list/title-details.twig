@@ -26,7 +26,7 @@
         <tbody>
             {% for program in title.programs %}
                 <tr>
-                    <td>{{ program.title }}</td>
+                    <td><a href="internal/notedirectory/programs/{{ program.year }}/{{ program.name }}" class="hidden-print"><i class="fa fa-info-circle"></i></a> {{ program.title }}</td>
                     <td>{{ program.year }}</td>
                     <td>{{ program.titles[0].number }}</td>
                 </tr>

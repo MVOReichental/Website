@@ -3,7 +3,7 @@ namespace de\mvo\model\notedirectory;
 
 use de\mvo\Database;
 
-class Program
+class Program implements SingleModel
 {
     /**
      * @var int
@@ -103,6 +103,31 @@ class Program
         (
             ":year" => $year,
             ":name" => $name
+        ));
+
+        if (!$query->rowCount()) {
+            return null;
+        }
+
+        return $query->fetchObject(self::class);
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return Program|null
+     */
+    public static function getById($id)
+    {
+        $query = Database::prepare("
+            SELECT *
+            FROM `notedirectoryprograms`
+            WHERE `id` = :id
+        ");
+
+        $query->execute(array
+        (
+            ":id" => $id
         ));
 
         if (!$query->rowCount()) {

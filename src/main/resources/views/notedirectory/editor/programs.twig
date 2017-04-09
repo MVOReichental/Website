@@ -1,6 +1,10 @@
 {% extends "notedirectory/editor/page.twig" %}
 
 {% block editorContent %}
+    <div class="btn-group">
+        <a href="internal/notedirectory/editor/programs/new" class="btn btn-success"><i class="fa fa-plus"></i> Neues Programm</a>
+    </div>
+
     <table class="table table-striped table-hover table-responsive">
         <thead>
             <tr>
@@ -18,6 +22,7 @@
                     <td>
                         <div class="btn-group btn-group-xs">
                             <a href="internal/notedirectory/editor/programs/{{ program.id }}" class="btn btn-default" data-toggle="tooltip" title="Bearbeiten"><i class="fa fa-pencil"></i></a>
+                            <a href="internal/notedirectory/editor/programs/{{ program.id }}/copy" class="btn btn-default" data-toggle="tooltip" title="Kopieren"><i class="fa fa-copy"></i></a>
                             <button type="button" class="btn btn-danger remove" data-toggle="tooltip" title="L&ouml;schen"><i class="fa fa-remove"></i></button>
                         </div>
                     </td>
