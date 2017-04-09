@@ -32,7 +32,7 @@ class NoteDirectory extends AbstractService
         );
     }
 
-    public function redirectToLatestProgram()
+    public function redirectToLatestDefaultProgram()
     {
         $program = Program::getLatest();
         if ($program === null) {

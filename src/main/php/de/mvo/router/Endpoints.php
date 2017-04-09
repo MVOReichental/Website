@@ -102,7 +102,7 @@ class Endpoints extends ArrayObject
         $this->append(new Endpoint(HttpMethod::GET, "/internal/forms/[*:filename]", Target::create()->className(Forms::class)->method("download")->requireLogin()));
 
         $noteDirectoryEditorPages = array_keys(NoteDirectory::getEditorPages());
-        $this->append(new Endpoint(HttpMethod::GET, "/internal/notedirectory", Target::create()->className(NoteDirectory::class)->method("redirectToLatestProgram")->permission("notedirectory.view")));
+        $this->append(new Endpoint(HttpMethod::GET, "/internal/notedirectory", Target::create()->className(NoteDirectory::class)->method("redirectToLatestDefaultProgram")->permission("notedirectory.view")));
         $this->append(new Endpoint(HttpMethod::GET, "/internal/notedirectory/programs/[i:year]/[*:name]", Target::create()->className(NoteDirectory::class)->method("getProgram")->permission("notedirectory.view")));
         $this->append(new Endpoint(HttpMethod::GET, "/internal/notedirectory/titles", Target::create()->className(NoteDirectory::class)->method("getAllTitles")->permission("notedirectory.view")));
         $this->append(new Endpoint(HttpMethod::GET, "/internal/notedirectory/titles/[i:id]", Target::create()->className(NoteDirectory::class)->method("getTitleDetails")->permission("notedirectory.view")));
