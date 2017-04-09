@@ -1,3 +1,4 @@
+#! /usr/bin/env php
 <?php
 use de\mvo\Database;
 use de\mvo\model\permissions\Group;

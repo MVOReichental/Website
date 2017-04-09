@@ -37,7 +37,7 @@ class { "::mysql::server":
   remove_default_accounts => true,
 }
 
-mysql::db { "mvo_db":
+mysql::db { "mvo":
   dbname   => "mvo",
   user     => "mvo",
   password => "mvo",
@@ -72,4 +72,15 @@ exec { "bower_install":
   command     => "bower install --config.interactive=false",
   environment => ["HOME=/home/vagrant"],
   require     => Exec["npm_install_bower"],
+}
+
+file { "/opt/mvo-website/src/main/resources/config.ini":
+  source  => "/opt/mvo-website/vagrant/config.ini",
+  replace => "no",
+}
+
+exec { "/opt/mvo-website/vagrant/create-sample-data.php":
+  subscribe   => Mysql::Db["mvo"],
+  refreshonly => true,
+  require     => Package["php5-cli"],
 }
