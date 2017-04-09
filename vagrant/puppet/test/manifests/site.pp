@@ -1,34 +1,15 @@
-package { "htop":
-  ensure => installed,
-}
+$packages = [
+  "git",
+  "htop",
+  "nodejs-legacy",
+  "npm",
+  "php5-cli",
+  "php5-gd",
+  "php5-mysql",
+  "vim",
+]
 
-package { "vim":
-  ensure => installed,
-}
-
-package { "git":
-  ensure => installed,
-}
-
-package { "nodejs-legacy":
-  ensure => installed,
-}
-
-package { "npm":
-  ensure => installed,
-}
-
-package { "php5-cli":
-  ensure => installed,
-}
-
-package { "php5-mysql":
-  ensure => installed,
-}
-
-package { "php5-gd":
-  ensure => installed,
-}
+package { $packages: }
 
 file { "/etc/timezone":
   ensure  => present,
