@@ -1,8 +1,8 @@
 $script = <<SHELL
     aptitude update
-    puppet module install puppetlabs-apache
-    puppet module install puppetlabs-mysql
-    puppet module install willdurand-composer
+    for module in {puppetlabs-apache,puppetlabs-mysql,willdurand-composer}; do
+        puppet module install --target-dir /opt/mvo-website/vagrant/puppet/test/modules $module
+    done
 SHELL
 
 Vagrant.configure(2) do |config|
