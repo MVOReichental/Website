@@ -1,3 +1,4 @@
+#! /usr/bin/env php
 <?php
 use de\mvo\model\pictures\YearList;
 
