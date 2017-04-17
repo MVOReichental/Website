@@ -1,6 +1,6 @@
 {% extends "base/internal-public-switch.twig" %}
 
-{% block title %}Titel bearbeiten - Notenverzeichniseditor{{ parent() }}{% endblock %}
+{% block title %}Titel {% if data.id and not createNewOnSave %}bearbeiten{% else %}erstellen{% endif %} - Notenverzeichniseditor{{ parent() }}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="page-header">Notenverzeichniseditor - Titel bearbeiten</h1>
+    <h1 class="page-header">Notenverzeichniseditor - Titel {% if data.id and not createNewOnSave %}bearbeiten{% else %}erstellen{% endif %}</h1>
 
     <form action="{{ path }}" method="post">
         <div class="form-group">
