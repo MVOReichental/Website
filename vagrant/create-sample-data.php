@@ -143,6 +143,7 @@ $group2 = new Group;
 $group2->title = "Group 2";
 $group2->permissions->append("group.musicians.group2");
 $group2->permissions->append("permissions.2");
+$group2->permissions->append("notedirectory.view");
 $rootGroup->addGroup($group2);
 
 $group1->addUser($user1);
