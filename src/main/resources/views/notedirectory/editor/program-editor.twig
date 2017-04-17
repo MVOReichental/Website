@@ -1,6 +1,6 @@
 {% extends "base/internal-public-switch.twig" %}
 
-{% block title %}Programm {% if data.id and not createNewOnSave %}bearbeiten{% else %}erstellen{% endif %} - Notenverzeichniseditor{{ parent() }}{% endblock %}
+{% block title %}Programm {% if program.id and not createNewOnSave %}bearbeiten{% else %}erstellen{% endif %} - Notenverzeichniseditor{{ parent() }}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -9,7 +9,10 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="page-header">Notenverzeichniseditor - Programm {% if data.id and not createNewOnSave %}bearbeiten{% else %}erstellen{% endif %}</h1>
+    <h1 class="page-header">
+        Notenverzeichniseditor<br/>
+        <span class="small">Programm {% if program.id and not createNewOnSave %}bearbeiten{% else %}erstellen{% endif %}</span>
+    </h1>
 
     <form action="{{ path }}" method="post">
         <fieldset>
@@ -17,12 +20,12 @@
 
             <div class="form-group">
                 <label for="program-editor-year">Jahr</label>
-                <input type="text" class="form-control" id="program-editor-year" name="year" value="{{ data.year }}"/>
+                <input type="text" class="form-control" id="program-editor-year" name="year" value="{{ program.year }}"/>
             </div>
 
             <div class="form-group">
                 <label for="program-editor-title">Programm</label>
-                <input type="text" class="form-control" id="program-editor-title" name="title" value="{{ data.title }}"/>
+                <input type="text" class="form-control" id="program-editor-title" name="title" value="{{ program.title }}"/>
             </div>
         </fieldset>
 
@@ -44,7 +47,7 @@
                 </thead>
 
                 <tbody>
-                    {% for title in data.titles %}
+                    {% for title in program.titles %}
                         <tr>
                             <td>{{ title.number }}</td>
                             <td>{{ title.title }}</td>

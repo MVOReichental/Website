@@ -1,6 +1,6 @@
 {% extends "base/internal-public-switch.twig" %}
 
-{% block title %}Titel {% if data.id and not createNewOnSave %}bearbeiten{% else %}erstellen{% endif %} - Notenverzeichniseditor{{ parent() }}{% endblock %}
+{% block title %}Titel {% if title.id %}bearbeiten{% else %}erstellen{% endif %} - Notenverzeichniseditor{{ parent() }}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -9,27 +9,29 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="page-header">Notenverzeichniseditor - Titel {% if data.id and not createNewOnSave %}bearbeiten{% else %}erstellen{% endif %}</h1>
+    <h1 class="page-header">
+        Notenverzeichniseditor<br/>
+        <span class="small">Titel {% if title.id %}bearbeiten{% else %}erstellen{% endif %}</span></h1>
 
     <form action="{{ path }}" method="post">
         <div class="form-group">
             <label for="title-editor-title">Titel</label>
-            <input type="text" class="form-control" id="title-editor-title" name="title" value="{{ data.title }}"/>
+            <input type="text" class="form-control" id="title-editor-title" name="title" value="{{ title.title }}"/>
         </div>
 
         <div class="form-group">
             <label for="title-editor-composer">Komponist</label>
-            <input type="text" class="form-control" id="title-editor-composer" name="composer" value="{{ data.composer }}"/>
+            <input type="text" class="form-control" id="title-editor-composer" name="composer" value="{{ title.composer }}"/>
         </div>
 
         <div class="form-group">
             <label for="title-editor-arranger">Bearbeiter</label>
-            <input type="text" class="form-control" id="title-editor-arranger" name="arranger" value="{{ data.arranger }}"/>
+            <input type="text" class="form-control" id="title-editor-arranger" name="arranger" value="{{ title.arranger }}"/>
         </div>
 
         <div class="form-group">
             <label for="title-editor-publisher">Verleger</label>
-            <input type="text" class="form-control" id="title-editor-publisher" name="publisher" value="{{ data.publisher }}"/>
+            <input type="text" class="form-control" id="title-editor-publisher" name="publisher" value="{{ title.publisher }}"/>
         </div>
 
         <div class="btn-group">

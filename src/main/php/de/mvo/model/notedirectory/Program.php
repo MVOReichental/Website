@@ -3,7 +3,7 @@ namespace de\mvo\model\notedirectory;
 
 use de\mvo\Database;
 
-class Program implements SingleModel
+class Program
 {
     /**
      * @var int

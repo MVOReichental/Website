@@ -19,9 +19,11 @@ try {
 
     Visit::track();
 
+    Endpoints::map();
+
     $router = new Router;
 
-    $router->mapAll(new Endpoints);
+    $router->mapAll(Endpoints::get());
 
     if (isset($_SERVER["PATH_INFO"])) {
         $path = $_SERVER["PATH_INFO"];

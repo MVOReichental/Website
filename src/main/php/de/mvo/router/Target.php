@@ -18,11 +18,6 @@ class Target
     public $requireLogin = false;
     public $requiredPermission;
 
-    public static function create()
-    {
-        return new self;
-    }
-
     public function className($class)
     {
         $this->class = $class;

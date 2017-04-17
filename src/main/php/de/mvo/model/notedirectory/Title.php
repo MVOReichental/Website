@@ -4,7 +4,7 @@ namespace de\mvo\model\notedirectory;
 use de\mvo\Database;
 use PDO;
 
-class Title implements SingleModel
+class Title
 {
     /**
      * @var int

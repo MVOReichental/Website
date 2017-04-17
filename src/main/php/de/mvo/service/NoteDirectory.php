@@ -5,7 +5,6 @@ use de\mvo\model\notedirectory\Categories;
 use de\mvo\model\notedirectory\Category;
 use de\mvo\model\notedirectory\Program;
 use de\mvo\model\notedirectory\Programs;
-use de\mvo\model\notedirectory\SingleModel;
 use de\mvo\model\notedirectory\Title;
 use de\mvo\model\notedirectory\Titles;
 use de\mvo\model\users\User;
@@ -14,25 +13,6 @@ use de\mvo\TwigRenderer;
 
 class NoteDirectory extends AbstractService
 {
-    public static function getEditorPages()
-    {
-        return array
-        (
-            "titles" => array
-            (
-                "singleEditView" => "title-editor",
-                "modelClass" => Title::class,
-                "title" => "Titel"
-            ),
-            "programs" => array
-            (
-                "singleEditView" => "program-editor",
-                "modelClass" => Program::class,
-                "title" => "Programme"
-            )
-        );
-    }
-
     public function redirectToLatestDefaultProgram()
     {
         $program = Program::getLatest();
@@ -105,121 +85,5 @@ class NoteDirectory extends AbstractService
         (
             "title" => $title
         )));
-    }
-
-    public function editTitle()
-    {
-        $title = Title::getById($this->params->id);
-        if ($title === null) {
-            throw new NotFoundException;
-        }
-
-        $title->title = $_POST["title"];
-        $title->composer = $_POST["composer"];
-        $title->arranger = $_POST["arranger"];
-        $title->publisher = $_POST["publisher"];
-
-        $title->save();
-
-        header("Location: /internal/notedirectory/editor/titles", true, 302);
-        return null;
-    }
-
-    public function createTitle()
-    {
-        $title = new Title;
-
-        $title->title = $_POST["title"];
-        $title->composer = $_POST["composer"];
-        $title->arranger = $_POST["arranger"];
-        $title->publisher = $_POST["publisher"];
-
-        $title->save();
-
-        header("Location: /internal/notedirectory/editor/titles", true, 302);
-        return null;
-    }
-
-    public function deleteTitle()
-    {
-        $title = Title::getById($this->params->id);
-        if ($title === null) {
-            throw new NotFoundException;
-        }
-
-        $title->delete();
-    }
-
-    public function getEditPage()
-    {
-        $pages = self::getEditorPages();
-
-        $activePage = null;
-
-        foreach ($pages as $name => &$page) {
-            $page["name"] = $name;
-
-            if ($this->params->page == $page["name"]) {
-                $page["active"] = true;
-
-                $activePage = $page;
-            } else {
-                $page["active"] = false;
-            }
-        }
-
-        $context = array
-        (
-            "pages" => array_values($pages),
-            "title" => $activePage["title"],
-            "activePage" => $activePage
-        );
-
-        switch ($activePage["name"]) {
-            case "titles":
-                $context["titles"] = Titles::getAll();
-                break;
-            case "programs":
-                $context["programs"] = Programs::getAll();
-                break;
-        }
-
-        return TwigRenderer::render("notedirectory/editor/" . $activePage["name"], $context);
-    }
-
-    private static function getEditorPage($page, $id, $createNewOnSave)
-    {
-        $pageConfig = self::getEditorPages()[$page];
-
-        if ($id === null) {
-            $modelData = null;
-        } else {
-            /**
-             * @var $modelClass SingleModel
-             */
-            $modelClass = $pageConfig["modelClass"];
-
-            $modelData = $modelClass::getById($id);
-
-            if ($modelData === null) {
-                throw new NotFoundException;
-            }
-        }
-
-        return TwigRenderer::render("notedirectory/editor/" . $pageConfig["singleEditView"], array
-        (
-            "data" => $modelData,
-            "createNewOnSave" => $createNewOnSave
-        ));
-    }
-
-    public function getEditExistingPage($createNewOnSave = false)
-    {
-        return self::getEditorPage($this->params->page, $this->params->id, $createNewOnSave);
-    }
-
-    public function getEditNewPage()
-    {
-        return self::getEditorPage($this->params->page, null, true);
     }
 }
