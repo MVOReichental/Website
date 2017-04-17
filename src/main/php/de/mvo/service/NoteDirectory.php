@@ -29,12 +29,6 @@ class NoteDirectory extends AbstractService
                 "singleEditView" => "program-editor",
                 "modelClass" => Program::class,
                 "title" => "Programme"
-            ),
-            "categories" => array
-            (
-                "singleEditView" => "category-editor",
-                "modelClass" => Category::class,
-                "title" => "Kategorien"
             )
         );
     }
