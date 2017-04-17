@@ -1,6 +1,6 @@
 $script = <<SHELL
     aptitude update
-    for module in {puppetlabs-apache,puppetlabs-mysql,willdurand-composer}; do
+    for module in {puppetlabs-apache,puppetlabs-apt,puppetlabs-mysql,willdurand-composer}; do
         puppet module install --target-dir /opt/mvo-website/vagrant/puppet/test/modules $module
     done
 SHELL

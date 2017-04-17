@@ -1,11 +1,11 @@
 $packages = [
+  "apt-transport-https",
+  "ca-certificates",
   "git",
   "htop",
+  "lsb-release",
   "nodejs-legacy",
   "npm",
-  "php5-cli",
-  "php5-gd",
-  "php5-mysql",
   "vim",
 ]
 
@@ -22,6 +22,18 @@ apt::source { "packages.sury.org_php":
   require  => Package["apt-transport-https", "ca-certificates"],
 }
 
+$php_modules = [
+  "cli",
+  "gd",
+  "mysql",
+]
+
+$php_modules.each | $module | {
+  package { "php7.1-${module}":
+    require => Apt::Source["packages.sury.org_php"],
+  }
+}
+
 file { "/etc/timezone":
   ensure  => present,
   content => "Europe/Berlin",
@@ -35,16 +47,21 @@ class { "apache":
   group         => "vagrant",
 }
 
+package { "libapache2-mod-php7.1": }
+
+class { "apache::mod::php":
+  php_version => "7.1",
+  require     => Package["libapache2-mod-php7.1"],
+}
+include apache::mod::rewrite
+
 apache::vhost { "localhost":
   port     => 80,
   docroot  => "/opt/mvo-website/httpdocs",
   override => ["All"],
 }
 
-include apache::mod::php
-include apache::mod::rewrite
-
-class { "::mysql::server":
+class { "mysql::server":
   remove_default_accounts => true,
 }
 
@@ -93,5 +110,5 @@ file { "/opt/mvo-website/src/main/resources/config.ini":
 exec { "/opt/mvo-website/vagrant/create-sample-data.php":
   subscribe   => Mysql::Db["mvo"],
   refreshonly => true,
-  require     => Package["php5-cli"],
+  require     => Package["php7.1-cli"],
 }
