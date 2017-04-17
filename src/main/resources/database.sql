@@ -141,8 +141,6 @@ CREATE TABLE `notedirectoryprograms` (
   `year` year NOT NULL,
   `name` varchar(200) NOT NULL,
   `title` varchar(200) NOT NULL,
-  `isDefault` boolean NOT NULL DEFAULT FALSE,
-  `showCategories` boolean NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`id`),
   UNIQUE KEY (`year`, `name`)
 ) Engine=InnoDB DEFAULT CHARSET=utf8;

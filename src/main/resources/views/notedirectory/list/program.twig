@@ -9,7 +9,7 @@
                 <th>Verleger</th>
             </tr>
         </thead>
-        {% if program.showCategories %}
+        {% if program.name == "jahresprogramm" %}
             {% for category in program.categories %}
                 {% if category.titles.count %}
                     <tbody>

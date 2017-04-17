@@ -438,7 +438,7 @@ class Endpoints
             ->target()
             ->className(Redirect::class)
             ->method("redirect")
-            ->arguments("/internal/notedirectory/editor/titles")
+            ->arguments("/internal/notedirectory/editor/programs")
             ->permission($permission);
 
         # Programs
@@ -466,6 +466,24 @@ class Endpoints
             ->target()
             ->className(NoteDirectoryEditor::class)
             ->method("getCreateProgramPage")
+            ->permission($permission);
+
+        Endpoint::create(HttpMethod::POST, $baseUrl . "/programs/[i:id]")
+            ->target()
+            ->className(NoteDirectoryEditor::class)
+            ->method("editProgram")
+            ->permission($permission);
+
+        Endpoint::create(HttpMethod::POST, $baseUrl . "/programs/new")
+            ->target()
+            ->className(NoteDirectoryEditor::class)
+            ->method("createProgram")
+            ->permission($permission);
+
+        Endpoint::create(HttpMethod::DELETE, $baseUrl . "/programs/[i:id]")
+            ->target()
+            ->className(NoteDirectoryEditor::class)
+            ->method("deleteProgram")
             ->permission($permission);
 
         # Titles

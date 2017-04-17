@@ -7,6 +7,7 @@ use de\mvo\model\notedirectory\Title;
 use de\mvo\model\notedirectory\Titles;
 use de\mvo\service\exception\NotFoundException;
 use de\mvo\TwigRenderer;
+use de\mvo\utils\String;
 
 class NoteDirectoryEditor extends AbstractService
 {
@@ -37,12 +38,62 @@ class NoteDirectoryEditor extends AbstractService
         );
     }
 
-    public function getProgramsPage()
+    private static function setProgramTitles(Program $program)
     {
-        return TwigRenderer::render("notedirectory/editor/programs", array_merge(self::getEditorData("programs"), array
-        (
-            "programs" => Programs::getAll()
-        )));
+        $program->titles = new Titles;
+
+        foreach ($_POST["title_number"] as $index => $number) {
+            $title = Title::getById($_POST["title_id"][$index]);
+
+            $title->number = $number;
+
+            $program->titles->append($title);
+        }
+    }
+
+    public function editProgram()
+    {
+        $program = Program::getById($this->params->id);
+        if ($program === null) {
+            throw new NotFoundException;
+        }
+
+        $program->year = $_POST["year"];
+        $program->name = strtolower(String::removeNonAlphanumeric($_POST["title"]));
+        $program->title = $_POST["title"];
+
+        self::setProgramTitles($program);
+
+        $program->save();
+
+        header("Location: /internal/notedirectory/editor/programs", true, 302);
+        return null;
+    }
+
+    public function createProgram()
+    {
+        $program = new Program;
+
+        $program->year = $_POST["year"];
+        $program->name = strtolower(String::removeNonAlphanumeric($_POST["title"]));
+        $program->title = $_POST["title"];
+
+        self::setProgramTitles($program);
+
+        $program->save();
+
+        header("Location: /internal/notedirectory/editor/programs", true, 302);
+        return null;
+    }
+
+    public function deleteProgram()
+    {
+        $program = Program::getById($this->params->id);
+        if ($program === null) {
+            throw new NotFoundException;
+        }
+
+        $program->delete();
     }
 
     public function getProgramEditPage($createNewOnSave = false)
@@ -55,13 +106,25 @@ class NoteDirectoryEditor extends AbstractService
         return TwigRenderer::render("notedirectory/editor/program-editor", array
         (
             "program" => $program,
+            "titles" => Titles::getAll(),
             "createNewOnSave" => $createNewOnSave
         ));
     }
 
     public function getCreateProgramPage()
     {
-        return TwigRenderer::render("notedirectory/editor/program-editor");
+        return TwigRenderer::render("notedirectory/editor/program-editor", array
+        (
+            "titles" => Titles::getAll()
+        ));
+    }
+
+    public function getProgramsPage()
+    {
+        return TwigRenderer::render("notedirectory/editor/programs", array_merge(self::getEditorData("programs"), array
+        (
+            "programs" => Programs::getAll()
+        )));
     }
 
     public function editTitle()

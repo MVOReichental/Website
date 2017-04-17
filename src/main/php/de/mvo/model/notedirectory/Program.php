@@ -2,6 +2,7 @@
 namespace de\mvo\model\notedirectory;
 
 use de\mvo\Database;
+use PDO;
 
 class Program
 {
@@ -25,14 +26,6 @@ class Program
      * @var Titles
      */
     public $titles;
-    /**
-     * @var bool
-     */
-    public $isDefault;
-    /**
-     * @var bool
-     */
-    public $showCategories;
 
     public function __construct()
     {
@@ -42,8 +35,6 @@ class Program
 
         $this->id = (int)$this->id;
         $this->year = (int)$this->year;
-        $this->isDefault = (bool)$this->isDefault;
-        $this->showCategories = (bool)$this->showCategories;
 
         $query = Database::prepare("
             SELECT `notedirectorytitles`.*, `number`
@@ -73,7 +64,7 @@ class Program
         $query = Database::query("
             SELECT *
             FROM `notedirectoryprograms`
-            WHERE `isDefault`
+            WHERE `name` = 'jahresprogramm'
             ORDER BY `year` DESC
             LIMIT 1
         ");
@@ -135,6 +126,145 @@ class Program
         }
 
         return $query->fetchObject(self::class);
+    }
+
+    public function save()
+    {
+        if ($this->id === null) {
+            $query = Database::prepare("
+                INSERT INTO `notedirectoryprograms`
+                SET
+                    `year` = :year,
+                    `name` = :name,
+                    `title` = :title
+            ");
+        } else {
+            $query = Database::prepare("
+                UPDATE `notedirectoryprograms`
+                SET
+                    `year` = :year,
+                    `name` = :name,
+                    `title` = :title
+                WHERE `id` = :id
+            ");
+
+            $query->bindValue(":id", $this->id, PDO::PARAM_INT);
+        }
+
+        $query->bindValue(":year", $this->year);
+        $query->bindValue(":name", $this->name);
+        $query->bindValue(":title", $this->title);
+
+        $query->execute();
+
+        if ($this->id === null) {
+            $this->id = (int)Database::lastInsertId();
+        }
+
+        Database::beginTransaction();
+
+        $deleteQuery = Database::prepare("
+            DELETE FROM `notedirectoryprogramtitles`
+            WHERE `programId` = :programId AND `titleId` = :titleId
+        ");
+
+        $query = Database::prepare("
+            SELECT `titleId`
+            FROM `notedirectoryprogramtitles`
+            WHERE `programId` = :programId
+        ");
+
+        $query->execute(array
+        (
+            ":programId" => $this->id
+        ));
+
+        while ($row = $query->fetch(PDO::FETCH_OBJ)) {
+            $found = false;
+            /**
+             * @var $title Title
+             */
+            foreach ($this->titles as $title) {
+                if ($title->id == $row->titleId) {
+                    $found = true;
+                    continue;
+                }
+            }
+
+            if (!$found) {
+                $deleteQuery->execute(array
+                (
+                    ":programId" => $this->id,
+                    ":titleId" => $row->titleId
+                ));
+            }
+        }
+
+        $selectQuery = Database::prepare("
+            SELECT `number`
+            FROM `notedirectoryprogramtitles`
+            WHERE `programId` = :programId AND `titleId` = :titleId
+        ");
+
+        $updateQuery = Database::prepare("
+            UPDATE `notedirectoryprogramtitles`
+            SET `number` = :number
+            WHERE `programId` = :programId AND `titleId` = :titleId
+        ");
+
+        $insertQuery = Database::prepare("
+            INSERT INTO `notedirectoryprogramtitles`
+            SET
+                `programId` = :programId,
+                `titleId` = :titleId,
+                `number` = :number
+        ");
+
+        /**
+         * @var $title Title
+         */
+        foreach ($this->titles as $title) {
+            $selectQuery->execute(array
+            (
+                ":programId" => $this->id,
+                ":titleId" => $title->id
+            ));
+
+            if ($selectQuery->rowCount()) {
+                if ($selectQuery->fetch(PDO::FETCH_OBJ)->number == $title->number) {
+                    continue;
+                }
+
+                $updateQuery->execute(array
+                (
+                    ":programId" => $this->id,
+                    ":titleId" => $title->id,
+                    ":number" => $title->number
+                ));
+            } else {
+                $insertQuery->execute(array
+                (
+                    ":programId" => $this->id,
+                    ":titleId" => $title->id,
+                    ":number" => $title->number
+                ));
+            }
+        }
+
+        Database::commit();
+    }
+
+    public function delete()
+    {
+        $query = Database::prepare("
+            DELETE FROM `notedirectoryprograms`
+            WHERE `id` = :id
+        ");
+
+        $query->execute(array
+        (
+            ":id" => $this->id
+        ));
     }
 
     public function categories()
