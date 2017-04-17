@@ -61,6 +61,12 @@ apache::vhost { "localhost":
   override => ["All"],
 }
 
+file { "/etc/php/7.1/apache2/conf.d/50-upload.ini":
+  content => "upload_max_filesize = 32M\npost_max_size = 32M",
+  notify  => Class["apache::service"],
+  require => Package["libapache2-mod-php7.1"],
+}
+
 class { "mysql::server":
   remove_default_accounts => true,
 }
