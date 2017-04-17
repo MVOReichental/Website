@@ -29,12 +29,13 @@ class NoteDirectory extends AbstractService
         return null;
     }
 
-    private static function renderListPage($title, $list)
+    private static function renderListPage($title, $activePath, $list)
     {
         return TwigRenderer::render("notedirectory/list/page", array
         (
             "title" => $title,
-            "otherPrograms" => Programs::getAll()->getGroupedByYear(),
+            "active" => $activePath,
+            "programs" => Programs::getAll()->getGroupedByYear(),
             "categories" => Categories::getAll(),
             "list" => $list
         ));
@@ -47,7 +48,7 @@ class NoteDirectory extends AbstractService
             throw new NotFoundException;
         }
 
-        return self::renderListPage($program->title . " " . $program->year, TwigRenderer::render("notedirectory/list/program", array
+        return self::renderListPage($program->title . " " . $program->year, "programs/" . $program->year . "/" . $program->name, TwigRenderer::render("notedirectory/list/program", array
         (
             "program" => $program
         )));
@@ -60,7 +61,7 @@ class NoteDirectory extends AbstractService
             throw new NotFoundException;
         }
 
-        return self::renderListPage($category->title, TwigRenderer::render("notedirectory/list/titles", array
+        return self::renderListPage($category->title, "categories/" . $category->id, TwigRenderer::render("notedirectory/list/titles", array
         (
             "titles" => Titles::getByCategory($category)
         )));
@@ -68,7 +69,7 @@ class NoteDirectory extends AbstractService
 
     public function getAllTitles()
     {
-        return self::renderListPage("Alle Titel", TwigRenderer::render("notedirectory/list/titles-grouped", array
+        return self::renderListPage("Alle Titel", "titles", TwigRenderer::render("notedirectory/list/titles-grouped", array
         (
             "categories" => Titles::getAll()->getInCategories()
         )));
@@ -81,7 +82,7 @@ class NoteDirectory extends AbstractService
             throw new NotFoundException;
         }
 
-        return self::renderListPage($title->title, TwigRenderer::render("notedirectory/list/title-details", array
+        return self::renderListPage($title->title, null, TwigRenderer::render("notedirectory/list/title-details", array
         (
             "title" => $title
         )));
