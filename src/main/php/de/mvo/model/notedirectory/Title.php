@@ -2,6 +2,7 @@
 namespace de\mvo\model\notedirectory;
 
 use de\mvo\Database;
+use PDO;
 
 class Title implements SingleModel
 {
@@ -46,21 +47,7 @@ class Title implements SingleModel
 
         $this->id = (int)$this->id;
         $this->number = (int)$this->number;
-
-        $query = Database::prepare("
-            SELECT *
-            FROM `notedirectorycategories`
-            WHERE `id` = :id
-        ");
-
-        $query->execute(array
-        (
-            ":id" => $this->categoryId
-        ));
-
-        if ($query->rowCount()) {
-            $this->category = $query->fetchObject(Category::class);
-        }
+        $this->category = Category::getById($this->categoryId);
     }
 
     /**
@@ -86,6 +73,56 @@ class Title implements SingleModel
         }
 
         return $query->fetchObject(self::class);
+    }
+
+    public function save()
+    {
+        if ($this->id === null) {
+            $query = Database::prepare("
+                INSERT INTO `notedirectorytitles`
+                SET
+                    `title` = :title,
+                    `composer` = :composer,
+                    `arranger` = :arranger,
+                    `publisher` = :publisher
+            ");
+        } else {
+            $query = Database::prepare("
+                UPDATE `notedirectorytitles`
+                SET
+                    `title` = :title,
+                    `composer` = :composer,
+                    `arranger` = :arranger,
+                    `publisher` = :publisher
+                WHERE `id` = :id
+            ");
+
+            $query->bindValue(":id", $this->id, PDO::PARAM_INT);
+        }
+
+        $query->bindValue(":title", $this->title);
+        $query->bindValue(":composer", $this->composer);
+        $query->bindValue(":arranger", $this->arranger);
+        $query->bindValue(":publisher", $this->publisher);
+
+        $query->execute();
+
+        if ($this->id === null) {
+            $this->id = (int)Database::lastInsertId();
+        }
+    }
+
+    public function delete()
+    {
+        $query = Database::prepare("
+            DELETE FROM `notedirectorytitles`
+            WHERE `id` = :id
+        ");
+
+        $query->execute(array
+        (
+            ":id" => $this->id
+        ));
     }
 
     public function programs()

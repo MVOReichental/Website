@@ -112,6 +112,9 @@ class Endpoints extends ArrayObject
         $this->append(new Endpoint(HttpMethod::GET, "/internal/notedirectory/editor/[" . implode("|", $noteDirectoryEditorPages) . ":page]/[i:id]", Target::create()->className(NoteDirectory::class)->method("getEditExistingPage")->permission("notedirectory.edit")));
         $this->append(new Endpoint(HttpMethod::GET, "/internal/notedirectory/editor/[" . implode("|", $noteDirectoryEditorPages) . ":page]/[i:id]/copy", Target::create()->className(NoteDirectory::class)->method("getEditExistingPage")->arguments(true)->permission("notedirectory.edit")));
         $this->append(new Endpoint(HttpMethod::GET, "/internal/notedirectory/editor/[" . implode("|", $noteDirectoryEditorPages) . ":page]/new", Target::create()->className(NoteDirectory::class)->method("getEditNewPage")->permission("notedirectory.edit")));
+        $this->append(new Endpoint(HttpMethod::POST, "/internal/notedirectory/editor/titles/[i:id]", Target::create()->className(NoteDirectory::class)->method("editTitle")->permission("notedirectory.edit")));
+        $this->append(new Endpoint(HttpMethod::POST, "/internal/notedirectory/editor/titles/new", Target::create()->className(NoteDirectory::class)->method("createTitle")->permission("notedirectory.edit")));
+        $this->append(new Endpoint(HttpMethod::DELETE, "/internal/notedirectory/editor/titles/[i:id]", Target::create()->className(NoteDirectory::class)->method("deleteTitle")->permission("notedirectory.edit")));
 
         $this->append(new Endpoint(HttpMethod::GET, "/internal/protocols", Target::create()->className(Protocols::class)->method("getList")->permission("protocols.view.*")));
         $this->append(new Endpoint(HttpMethod::POST, "/internal/protocols", Target::create()->className(Protocols::class)->method("upload")->permission("protocols.upload.*")));

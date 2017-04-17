@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="css/notedirectoryeditor.css"/>
 {% endblock %}
 
+{% block scripts %}
+    {{ parent() }}
+
+    <script src="js/notedirectory-editor.js"></script>
+{% endblock %}
+
 {% block content %}
     <h1 class="page-header">Notenverzeichniseditor</h1>
 

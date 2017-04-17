@@ -113,6 +113,49 @@ class NoteDirectory extends AbstractService
         )));
     }
 
+    public function editTitle()
+    {
+        $title = Title::getById($this->params->id);
+        if ($title === null) {
+            throw new NotFoundException;
+        }
+
+        $title->title = $_POST["title"];
+        $title->composer = $_POST["composer"];
+        $title->arranger = $_POST["arranger"];
+        $title->publisher = $_POST["publisher"];
+
+        $title->save();
+
+        header("Location: /internal/notedirectory/editor/titles", true, 302);
+        return null;
+    }
+
+    public function createTitle()
+    {
+        $title = new Title;
+
+        $title->title = $_POST["title"];
+        $title->composer = $_POST["composer"];
+        $title->arranger = $_POST["arranger"];
+        $title->publisher = $_POST["publisher"];
+
+        $title->save();
+
+        header("Location: /internal/notedirectory/editor/titles", true, 302);
+        return null;
+    }
+
+    public function deleteTitle()
+    {
+        $title = Title::getById($this->params->id);
+        if ($title === null) {
+            throw new NotFoundException;
+        }
+
+        $title->delete();
+    }
+
     public function getEditPage()
     {
         $pages = self::getEditorPages();
