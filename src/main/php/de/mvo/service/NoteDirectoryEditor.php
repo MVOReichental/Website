@@ -7,7 +7,7 @@ use de\mvo\model\notedirectory\Title;
 use de\mvo\model\notedirectory\Titles;
 use de\mvo\service\exception\NotFoundException;
 use de\mvo\TwigRenderer;
-use de\mvo\utils\String;
+use de\mvo\utils\StringUtil;
 
 class NoteDirectoryEditor extends AbstractService
 {
@@ -59,7 +59,7 @@ class NoteDirectoryEditor extends AbstractService
         }
 
         $program->year = $_POST["year"];
-        $program->name = strtolower(String::removeNonAlphanumeric($_POST["title"]));
+        $program->name = strtolower(StringUtil::removeNonAlphanumeric($_POST["title"]));
         $program->title = $_POST["title"];
 
         self::setProgramTitles($program);
@@ -75,7 +75,7 @@ class NoteDirectoryEditor extends AbstractService
         $program = new Program;
 
         $program->year = $_POST["year"];
-        $program->name = strtolower(String::removeNonAlphanumeric($_POST["title"]));
+        $program->name = strtolower(StringUtil::removeNonAlphanumeric($_POST["title"]));
         $program->title = $_POST["title"];
 
         self::setProgramTitles($program);

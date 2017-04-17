@@ -1,7 +1,7 @@
 <?php
 namespace de\mvo\utils;
 
-class String
+class StringUtil
 {
     public static function removeNonAlphanumeric($string)
     {
