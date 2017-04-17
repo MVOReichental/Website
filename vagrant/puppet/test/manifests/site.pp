@@ -11,6 +11,17 @@ $packages = [
 
 package { $packages: }
 
+apt::source { "packages.sury.org_php":
+  location => "https://packages.sury.org/php",
+  release  => "jessie",
+  repos    => "main",
+  key      => {
+    id     => "DF3D585DB8F0EB658690A554AC0E47584A7A714D",
+    source => "https://packages.sury.org/php/apt.gpg",
+  },
+  require  => Package["apt-transport-https", "ca-certificates"],
+}
+
 file { "/etc/timezone":
   ensure  => present,
   content => "Europe/Berlin",
