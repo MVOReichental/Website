@@ -35,7 +35,7 @@
                         {% endif %}
                         {% for contact in user.contacts %}
                             <tr>
-                                <td>{{ contact.title }}</td>
+                                <td>{{ contact.title|raw }}</td>
                                 <td><i class="fa fa-phone"></i> {{ contact.value }}</td>
                             </tr>
                         {% endfor %}

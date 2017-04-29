@@ -8,6 +8,18 @@ use PDO;
 
 class Contact
 {
+    const TYPE_TILES = array
+    (
+        "mobile" => "Mobil",
+        "phone" => "Telefon"
+    );
+
+    const CATEGORY_TITLES = array
+    (
+        "business" => "Gesch&auml;ftlich",
+        "private" => "Privat"
+    );
+
     /**
      * @var int
      */
@@ -70,7 +82,7 @@ class Contact
 
     public function getTitle()
     {
-        return $this->type . " (" . $this->category . ")";
+        return self::TYPE_TILES[$this->type] . " (" . self::CATEGORY_TITLES[$this->category] . ")";
     }
 
     public function save()

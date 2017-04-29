@@ -1,15 +1,17 @@
 <tr class="settings-contact">
     <td>
         <select class="selectpicker show-tick" name="type[]">
-            <option value="phone" {% if contact.type == "phone" %}selected{% endif %}>Telefon</option>
-            <option value="mobile" {% if contact.type == "mobile" %}selected{% endif %}>Mobil</option>
+            {% for name, title in contactTypes %}
+                <option value="{{ name }}" {% if contact.type == name %}selected{% endif %}>{{ title|raw }}</option>
+            {% endfor %}
         </select>
     </td>
 
     <td>
         <select class="selectpicker show-tick" name="category[]">
-            <option value="private" {% if contact.category == "private" %}selected{% endif %}>Privat</option>
-            <option value="business" {% if contact.category == "business" %}selected{% endif %}>Gesch&auml;ftlich</option>
+            {% for name, title in contactCategories %}
+                <option value="{{ name }}" {% if contact.category == name %}selected{% endif %}>{{ title|raw }}</option>
+            {% endfor %}
         </select>
     </td>
 

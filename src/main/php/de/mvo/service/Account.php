@@ -193,7 +193,9 @@ class Account extends AbstractService
             "pages" => array_values($pages),
             "title" => $activePage["title"],
             "activePage" => $activePage,
-            "user" => $user
+            "user" => $user,
+            "contactTypes" => Contact::TYPE_TILES,
+            "contactCategories" => Contact::CATEGORY_TITLES
         ));
     }
 
