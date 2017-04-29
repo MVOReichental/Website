@@ -64,6 +64,25 @@ $(function () {
         Members.showSendMessage(recipients);
     });
 
+    $("#members-send-message-attachments").on("change", "input[type='file']", function() {
+        var container = $("#members-send-message-attachments");
+
+        container.find("input[type='file']").each(function() {
+            var fileList = $(this).prop("files");
+
+            if (!fileList.length) {
+                $(this).remove();
+            }
+        });
+
+        var newFileInput = $("<input>");
+        newFileInput.attr("type", "file");
+        newFileInput.attr("name", "files[]");
+        newFileInput.attr("multiple", true);
+
+        container.append(newFileInput);
+    });
+
     $("#members-details-send-message-button").on("click", function () {
         var recipients = [
             {
