@@ -5,7 +5,7 @@
             <th>Nachname</th>
             <th>Email-Adresse</th>
             <th>Zuletzt Online</th>
-            <th></th>
+            <th class="minimum-width"></th>
         </tr>
     </thead>
 
@@ -21,7 +21,7 @@
                         <span class="label label-success">online</span>
                     {% endif %}
                 </td>
-                <td>
+                <td class="minimum-width">
                     <div class="btn-group btn-group-xs">
                         <a href="internal/admin/usermanagement/user/{{ user.id }}" class="btn btn-default" data-toggle="tooltip" title="Bearbeiten"><i class="fa fa-edit"></i></a>
                         <a href="internal/admin/usermanagement/user/{{ user.id }}/profile-picture" class="btn btn-default" data-toggle="tooltip" title="Profilbild bearbeiten"><i class="fa fa-camera"></i></a>

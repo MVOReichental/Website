@@ -7,7 +7,8 @@
                 <th>Veranstaltung</th>
                 <th>Ort</th>
                 {% if allowEdit %}
-                    <th class="hidden-print" data-defaultsort="disabled"></th>
+                    <th class="hidden-print minimum-width" data-defaultsort="disabled"></th>
+                    <th class="hidden-print minimum-width" data-defaultsort="disabled"></th>
                 {% endif %}
             </tr>
         </thead>
@@ -24,12 +25,7 @@
                     <td class="dates-title">{{ entry.title }}</td>
                     <td>{{ entry.location.name }}</td>
                     {% if allowEdit %}
-                        <td class="hidden-print">
-                            <div class="btn-group btn-group-xs">
-                                <a href="internal/dates/edit/{{ entry.id }}" class="btn btn-default edit" data-toggle="tooltip" title="Bearbeiten"><i class="fa fa-edit"></i></a>
-                                <button type="button" class="btn btn-danger remove" data-toggle="tooltip" title="L&ouml;schen"><i class="fa fa-remove"></i></button>
-                            </div>
-
+                        <td class="hidden-print minimum-width">
                             {% if entry.isPublic %}
                                 <span class="label label-success">&Ouml;ffentlich</span>
                             {% else %}
@@ -41,6 +37,13 @@
                                     <span class="label label-danger">Intern</span>
                                 {% endif %}
                             {% endif %}
+                        </td>
+
+                        <td class="hidden-print minimum-width">
+                            <div class="btn-group btn-group-xs">
+                                <a href="internal/dates/edit/{{ entry.id }}" class="btn btn-default edit" data-toggle="tooltip" title="Bearbeiten"><i class="fa fa-edit"></i></a>
+                                <button type="button" class="btn btn-danger remove" data-toggle="tooltip" title="L&ouml;schen"><i class="fa fa-remove"></i></button>
+                            </div>
                         </td>
                     {% endif %}
                 </tr>
