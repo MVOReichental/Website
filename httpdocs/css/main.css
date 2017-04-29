@@ -108,6 +108,10 @@ a.thumbnail.active {
     border-bottom-right-radius: 4px;
 }
 
+.minimum-width {
+    width: 1px;
+}
+
 /* Fix for button group wrapping */
 .btn-group {
     display: flex;

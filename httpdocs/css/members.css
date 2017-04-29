@@ -2,6 +2,10 @@
     #members-details-user {
         position: fixed;
     }
+
+    #members-list tbody td {
+        vertical-align: middle;
+    }
 }
 
 #members-send-message-button {
