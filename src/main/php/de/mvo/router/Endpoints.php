@@ -581,11 +581,10 @@ class Endpoints
 
     private static function mapUploadEndpoints()
     {
-        Endpoint::create(HttpMethod::GET, "/internal/uploads/[i:id]/[:key]/[*:filename]")
+        Endpoint::create(HttpMethod::GET, "/uploads/[i:id]/[:key]/[*:filename]")
             ->target()
             ->className(Uploads::class)
-            ->method("get")
-            ->requireLogin();
+            ->method("get");
 
         Endpoint::create(HttpMethod::POST, "/internal/upload")
             ->target()

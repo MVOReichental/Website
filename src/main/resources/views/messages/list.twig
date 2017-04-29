@@ -25,8 +25,8 @@
                     {% if message.attachments.count %}
                         <div class="clearfix">
                             <strong>Anh&auml;nge:</strong>
-                            {% for attachment in message.attachments %}
-                                <a href="internal/uploads/{{ attachment.id }}/{{ attachment.key }}/{{ attachment.filename }}" class="label label-default">{{ attachment.filename }}</a>
+                            {% for upload in message.attachments %}
+                                <a href="{{ upload.url }}" class="label label-default">{{ upload.filename }}</a>
                             {% endfor %}
                         </div>
                     {% endif %}

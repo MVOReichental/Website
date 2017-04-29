@@ -93,7 +93,7 @@ class Upload
 
     public function getUrl()
     {
-        return sprintf("/internal/uploads/%d/%s/%s", $this->id, $this->key, $this->filename);
+        return sprintf("/uploads/%d/%s/%s", $this->id, $this->key, $this->filename);
     }
 
     public function stream()
