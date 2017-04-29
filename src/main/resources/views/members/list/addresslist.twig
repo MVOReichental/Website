@@ -11,7 +11,7 @@
         </thead>
         <tbody>
             {% for user in users %}
-                <tr data-id="{{ user.id }}">
+                <tr data-id="{{ user.id }}" data-own-user="{{ user.isCurrentUser }}">
                     <td class="hidden-print"><input type="checkbox" class="members-select-checkbox"/></td>
                     <td class="first-name">
                         <a href="internal/members/{{ user.username }}" class="hidden-print"><i class="fa fa-info-circle"></i></a>

@@ -673,6 +673,17 @@ class User implements JsonSerializable
         $_SESSION["userId"] = $this->id;
     }
 
+    public function isCurrentUser()
+    {
+        $currentUser = self::getCurrent();
+
+        if ($currentUser === null) {
+            return false;
+        }
+
+        return $currentUser->isEqualTo($this);
+    }
+
     public function isOnline()
     {
         if ($this->lastOnline === null) {

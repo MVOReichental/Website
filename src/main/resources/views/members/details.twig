@@ -48,7 +48,9 @@
                     </tbody>
                 </table>
 
-                <button type="button" class="btn btn-sm btn-success" id="members-details-send-message-button"><i class="fa fa-send"></i> Nachricht senden</button>
+                {% if user.id != currentUser.id %}
+                    <button type="button" class="btn btn-sm btn-success" id="members-details-send-message-button"><i class="fa fa-send"></i> Nachricht senden</button>
+                {% endif %}
             </div>
         </div>
 

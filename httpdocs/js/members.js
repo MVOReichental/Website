@@ -14,7 +14,7 @@ $(function () {
         var checkCount = 0;
 
         rows.each(function () {
-            var checked = $(this).find(".members-select-checkbox").prop("checked");
+            var checked = $(this).find(".members-select-checkbox").prop("checked") && !$(this).data("own-user");
 
             $(this).toggleClass("success", checked);
 
@@ -50,7 +50,7 @@ $(function () {
         var recipients = [];
 
         membersList.find("tbody > tr").each(function () {
-            if (!$(this).find(".members-select-checkbox").prop("checked")) {
+            if (!$(this).find(".members-select-checkbox").prop("checked") || $(this).data("own-user")) {
                 return;
             }
 
@@ -69,7 +69,7 @@ $(function () {
             {
                 id: $("#members-details-user").data("id"),
                 firstName: $("#members-details-firstname").text(),
-                lastName: $("#members-details-lastname").text(),
+                lastName: $("#members-details-lastname").text()
             }
         ];
 
