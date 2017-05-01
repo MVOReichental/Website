@@ -2,17 +2,17 @@
     <table class="table table-striped table-hover" id="notedirectory-list">
         <thead>
             <tr>
-                <th>Titel</th>
-                <th>Komponist</th>
-                <th>Bearbeiter</th>
-                <th>Verleger</th>
+                <th data-name="title">Titel</th>
+                <th data-name="composer">Komponist</th>
+                <th data-name="arranger">Bearbeiter</th>
+                <th data-name="publisher">Verleger</th>
             </tr>
         </thead>
         {% for category in categories %}
             {% if category.titles.count %}
                 <tbody>
                     <tr>
-                        <th colspan="4">{{ category.title }}</th>
+                        <th class="notedirectory-list-category-title" colspan="4">{{ category.title }}</th>
                     </tr>
                     {% for title in category.titles %}
                         {% include("notedirectory/list/title-row.twig") %}

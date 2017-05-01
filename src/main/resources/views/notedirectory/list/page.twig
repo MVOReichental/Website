@@ -8,47 +8,65 @@
     <link rel="stylesheet" href="css/notedirectory.css"/>
 {% endblock %}
 
+{% block scripts %}
+    {{ parent() }}
+
+    <script type="text/javascript" src="js/notedirectory.js"></script>
+{% endblock %}
+
 {% block content %}
     <h1 class="page-header">
         Notenverzeichnis<br/>
-        <span class="small">{{ title }} <small class="visible-print-inline pull-right">Stand: {{ currentFormattedDate }}</small></span>
+        <span class="small">{{ title }}
+            <small class="visible-print-inline pull-right">Stand: {{ currentFormattedDate }}</small></span>
     </h1>
 
-    <div class="btn-group hidden-print" id="notedirectory-selection">
+    <div class="btn-toolbar hidden-print" id=" notedirectory-button-toolbar">
         <div class="btn-group">
             {% if currentUser.hasPermission("notedirectory.edit") %}
-                <a href="internal/notedirectory/editor" class="btn btn-default hidden-print">Editor</a>
+                <a href="internal/notedirectory/editor" class="btn btn-default hidden-print"><i class="fa fa-pencil"></i> Editor</a>
             {% endif %}
-            <button type="button" class="btn btn-default dropdown-toggle {% if active starts with "programs/" %}active{% endif %}" data-toggle="dropdown">
-                Programme <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-                {% for year in programs %}
-                    <li class="dropdown-header">{{ year.year }}</li>
-                    {% for program in year.programs %}
-                        {% set path = "programs/#{program.year}/#{program.name}" %}
-                        <li class="{% if active == path %}active{% endif %}">
-                            <a href="internal/notedirectory/{{ path }}">{{ program.title }}</a>
-                        </li>
-                    {% endfor %}
-                    <li class="divider"></li>
-                {% endfor %}
-            </ul>
         </div>
 
         <div class="btn-group">
-            <button type="button" class="btn btn-default dropdown-toggle {% if active starts with "categories/" %}active{% endif %}" data-toggle="dropdown">
-                Kategorien <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-                {% for category in categories %}
-                    {% set path = "categories/#{category.id}" %}
-                    <li class="{% if active == path %}active{% endif %}"><a href="internal/notedirectory/{{ path }}">{{ category.title }}</a></li>
-                {% endfor %}
-            </ul>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle {% if active starts with "programs/" %}active{% endif %}" data-toggle="dropdown">
+                    Programme <span class="caret"></span>
+                </button>
+
+                <ul class="dropdown-menu">
+                    {% for year in programs %}
+                        <li class="dropdown-header">{{ year.year }}</li>
+                        {% for program in year.programs %}
+                            {% set path = "programs/#{program.year}/#{program.name}" %}
+                            <li class="{% if active == path %}active{% endif %}">
+                                <a href="internal/notedirectory/{{ path }}">{{ program.title }}</a>
+                            </li>
+                        {% endfor %}
+                        <li class="divider"></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle {% if active starts with "categories/" %}active{% endif %}" data-toggle="dropdown">
+                    Kategorien <span class="caret"></span>
+                </button>
+
+                <ul class="dropdown-menu">
+                    {% for category in categories %}
+                        {% set path = "categories/#{category.id}" %}
+                        <li class="{% if active == path %}active{% endif %}"><a href="internal/notedirectory/{{ path }}">{{ category.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <a href="internal/notedirectory/titles" class="btn btn-default {% if active == "titles" %}active{% endif %}">Alle Titel</a>
         </div>
 
-        <a href="internal/notedirectory/titles" class="btn btn-default {% if active == "titles" %}active{% endif %}">Alle Titel</a>
+        <div class="btn-group">
+            <select class="show-tick" id="notedirectory-columns" title="Keine Auswahl" multiple></select>
+        </div>
     </div>
 
     {{ list|raw }}
