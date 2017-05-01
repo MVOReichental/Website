@@ -1,7 +1,9 @@
 $(function () {
     setInterval(function () {
-        $.get("nop");
-    }, 180000);
+        $.get("nop").fail(function (data, textStatus, jqXHR) {
+            console.log(data, textStatus, jqXHR);
+        });
+    }, 60000);
 });
 
 this.jQuery.fn.selectpicker.defaults.iconBase = "fa";
