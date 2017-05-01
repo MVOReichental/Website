@@ -48,12 +48,11 @@ class { "apache":
 }
 
 package { "libapache2-mod-php7.1":
-  require => Apt::Source["packages.sury.org_php"],
+  require => [Class["apache"], Apt::Source["packages.sury.org_php"]],
 }
 
 class { "apache::mod::php":
   php_version => "7.1",
-  require     => Package["libapache2-mod-php7.1"],
 }
 include apache::mod::rewrite
 
