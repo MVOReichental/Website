@@ -81,6 +81,7 @@ class Title
             $query = Database::prepare("
                 INSERT INTO `notedirectorytitles`
                 SET
+                    `categoryId` = :categoryId,
                     `title` = :title,
                     `composer` = :composer,
                     `arranger` = :arranger,
@@ -90,6 +91,7 @@ class Title
             $query = Database::prepare("
                 UPDATE `notedirectorytitles`
                 SET
+                    `categoryId` = :categoryId,
                     `title` = :title,
                     `composer` = :composer,
                     `arranger` = :arranger,
@@ -100,6 +102,7 @@ class Title
             $query->bindValue(":id", $this->id, PDO::PARAM_INT);
         }
 
+        $query->bindValue(":categoryId", $this->category->id, PDO::PARAM_INT);
         $query->bindValue(":title", $this->title);
         $query->bindValue(":composer", $this->composer);
         $query->bindValue(":arranger", $this->arranger);
