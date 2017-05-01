@@ -14,7 +14,6 @@ use de\mvo\model\notedirectory\Titles;
 use de\mvo\model\permissions\Group;
 use de\mvo\model\permissions\GroupList;
 use de\mvo\model\permissions\Permissions;
-use de\mvo\model\pictures\YearList;
 use de\mvo\model\protocols\Protocol;
 use de\mvo\model\roomoccupancyplan\Entry as RoomOccupancyPlanEntry;
 use de\mvo\model\uploads\Upload;
