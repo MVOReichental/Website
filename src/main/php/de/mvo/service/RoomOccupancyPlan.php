@@ -38,7 +38,7 @@ class RoomOccupancyPlan extends AbstractService
 
             $weekday = (int)$date->format("N");
 
-            if ($entry->repeatWeekly or $entry->endDate !== null) {
+            if ($entry->repeatWeekly or $entry->repeatTillDate !== null) {
                 $date = clone $requestedStartDate;
 
                 if ($weekday > $requestedStartWeekday) {

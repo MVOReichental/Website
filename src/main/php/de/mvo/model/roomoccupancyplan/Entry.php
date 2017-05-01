@@ -23,10 +23,6 @@ class Entry
      */
     public $date;
     /**
-     * @var Date
-     */
-    public $endDate;
-    /**
      * @var Date|null
      */
     public $repeatTillDate;
