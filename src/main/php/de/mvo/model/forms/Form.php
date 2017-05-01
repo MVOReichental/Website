@@ -4,6 +4,7 @@ namespace de\mvo\model\forms;
 use de\mvo\Database;
 use de\mvo\Date;
 use de\mvo\utils\File;
+use PDO;
 
 class Form
 {
@@ -66,6 +67,39 @@ class Form
         return $date;
     }
 
+    public function save()
+    {
+        if ($this->id === null) {
+            $query = Database::prepare("
+                INSERT INTO `forms`
+                SET
+                    `filename` = :filename,
+                    `name` = :name,
+                    `title` = :title
+            ");
+        } else {
+            $query = Database::prepare("
+                UPDATE `forms`
+                SET
+                    `filename` = :filename,
+                    `name` = :name,
+                    `title` = :title
+            ");
+
+            $query->bindValue(":id", $this->id, PDO::PARAM_INT);
+        }
+
+        $query->bindValue(":filename", $this->filename);
+        $query->bindValue(":name", $this->name);
+        $query->bindValue(":title", $this->title);
+
+        $query->execute();
+
+        if ($this->id === null) {
+            $this->id = (int)Database::lastInsertId();
+        }
+    }
+
     public function stream()
     {
         $filename = $this->getAbsoluteFilePath();
@@ -86,6 +120,7 @@ class Form
             }
 
             fclose($file);
+
             return true;
         }
     }

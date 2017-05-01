@@ -697,10 +697,10 @@ class User implements JsonSerializable
         return true;
     }
 
-    public function save()
+    public function save($forceInsert = false)
     {
         try {
-            if ($this->id === null) {
+            if ($this->id === null or $forceInsert) {
                 $query = Database::prepare("
                 INSERT INTO `users`
                 SET

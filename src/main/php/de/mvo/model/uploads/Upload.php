@@ -61,23 +61,11 @@ class Upload
 
         Database::pdo()->beginTransaction();
 
-        $query = Database::prepare("
-            INSERT INTO `uploads`
-            SET
-                `key` = :key,
-                `filename` = :filename
-        ");
-
-        $query->execute(array
-        (
-            ":key" => $upload->key,
-            ":filename" => $upload->filename
-        ));
-
-        $upload->id = Database::lastInsertId();
+        $upload->saveAsNew();
 
         if (!rename($sourcePath, $upload->getAbsoluteFilePath())) {
             Database::pdo()->rollBack();
+
             return null;
         }
 
@@ -94,6 +82,24 @@ class Upload
     public function getUrl()
     {
         return sprintf("/uploads/%d/%s/%s", $this->id, $this->key, $this->filename);
+    }
+
+    public function saveAsNew()
+    {
+        $query = Database::prepare("
+            INSERT INTO `uploads`
+            SET
+                `key` = :key,
+                `filename` = :filename
+        ");
+
+        $query->execute(array
+        (
+            ":key" => $this->key,
+            ":filename" => $this->filename
+        ));
+
+        $this->id = (int)Database::lastInsertId();
     }
 
     public function stream()

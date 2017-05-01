@@ -75,9 +75,9 @@ class Title
         return $query->fetchObject(self::class);
     }
 
-    public function save()
+    public function save($forceInsert = false)
     {
-        if ($this->id === null) {
+        if ($this->id === null or $forceInsert) {
             $query = Database::prepare("
                 INSERT INTO `notedirectorytitles`
                 SET
