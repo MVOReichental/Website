@@ -70,7 +70,7 @@ class Messages extends AbstractService
             }
         }
 
-        $message = new Message(true);
+        $message = new Message;
 
         $message->sender = User::getCurrent();
         $message->text = $_POST["text"];

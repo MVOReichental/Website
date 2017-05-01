@@ -45,6 +45,7 @@ class Message
     public function __construct()
     {
         if ($this->id === null) {
+            $this->visibleToSender = true;
             return;
         }
 
