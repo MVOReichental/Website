@@ -24,7 +24,7 @@
         <div class="form-group">
             <label for="protocols-upload-groups">Gruppen</label>
 
-            <select class="selectpicker form-control" id="protocols-upload-groups" name="groups[]" multiple data-actions-box="true" required>
+            <select class="selectpicker form-control" id="protocols-upload-groups" name="groups[]" data-none-selected-text="Keine Auswahl" data-select-all-text="Alles ausw&auml;hlen" data-deselect-all-text="Nichts ausw&auml;hlen" data-actions-box="true" multiple required>
                 {% for name, title in groups %}
                     <option value="{{ name }}">{{ title|raw }}</option>
                 {% endfor %}

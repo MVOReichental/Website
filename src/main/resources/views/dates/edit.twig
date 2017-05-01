@@ -67,7 +67,7 @@
         <div class="form-group">
             <label for="dates-edit-groups">Gruppen</label>
 
-            <select class="selectpicker form-control" id="dates-edit-groups" name="groups[]" multiple data-actions-box="true">
+            <select class="selectpicker form-control" id="dates-edit-groups" name="groups[]" data-none-selected-text="Keine Auswahl" data-select-all-text="Alles ausw&auml;hlen" data-deselect-all-text="Nichts ausw&auml;hlen" data-actions-box="true" multiple>
                 {% for name, title in groups %}
                     <option value="{{ name }}" {% if name in entry.groups %}selected{% endif %}>{{ title|raw }}</option>
                 {% endfor %}
