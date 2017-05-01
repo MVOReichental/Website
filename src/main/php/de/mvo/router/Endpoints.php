@@ -601,6 +601,12 @@ class Endpoints
             ->method("getPage")
             ->permission("admin.visits");
 
+        Endpoint::create(HttpMethod::GET, "/internal/admin/visits/chart.json")
+            ->target()
+            ->className(Visits::class)
+            ->method("getChartData")
+            ->permission("admin.visits");
+
         Endpoint::create(HttpMethod::GET, "/internal/admin/usermanagement")
             ->target()
             ->className(UserManagement::class)
