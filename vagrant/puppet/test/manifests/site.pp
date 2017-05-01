@@ -47,7 +47,9 @@ class { "apache":
   group         => "vagrant",
 }
 
-package { "libapache2-mod-php7.1": }
+package { "libapache2-mod-php7.1":
+  require => Apt::Source["packages.sury.org_php"],
+}
 
 class { "apache::mod::php":
   php_version => "7.1",
@@ -83,6 +85,7 @@ mysql::db { "mvo":
 class { "composer":
   command_name => "composer",
   target_dir   => "/usr/local/bin",
+  require      => Package["php7.1-cli"],
 }
 
 exec { "composer_install":
