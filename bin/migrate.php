@@ -283,6 +283,8 @@ function migrateStage(PDO $oldDb, $stage)
                 $program->title = $row->title;
                 $program->year = $row->year;
 
+                $program->generateName();
+
                 $program->titles = new Titles;
 
                 $programTitlesQuery->execute(array

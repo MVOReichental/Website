@@ -2,6 +2,7 @@
 namespace de\mvo\model\notedirectory;
 
 use de\mvo\Database;
+use de\mvo\utils\StringUtil;
 use PDO;
 
 class Program
@@ -126,6 +127,11 @@ class Program
         }
 
         return $query->fetchObject(self::class);
+    }
+
+    public function generateName()
+    {
+        $this->name = strtolower(StringUtil::removeNonAlphanumeric($this->title));
     }
 
     public function save()

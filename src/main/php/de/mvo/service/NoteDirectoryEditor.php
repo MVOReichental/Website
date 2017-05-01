@@ -59,8 +59,9 @@ class NoteDirectoryEditor extends AbstractService
         }
 
         $program->year = $_POST["year"];
-        $program->name = strtolower(StringUtil::removeNonAlphanumeric($_POST["title"]));
         $program->title = $_POST["title"];
+
+        $program->generateName();
 
         self::setProgramTitles($program);
 
@@ -75,8 +76,9 @@ class NoteDirectoryEditor extends AbstractService
         $program = new Program;
 
         $program->year = $_POST["year"];
-        $program->name = strtolower(StringUtil::removeNonAlphanumeric($_POST["title"]));
         $program->title = $_POST["title"];
+
+        $program->generateName();
 
         self::setProgramTitles($program);
 
