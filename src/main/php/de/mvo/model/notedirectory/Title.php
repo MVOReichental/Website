@@ -75,18 +75,33 @@ class Title
         return $query->fetchObject(self::class);
     }
 
-    public function save($forceInsert = false)
+    public function save($forceInsertWithId = false)
     {
-        if ($this->id === null or $forceInsert) {
-            $query = Database::prepare("
-                INSERT INTO `notedirectorytitles`
-                SET
-                    `categoryId` = :categoryId,
-                    `title` = :title,
-                    `composer` = :composer,
-                    `arranger` = :arranger,
-                    `publisher` = :publisher
-            ");
+        if ($this->id === null or $forceInsertWithId) {
+            if ($forceInsertWithId) {
+                $query = Database::prepare("
+                    INSERT INTO `notedirectorytitles`
+                    SET
+                        `id` = :id,
+                        `categoryId` = :categoryId,
+                        `title` = :title,
+                        `composer` = :composer,
+                        `arranger` = :arranger,
+                        `publisher` = :publisher
+                ");
+
+                $query->bindValue(":id", $this->id, PDO::PARAM_INT);
+            } else {
+                $query = Database::prepare("
+                    INSERT INTO `notedirectorytitles`
+                    SET
+                        `categoryId` = :categoryId,
+                        `title` = :title,
+                        `composer` = :composer,
+                        `arranger` = :arranger,
+                        `publisher` = :publisher
+                ");
+            }
         } else {
             $query = Database::prepare("
                 UPDATE `notedirectorytitles`

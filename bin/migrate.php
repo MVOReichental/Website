@@ -252,7 +252,7 @@ function migrateStage(PDO $oldDb, $stage)
                 $category->title = $row->title;
                 $category->order = $row->order;
 
-                $category->save();
+                $category->save(true);
             }
 
             $query = $oldDb->query("SELECT * FROM `notedirectory_titles`");

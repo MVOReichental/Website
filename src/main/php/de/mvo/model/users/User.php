@@ -697,32 +697,57 @@ class User implements JsonSerializable
         return true;
     }
 
-    public function save($forceInsert = false)
+    public function save($forceInsertWithId = false)
     {
         try {
-            if ($this->id === null or $forceInsert) {
-                $query = Database::prepare("
-                INSERT INTO `users`
-                SET
-                    `username` = :username,
-                    `email` = :email,
-                    `firstName` = :firstName,
-                    `lastName` = :lastName,
-                    `birthDate` = :birthDate,
-                    `enabled` = :enabled
-            ");
+            if ($this->id === null or $forceInsertWithId) {
+                if ($forceInsertWithId) {
+                    $query = Database::prepare("
+                        INSERT INTO `users`
+                        SET
+                            `id` = :id,
+                            `username` = :username,
+                            `email` = :email,
+                            `firstName` = :firstName,
+                            `lastName` = :lastName,
+                            `birthDate` = :birthDate,
+                            `enabled` = :enabled
+                    ");
 
-                $query->execute(array
-                (
-                    ":username" => $this->username,
-                    ":email" => $this->email,
-                    ":firstName" => $this->firstName,
-                    ":lastName" => $this->lastName,
-                    ":birthDate" => $this->birthDate === null ? null : $this->birthDate->format("Y-m-d"),
-                    ":enabled" => (int)$this->enabled
-                ));
+                    $query->execute(array
+                    (
+                        ":id" => $this->id,
+                        ":username" => $this->username,
+                        ":email" => $this->email,
+                        ":firstName" => $this->firstName,
+                        ":lastName" => $this->lastName,
+                        ":birthDate" => $this->birthDate === null ? null : $this->birthDate->format("Y-m-d"),
+                        ":enabled" => (int)$this->enabled
+                    ));
+                } else {
+                    $query = Database::prepare("
+                        INSERT INTO `users`
+                        SET
+                            `username` = :username,
+                            `email` = :email,
+                            `firstName` = :firstName,
+                            `lastName` = :lastName,
+                            `birthDate` = :birthDate,
+                            `enabled` = :enabled
+                    ");
 
-                $this->id = (int)Database::lastInsertId();
+                    $query->execute(array
+                    (
+                        ":username" => $this->username,
+                        ":email" => $this->email,
+                        ":firstName" => $this->firstName,
+                        ":lastName" => $this->lastName,
+                        ":birthDate" => $this->birthDate === null ? null : $this->birthDate->format("Y-m-d"),
+                        ":enabled" => (int)$this->enabled
+                    ));
+
+                    $this->id = (int)Database::lastInsertId();
+                }
             } else {
                 $query = Database::prepare("
                 UPDATE `users`

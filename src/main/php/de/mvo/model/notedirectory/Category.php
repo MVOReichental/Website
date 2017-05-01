@@ -63,15 +63,27 @@ class Category
         return ($this->id == $category->id);
     }
 
-    public function save()
+    public function save($forceInsertWithId = false)
     {
-        if ($this->id === null) {
-            $query = Database::prepare("
-                INSERT INTO `notedirectorycategories`
-                SET
-                    `title` = :title,
-                    `order` = :order
-            ");
+        if ($this->id === null or $forceInsertWithId) {
+            if ($forceInsertWithId) {
+                $query = Database::prepare("
+                    INSERT INTO `notedirectorycategories`
+                    SET
+                        `id` = :id,
+                        `title` = :title,
+                        `order` = :order
+                ");
+
+                $query->bindValue(":id", $this->id, PDO::PARAM_INT);
+            } else {
+                $query = Database::prepare("
+                    INSERT INTO `notedirectorycategories`
+                    SET
+                        `title` = :title,
+                        `order` = :order
+                ");
+            }
         } else {
             $query = Database::prepare("
                 UPDATE `notedirectorycategories`
