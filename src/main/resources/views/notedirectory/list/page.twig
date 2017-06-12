@@ -15,10 +15,14 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="page-header">
+    <h1 class="page-header hidden-print">
         Notenverzeichnis<br/>
-        <span class="small">{{ title }}
-            <small class="visible-print-inline pull-right">Stand: {{ currentFormattedDate }}</small></span>
+        <span class="small">{{ title }}</span>
+    </h1>
+
+    <h1 class="page-header visible-print-block">
+        {{ title }}
+        <small class="pull-right">Stand: {{ currentFormattedDate }}</small>
     </h1>
 
     <div class="btn-toolbar hidden-print" id=" notedirectory-button-toolbar">
