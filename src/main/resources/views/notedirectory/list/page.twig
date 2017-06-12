@@ -48,19 +48,6 @@
                 </ul>
             </div>
 
-            <div class="btn-group">
-                <button type="button" class="btn btn-default dropdown-toggle {% if active starts with "categories/" %}active{% endif %}" data-toggle="dropdown">
-                    Kategorien <span class="caret"></span>
-                </button>
-
-                <ul class="dropdown-menu">
-                    {% for category in categories %}
-                        {% set path = "categories/#{category.id}" %}
-                        <li class="{% if active == path %}active{% endif %}"><a href="internal/notedirectory/{{ path }}">{{ category.title }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
-
             <a href="internal/notedirectory/titles" class="btn btn-default {% if active == "titles" %}active{% endif %}">Alle Titel</a>
         </div>
 

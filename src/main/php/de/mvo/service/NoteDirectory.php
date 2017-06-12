@@ -1,8 +1,6 @@
 <?php
 namespace de\mvo\service;
 
-use de\mvo\model\notedirectory\Categories;
-use de\mvo\model\notedirectory\Category;
 use de\mvo\model\notedirectory\Program;
 use de\mvo\model\notedirectory\Programs;
 use de\mvo\model\notedirectory\Title;
@@ -36,7 +34,6 @@ class NoteDirectory extends AbstractService
             "title" => $title,
             "active" => $activePath,
             "programs" => Programs::getAll()->getGroupedByYear(),
-            "categories" => Categories::getAll(),
             "list" => $list
         ));
     }
@@ -54,24 +51,11 @@ class NoteDirectory extends AbstractService
         )));
     }
 
-    public function getTitlesWithCategory()
-    {
-        $category = Category::getById($this->params->id);
-        if ($category === null) {
-            throw new NotFoundException;
-        }
-
-        return self::renderListPage($category->title, "categories/" . $category->id, TwigRenderer::render("notedirectory/list/titles", array
-        (
-            "titles" => Titles::getByCategory($category)
-        )));
-    }
-
     public function getAllTitles()
     {
-        return self::renderListPage("Alle Titel", "titles", TwigRenderer::render("notedirectory/list/titles-grouped", array
+        return self::renderListPage("Alle Titel", "titles", TwigRenderer::render("notedirectory/list/titles", array
         (
-            "categories" => Titles::getAll()->getInCategories()
+            "titles" => Titles::getAll()
         )));
     }
 

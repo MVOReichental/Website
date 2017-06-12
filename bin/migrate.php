@@ -9,7 +9,6 @@ use de\mvo\model\date\Groups;
 use de\mvo\model\date\Location;
 use de\mvo\model\forms\Form;
 use de\mvo\model\messages\Message;
-use de\mvo\model\notedirectory\Category;
 use de\mvo\model\notedirectory\Program;
 use de\mvo\model\notedirectory\Title;
 use de\mvo\model\notedirectory\Titles;
@@ -242,19 +241,6 @@ function migrateStage(PDO $oldDb, $stage)
 
         case "notedirectory":
             echo "Migrating note directory\n";
-
-            $query = $oldDb->query("SELECT * FROM `notedirectory_categories`");
-
-            while ($row = $query->fetch()) {
-                $category = new Category;
-
-                $category->id = $row->id;
-                $category->title = $row->title;
-                $category->order = $row->order;
-
-                $category->save(true);
-            }
-
             $query = $oldDb->query("SELECT * FROM `notedirectory_titles`");
 
             while ($row = $query->fetch()) {
@@ -265,7 +251,6 @@ function migrateStage(PDO $oldDb, $stage)
                 $title->composer = $row->composer;
                 $title->arranger = $row->arranger;
                 $title->publisher = $row->publisher;
-                $title->category = Category::getById($row->categoryId);
 
                 $title->save(true);
             }

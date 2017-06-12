@@ -272,9 +272,4 @@ class Program
             ":id" => $this->id
         ));
     }
-
-    public function categories()
-    {
-        return $this->titles->getInCategories();
-    }
 }

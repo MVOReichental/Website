@@ -421,12 +421,6 @@ class Endpoints
             ->className(NoteDirectory::class)
             ->method("getTitleDetails")
             ->permission($permission);
-
-        Endpoint::create(HttpMethod::GET, $baseUrl . "/categories/[i:id]")
-            ->target()
-            ->className(NoteDirectory::class)
-            ->method("getTitlesWithCategory")
-            ->permission($permission);
     }
 
     private static function mapNoteDirectoryEditorEndpoints()

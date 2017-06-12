@@ -30,14 +30,6 @@ class Title
      * @var string
      */
     public $publisher;
-    /**
-     * @var Category
-     */
-    public $category;
-    /**
-     * @var int
-     */
-    private $categoryId;
 
     public function __construct()
     {
@@ -47,7 +39,6 @@ class Title
 
         $this->id = (int)$this->id;
         $this->number = (int)$this->number;
-        $this->category = Category::getById($this->categoryId);
     }
 
     /**
@@ -83,7 +74,6 @@ class Title
                     INSERT INTO `notedirectorytitles`
                     SET
                         `id` = :id,
-                        `categoryId` = :categoryId,
                         `title` = :title,
                         `composer` = :composer,
                         `arranger` = :arranger,
@@ -95,7 +85,6 @@ class Title
                 $query = Database::prepare("
                     INSERT INTO `notedirectorytitles`
                     SET
-                        `categoryId` = :categoryId,
                         `title` = :title,
                         `composer` = :composer,
                         `arranger` = :arranger,
@@ -106,7 +95,6 @@ class Title
             $query = Database::prepare("
                 UPDATE `notedirectorytitles`
                 SET
-                    `categoryId` = :categoryId,
                     `title` = :title,
                     `composer` = :composer,
                     `arranger` = :arranger,
@@ -117,7 +105,6 @@ class Title
             $query->bindValue(":id", $this->id, PDO::PARAM_INT);
         }
 
-        $query->bindValue(":categoryId", $this->category->id, PDO::PARAM_INT);
         $query->bindValue(":title", $this->title);
         $query->bindValue(":composer", $this->composer);
         $query->bindValue(":arranger", $this->arranger);

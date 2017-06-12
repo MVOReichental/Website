@@ -128,14 +128,6 @@ CREATE TABLE `forms` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE `notedirectorycategories` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(100) NOT NULL,
-  `order` int(11) unsigned NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY (`title`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 CREATE TABLE `notedirectoryprograms` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `year` year NOT NULL,
@@ -147,14 +139,11 @@ CREATE TABLE `notedirectoryprograms` (
 
 CREATE TABLE `notedirectorytitles` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `categoryId` int(11) unsigned NOT NULL,
   `title` varchar(200) NOT NULL,
   `composer` varchar(200) DEFAULT NULL,
   `arranger` varchar(200) DEFAULT NULL,
   `publisher` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY (`categoryId`),
-  CONSTRAINT FOREIGN KEY (`categoryId`) REFERENCES `notedirectorycategories` (`id`) ON UPDATE CASCADE ON DELETE RESTRICT
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `notedirectoryprogramtitles` (

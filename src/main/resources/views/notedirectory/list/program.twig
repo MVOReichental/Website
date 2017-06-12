@@ -9,25 +9,10 @@
                 <th data-name="publisher">Verleger</th>
             </tr>
         </thead>
-        {% if program.name == "jahresprogramm" %}
-            {% for category in program.categories %}
-                {% if category.titles.count %}
-                    <tbody>
-                        <tr>
-                            <th class="notedirectory-list-category-title" colspan="5">{{ category.title }}</th>
-                        </tr>
-                        {% for title in category.titles %}
-                            {% include("notedirectory/list/title-row.twig") %}
-                        {% endfor %}
-                    </tbody>
-                {% endif %}
+        <tbody>
+            {% for title in program.titles %}
+                {% include("notedirectory/list/title-row.twig") %}
             {% endfor %}
-        {% else %}
-            <tbody>
-                {% for title in program.titles %}
-                    {% include("notedirectory/list/title-row.twig") %}
-                {% endfor %}
-            </tbody>
-        {% endif %}
+        </tbody>
     </table>
 </div>
