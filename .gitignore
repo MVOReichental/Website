@@ -5,4 +5,5 @@
 /src/main/resources/permissions.serialized
 /src/main/resources/pictures.serialized
 /src/main/resources/news.html
+/src/main/resources/twig-cache
 /vendor/
