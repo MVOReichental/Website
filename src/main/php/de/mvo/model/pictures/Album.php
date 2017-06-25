@@ -39,7 +39,7 @@ class Album
      */
     public $cover;
     /**
-     * @var Pictures
+     * @var Picture[]
      */
     public $pictures;
 
@@ -61,7 +61,7 @@ class Album
         $this->useAsYearCover = $albumData->useAsYearCover;
         $this->date = new Date($albumData->date);
 
-        $this->pictures = new Pictures;
+        $this->pictures = array();
 
         foreach ($albumData->pictures as $pictureData) {
             $picture = new Picture;
@@ -69,11 +69,11 @@ class Album
             $picture->file = $pictureData->file;
             $picture->title = $pictureData->title;
 
-            $this->pictures->append($picture);
+            $this->pictures[$picture->file] = $picture;
         }
 
-        if ($this->pictures->offsetExists($albumData->coverPicture)) {
-            $this->cover = $this->pictures->offsetGet($albumData->coverPicture);
+        if (isset($this->pictures[$albumData->coverPicture])) {
+            $this->cover = $this->pictures[$albumData->coverPicture];
         }
     }
 
