@@ -19,16 +19,17 @@ class Year
     public function __construct($year)
     {
         $this->year = (int)$year;
-
-        $file = PICTURES_ROOT . "/" . $this->year . "/year.json";
-        if (!file_exists($file)) {
-            return null;
-        }
-
-        $yearData = json_decode(file_get_contents($file));
-
-        $this->coverAlbum = new Album($this->year, $yearData->coverAlbum);
         $this->albums = AlbumList::getForYear($this->year);
+
+        /**
+         * @var $album Album
+         */
+        foreach ($this->albums as $album) {
+            if ($album->useAsYearCover) {
+                $this->coverAlbum = $album;
+                break;
+            }
+        }
     }
 
     public function __toString()

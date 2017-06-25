@@ -27,6 +27,10 @@ class Album
      */
     public $isPublic;
     /**
+     * @var bool
+     */
+    public $useAsYearCover;
+    /**
      * @var Date
      */
     public $date;
@@ -54,6 +58,7 @@ class Album
         $this->title = $albumData->title;
         $this->text = $albumData->text;
         $this->isPublic = $albumData->isPublic;
+        $this->useAsYearCover = $albumData->useAsYearCover;
         $this->date = new Date($albumData->date);
 
         $this->pictures = new Pictures;

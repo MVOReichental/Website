@@ -2,7 +2,6 @@ ErrorDocument 500 /error-500.html
 
 RewriteEngine On
 
-RewriteRule year.json - [F]
 RewriteRule album.json - [F]
 
 RewriteCond %{REQUEST_FILENAME} !-d

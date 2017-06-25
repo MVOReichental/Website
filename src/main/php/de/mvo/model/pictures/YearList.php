@@ -57,11 +57,6 @@ class YearList extends ArrayObject
                 continue;
             }
 
-            $file = $item->getPath() . "/" . $item->getFilename() . "/year.json";
-            if (!file_exists($file)) {
-                continue;
-            }
-
             $list->append(new Year($item->getFilename()));
         }
 
