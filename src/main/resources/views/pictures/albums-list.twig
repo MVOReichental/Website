@@ -3,7 +3,7 @@
         {% for album in albums %}
             <div class="col-sm-6 col-md-4">
                 <a href="{{ loop.parent.picturesBaseUrl }}/{{ album.year }}/{{ album.name }}" class="thumbnail">
-                    <img src="pictures/{{ album.year }}/{{ album.name }}/small_{{ album.cover.hash }}.jpg"/>
+                    <img src="pictures/{{ album.year }}/{{ album.name }}/{{ album.cover.hash }}_small.jpg"/>
                     <div class="caption">
                         <h3>
                             {{ album.title }}<br/>
