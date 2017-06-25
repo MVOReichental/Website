@@ -1,11 +1,21 @@
 @media print {
+    #notedirectory-header {
+        margin-top: 0;
+        font-size: 20px;
+    }
+
     #notedirectory-list > thead > tr > th,
     #notedirectory-list > tbody > tr > th,
     #notedirectory-list > tfoot > tr > th,
     #notedirectory-list > thead > tr > td,
     #notedirectory-list > tbody > tr > td,
     #notedirectory-list > tfoot > tr > td {
-        padding: 3px;
+        padding: 0;
+        font-size: 22px;
+    }
+
+    #notedirectory-list > tbody > tr:nth-of-type(odd) > td {
+        background-color: #e0e0e0 !important;
     }
 }
 

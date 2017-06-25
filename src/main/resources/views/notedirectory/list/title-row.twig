@@ -1,6 +1,6 @@
 <tr>
     {% if title.number %}
-        <td data-name="number">{{ title.number }}</td>
+        <td data-name="number" class="text-center">{{ title.number }}</td>
     {% endif %}
     <td data-name="title"><a href="internal/notedirectory/titles/{{ title.id }}" class="hidden-print"><i class="fa fa-info-circle"></i></a> {{ title.title }}</td>
     <td data-name="composer">{{ title.composer }}</td>
