@@ -14,7 +14,7 @@
             {% for year in years %}
                 <div class="col-sm-6 col-md-4">
                     <a href="{{ loop.parent.picturesBaseUrl }}/{{ year.year }}" class="thumbnail">
-                        <img src="pictures/{{ year.year }}/{{ year.coverAlbum.name }}/small_{{ year.coverAlbum.cover.file }}.jpg"/>
+                        <img src="pictures/{{ year.year }}/{{ year.coverAlbum.name }}/small_{{ year.coverAlbum.cover.hash }}.jpg"/>
                         <div class="caption">
                             <h3>{{ year.year }}</h3>
                         </div>

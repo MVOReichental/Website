@@ -30,8 +30,8 @@
         <div class="row gallery-source">
             {% for picture in album.pictures %}
                 <div class="col-sm-6 col-md-4">
-                    <a href="pictures/{{ loop.parent.album.year }}/{{ loop.parent.album.name }}/large_{{ picture.file }}.jpg" class="thumbnail" title="{{ picture.title }}">
-                        <img src="pictures/{{ loop.parent.album.year }}/{{ loop.parent.album.name }}/small_{{ picture.file }}.jpg"/>
+                    <a href="pictures/{{ loop.parent.album.year }}/{{ loop.parent.album.name }}/large_{{ picture.hash }}.jpg" class="thumbnail" title="{{ picture.title }}">
+                        <img src="pictures/{{ loop.parent.album.year }}/{{ loop.parent.album.name }}/small_{{ picture.hash }}.jpg"/>
                         {% if picture.title %}
                             <div class="caption">
                                 <h3>{{ picture.title }}</h3>

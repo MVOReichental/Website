@@ -66,10 +66,10 @@ class Album
         foreach ($albumData->pictures as $pictureData) {
             $picture = new Picture;
 
-            $picture->file = $pictureData->file;
+            $picture->hash = $pictureData->hash;
             $picture->title = $pictureData->title;
 
-            $this->pictures[$picture->file] = $picture;
+            $this->pictures[$picture->hash] = $picture;
         }
 
         if (isset($this->pictures[$albumData->coverPicture])) {

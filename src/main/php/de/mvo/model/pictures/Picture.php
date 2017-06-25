@@ -6,7 +6,7 @@ class Picture
     /**
      * @var string
      */
-    public $file;
+    public $hash;
     /**
      * @var string
      */
