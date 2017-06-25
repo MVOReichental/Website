@@ -36,6 +36,11 @@ class Date extends DateTime
         return $now->diff($this)->y;
     }
 
+    public function toDatabase()
+    {
+        return $this->format("Y-m-d H:i:s");
+    }
+
     public function __toString()
     {
         return $this->format("c");

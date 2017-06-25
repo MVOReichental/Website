@@ -28,8 +28,8 @@ class Entries extends ArrayObject
 
         $query->execute(array
         (
-            ":startDate" => $startDate->format("c"),
-            ":endDate" => $endDate->format("c")
+            ":startDate" => $startDate->toDatabase(),
+            ":endDate" => $endDate->toDatabase()
         ));
 
         $entries = new self;

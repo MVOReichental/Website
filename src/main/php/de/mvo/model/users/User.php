@@ -631,7 +631,7 @@ class User implements JsonSerializable
 
         $query->execute(array
         (
-            ":date" => $this->lastOnline->format("c"),
+            ":date" => $this->lastOnline->toDatabase(),
             ":id" => $this->id
         ));
     }
