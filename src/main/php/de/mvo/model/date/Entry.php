@@ -148,7 +148,7 @@ class Entry
         $query->bindValue(":endDate", $this->endDate === null ? null : $this->endDate->toDatabase());
         $query->bindValue(":title", $this->title);
         $query->bindValue(":description", $this->description);
-        $query->bindValue(":locationId", $this->location->id, PDO::PARAM_INT);
+        $query->bindValue(":locationId", $this->location === null ? null : $this->location->id, PDO::PARAM_INT);
         $query->bindValue(":highlight", $this->highlight, PDO::PARAM_BOOL);
         $query->bindValue(":isPublic", $this->isPublic, PDO::PARAM_BOOL);
 
