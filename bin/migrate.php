@@ -72,25 +72,29 @@ function migrateStage(PDO $oldDb, $stage)
             ");
 
             while ($row = $query->fetch()) {
-                $location = Location::getByName($row->location);
+                if ($row->location === null) {
+                    $location = null;
+                } else {
+                    $location = Location::getByName($row->location);
 
-                if ($location === null) {
-                    $location = new Location;
+                    if ($location === null) {
+                        $location = new Location;
 
-                    $locationQuery = $oldDb->prepare("SELECT * FROM `locations` WHERE `id` = :id");
+                        $locationQuery = $oldDb->prepare("SELECT * FROM `locations` WHERE `id` = :id");
 
-                    $locationQuery->execute(array
-                    (
-                        ":id" => $row->locationId
-                    ));
+                        $locationQuery->execute(array
+                        (
+                            ":id" => $row->locationId
+                        ));
 
-                    $locationRow = $locationQuery->fetch();
+                        $locationRow = $locationQuery->fetch();
 
-                    $location->name = $locationRow->name;
-                    $location->latitude = $locationRow->latitude;
-                    $location->longitude = $locationRow->longitude;
+                        $location->name = $locationRow->name;
+                        $location->latitude = $locationRow->latitude;
+                        $location->longitude = $locationRow->longitude;
 
-                    $location->save();
+                        $location->save();
+                    }
                 }
 
                 $entry = new Entry;
