@@ -1,8 +1,6 @@
 $(function () {
     setInterval(function () {
-        $.get("nop").fail(function (data, textStatus, jqXHR) {
-            console.log(data, textStatus, jqXHR);
-        });
+        $.get("nop");
     }, 60000);
 });
 
