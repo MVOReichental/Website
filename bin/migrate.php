@@ -149,7 +149,6 @@ function migrateStage(PDO $oldDb, $stage)
                 $user->id = $row->id;
                 $user->username = $row->username;
                 $user->email = $row->email;
-                // TODO: Migrate password
                 $user->firstName = $row->firstName;
                 $user->lastName = $row->lastName;
                 $user->birthDate = new Date($row->birthDate);
@@ -173,6 +172,18 @@ function migrateStage(PDO $oldDb, $stage)
 
                     $contact->save();
                 }
+
+                $query = Database::prepare("
+                    UPDATE `users`
+                    SET `password` = :password
+                    WHERE `id` = :id
+                ");
+
+                $query->execute(array
+                (
+                    ":password" => $row->newPasswordHash,
+                    ":id" => $row->id,
+                ));
             }
 
             $oldJson = json_decode(file_get_contents(Config::getRequiredValue("migrate", "path") . "/includes/permissions.json"));
