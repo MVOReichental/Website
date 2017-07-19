@@ -2,7 +2,7 @@
 namespace de\mvo\model\visits;
 
 use DateInterval;
-use DateTime;
+use de\mvo\Date;
 
 class Stats
 {
@@ -19,7 +19,7 @@ class Stats
     {
         $stats = new self;
 
-        $stats->count(Visit::getAtDate(new DateTime));
+        $stats->count(Visit::getAtDate(new Date));
 
         return $stats;
     }
@@ -28,14 +28,14 @@ class Stats
     {
         $stats = new self;
 
-        $stats->count(Visit::getAtDate((new DateTime)->sub(new DateInterval("P1D"))));
+        $stats->count(Visit::getAtDate((new Date)->sub(new DateInterval("P1D"))));
 
         return $stats;
     }
 
     public static function currentWeek()
     {
-        $startDate = new DateTime("monday this week");
+        $startDate = new Date("monday this week");
 
         $endDate = clone $startDate;
         $endDate->add(new DateInterval("P6D"));// Add 6 days to reach sunday
@@ -49,7 +49,7 @@ class Stats
 
     public static function previousWeek()
     {
-        $startDate = new DateTime("monday this week");
+        $startDate = new Date("monday this week");
         $startDate->sub(new DateInterval("P1W"));
 
         $endDate = clone $startDate;
@@ -64,8 +64,8 @@ class Stats
 
     public static function currentMonth()
     {
-        $startDate = new DateTime("first day of this month");
-        $endDate = new DateTime("last day of this month");
+        $startDate = new Date("first day of this month");
+        $endDate = new Date("last day of this month");
 
         $stats = new self;
 
@@ -76,8 +76,8 @@ class Stats
 
     public static function previousMonth()
     {
-        $startDate = new DateTime("first day of previous month");
-        $endDate = new DateTime("last day of previous month");
+        $startDate = new Date("first day of previous month");
+        $endDate = new Date("last day of previous month");
 
         $stats = new self;
 
