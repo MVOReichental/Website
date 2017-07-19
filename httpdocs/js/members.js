@@ -46,6 +46,31 @@ $(function () {
         checkbox.prop("checked", !checkbox.prop("checked")).change();
     });
 
+    if (membersList.hasClass("birthdays")) {
+        var nextBirthday = Members.findNextBirthday();
+
+        if (nextBirthday) {
+            var today = new Date();
+            today.setHours(0, 0, 0, 0);
+            var todayMoment = moment(today);
+
+            var row = membersList.find("tbody > tr > td.birthdate[data-next-birthday=\"" + moment(nextBirthday).format("YYYY-MM-DD") + "\"]").parent();
+
+            row.addClass("info");
+
+            var text;
+            if (todayMoment.isSame(nextBirthday)) {
+                text = "Hat heute Geburtstag";
+            } else {
+                text = todayMoment.to(nextBirthday);
+            }
+
+            var content = row.find(".birthday-days div");
+            content.removeClass("hidden");
+            content.find(".label").text(text);
+        }
+    }
+
     $("#members-send-message-button").on("click", function () {
         var recipients = [];
 
@@ -64,10 +89,10 @@ $(function () {
         Members.showSendMessage(recipients);
     });
 
-    $("#members-send-message-attachments").on("change", "input[type='file']", function() {
+    $("#members-send-message-attachments").on("change", "input[type='file']", function () {
         var container = $("#members-send-message-attachments");
 
-        container.find("input[type='file']").each(function() {
+        container.find("input[type='file']").each(function () {
             var fileList = $(this).prop("files");
 
             if (!fileList.length) {
@@ -115,5 +140,19 @@ var Members = {
 
             var modal = $("#members-send-message-modal").modal("show");
         });
+    },
+
+    findNextBirthday: function () {
+        var birthdays = [];
+
+        $("#members-list").find("tbody > tr > td.birthdate").each(function () {
+            birthdays.push(moment($(this).data("next-birthday")));
+        });
+
+        birthdays.sort(function (date1, date2) {
+            return date1 - date2;
+        });
+
+        return birthdays[0];
     }
 };

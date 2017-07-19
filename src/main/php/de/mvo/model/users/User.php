@@ -677,6 +677,36 @@ class User implements JsonSerializable
         return $this->firstName . " " . $this->lastName;
     }
 
+    public function nextBirthday()
+    {
+        if ($this->birthDate === null) {
+            return null;
+        }
+
+        $today = new Date("today");
+
+        if ($this->birthDate->format("m-d") === $today->format("m-d")) {
+            return $today;
+        }
+
+        $year = (int)$today->format("Y");
+
+        $birthMonth = (int)$this->birthDate->format("m");
+        $birthDay = (int)$this->birthDate->format("d");
+
+        $currentYearBirthDate = clone $this->birthDate;
+        $currentYearBirthDate->setDate($year, $birthMonth, $birthDay);
+
+        if ($currentYearBirthDate > $today) {
+            return $currentYearBirthDate;
+        }
+
+        $nextYearBirthDate = clone $this->birthDate;
+        $nextYearBirthDate->setDate($year + 1, $birthMonth, $birthDay);
+
+        return $nextYearBirthDate;
+    }
+
     public function doLogin()
     {
         $this->updateLastOnline();
