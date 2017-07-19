@@ -22,7 +22,7 @@
                         {{ user.firstName }}
                     </td>
                     <td class="last-name">{{ user.lastName }}</td>
-                    <td class="birthdate" data-value="{{ user.birthDate.format("m.d") }}" data-next-birthday="{{ user.nextBirthday.format("Y-m-d") }}">{{ user.birthDate.format("d.m.") }}</td>
+                    <td class="birthdate" data-value="{{ user.nextBirthday.format("Y.m.d") }}" data-next-birthday="{{ user.nextBirthday.format("Y-m-d") }}">{{ user.birthDate.format("d.m.") }}</td>
                     <td>{{ user.birthDate.format("Y") }}</td>
                     <td>{{ user.birthDate.yearsTillNow }}</td>
                     <td class="birthday-days">
