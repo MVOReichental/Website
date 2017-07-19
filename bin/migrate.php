@@ -366,7 +366,6 @@ $oldDb = new PDO(
 
 $oldDb->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $oldDb->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-$oldDb->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND, "SET NAMES latin1");
 
 $stages = $argv;
 array_shift($stages);// Remove script path ($argv[0])
