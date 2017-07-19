@@ -33,7 +33,7 @@ class InternalHome extends AbstractService
         return TwigRenderer::render("home-internal", array
         (
             "user" => User::getCurrent(),
-            "nextBirthdays" => array_slice(Users::getAll()->sortByNextBirthdays()->getArrayCopy(), 0, 5),
+            "nextBirthdays" => array_slice(Users::getAll()->enabledUsers()->sortByNextBirthdays()->getArrayCopy(), 0, 5),
             "messages" => $latestMessage,
             "albums" => $albums->getVisibleToUser($currentUser)->slice(0, 3),
         ));

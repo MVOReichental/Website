@@ -98,7 +98,7 @@ class Members extends AbstractService
             "title" => self::getListViews()[$this->params->view]["title"],
             "groups" => array_values($groups),
             "view" => $this->params->view,
-            "users" => $users
+            "users" => $users->enabledUsers()
         ));
     }
 
