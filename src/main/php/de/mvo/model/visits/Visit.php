@@ -89,7 +89,7 @@ class Visit
             $query->execute(array
             (
                 ":ip" => $ip,
-                ":date" => $date->toDatabase(),
+                ":date" => $date->toDatabaseDate(),
                 ":userId" => $user->id
             ));
         }
