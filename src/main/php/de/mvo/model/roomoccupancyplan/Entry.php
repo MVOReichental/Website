@@ -92,8 +92,8 @@ class Entry
             (
                 ":startTime" => $this->startTime,
                 ":endTime" => $this->endTime,
-                ":date" => $this->date->toDatabase(),
-                ":repeatTillDate" => $this->repeatTillDate === null ? null : $this->repeatTillDate->toDatabase(),
+                ":date" => $this->date->toDatabaseDate(),
+                ":repeatTillDate" => $this->repeatTillDate === null ? null : $this->repeatTillDate->toDatabaseDate(),
                 ":repeatWeekly" => (int)$this->repeatWeekly,
                 ":title" => $this->title
             ));
@@ -116,8 +116,8 @@ class Entry
             (
                 ":startTime" => $this->startTime,
                 ":endTime" => $this->endTime,
-                ":date" => $this->date->toDatabase(),
-                ":repeatTillDate" => $this->repeatTillDate === null ? null : $this->repeatTillDate->toDatabase(),
+                ":date" => $this->date->toDatabaseDate(),
+                ":repeatTillDate" => $this->repeatTillDate === null ? null : $this->repeatTillDate->toDatabaseDate(),
                 ":repeatWeekly" => (int)$this->repeatWeekly,
                 ":title" => $this->title,
                 ":id" => $this->id

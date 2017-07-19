@@ -41,6 +41,16 @@ class Date extends DateTime
         return $this->format("Y-m-d H:i:s");
     }
 
+    public function toDatabaseDate()
+    {
+        return $this->format("Y-m-d");
+    }
+
+    public function toDatabaseTime()
+    {
+        return $this->format("H:i:s");
+    }
+
     public function __toString()
     {
         return $this->format("c");

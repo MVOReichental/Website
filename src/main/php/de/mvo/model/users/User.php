@@ -721,7 +721,7 @@ class User implements JsonSerializable
                         ":email" => $this->email,
                         ":firstName" => $this->firstName,
                         ":lastName" => $this->lastName,
-                        ":birthDate" => $this->birthDate === null ? null : $this->birthDate->toDatabase(),
+                        ":birthDate" => $this->birthDate === null ? null : $this->birthDate->toDatabaseDate(),
                         ":enabled" => (int)$this->enabled
                     ));
                 } else {
@@ -742,7 +742,7 @@ class User implements JsonSerializable
                         ":email" => $this->email,
                         ":firstName" => $this->firstName,
                         ":lastName" => $this->lastName,
-                        ":birthDate" => $this->birthDate === null ? null : $this->birthDate->toDatabase(),
+                        ":birthDate" => $this->birthDate === null ? null : $this->birthDate->toDatabaseDate(),
                         ":enabled" => (int)$this->enabled
                     ));
 
@@ -767,7 +767,7 @@ class User implements JsonSerializable
                     ":email" => $this->email,
                     ":firstName" => $this->firstName,
                     ":lastName" => $this->lastName,
-                    ":birthDate" => $this->birthDate === null ? null : $this->birthDate->toDatabase(),
+                    ":birthDate" => $this->birthDate === null ? null : $this->birthDate->toDatabaseDate(),
                     ":enabled" => (int)$this->enabled,
                     ":id" => $this->id
                 ));

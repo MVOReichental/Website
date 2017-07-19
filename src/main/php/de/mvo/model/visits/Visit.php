@@ -77,7 +77,7 @@ class Visit
             $query->execute(array
             (
                 ":ip" => $ip,
-                ":date" => $date->toDatabase()
+                ":date" => $date->toDatabaseDate()
             ));
         } else {
             $query = Database::prepare("
@@ -230,9 +230,9 @@ class Visit
             $query->execute(array
             (
                 ":ip" => $this->ip,
-                ":date" => $this->date->toDatabase(),
-                ":firstVisit" => $this->firstVisit->format("H:i:s"),
-                ":lastVisit" => $this->lastVisit->format("H:i:s"),
+                ":date" => $this->date->toDatabaseDate(),
+                ":firstVisit" => $this->firstVisit->toDatabaseTime(),
+                ":lastVisit" => $this->lastVisit->toDatabaseTime(),
                 ":userId" => $this->user === null ? null : $this->user->id
             ));
 
@@ -252,9 +252,9 @@ class Visit
             $query->execute(array
             (
                 ":ip" => $this->ip,
-                ":date" => $this->date->toDatabase(),
-                ":firstVisit" => $this->firstVisit->format("H:i:s"),
-                ":lastVisit" => $this->lastVisit->format("H:i:s"),
+                ":date" => $this->date->toDatabaseDate(),
+                ":firstVisit" => $this->firstVisit->toDatabaseTime(),
+                ":lastVisit" => $this->lastVisit->toDatabaseTime(),
                 ":userId" => $this->user === null ? null : $this->user->id,
                 ":id" => $this->id
             ));
