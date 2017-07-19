@@ -641,6 +641,17 @@ class User implements JsonSerializable
         return ($this->id == $user->id);
     }
 
+    public function compareByLastNameAndFirstName(User $otherUser)
+    {
+        $result = strcmp($this->lastName, $otherUser->lastName);
+
+        if ($result !== 0) {
+            return $result;
+        }
+
+        return strcmp($this->firstName, $otherUser->firstName);
+    }
+
     public static function getProfilePicturePath($userId)
     {
         $filename = PROFILE_PICTURES_ROOT . "/" . $userId . ".jpg";

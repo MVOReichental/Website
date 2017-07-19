@@ -52,6 +52,8 @@ class Users extends ArrayObject implements JsonSerializable
     public function makeUnique()
     {
         $this->exchangeArray(array_unique((array)$this));
+
+        return $this;
     }
 
     public function enabledUsers()
@@ -88,6 +90,15 @@ class Users extends ArrayObject implements JsonSerializable
         }
 
         return $users;
+    }
+
+    public function sortByLastNameAndFirstName()
+    {
+        $this->uasort(function (User $user1, User $user2) {
+            return $user1->compareByLastNameAndFirstName($user2);
+        });
+
+        return $this;
     }
 
     public static function getAll()

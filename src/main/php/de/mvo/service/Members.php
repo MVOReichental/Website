@@ -91,6 +91,8 @@ class Members extends AbstractService
             $users = Users::getAll();
         }
 
+        $users->sortByLastNameAndFirstName();
+
         return TwigRenderer::render("members/list/page", array
         (
             "title" => self::getListViews()[$this->params->view]["title"],

@@ -15,7 +15,7 @@ class UserManagement extends AbstractService
     {
         return TwigRenderer::render("admin/usermanagement/page", array
         (
-            "users" => Users::getAll()
+            "users" => Users::getAll()->sortByLastNameAndFirstName()
         ));
     }
 
