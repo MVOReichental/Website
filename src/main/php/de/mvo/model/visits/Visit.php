@@ -2,7 +2,6 @@
 namespace de\mvo\model\visits;
 
 use DateInterval;
-use DateTime;
 use de\mvo\Database;
 use de\mvo\Date;
 use de\mvo\model\users\User;
@@ -62,11 +61,11 @@ class Visit
 
     /**
      * @param string $ip
-     * @param DateTime $date
+     * @param Date $date
      * @param User $user
      * @return Visit|null
      */
-    public static function getByIpDateUser($ip, DateTime $date, User $user = null)
+    public static function getByIpDateUser($ip, Date $date, User $user = null)
     {
         if ($user === null) {
             $query = Database::prepare("
@@ -78,7 +77,7 @@ class Visit
             $query->execute(array
             (
                 ":ip" => $ip,
-                ":date" => $date->format("Y-m-d")
+                ":date" => $date->toDatabase()
             ));
         } else {
             $query = Database::prepare("
@@ -90,7 +89,7 @@ class Visit
             $query->execute(array
             (
                 ":ip" => $ip,
-                ":date" => $date->format("Y-m-d"),
+                ":date" => $date->toDatabase(),
                 ":userId" => $user->id
             ));
         }
@@ -103,11 +102,11 @@ class Visit
     }
 
     /**
-     * @param DateTime $startDate
-     * @param DateTime $endDate
+     * @param Date $startDate
+     * @param Date $endDate
      * @return Visit[]
      */
-    public static function getInDateRange(DateTime $startDate, DateTime $endDate)
+    public static function getInDateRange(Date $startDate, Date $endDate)
     {
         $query = Database::prepare("
             SELECT *
@@ -117,8 +116,8 @@ class Visit
 
         $query->execute(array
         (
-            ":startDate" => $startDate->format("Y-m-d"),
-            ":endDate" => $endDate->format("Y-m-d")
+            ":startDate" => $startDate->toDatabase(),
+            ":endDate" => $endDate->toDatabase()
         ));
 
         $visits = array();
@@ -131,10 +130,10 @@ class Visit
     }
 
     /**
-     * @param DateTime $date
+     * @param Date $date
      * @return Visit[]
      */
-    public static function getAtDate(DateTime $date)
+    public static function getAtDate(Date $date)
     {
         $query = Database::prepare("
             SELECT *
@@ -144,7 +143,7 @@ class Visit
 
         $query->execute(array
         (
-            ":date" => $date->format("Y-m-d")
+            ":date" => $date->toDatabase()
         ));
 
         $visits = array();
@@ -180,7 +179,7 @@ class Visit
 
         $query->execute(array
         (
-            ":date" => $date->format("Y-m-d"),
+            ":date" => $date->toDatabase(),
             ":minTime" => $minTime
         ));
 
@@ -231,7 +230,7 @@ class Visit
             $query->execute(array
             (
                 ":ip" => $this->ip,
-                ":date" => $this->date->format("Y-m-d"),
+                ":date" => $this->date->toDatabase(),
                 ":firstVisit" => $this->firstVisit->format("H:i:s"),
                 ":lastVisit" => $this->lastVisit->format("H:i:s"),
                 ":userId" => $this->user === null ? null : $this->user->id
@@ -253,7 +252,7 @@ class Visit
             $query->execute(array
             (
                 ":ip" => $this->ip,
-                ":date" => $this->date->format("Y-m-d"),
+                ":date" => $this->date->toDatabase(),
                 ":firstVisit" => $this->firstVisit->format("H:i:s"),
                 ":lastVisit" => $this->lastVisit->format("H:i:s"),
                 ":userId" => $this->user === null ? null : $this->user->id,

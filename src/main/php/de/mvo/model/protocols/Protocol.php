@@ -70,7 +70,7 @@ class Protocol
         (
             ":uploadId" => $this->upload->id,
             ":title" => $this->title,
-            ":date" => $this->date
+            ":date" => $this->date->toDatabase()
         ));
 
         $this->id = Database::lastInsertId();
