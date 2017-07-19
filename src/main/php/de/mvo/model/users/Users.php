@@ -114,6 +114,26 @@ class Users extends ArrayObject implements JsonSerializable
         return $users;
     }
 
+    public function sortByNextBirthdays()
+    {
+        $this->uasort(function (User $user1, User $user2) {
+            $user1NextBirthday = $user1->nextBirthday();
+            $user2NextBirthday = $user2->nextBirthday();
+
+            if ($user1NextBirthday < $user2NextBirthday) {
+                return -1;
+            }
+
+            if ($user1NextBirthday > $user2NextBirthday) {
+                return 1;
+            }
+
+            return strcmp($user1->getFullName(), $user2->getFullName());
+        });
+
+        return $this;
+    }
+
     function jsonSerialize()
     {
         return $this->getArrayCopy();
