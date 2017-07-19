@@ -50,24 +50,18 @@ $(function () {
         var nextBirthday = Members.findNextBirthday();
 
         if (nextBirthday) {
-            var today = new Date();
-            today.setHours(0, 0, 0, 0);
-            var todayMoment = moment(today);
-
             var row = membersList.find("tbody > tr > td.birthdate[data-next-birthday=\"" + moment(nextBirthday).format("YYYY-MM-DD") + "\"]").parent();
 
             row.addClass("info");
 
-            var text;
-            if (todayMoment.isSame(nextBirthday)) {
-                text = "Hat heute Geburtstag";
-            } else {
-                text = todayMoment.to(nextBirthday);
-            }
-
             var content = row.find(".birthday-days div");
             content.removeClass("hidden");
-            content.find(".label").text(text);
+            content.find(".label").text(moment(nextBirthday).calendar(null, {
+                sameDay: "[heute]",
+                nextDay: "[morgen]",
+                nextWeek: "dddd",
+                sameElse: "DD.MM.YYYY"
+            }));
         }
     }
 
