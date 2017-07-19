@@ -144,8 +144,8 @@ class Entry
             $query->bindValue(":id", $this->id, PDO::PARAM_INT);
         }
 
-        $query->bindValue(":startDate", $this->startDate);
-        $query->bindValue(":endDate", $this->endDate);
+        $query->bindValue(":startDate", $this->startDate->toDatabase());
+        $query->bindValue(":endDate", $this->endDate->toDatabase());
         $query->bindValue(":title", $this->title);
         $query->bindValue(":description", $this->description);
         $query->bindValue(":locationId", $this->location->id, PDO::PARAM_INT);
