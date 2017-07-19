@@ -141,6 +141,14 @@ function migrateStage(PDO $oldDb, $stage)
                 WHERE `userId` = :userId AND `category` IN ('phone', 'mobile') AND `subCategory` IN ('private', 'business')
             ");
 
+            $updateQuery = Database::prepare("
+                UPDATE `users`
+                SET
+                    `password` = :password,
+                    `lastOnline` = :lastOnline
+                WHERE `id` = :id
+            ");
+
             $query = $oldDb->query("SELECT * FROM `users`");
 
             while ($row = $query->fetch()) {
@@ -173,15 +181,10 @@ function migrateStage(PDO $oldDb, $stage)
                     $contact->save();
                 }
 
-                $query = Database::prepare("
-                    UPDATE `users`
-                    SET `password` = :password
-                    WHERE `id` = :id
-                ");
-
-                $query->execute(array
+                $updateQuery->execute(array
                 (
                     ":password" => $row->newPasswordHash,
+                    ":lastOnline" => (new Date($row->lastOnline))->toDatabase(),
                     ":id" => $row->id,
                 ));
             }
@@ -363,6 +366,7 @@ $oldDb = new PDO(
 
 $oldDb->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $oldDb->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+$oldDb->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND, "SET NAMES latin1");
 
 $stages = $argv;
 array_shift($stages);// Remove script path ($argv[0])
