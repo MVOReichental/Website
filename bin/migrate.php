@@ -65,7 +65,7 @@ function migrateStage(PDO $oldDb, $stage)
             echo "Migrating dates\n";
 
             $query = $oldDb->query("
-                SELECT `startDate`, `endDate`, `title`, `description`, `locations`.`name` AS `location`, `groups`
+                SELECT `startDate`, `endDate`, `title`, `description`, `locations`.`name` AS `location`, `locationId`, `groups`
                 FROM `dates`
                 LEFT JOIN `locations` ON `locations`.`id` = `locationId`
                 WHERE `enabled`
