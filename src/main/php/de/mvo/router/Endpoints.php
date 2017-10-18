@@ -110,12 +110,6 @@ class Endpoints
             ->method("get")
             ->arguments("jugendausbildung/ausbildungsgruppen", "jugendausbildung/ausbildungsgruppen");
 
-        Endpoint::create(HttpMethod::GET, "/jugendausbildung/ausbildungsvereinbarung.pdf")
-            ->target()
-            ->className(File::class)
-            ->method("get")
-            ->arguments(RESOURCES_ROOT . "/ausbildungsvereinbarung.pdf", "application/pdf");
-
         Endpoint::create(HttpMethod::GET, "/foerderverein/warum_foerderverein")
             ->target()
             ->className(StaticView::class)
