@@ -3,6 +3,7 @@ namespace de\mvo\model\users;
 
 use ArrayObject;
 use de\mvo\Database;
+use de\mvo\Date;
 use JsonSerializable;
 
 class Users extends ArrayObject implements JsonSerializable
@@ -83,6 +84,26 @@ class Users extends ArrayObject implements JsonSerializable
          */
         foreach ($this as $user) {
             if ($user->enabled) {
+                continue;
+            }
+
+            $users->append($user);
+        }
+
+        return $users;
+    }
+
+    public function nextBirthdayBetween(Date $start, Date $end)
+    {
+        $users = new self;
+
+        /**
+         * @var $user User
+         */
+        foreach ($this as $user) {
+            $nextBirthday = $user->nextBirthday();
+
+            if ($nextBirthday < $start or $nextBirthday > $end) {
                 continue;
             }
 

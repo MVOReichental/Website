@@ -23,11 +23,15 @@
 
     <h3>N&auml;chste Geburtstage</h3>
 
-    <ul>
-        {% for user in nextBirthdays %}
-            <li>{{ user.firstName }} {{ user.lastName }} <span class="label label-primary home-next-birthday" data-date="{{ user.nextBirthday.format("Y-m-d") }}"></span></li>
-        {% endfor %}
-    </ul>
+    {% if nextBirthdays %}
+        <ul>
+            {% for user in nextBirthdays %}
+                <li>{{ user.firstName }} {{ user.lastName }} <span class="label label-primary home-next-birthday" data-date="{{ user.nextBirthday.format("Y-m-d") }}"></span></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Keine Geburtstage in den n&auml;chsten 4 Wochen.</p>
+    {% endif %}
 
     <p>Klicke <a href="internal/members/birthdays">hier</a> um alle Geburtstage zu sehen.</p>
 
