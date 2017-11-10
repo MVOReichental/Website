@@ -3,6 +3,7 @@ namespace de\mvo\model\date;
 
 use ArrayObject;
 use de\mvo\Database;
+use de\mvo\Date;
 use de\mvo\model\users\User;
 use PDO;
 
@@ -19,6 +20,32 @@ class DateList extends ArrayObject
         ");
 
         $query->bindValue(":limit", $limit, PDO::PARAM_INT);
+
+        $query->execute();
+
+        $list = new self;
+
+        /**
+         * @var $entry Entry
+         */
+        while ($entry = $query->fetchObject(Entry::class)) {
+            $list->append($entry);
+        }
+
+        return $list;
+    }
+
+    public static function getBetween(Date $start, Date $end)
+    {
+        $query = Database::prepare("
+            SELECT *
+            FROM `dates`
+            WHERE `startDate` >= :startDate AND `startDate` <= :endDate
+            ORDER BY `startDate` ASC
+        ");
+
+        $query->bindValue(":startDate", $start->toDatabase());
+        $query->bindValue(":endDate", $end->toDatabase());
 
         $query->execute();
 

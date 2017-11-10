@@ -21,16 +21,30 @@
         <span class="lead">willkommen im Internen Bereich</span>
     </h3>
 
+    <h3>N&auml;chste Termine</h3>
+
+    {% if nextDates %}
+        <ul>
+            {% for date in nextDates %}
+                <li>{{ date.title }} <span class="label label-primary home-next-date" data-date="{{ date.startDate.format("Y-m-d H:i:s") }}"></span></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>In den n&auml;chsten 4 Wochen stehen keine Termine an.</p>
+    {% endif %}
+
+    <p>Klicke <a href="internal/dates">hier</a> um alle Termine zu sehen.</p>
+
     <h3>N&auml;chste Geburtstage</h3>
 
     {% if nextBirthdays %}
         <ul>
             {% for user in nextBirthdays %}
-                <li>{{ user.firstName }} {{ user.lastName }} <span class="label label-primary home-next-birthday" data-date="{{ user.nextBirthday.format("Y-m-d") }}"></span></li>
+                <li>{{ user.firstName }} {{ user.lastName }} <span class="label label-primary home-next-date" data-date="{{ user.nextBirthday.format("Y-m-d") }}"></span></li>
             {% endfor %}
         </ul>
     {% else %}
-        <p>Keine Geburtstage in den n&auml;chsten 4 Wochen.</p>
+        <p>In den n&auml;chsten 4 Wochen stehen keine Geburtstage an.</p>
     {% endif %}
 
     <p>Klicke <a href="internal/members/birthdays">hier</a> um alle Geburtstage zu sehen.</p>

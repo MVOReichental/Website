@@ -3,6 +3,7 @@ namespace de\mvo\service;
 
 use DateInterval;
 use de\mvo\Date;
+use de\mvo\model\date\DateList;
 use de\mvo\model\messages\Messages;
 use de\mvo\model\pictures\YearList;
 use de\mvo\model\users\User;
@@ -32,6 +33,11 @@ class InternalHome extends AbstractService
 
         $albums->sortByDate(false);
 
+        $nextDatesStart = new Date;
+        $nextDatesStart->setTime(0, 0);
+        $nextDatesEnd = clone $nextDatesStart;
+        $nextDatesEnd->add(new DateInterval("P4W"));
+
         $nextBirthdayStart = new Date;
         $nextBirthdayStart->setTime(0, 0);
         $nextBirthdayEnd = clone $nextBirthdayStart;
@@ -40,6 +46,7 @@ class InternalHome extends AbstractService
         return TwigRenderer::render("home-internal", array
         (
             "user" => User::getCurrent(),
+            "nextDates" => array_slice(DateList::getBetween($nextDatesStart, $nextDatesEnd)->visibleForUser($currentUser)->getArrayCopy(), 0, 5),
             "nextBirthdays" => array_slice(Users::getAll()->enabledUsers()->nextBirthdayBetween($nextBirthdayStart, $nextBirthdayEnd)->sortByNextBirthdays()->getArrayCopy(), 0, 5),
             "messages" => $latestMessage,
             "albums" => $albums->getVisibleToUser($currentUser)->slice(0, 3),

@@ -1,15 +1,16 @@
 $(function () {
-    $(".home-next-birthday").each(function () {
-        var date = $(this).data("date");
-        var today = new Date();
-        today.setHours(0, 0, 0, 0);
-        var todayMoment = moment(today);
+    $(".home-next-date").each(function () {
+        var date = moment($(this).data("date"));
 
-        $(this).text(moment(date).calendar(null, {
-            sameDay: "[heute]",
-            nextDay: "[morgen]",
-            nextWeek: "dddd",
-            sameElse: "DD.MM.YYYY"
+        var hasTime = date.hours() || date.minutes();
+
+        $(this).text(date.calendar(null, {
+            sameDay: hasTime ? "[heute] LT" : "[heute]",
+            nextDay: hasTime ? "[morgen] LT" : "[morgen]",
+            nextWeek: hasTime ? "LLL" : "LL",
+            sameElse: hasTime ? "LLL" : "LL"
         }));
+
+        $(this).attr("title", date.format(hasTime ? "LLL" : "LL"));
     });
 });
