@@ -30,9 +30,9 @@
                                 <span class="label label-success">&Ouml;ffentlich</span>
                             {% else %}
                                 {% if entry.groups.count == 1 %}
-                                    <span class="label label-danger">1 Gruppe</span>
+                                    <span class="label label-danger" title="{{ entry.groups.titles|join(", ") }}">1 Gruppe</span>
                                 {% elseif entry.groups.count > 1 %}
-                                    <span class="label label-danger">{{ entry.groups.count }} Gruppen</span>
+                                    <span class="label label-danger" title="{{ entry.groups.titles|join(", ") }}">{{ entry.groups.count }} Gruppen</span>
                                 {% else %}
                                     <span class="label label-danger">Intern</span>
                                 {% endif %}

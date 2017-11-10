@@ -106,4 +106,16 @@ class Groups extends ArrayObject
 
         return false;
     }
+
+    public function getTitles()
+    {
+        $allGroups = self::getAll();
+        $titles = array();
+
+        foreach ($this as $group) {
+            $titles[] = $allGroups[$group];
+        }
+
+        return $titles;
+    }
 }
