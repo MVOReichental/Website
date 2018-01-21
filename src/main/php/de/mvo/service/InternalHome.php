@@ -1,4 +1,5 @@
 <?php
+
 namespace de\mvo\service;
 
 use DateInterval;
@@ -50,6 +51,7 @@ class InternalHome extends AbstractService
             "nextBirthdays" => array_slice(Users::getAll()->enabledUsers()->nextBirthdayBetween($nextBirthdayStart, $nextBirthdayEnd)->sortByNextBirthdays()->getArrayCopy(), 0, 5),
             "messages" => $latestMessage,
             "albums" => $albums->getVisibleToUser($currentUser)->slice(0, 3),
+            "picturesBaseUrl" => "internal/pictures"
         ));
     }
 }
