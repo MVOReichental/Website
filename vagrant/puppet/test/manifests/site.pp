@@ -4,8 +4,6 @@ $packages = [
   "git",
   "htop",
   "lsb-release",
-  "nodejs-legacy",
-  "npm",
   "vim",
 ]
 
@@ -22,6 +20,12 @@ apt::source { "packages.sury.org_php":
   require  => Package["apt-transport-https", "ca-certificates"],
 }
 
+apt::pin { "packages.sury.org_php":
+  priority   => 1000,
+  originator => "deb.sury.org",
+  require    => Apt::Source["packages.sury.org_php"],
+}
+
 $php_modules = [
   "cli",
   "gd",
@@ -30,7 +34,10 @@ $php_modules = [
 
 $php_modules.each | $module | {
   package { "php7.1-${module}":
-    require => Apt::Source["packages.sury.org_php"],
+    require => [
+      Apt::Source["packages.sury.org_php"],
+      Apt::Pin["packages.sury.org_php"],
+    ],
   }
 }
 
@@ -48,7 +55,11 @@ class { "apache":
 }
 
 package { "libapache2-mod-php7.1":
-  require => [Class["apache"], Apt::Source["packages.sury.org_php"]],
+  require => [
+    Class["apache"],
+    Apt::Source["packages.sury.org_php"],
+    Apt::Pin["packages.sury.org_php"],
+  ],
 }
 
 class { "apache::mod::php":
@@ -95,10 +106,13 @@ exec { "composer_install":
   require     => Class["composer"],
 }
 
-exec { "npm_install_bower":
-  path    => ["/usr/local/sbin", "/usr/local/bin", "/usr/sbin", "/usr/bin", "/sbin", "/bin"],
-  command => "npm install -g bower",
-  require => Package["nodejs-legacy", "npm"],
+class { "nodejs":
+  repo_url_suffix    => "8.x",
+  npm_package_ensure => "present",
+}
+
+package { "bower":
+  provider => "npm",
 }
 
 exec { "bower_install":
@@ -107,7 +121,7 @@ exec { "bower_install":
   user        => "vagrant",
   command     => "bower install --config.interactive=false",
   environment => ["HOME=/home/vagrant"],
-  require     => Exec["npm_install_bower"],
+  require     => Package["bower"],
 }
 
 file { "/opt/mvo-website/src/main/resources/config.ini":
