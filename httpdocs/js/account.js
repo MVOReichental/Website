@@ -76,8 +76,9 @@ $(function () {
             data: {
                 "password": password
             },
-            success: function (uri) {
-                $("#settings-2fa-qrcode").qrcode(uri);
+            success: function (data) {
+                $("#settings-2fa-qrcode").qrcode(data.uri);
+                $("#settings-2fa-secret").val(data.secret);
 
                 $("#settings-2fa-enable-modal").modal("show");
             },
@@ -128,7 +129,7 @@ $(function () {
         });
     });
 
-    $(".settings-contact-remove").on("click", function() {
+    $(".settings-contact-remove").on("click", function () {
         $(this).closest(".settings-contact").remove();
     });
 });

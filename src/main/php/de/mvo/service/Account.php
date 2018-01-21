@@ -1,4 +1,5 @@
 <?php
+
 namespace de\mvo\service;
 
 use de\mvo\model\contacts\Contact;
@@ -8,6 +9,7 @@ use de\mvo\service\exception\LoginException;
 use de\mvo\TwigRenderer;
 use Exception;
 use Kelunik\TwoFactor\Oath;
+use ParagonIE\ConstantTime\Base32;
 use PDOException;
 
 class Account extends AbstractService
@@ -409,8 +411,13 @@ class Account extends AbstractService
 
         $_SESSION["2faKey"] = $key;
 
-        header("Content-Type: text/plain");
-        echo $uri;
+        header("Content-Type: application/json");
+
+        echo json_encode(array
+        (
+            "uri" => $uri,
+            "secret" => Base32::encode($key)
+        ));
 
         return null;
     }

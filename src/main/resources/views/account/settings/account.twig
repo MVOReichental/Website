@@ -132,6 +132,12 @@
                     <h4>Scanne den folgenden QRCode mit der Google Authenticator App.</h4>
                     <div id="settings-2fa-qrcode" class="text-center"></div>
 
+                    <div class="form-group">
+                        <label for="settings-2fa-secret">Schl&uuml;ssel</label>
+                        <input type="text" class="form-control" id="settings-2fa-secret" readonly/>
+                        <span class="help-block">Verwende diesen Schl&uuml;ssel wenn die von dir verwendete App keine QR Codes scannen kann (z.B. Enpass).</span>
+                    </div>
+
                     <h4>Gebe anschlie&szlig;end den 6 stelligen Code aus der App in das nachfolgende Feld ein.</h4>
                     <div class="form-group" id="settings-2fa-token-group">
                         <label for="settings-2fa-token">Code</label>
