@@ -11,7 +11,7 @@ package { $packages: }
 
 apt::source { "packages.sury.org_php":
   location => "https://packages.sury.org/php",
-  release  => "jessie",
+  release  => "stretch",
   repos    => "main",
   key      => {
     id     => "DF3D585DB8F0EB658690A554AC0E47584A7A714D",
