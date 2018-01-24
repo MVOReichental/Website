@@ -144,7 +144,7 @@ class Visit
 
         $query->execute(array
         (
-            ":date" => $date->toDatabase()
+            ":date" => $date->toDatabaseDate()
         ));
 
         $visits = array();
@@ -180,7 +180,7 @@ class Visit
 
         $query->execute(array
         (
-            ":date" => $date->toDatabase(),
+            ":date" => $date->toDatabaseDate(),
             ":minTime" => $minTime
         ));
 
