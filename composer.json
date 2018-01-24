@@ -22,6 +22,7 @@
         "erusev/parsedown": "^1.6",
         "kelunik/two-factor": "^1.0",
         "twig/twig": "^1.24",
-        "swiftmailer/swiftmailer": "^5.4"
+        "swiftmailer/swiftmailer": "^5.4",
+        "jaybizzle/crawler-detect": "^1.2"
     }
 }

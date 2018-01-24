@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2f7f759e98846ce839042c6ef30c91a5",
-    "content-hash": "4a329de79b3d2db57be9cde77c9506f3",
+    "content-hash": "08e366b3a97a8c841dc8962196c05efb",
     "packages": [
         {
             "name": "altorouter/altorouter",
@@ -60,7 +59,7 @@
                 "router",
                 "routing"
             ],
-            "time": "2015-11-30 00:47:43"
+            "time": "2015-11-30T00:47:43+00:00"
         },
         {
             "name": "eluceo/ical",
@@ -113,7 +112,7 @@
                 "ics",
                 "php calendar"
             ],
-            "time": "2016-04-26 12:17:31"
+            "time": "2016-04-26T12:17:31+00:00"
         },
         {
             "name": "erusev/parsedown",
@@ -152,7 +151,56 @@
                 "markdown",
                 "parser"
             ],
-            "time": "2015-10-04 16:44:32"
+            "time": "2015-10-04T16:44:32+00:00"
+        },
+        {
+            "name": "jaybizzle/crawler-detect",
+            "version": "v1.2.55",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JayBizzle/Crawler-Detect.git",
+                "reference": "e745d69502afc610ff993315e2607ad41e3bc13c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JayBizzle/Crawler-Detect/zipball/e745d69502afc610ff993315e2607ad41e3bc13c",
+                "reference": "e745d69502afc610ff993315e2607ad41e3bc13c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.8.*",
+                "satooshi/php-coveralls": "1.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Jaybizzle\\CrawlerDetect\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Beech",
+                    "email": "m@rkbee.ch",
+                    "role": "Developer"
+                }
+            ],
+            "description": "CrawlerDetect is a PHP class for detecting bots/crawlers/spiders via the user agent",
+            "homepage": "https://github.com/JayBizzle/Crawler-Detect/",
+            "keywords": [
+                "crawler",
+                "crawler detect",
+                "crawler detector",
+                "crawlerdetect",
+                "php crawler detect"
+            ],
+            "time": "2018-01-05T07:59:11+00:00"
         },
         {
             "name": "kelunik/two-factor",
@@ -202,7 +250,7 @@
                 "totp",
                 "two-factor"
             ],
-            "time": "2016-04-18 17:49:47"
+            "time": "2016-04-18T17:49:47+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
@@ -264,7 +312,7 @@
                 "hex2bin",
                 "rfc4648"
             ],
-            "time": "2016-04-08 16:58:39"
+            "time": "2016-04-08T16:58:39+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -312,7 +360,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2016-04-03 06:00:07"
+            "time": "2016-04-03T06:00:07+00:00"
         },
         {
             "name": "programie/pini",
@@ -348,7 +396,7 @@
                 }
             ],
             "description": "A simple PHP class for reading and writing ini files",
-            "time": "2015-11-17 13:24:59"
+            "time": "2015-11-17T13:24:59+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -401,7 +449,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2016-07-08 11:51:25"
+            "time": "2016-07-08T11:51:25+00:00"
         },
         {
             "name": "symfony/polyfill-php56",
@@ -457,7 +505,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-05-18 14:26:46"
+            "time": "2016-05-18T14:26:46+00:00"
         },
         {
             "name": "symfony/polyfill-util",
@@ -509,7 +557,7 @@
                 "polyfill",
                 "shim"
             ],
-            "time": "2016-05-18 14:26:46"
+            "time": "2016-05-18T14:26:46+00:00"
         },
         {
             "name": "twig/twig",
@@ -570,7 +618,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2016-05-30 09:11:59"
+            "time": "2016-05-30T09:11:59+00:00"
         }
     ],
     "packages-dev": [],

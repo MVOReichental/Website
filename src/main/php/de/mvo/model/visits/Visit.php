@@ -5,6 +5,7 @@ use DateInterval;
 use de\mvo\Database;
 use de\mvo\Date;
 use de\mvo\model\users\User;
+use Jaybizzle\CrawlerDetect\CrawlerDetect;
 
 class Visit
 {
@@ -194,6 +195,16 @@ class Visit
 
     public static function track()
     {
+        if (preg_match("/^check_http/", $_SERVER["HTTP_USER_AGENT"])) {
+            return;
+        }
+
+        $crawlerDetect = new CrawlerDetect;
+
+        if ($crawlerDetect->isCrawler()) {
+            return;
+        }
+
         $ip = $_SERVER["REMOTE_ADDR"];
         $date = new Date;
         $user = User::getCurrent();
