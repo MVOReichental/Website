@@ -11,20 +11,38 @@ use ReflectionMethod;
 
 class Target
 {
+    /**
+     * @var string
+     */
     public $class;
+    /**
+     * @var string
+     */
     public $method;
+    /**
+     * @var array
+     */
     public $params;
+    /**
+     * @var array
+     */
     public $methodArguments = array();
+    /**
+     * @var bool
+     */
     public $requireLogin = false;
+    /**
+     * @var string
+     */
     public $requiredPermission;
 
-    public function className($class)
+    public function className(string $class)
     {
         $this->class = $class;
         return $this;
     }
 
-    public function method($method)
+    public function method(string $method)
     {
         $this->method = $method;
         return $this;
@@ -42,13 +60,19 @@ class Target
         return $this;
     }
 
-    public function permission($permission)
+    public function permission(string $permission)
     {
         $this->requireLogin();
         $this->requiredPermission = $permission;
         return $this;
     }
 
+    /**
+     * @return mixed
+     * @throws LoginException
+     * @throws PermissionViolationException
+     * @throws TargetConfigurationException
+     */
     public function call()
     {
         if ($this->requireLogin) {
