@@ -7,9 +7,14 @@ use de\mvo\model\roomoccupancyplan\Entries;
 use de\mvo\model\roomoccupancyplan\Entry;
 use de\mvo\service\exception\NotFoundException;
 use de\mvo\TwigRenderer;
+use Twig_Error;
 
 class RoomOccupancyPlan extends AbstractService
 {
+    /**
+     * @return string
+     * @throws Twig_Error
+     */
     public function getCalendar()
     {
         return TwigRenderer::render("roomoccupancyplan/calendar");
@@ -79,6 +84,9 @@ class RoomOccupancyPlan extends AbstractService
         return json_encode($entries);
     }
 
+    /**
+     * @throws NotFoundException
+     */
     public function moveResizeEntry()
     {
         $entry = Entry::getById($this->params->id);
@@ -110,6 +118,9 @@ class RoomOccupancyPlan extends AbstractService
         $entry->save();
     }
 
+    /**
+     * @throws NotFoundException
+     */
     public function editEntry()
     {
         $entry = Entry::getById($this->params->id);

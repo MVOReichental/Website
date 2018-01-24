@@ -7,7 +7,7 @@ use de\mvo\model\notedirectory\Title;
 use de\mvo\model\notedirectory\Titles;
 use de\mvo\service\exception\NotFoundException;
 use de\mvo\TwigRenderer;
-use de\mvo\utils\StringUtil;
+use Twig_Error;
 
 class NoteDirectoryEditor extends AbstractService
 {
@@ -51,6 +51,10 @@ class NoteDirectoryEditor extends AbstractService
         }
     }
 
+    /**
+     * @return null
+     * @throws NotFoundException
+     */
     public function editProgram()
     {
         $program = Program::getById($this->params->id);
@@ -88,6 +92,9 @@ class NoteDirectoryEditor extends AbstractService
         return null;
     }
 
+    /**
+     * @throws NotFoundException
+     */
     public function deleteProgram()
     {
         $program = Program::getById($this->params->id);
@@ -98,6 +105,12 @@ class NoteDirectoryEditor extends AbstractService
         $program->delete();
     }
 
+    /**
+     * @param bool $createNewOnSave
+     * @return string
+     * @throws NotFoundException
+     * @throws Twig_Error
+     */
     public function getProgramEditPage($createNewOnSave = false)
     {
         $program = Program::getById($this->params->id);
@@ -113,6 +126,10 @@ class NoteDirectoryEditor extends AbstractService
         ));
     }
 
+    /**
+     * @return string
+     * @throws Twig_Error
+     */
     public function getCreateProgramPage()
     {
         return TwigRenderer::render("notedirectory/editor/program-editor", array
@@ -121,6 +138,10 @@ class NoteDirectoryEditor extends AbstractService
         ));
     }
 
+    /**
+     * @return string
+     * @throws Twig_Error
+     */
     public function getProgramsPage()
     {
         return TwigRenderer::render("notedirectory/editor/programs", array_merge(self::getEditorData("programs"), array
@@ -129,6 +150,10 @@ class NoteDirectoryEditor extends AbstractService
         )));
     }
 
+    /**
+     * @return null
+     * @throws NotFoundException
+     */
     public function editTitle()
     {
         $title = Title::getById($this->params->id);
@@ -162,6 +187,9 @@ class NoteDirectoryEditor extends AbstractService
         return null;
     }
 
+    /**
+     * @throws NotFoundException
+     */
     public function deleteTitle()
     {
         $title = Title::getById($this->params->id);
@@ -172,6 +200,11 @@ class NoteDirectoryEditor extends AbstractService
         $title->delete();
     }
 
+    /**
+     * @return string
+     * @throws NotFoundException
+     * @throws Twig_Error
+     */
     public function getTitleEditPage()
     {
         $title = Title::getById($this->params->id);
@@ -185,11 +218,19 @@ class NoteDirectoryEditor extends AbstractService
         ));
     }
 
+    /**
+     * @return string
+     * @throws Twig_Error
+     */
     public function getCreateTitlePage()
     {
         return TwigRenderer::render("notedirectory/editor/title-editor");
     }
 
+    /**
+     * @return string
+     * @throws Twig_Error
+     */
     public function getTitlesPage()
     {
         return TwigRenderer::render("notedirectory/editor/titles", array_merge(self::getEditorData("titles"), array

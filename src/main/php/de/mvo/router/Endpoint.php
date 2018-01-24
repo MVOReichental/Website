@@ -16,7 +16,11 @@ class Endpoint
      */
     public $target;
 
-    public function __construct($method, $path)
+    /**
+     * @param string $method
+     * @param string $path
+     */
+    public function __construct(string $method, string $path)
     {
         $this->method = $method;
         $this->path = $path;
@@ -36,7 +40,6 @@ class Endpoint
     /**
      * @param string $method
      * @param string $path
-     * @param Target $target
      * @return Endpoint
      */
     public static function create($method, $path)

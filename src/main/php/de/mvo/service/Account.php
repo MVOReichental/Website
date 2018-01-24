@@ -1,5 +1,4 @@
 <?php
-
 namespace de\mvo\service;
 
 use de\mvo\model\contacts\Contact;
@@ -11,6 +10,7 @@ use Exception;
 use Kelunik\TwoFactor\Oath;
 use ParagonIE\ConstantTime\Base32;
 use PDOException;
+use Twig_Error;
 
 class Account extends AbstractService
 {
@@ -55,6 +55,11 @@ class Account extends AbstractService
         );
     }
 
+    /**
+     * @return null
+     * @throws Exception
+     * @throws LoginException
+     */
     public function login()
     {
         if (isset($_POST["username"]) and isset($_POST["password"])) {
@@ -95,6 +100,10 @@ class Account extends AbstractService
         return null;
     }
 
+    /**
+     * @return string
+     * @throws Twig_Error
+     */
     public function logout()
     {
         User::logout();
@@ -102,6 +111,10 @@ class Account extends AbstractService
         return TwigRenderer::render("account/logout");
     }
 
+    /**
+     * @return string
+     * @throws Twig_Error
+     */
     public function resetPassword()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -121,6 +134,10 @@ class Account extends AbstractService
         }
     }
 
+    /**
+     * @return string
+     * @throws Twig_Error
+     */
     public function confirmResetPassword()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -152,6 +169,10 @@ class Account extends AbstractService
         return TwigRenderer::render("account/reset-password/confirm-error");
     }
 
+    /**
+     * @return string
+     * @throws Twig_Error
+     */
     public function confirmEmailChange()
     {
         $user = User::getById($_GET["id"]);
@@ -168,6 +189,11 @@ class Account extends AbstractService
         ));
     }
 
+    /**
+     * @param null $updateStatus
+     * @return string
+     * @throws Twig_Error
+     */
     public function showSettings($updateStatus = null)
     {
         $user = User::getCurrent();
@@ -263,6 +289,10 @@ class Account extends AbstractService
         return self::UPDATE_PASSWORD_OK;
     }
 
+    /**
+     * @return string|null
+     * @throws Twig_Error
+     */
     private function updateEmailAddress()
     {
         if (!isset($_POST["password"]) or !isset($_POST["email"])) {
@@ -352,6 +382,10 @@ class Account extends AbstractService
         return self::UPDATE_CONTACT_OK;
     }
 
+    /**
+     * @return string
+     * @throws Twig_Error
+     */
     public function updateSettings()
     {
         $response = null;

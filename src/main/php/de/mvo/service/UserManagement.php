@@ -8,9 +8,14 @@ use de\mvo\model\users\User;
 use de\mvo\model\users\Users;
 use de\mvo\service\exception\NotFoundException;
 use de\mvo\TwigRenderer;
+use Twig_Error;
 
 class UserManagement extends AbstractService
 {
+    /**
+     * @return string
+     * @throws Twig_Error
+     */
     public function getPage()
     {
         return TwigRenderer::render("admin/usermanagement/page", array
@@ -19,6 +24,11 @@ class UserManagement extends AbstractService
         ));
     }
 
+    /**
+     * @return string
+     * @throws NotFoundException
+     * @throws Twig_Error
+     */
     public function getEditPage()
     {
         if (isset($this->params->id)) {
@@ -37,6 +47,11 @@ class UserManagement extends AbstractService
         ));
     }
 
+    /**
+     * @return string
+     * @throws NotFoundException
+     * @throws Twig_Error
+     */
     public function getProfilePicturePage()
     {
         $user = User::getById($this->params->id);
@@ -51,6 +66,10 @@ class UserManagement extends AbstractService
         ));
     }
 
+    /**
+     * @return null|string
+     * @throws Twig_Error
+     */
     public function createUser()
     {
         $user = new User;
@@ -58,6 +77,11 @@ class UserManagement extends AbstractService
         return self::completeUserUpdate($user);
     }
 
+    /**
+     * @return null|string
+     * @throws NotFoundException
+     * @throws Twig_Error
+     */
     public function updateUser()
     {
         $user = User::getById($this->params->id);
@@ -75,6 +99,11 @@ class UserManagement extends AbstractService
         return json_encode(GroupList::load());
     }
 
+    /**
+     * @param User $user
+     * @return null|string
+     * @throws Twig_Error
+     */
     private static function completeUserUpdate(User $user)
     {
         $user->username = $_POST["username"];

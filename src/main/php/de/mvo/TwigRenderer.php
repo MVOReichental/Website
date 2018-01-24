@@ -3,6 +3,7 @@ namespace de\mvo;
 
 use de\mvo\model\users\User;
 use Twig_Environment;
+use Twig_Error;
 use Twig_Loader_Filesystem;
 
 class TwigRenderer
@@ -39,6 +40,12 @@ class TwigRenderer
         }
     }
 
+    /**
+     * @param $name
+     * @param array $context
+     * @return string
+     * @throws Twig_Error
+     */
     public static function render($name, $context = array())
     {
         return self::$twig->render($name . ".twig", $context);

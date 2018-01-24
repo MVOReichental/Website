@@ -8,6 +8,9 @@ use de\mvo\uploadhandler\Files;
 
 class Uploads extends AbstractService
 {
+    /**
+     * @throws NotFoundException
+     */
     public function get()
     {
         $upload = Upload::getById($this->params->id);

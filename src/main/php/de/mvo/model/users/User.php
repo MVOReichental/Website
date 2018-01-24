@@ -16,6 +16,7 @@ use JsonSerializable;
 use Kelunik\TwoFactor\Oath;
 use PDOException;
 use RuntimeException;
+use Twig_Error;
 use UnexpectedValueException;
 
 class User implements JsonSerializable
@@ -266,6 +267,9 @@ class User implements JsonSerializable
         $this->resetPasswordDate = null;
     }
 
+    /**
+     * @throws Twig_Error
+     */
     public function sendPasswordResetMail()
     {
         if ($this->email === null) {
@@ -318,6 +322,9 @@ class User implements JsonSerializable
         return true;
     }
 
+    /**
+     * @throws Twig_Error
+     */
     public function sendAccountCreatedMail()
     {
         if ($this->email === null) {
@@ -361,6 +368,9 @@ class User implements JsonSerializable
         ));
     }
 
+    /**
+     * @throws Twig_Error
+     */
     public function sendEmailChangeMail()
     {
         if ($this->newEmail === null) {

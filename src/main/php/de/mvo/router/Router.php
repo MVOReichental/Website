@@ -2,25 +2,41 @@
 namespace de\mvo\router;
 
 use AltoRouter;
+use Exception;
 
 class Router extends AltoRouter
 {
-    public function map($method, $route, Target $target)
+    /**
+     * @param $method
+     * @param $route
+     * @param Target $target
+     * @throws Exception
+     */
+    public function mapTarget(string $method, string $route, Target $target)
     {
         parent::map($method, $route, $target);
     }
 
-    public function mapAll($endpoints)
+    /**
+     * @param Endpoint[] $endpoints
+     * @throws Exception
+     */
+    public function mapAll(array $endpoints)
     {
         /**
          * @var $endpoint Endpoint
          */
         foreach ($endpoints as $endpoint) {
-            $this->map($endpoint->method, $endpoint->path, $endpoint->target);
+            $this->mapTarget($endpoint->method, $endpoint->path, $endpoint->target);
         }
     }
 
-    public function getMatchingTarget($requestUrl = null, $requestMethod = null)
+    /**
+     * @param string|null $requestUrl
+     * @param string|null $requestMethod
+     * @return Target|null
+     */
+    public function getMatchingTarget(string $requestUrl = null, string $requestMethod = null)
     {
         $match = $this->match($requestUrl, $requestMethod);
         if ($match === false) {
