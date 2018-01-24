@@ -63,10 +63,10 @@ $(function () {
 
     var addTitleModal = $("#notedirectory-editor-program-add-title-modal");
 
-    addTitleModal.find(".search").on("keyup", function() {
+    addTitleModal.find(".search").on("keyup", function () {
         var search = $(this).val().toLowerCase().trim();
 
-        addTitleModal.find(".entry").each(function() {
+        addTitleModal.find(".entry").each(function () {
             if ($(this).find(".entry-title").text().toLowerCase().indexOf(search) >= 0) {
                 $(this).show();
                 return;
@@ -91,7 +91,7 @@ $(function () {
         });
     });
 
-    addTitleModal.find("button.add").on("click", function() {
+    addTitleModal.find("button.add").on("click", function () {
         var tr = $(this).closest("tr");
 
         var titleRow = $("<tr>");

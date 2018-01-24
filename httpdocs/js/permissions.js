@@ -1,5 +1,5 @@
 Permissions2jsTree = {
-    Group: function(group, checkedGroups) {
+    Group: function (group, checkedGroups) {
         this.id = group.id;
         this.text = group.title;
 
@@ -12,7 +12,7 @@ Permissions2jsTree = {
         this.children = Permissions2jsTree.convertGroupList(group.subGroups, checkedGroups);
     },
 
-    convertGroupList: function(groupList, checkedGroups) {
+    convertGroupList: function (groupList, checkedGroups) {
         var groups = [];
 
         for (var index = 0; index < groupList.length; index++) {
