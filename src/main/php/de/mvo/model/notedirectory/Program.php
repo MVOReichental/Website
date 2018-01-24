@@ -79,7 +79,7 @@ class Program
 
     /**
      * @param int $year
-     * @param string $title
+     * @param string $name
      *
      * @return Program|null
      */
