@@ -1,5 +1,8 @@
 $(function () {
     Highcharts.setOptions({
+        global: {
+            useUTC: false
+        },
         lang: {
             decimalPoint: ",",
             thousandsSep: ".",
