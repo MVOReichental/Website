@@ -1,5 +1,4 @@
 <?php
-
 namespace de\mvo\service;
 
 use DateInterval;

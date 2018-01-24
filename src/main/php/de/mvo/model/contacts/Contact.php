@@ -1,5 +1,4 @@
 <?php
-
 namespace de\mvo\model\contacts;
 
 use de\mvo\Database;
