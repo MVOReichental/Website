@@ -4,9 +4,15 @@ namespace de\mvo\service;
 use de\mvo\model\pictures\YearList;
 use de\mvo\model\users\User;
 use de\mvo\TwigRenderer;
+use Twig_Error;
 
 class Pictures extends AbstractService
 {
+    /**
+     * @param bool $internal
+     * @return string
+     * @throws Twig_Error
+     */
     public function getYears($internal = false)
     {
         $years = YearList::load();
@@ -21,6 +27,11 @@ class Pictures extends AbstractService
         ));
     }
 
+    /**
+     * @param bool $internal
+     * @return string
+     * @throws Twig_Error
+     */
     public function getAlbums($internal = false)
     {
         $albums = null;
@@ -46,6 +57,11 @@ class Pictures extends AbstractService
         ));
     }
 
+    /**
+     * @param bool $internal
+     * @return string
+     * @throws Twig_Error
+     */
     public function getAlbum($internal = false)
     {
         $album = null;

@@ -2,9 +2,16 @@
 namespace de\mvo\service;
 
 use de\mvo\TwigRenderer;
+use Twig_Error;
 
 class JsonView extends AbstractService
 {
+    /**
+     * @param $template
+     * @param $modelFilename
+     * @return string
+     * @throws Twig_Error
+     */
     public function get($template, $modelFilename)
     {
         $json = json_decode(file_get_contents(MODELS_ROOT . "/" . $modelFilename . ".json"));

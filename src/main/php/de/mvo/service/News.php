@@ -4,9 +4,15 @@ namespace de\mvo\service;
 use de\mvo\model\date\DateList;
 use de\mvo\model\pictures\YearList;
 use de\mvo\TwigRenderer;
+use Twig_Error;
 
 class News extends AbstractService
 {
+    /**
+     * @param bool $allowEdit
+     * @return string
+     * @throws Twig_Error
+     */
     public function get($allowEdit = false)
     {
         $newsFile = RESOURCES_ROOT . "/news.html";

@@ -12,9 +12,14 @@ use de\mvo\service\exception\NotFoundException;
 use de\mvo\TwigRenderer;
 use de\mvo\uploadhandler\File;
 use de\mvo\uploadhandler\Files;
+use Twig_Error;
 
 class Messages extends AbstractService
 {
+    /**
+     * @return string
+     * @throws Twig_Error
+     */
     public function getSentMessages()
     {
         return TwigRenderer::render("messages/page", array
@@ -24,6 +29,10 @@ class Messages extends AbstractService
         ));
     }
 
+    /**
+     * @return string
+     * @throws Twig_Error
+     */
     public function getReceivedMessages()
     {
         return TwigRenderer::render("messages/page", array
@@ -33,6 +42,10 @@ class Messages extends AbstractService
         ));
     }
 
+    /**
+     * @return null|string
+     * @throws Twig_Error
+     */
     public function sendMessage()
     {
         if (!isset($_POST["text"]) or !isset($_POST["recipients"])) {
@@ -113,6 +126,9 @@ class Messages extends AbstractService
         ));
     }
 
+    /**
+     * @throws NotFoundException
+     */
     public function hideMessageForUser()
     {
         $currentUser = User::getCurrent();

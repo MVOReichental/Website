@@ -11,9 +11,15 @@ use de\mvo\service\exception\NotFoundException;
 use de\mvo\TwigRenderer;
 use Eluceo\iCal\Component\Calendar;
 use Eluceo\iCal\Component\Event;
+use Twig_Error;
 
 class Dates extends AbstractService
 {
+    /**
+     * @param bool $internal
+     * @return string
+     * @throws Twig_Error
+     */
     public function getHtml($internal = false)
     {
         $user = User::getCurrent();
@@ -128,6 +134,10 @@ class Dates extends AbstractService
         return null;
     }
 
+    /**
+     * @return null
+     * @throws NotFoundException
+     */
     public function deleteEntry()
     {
         $entry = Entry::getById($this->params->id);
@@ -140,6 +150,11 @@ class Dates extends AbstractService
         return null;
     }
 
+    /**
+     * @return string
+     * @throws NotFoundException
+     * @throws Twig_Error
+     */
     public function saveEntry()
     {
         if (isset($_POST["id"])) {
@@ -211,6 +226,10 @@ class Dates extends AbstractService
         return $this->getHtml(true);
     }
 
+    /**
+     * @return string
+     * @throws Twig_Error
+     */
     public function showCreateEntryForm()
     {
         return TwigRenderer::render("dates/edit", array
@@ -219,6 +238,11 @@ class Dates extends AbstractService
         ));
     }
 
+    /**
+     * @return string
+     * @throws NotFoundException
+     * @throws Twig_Error
+     */
     public function showEditEntryForm()
     {
         $entry = Entry::getById($this->params->id);

@@ -8,9 +8,15 @@ use de\mvo\model\users\User;
 use de\mvo\TwigRenderer;
 use de\mvo\uploadhandler\File;
 use de\mvo\uploadhandler\Files;
+use Twig_Error;
 
 class Protocols extends AbstractService
 {
+    /**
+     * @param null $uploaded
+     * @return string
+     * @throws Twig_Error
+     */
     public function getList($uploaded = null)
     {
         return TwigRenderer::render("protocols/page", array
@@ -22,6 +28,10 @@ class Protocols extends AbstractService
         ));
     }
 
+    /**
+     * @return string
+     * @throws Twig_Error
+     */
     public function showUploadForm()
     {
         return TwigRenderer::render("protocols/upload", array
@@ -30,6 +40,10 @@ class Protocols extends AbstractService
         ));
     }
 
+    /**
+     * @return string
+     * @throws Twig_Error
+     */
     public function upload()
     {
         $files = new Files($_FILES["file"]);

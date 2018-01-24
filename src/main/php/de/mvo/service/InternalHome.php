@@ -9,9 +9,14 @@ use de\mvo\model\pictures\YearList;
 use de\mvo\model\users\User;
 use de\mvo\model\users\Users;
 use de\mvo\TwigRenderer;
+use Twig_Error;
 
 class InternalHome extends AbstractService
 {
+    /**
+     * @return string
+     * @throws Twig_Error
+     */
     public function get()
     {
         $currentUser = User::getCurrent();

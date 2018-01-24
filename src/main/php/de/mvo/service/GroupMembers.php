@@ -3,9 +3,16 @@ namespace de\mvo\service;
 
 use de\mvo\model\GroupMembersList;
 use de\mvo\TwigRenderer;
+use Twig_Error;
 
 class GroupMembers extends AbstractService
 {
+    /**
+     * @param $title
+     * @param $group
+     * @return string
+     * @throws Twig_Error
+     */
     public function get($title, $group)
     {
         return TwigRenderer::render("groupmembers", array
