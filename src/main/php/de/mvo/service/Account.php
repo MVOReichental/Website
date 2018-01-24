@@ -443,14 +443,16 @@ class Account extends AbstractService
 
         $uri = $oath->getUri($key, "MVO", $user->username);
 
-        $_SESSION["2faKey"] = $key;
+        $secret = Base32::encode($key);
+
+        $_SESSION["2faKey"] = $secret;
 
         header("Content-Type: application/json");
 
         echo json_encode(array
         (
             "uri" => $uri,
-            "secret" => Base32::encode($key)
+            "secret" => $secret
         ));
 
         return null;

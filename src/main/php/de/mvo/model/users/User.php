@@ -14,6 +14,7 @@ use de\mvo\TwigRenderer;
 use de\mvo\utils\Url;
 use JsonSerializable;
 use Kelunik\TwoFactor\Oath;
+use ParagonIE\ConstantTime\Base32;
 use PDOException;
 use RuntimeException;
 use Twig_Error;
@@ -578,7 +579,7 @@ class User implements JsonSerializable
 
         $oath = new Oath;
 
-        if (!$oath->verifyTotp($key, $token)) {
+        if (!$oath->verifyTotp(Base32::decode($key), $token)) {
             return false;
         }
 
