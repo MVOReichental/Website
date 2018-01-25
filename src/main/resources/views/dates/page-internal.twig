@@ -21,9 +21,9 @@
         <div class="alert alert-success"><i class="fa fa-check"></i> Die &Auml;nderungen wurden erfolgreich gespeichert.</div>
     {% endif %}
 
-    <div class="btn-toolbar hidden-print">
+    <div class="mb-3 hidden-print">
         {% if allowEdit %}
-            <div class="btn-group">
+            <div class="btn-group mr-3">
                 <a href="internal/dates/create" class="btn btn-success"><i class="fa fa-plus"></i> Neuer Termin</a>
             </div>
         {% endif %}
@@ -31,9 +31,9 @@
         <div class="btn-group">
             {% for group in groups %}
                 {% if group.active %}
-                    <a href="{{ group.url }}" class="btn btn-default active">{{ group.title|raw }}</a>
+                    <a href="{{ group.url }}" class="btn btn-secondary active">{{ group.title|raw }}</a>
                 {% else %}
-                    <a href="{{ group.url }}" class="btn btn-default">{{ group.title|raw }}</a>
+                    <a href="{{ group.url }}" class="btn btn-secondary">{{ group.title|raw }}</a>
                 {% endif %}
             {% endfor %}
         </div>

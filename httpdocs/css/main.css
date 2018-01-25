@@ -6,16 +6,13 @@
 
     body {
         padding-top: 70px;
-        margin: 0;
-        margin-bottom: 110px;
+        margin: 0 0 180px;
     }
 
     #footer {
         position: absolute;
         bottom: 0;
         width: 100%;
-        height: 90px;
-        padding: 20px 0;
         text-align: center;
     }
 
@@ -38,7 +35,6 @@
     }
 }
 
-/* Theme */
 a {
     color: #a4556b;
 }
@@ -110,11 +106,6 @@ a.thumbnail.active {
 
 .minimum-width {
     width: 1px;
-}
-
-/* Fix for button group wrapping */
-.btn-group {
-    display: flex;
 }
 
 @media (min-width: 768px) {

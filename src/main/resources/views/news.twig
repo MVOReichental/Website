@@ -12,8 +12,8 @@
     {{ parent() }}
 
     {% if news.allowEdit %}
-        <script src="bower_components/ckeditor/ckeditor.js"></script>
-        <script src="bower_components/ckeditor/adapters/jquery.js"></script>
+        <script src="node_modules/ckeditor/ckeditor.js"></script>
+        <script src="node_modules/ckeditor/adapters/jquery.js"></script>
         <script src="js/newseditor.js"></script>
     {% endif %}
 {% endblock %}

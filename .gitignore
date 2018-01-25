@@ -1,6 +1,6 @@
 /.idea/
 /.vagrant/
-/httpdocs/bower_components/
+/httpdocs/node_modules/
 /src/main/resources/config.ini
 /src/main/resources/permissions.serialized
 /src/main/resources/pictures.serialized

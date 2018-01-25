@@ -13,7 +13,7 @@
 {% block stylesheets %}
     {{ parent() }}
 
-    <link rel="stylesheet" href="bower_components/jstree-bootstrap-theme/dist/themes/proton/style.min.css"/>
+    <link rel="stylesheet" href="node_modules/jstree-bootstrap-theme/dist/themes/proton/style.min.css"/>
 
     <link rel="stylesheet" href="css/usermanagement.css"/>
 {% endblock %}
@@ -21,7 +21,7 @@
 {% block scripts %}
     {{ parent() }}
 
-    <script src="bower_components/jstree-bootstrap-theme/dist/jstree.min.js"></script>
+    <script src="node_modules/jstree-bootstrap-theme/dist/jstree.min.js"></script>
 
     <script src="js/permissions.js"></script>
     <script src="js/usermanagement.js"></script>
@@ -61,8 +61,8 @@
 
         <div>
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#usermanagement-edit-tab-general" data-toggle="tab">Allgemein</a></li>
-                <li><a href="#usermanagement-edit-tab-permissiongroups" data-toggle="tab">Bereichtigungsgruppen</a></li>
+                <li class="nav-item"><a class="nav-link active" href="#usermanagement-edit-tab-general" data-toggle="tab">Allgemein</a></li>
+                <li class="nav-item"><a class="nav-link" href="#usermanagement-edit-tab-permissiongroups" data-toggle="tab">Bereichtigungsgruppen</a></li>
             </ul>
 
             <div class="tab-content">
@@ -72,11 +72,11 @@
                         <div class="input-group">
                             <input type="text" class="form-control" id="usermanagement-edit-username" name="username" value="{{ user.username }}"/>
                             <div class="input-group-btn">
-                                <button id="usermanagement-edit-username-from-name" class="btn btn-default" type="button" data-toggle="tooltip" title="Von Vorname und Nachname &uuml;bernehmen"><i class="fa fa-reply"></i></button>
+                                <button id="usermanagement-edit-username-from-name" class="btn btn-secondary" type="button" data-toggle="tooltip" title="Von Vorname und Nachname &uuml;bernehmen"><i class="fa fa-reply"></i></button>
                             </div>
                         </div>
 
-                        <span class="help-block"></span>
+                        <span class="form-text"></span>
                     </div>
 
                     <div class="form-group">
@@ -102,14 +102,14 @@
                     <div class="form-group">
                         <strong>Optionen</strong>
 
-                        <div class="checkbox">
+                        <div class="form-check">
                             <label>
                                 <input type="checkbox" name="enabled" value="1" {% if user.enabled %}checked{% endif %} {% if user.id == currentUser.id %}disabled{% endif %}/>
                                 Aktiviert
                             </label>
                         </div>
 
-                        <div class="checkbox">
+                        <div class="form-check">
                             <label>
                                 <input type="checkbox" id="usermanagement-edit-send-credentials" name="sendCredentials" value="1"/>
                                 Zugangsdaten versenden
@@ -124,7 +124,7 @@
 
         <div class="btn-group">
             <button type="submit" class="btn btn-primary">Speichern</button>
-            <a href="internal/admin/usermanagement" class="btn btn-default">Abbrechen</a>
+            <a href="internal/admin/usermanagement" class="btn btn-secondary">Abbrechen</a>
         </div>
     </form>
 
@@ -132,15 +132,15 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Zugangsdaten versenden</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     Beim Speichern werden dem Benutzer neue Zugangsdaten zugesendet.<br/>
                     Die aktuellen Zugangsdaten sind anschlie&szlig;end nicht mehr g&uuml;ltig.
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
                 </div>
             </div>
         </div>

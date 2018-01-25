@@ -6,8 +6,8 @@ $(function () {
         if (!element.val()) {
             var divElement = element.parent(".form-group");
 
-            divElement.addClass("has-error");
-            divElement.find(".help-block").text("Ein Benutzername ist erforderlich!");
+            divElement.addClass("has-error");// TODO
+            divElement.find(".form-text").text("Ein Benutzername ist erforderlich!");
 
             event.preventDefault();
         }

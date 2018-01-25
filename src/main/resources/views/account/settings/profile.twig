@@ -19,12 +19,10 @@
 {% endblock %}
 
 {% block settingsContent %}
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Dein Profil</h3>
-        </div>
+    <div class="card">
+        <div class="card-header">Dein Profil</div>
 
-        <div class="panel-body edit-profilepicture-dropzone">
+        <div class="card-body edit-profilepicture-dropzone">
             <div class="form-group">
                 <label for="settings-profile-profilepicture">Profilbild</label>
 
@@ -39,9 +37,9 @@
                             <input id="settings-profile-profilepicture" class="edit-profilepicture" type="file" name="file" data-url="users/{{ user.id }}/profile-picture.jpg" accept="image/bmp,image/gif,image/jpeg,image/png"/>
                         </div>
 
-                        <small class="help-block">Unterst&uuml;tzte Dateiformate: BMP, GIF, JPEG und PNG</small>
+                        <small class="form-text">Unterst&uuml;tzte Dateiformate: BMP, GIF, JPEG und PNG</small>
 
-                        <span class="help-block">Du kannst auch ein Bild von deinem Computer hier hin ziehen.</span>
+                        <span class="form-text">Du kannst auch ein Bild von deinem Computer hier hin ziehen.</span>
                     </div>
                 </div>
             </div>

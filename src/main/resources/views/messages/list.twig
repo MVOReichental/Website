@@ -10,7 +10,7 @@
                 </div>
                 <div class="media-body">
                     <div class="clearfix">
-                        <strong>Von:</strong> <a href="internal/members/{{ message.sender.username }}" class="label label-default">{{ message.sender.firstName }} {{ message.sender.lastName }}</a>
+                        <strong>Von:</strong> <a href="internal/members/{{ message.sender.username }}" class="badge badge-default">{{ message.sender.firstName }} {{ message.sender.lastName }}</a>
 
                         <div class="messages-date">
                             <i class="fa fa-clock-o"></i> {{ message.date.humanReadableDate }} um {{ message.date.humanReadableTime }}
@@ -19,14 +19,14 @@
                     <div class="clearfix">
                         <strong>An:</strong>
                         {% for recipient in message.recipients %}
-                            <a href="internal/members/{{ recipient.username }}" class="label label-default">{{ recipient.firstName }} {{ recipient.lastName }}</a>
+                            <a href="internal/members/{{ recipient.username }}" class="badge badge-default">{{ recipient.firstName }} {{ recipient.lastName }}</a>
                         {% endfor %}
                     </div>
                     {% if message.attachments.count %}
                         <div class="clearfix">
                             <strong>Anh&auml;nge:</strong>
                             {% for upload in message.attachments %}
-                                <a href="{{ upload.url }}" class="label label-default">{{ upload.filename }}</a>
+                                <a href="{{ upload.url }}" class="badge badge-default">{{ upload.filename }}</a>
                             {% endfor %}
                         </div>
                     {% endif %}
@@ -40,15 +40,15 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Nachricht ausblenden</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     Bist du dir sicher, dass du die Nachricht ausblenden m&ouml;chtest?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" id="messages-hide-confirm-button">Nachricht ausblenden</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
                 </div>
             </div>
         </div>

@@ -17,7 +17,7 @@
                         <td>{{ protocol.title }}</td>
                         <td>
                             {% for group in protocol.groups %}
-                                <span class="label label-default">{{ loop.parent.loop.parent.groups[group]|raw }}</span>
+                                <span class="badge badge-default">{{ loop.parent.loop.parent.groups[group]|raw }}</span>
                             {% endfor %}
                         </td>
                     </tr>

@@ -9,22 +9,23 @@
 
         {% block stylesheets %}
 
-            <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css"/>
-            <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css"/>
-            <link rel="stylesheet" href="bower_components/blueimp-gallery/css/blueimp-gallery.min.css"/>
-            <link rel="stylesheet" href="bower_components/blueimp-bootstrap-image-gallery/css/bootstrap-image-gallery.min.css"/>
-            <link rel="stylesheet" href="bower_components/bootstrap-sortable/Contents/bootstrap-sortable.css"/>
+            <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css"/>
+            <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css"/>
+            <link rel="stylesheet" href="node_modules/blueimp-gallery/css/blueimp-gallery.min.css"/>
+            <link rel="stylesheet" href="node_modules/blueimp-bootstrap-image-gallery/css/bootstrap-image-gallery.min.css"/>
+            <link rel="stylesheet" href="node_modules/bootstrap-sortable/Contents/bootstrap-sortable.css"/>
 
             <link rel="stylesheet" href="css/main.css"/>
         {% endblock %}
 
         {% block scripts %}
-            <script src="bower_components/jquery/dist/jquery.min.js"></script>
-            <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-            <script src="bower_components/blueimp-gallery/js/blueimp-gallery.min.js"></script>
-            <script src="bower_components/blueimp-bootstrap-image-gallery/js/bootstrap-image-gallery.min.js"></script>
-            <script src="bower_components/bootstrap-sortable/Scripts/bootstrap-sortable.js"></script>
-            <script src="bower_components/moment/min/moment-with-locales.min.js"></script>
+            <script src="node_modules/jquery/dist/jquery.min.js"></script>
+            <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+            <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+            <script src="node_modules/blueimp-gallery/js/blueimp-gallery.min.js"></script>
+            <script src="node_modules/blueimp-bootstrap-image-gallery/js/bootstrap-image-gallery.min.js"></script>
+            <script src="node_modules/bootstrap-sortable/Scripts/bootstrap-sortable.js"></script>
+            <script src="node_modules/moment/min/moment-with-locales.min.js"></script>
 
             <script src="js/main.js"></script>
         {% endblock %}
@@ -45,12 +46,12 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" aria-hidden="true">&times;</button>
                             <h4 class="modal-title"></h4>
+                            <button type="button" class="close" aria-hidden="true">&times;</button>
                         </div>
                         <div class="modal-body next"></div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default pull-left prev">
+                            <button type="button" class="btn btn-secondary pull-left prev">
                                 <i class="glyphicon glyphicon-chevron-left"></i>
                                 Previous
                             </button>

@@ -1,4 +1,4 @@
-<tr class="settings-contact">
+<!--tr class="settings-contact">
     <td>
         <select class="selectpicker show-tick" name="type[]">
             {% for name, title in contactTypes %}
@@ -22,4 +22,28 @@
             <button type="button" class="btn btn-danger settings-contact-remove"><i class="fa fa-remove"></i></button>
         {% endif %}
     </td>
-</tr>
+</tr-->
+
+<div class="input-group mb-3">
+    <select class="custom-select show-tick" name="type[]">
+        {% for name, title in contactTypes %}
+            <option value="{{ name }}" {% if contact.type == name %}selected{% endif %}>{{ title|raw }}</option>
+        {% endfor %}
+    </select>
+
+    <select class="custom-select show-tick" name="category[]">
+        {% for name, title in contactCategories %}
+            <option value="{{ name }}" {% if contact.category == name %}selected{% endif %}>{{ title|raw }}</option>
+        {% endfor %}
+    </select>
+
+    <input type="text" class="form-control" name="value[]" value="{{ contact.value }}"/>
+
+    <div class="input-group-append">
+        {% if contact.id %}
+            <button type="button" class="btn btn-danger settings-contact-remove"><i class="fa fa-remove"></i></button>
+        {% else %}
+            <button type="button" class="btn btn-danger invisible" disabled><i class="fa fa-remove"></i></button>
+        {% endif %}
+    </div>
+</div>

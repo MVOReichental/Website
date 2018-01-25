@@ -15,12 +15,10 @@
 {% endblock %}
 
 {% block settingsContent %}
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Email-Adresse &auml;ndern</h3>
-        </div>
+    <div class="card">
+        <div class="card-header">Email-Adresse &auml;ndern</div>
 
-        <div class="panel-body">
+        <div class="card-body">
             <form method="post" id="settings-email-form">
                 <input type="hidden" name="form" value="email"/>
 
@@ -45,7 +43,7 @@
                         <input type="email" class="form-control" id="settings-email-new-confirm" required/>
                     </div>
 
-                    <span class="help-block"></span>
+                    <span class="form-text"></span>
                 </div>
 
                 <button type="submit" class="btn btn-success">Speichern</button>

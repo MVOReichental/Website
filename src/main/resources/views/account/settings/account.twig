@@ -3,8 +3,8 @@
 {% block scripts %}
     {{ parent() }}
 
-    <script src="bower_components/pwstrength-bootstrap/dist/pwstrength-bootstrap.min.js"></script>
-    <script src="bower_components/zxcvbn/dist/zxcvbn.js"></script>
+    <script src="node_modules/pwstrength-bootstrap/dist/pwstrength-bootstrap.min.js"></script>
+    <script src="node_modules/zxcvbn/dist/zxcvbn.js"></script>
 
     <script src="js/password-validation.js"></script>
 {% endblock %}
@@ -35,12 +35,10 @@
 {% endblock %}
 
 {% block settingsContent %}
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Passwort &auml;ndern</h3>
-        </div>
+    <div class="card mb-3">
+        <div class="card-header">Passwort &auml;ndern</div>
 
-        <div class="panel-body">
+        <div class="card-body">
             <form method="post" id="settings-password-form">
                 <input type="hidden" name="form" value="password"/>
 
@@ -60,7 +58,7 @@
                         <input type="password" class="form-control password-meter" id="settings-password-new-confirm" required/>
                     </div>
 
-                    <span class="help-block"></span>
+                    <span class="form-text"></span>
                 </div>
 
                 <button type="submit" class="btn btn-success">Speichern</button>
@@ -68,12 +66,10 @@
         </div>
     </div>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Benutzername &auml;ndern</h3>
-        </div>
+    <div class="card mb-3">
+        <div class="card-header">Benutzername &auml;ndern</div>
 
-        <div class="panel-body">
+        <div class="card-body">
             <form method="post">
                 <input type="hidden" name="form" value="username"/>
 
@@ -87,19 +83,17 @@
         </div>
     </div>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Zwei-Faktor-Authentifizierung
-                {% if user.has2FA %}
-                    <span class="label label-success pull-right">aktiviert</span>
-                {% else %}
-                    <span class="label label-danger pull-right">deaktiviert</span>
-                {% endif %}
-            </h3>
+    <div class="card mb-3">
+        <div class="card-header">Zwei-Faktor-Authentifizierung
+            {% if user.has2FA %}
+                <span class="badge badge-success pull-right">aktiviert</span>
+            {% else %}
+                <span class="badge badge-danger pull-right">deaktiviert</span>
+            {% endif %}
         </div>
 
-        <div class="panel-body">
-            <p class="help-block">
+        <div class="card-body">
+            <p class="form-text">
                 Mit der Zwei-Faktor-Authentifizierung kannst du deinen Benutzeraccount zus&auml;tzlich mit einem sich immer wieder &auml;ndernden Code absichern.<br/>
                 Das Verfahren ist &auml;nlich zu einer TAN beim Online Banking: Jeder Code ist nur einmalig g&uuml;ltig, aber auch nur f&uuml;r eine bestimmte Zeit.<br/>
                 Alles was du hierf&uuml;r brauchst ist eine App wie den <strong>Google Authenticator</strong>, welche die Codes generiert. Diese gibt es sowohl f&uuml;r <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2" target="_blank">Android</a> als auch f&uuml;r <a href="https://itunes.apple.com/de/app/google-authenticator/id388497605" target="_blank">iOS</a>.<br/>
@@ -109,7 +103,7 @@
             <div class="form-group" id="settings-2fa-password-group">
                 <label for="settings-2fa-password">Aktuelles Passwort</label>
                 <input type="password" class="form-control" id="settings-2fa-password" required/>
-                <span class="help-block"></span>
+                <span class="form-text"></span>
             </div>
 
             <div class="form-group">
@@ -135,18 +129,18 @@
                     <div class="form-group">
                         <label for="settings-2fa-secret">Schl&uuml;ssel</label>
                         <input type="text" class="form-control" id="settings-2fa-secret" readonly/>
-                        <span class="help-block">Verwende diesen Schl&uuml;ssel wenn die von dir verwendete App keine QR Codes scannen kann (z.B. Enpass).</span>
+                        <span class="form-text">Verwende diesen Schl&uuml;ssel wenn die von dir verwendete App keine QR Codes scannen kann (z.B. Enpass).</span>
                     </div>
 
                     <h4>Gebe anschlie&szlig;end den 6 stelligen Code aus der App in das nachfolgende Feld ein.</h4>
                     <div class="form-group" id="settings-2fa-token-group">
                         <label for="settings-2fa-token">Code</label>
                         <input type="text" class="form-control" id="settings-2fa-token" required/>
-                        <span class="help-block"></span>
+                        <span class="form-text"></span>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
                     <button type="button" class="btn btn-success" id="settings-2fa-enable-submit">Aktivieren</button>
                 </div>
             </div>

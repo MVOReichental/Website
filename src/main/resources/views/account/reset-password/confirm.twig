@@ -11,8 +11,8 @@
 {% block scripts %}
     {{ parent() }}
 
-    <script src="bower_components/pwstrength-bootstrap/dist/pwstrength-bootstrap.min.js"></script>
-    <script src="bower_components/zxcvbn/dist/zxcvbn.js"></script>
+    <script src="node_modules/pwstrength-bootstrap/dist/pwstrength-bootstrap.min.js"></script>
+    <script src="node_modules/zxcvbn/dist/zxcvbn.js"></script>
 
     <script src="js/reset-password.js"></script>
     <script src="js/password-validation.js"></script>
@@ -26,13 +26,13 @@
             <div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Das Passwort muss aus mindestens 6 Zeichen und sowohl aus Buchstaben als auch aus Zahlen bestehen!</div>
         {% endif %}
 
-        <p class="help-block">Lege ein neues Passwort fest.</p>
+        <p class="form-text">Lege ein neues Passwort fest.</p>
 
         <div id="reset-password-confirm-box" class="input-list">
             <input type="password" id="reset-password-confirm-password1" class="form-control password-meter" placeholder="Passwort" name="password" required autofocus/>
             <input type="password" id="reset-password-confirm-password2" class="form-control password-meter" placeholder="Passwort (wiederholen)" required/>
 
-            <span class="help-block"></span>
+            <span class="form-text"></span>
         </div>
 
         <button class="btn btn-lg btn-primary btn-block">Passwort &auml;ndern</button>

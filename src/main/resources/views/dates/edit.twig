@@ -13,7 +13,7 @@
 {% block scripts %}
     {{ parent() }}
 
-    <script src="bower_components/bootstrap3-typeahead/bootstrap3-typeahead.min.js"></script>
+    <script src="node_modules/bootstrap-3-typeahead/bootstrap3-typeahead.min.js"></script>
     <script src="js/date-editor.js"></script>
 {% endblock %}
 
@@ -77,14 +77,14 @@
         <div class="form-group">
             <strong>Optionen</strong>
 
-            <div class="checkbox">
+            <div class="form-check">
                 <label>
                     <input type="checkbox" id="dates-edit-public" name="public" value="1" {% if entry.isPublic %}checked{% endif %}/>
                     &Ouml;ffentlich sichtbar
                 </label>
             </div>
 
-            <div class="checkbox">
+            <div class="form-check">
                 <label>
                     <input type="checkbox" id="dates-edit-highlight" name="highlight" value="1" {% if entry.highlight %}checked{% endif %}/>
                     Hervorheben
@@ -94,7 +94,7 @@
 
         <div class="btn-group">
             <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Speichern</button>
-            <a href="internal/dates" class="btn btn-default"><i class="fa fa-remove"></i> Abbrechen</a>
+            <a href="internal/dates" class="btn btn-secondary"><i class="fa fa-remove"></i> Abbrechen</a>
         </div>
     </form>
 {% endblock %}

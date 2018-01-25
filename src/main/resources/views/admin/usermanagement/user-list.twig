@@ -18,13 +18,13 @@
                 <td>
                     {{ user.lastOnline.format("d.m.Y H:i") }}
                     {% if user.isOnline %}
-                        <span class="label label-success">online</span>
+                        <span class="badge badge-success">online</span>
                     {% endif %}
                 </td>
                 <td class="minimum-width">
-                    <div class="btn-group btn-group-xs">
-                        <a href="internal/admin/usermanagement/user/{{ user.id }}" class="btn btn-default" data-toggle="tooltip" title="Bearbeiten"><i class="fa fa-edit"></i></a>
-                        <a href="internal/admin/usermanagement/user/{{ user.id }}/profile-picture" class="btn btn-default" data-toggle="tooltip" title="Profilbild bearbeiten"><i class="fa fa-camera"></i></a>
+                    <div class="btn-group btn-group-sm">
+                        <a href="internal/admin/usermanagement/user/{{ user.id }}" class="btn btn-secondary" data-toggle="tooltip" title="Bearbeiten"><i class="fa fa-edit"></i></a>
+                        <a href="internal/admin/usermanagement/user/{{ user.id }}/profile-picture" class="btn btn-secondary" data-toggle="tooltip" title="Profilbild bearbeiten"><i class="fa fa-camera"></i></a>
                     </div>
                 </td>
             </tr>

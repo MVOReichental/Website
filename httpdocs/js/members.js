@@ -54,7 +54,7 @@ $(function () {
 
             var content = row.find(".birthday-days div");
             content.removeClass("hidden");
-            content.find(".label").text(moment(nextBirthday).calendar(null, {
+            content.find(".badge").text(moment(nextBirthday).calendar(null, {
                 sameDay: "[heute]",
                 nextDay: "[morgen]",
                 nextWeek: "dddd",

@@ -25,16 +25,16 @@
         <small class="pull-right">Stand: {{ currentFormattedDate }}</small>
     </h1>
 
-    <div class="btn-toolbar hidden-print" id=" notedirectory-button-toolbar">
-        <div class="btn-group">
+    <div class="mb-3 hidden-print" id=" notedirectory-button-toolbar">
+        <div class="btn-group mr-3">
             {% if currentUser.hasPermission("notedirectory.edit") %}
-                <a href="internal/notedirectory/editor" class="btn btn-default hidden-print"><i class="fa fa-pencil"></i> Editor</a>
+                <a href="internal/notedirectory/editor" class="btn btn-secondary hidden-print"><i class="fa fa-pencil"></i> Editor</a>
             {% endif %}
         </div>
 
-        <div class="btn-group">
+        <div class="btn-group mr-3">
             <div class="btn-group">
-                <button type="button" class="btn btn-default dropdown-toggle {% if active starts with "programs/" %}active{% endif %}" data-toggle="dropdown">
+                <button type="button" class="btn btn-secondary dropdown-toggle {% if active starts with "programs/" %}active{% endif %}" data-toggle="dropdown">
                     Programme <span class="caret"></span>
                 </button>
 
@@ -52,7 +52,7 @@
                 </ul>
             </div>
 
-            <a href="internal/notedirectory/titles" class="btn btn-default {% if active == "titles" %}active{% endif %}">Alle Titel</a>
+            <a href="internal/notedirectory/titles" class="btn btn-secondary {% if active == "titles" %}active{% endif %}">Alle Titel</a>
         </div>
 
         <div class="btn-group">

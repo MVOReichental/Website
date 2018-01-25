@@ -3,8 +3,8 @@ $(function () {
         if ($("#settings-password-new").val() != $("#settings-password-new-confirm").val()) {
             var box = $("#settings-password-new-box");
 
-            box.addClass("has-error");
-            box.find(".help-block").text("Die Passw\u00f6rter stimmen nicht \u00fcberein!");
+            box.addClass("has-error");// TODO
+            box.find(".form-text").text("Die Passw\u00f6rter stimmen nicht \u00fcberein!");
 
             event.preventDefault();
         }
@@ -14,8 +14,8 @@ $(function () {
         if ($("#settings-email-new").val() != $("#settings-email-new-confirm").val()) {
             var box = $("#settings-email-new-box");
 
-            box.addClass("has-error");
-            box.find(".help-block").text("Die Email-Adressen stimmen nicht \u00fcberein!");
+            box.addClass("has-error");// TODO
+            box.find(".form-text").text("Die Email-Adressen stimmen nicht \u00fcberein!");
 
             event.preventDefault();
         }
@@ -23,14 +23,14 @@ $(function () {
 
     $("#settings-2fa-disable").on("click", function () {
         var passwordFormGroup = $("#settings-2fa-password-group");
-        passwordFormGroup.removeClass("has-error");
+        passwordFormGroup.removeClass("has-error");// TODO
 
-        var passwordInfoBox = passwordFormGroup.find(".help-block");
+        var passwordInfoBox = passwordFormGroup.find(".form-text");
         passwordInfoBox.text("");
 
         var password = $("#settings-2fa-password").val();
         if (password == "") {
-            passwordFormGroup.addClass("has-error");
+            passwordFormGroup.addClass("has-error");// TODO
             passwordInfoBox.text("Bitte gebe dein aktuelles Passwort ein!");
             return;
         }
@@ -45,7 +45,7 @@ $(function () {
                 document.location.reload();
             },
             error: function (jqXHR) {
-                passwordFormGroup.addClass("has-error");
+                passwordFormGroup.addClass("has-error");// TODO
 
                 if (jqXHR.responseText == "INVALID_PASSWORD") {
                     passwordInfoBox.text("Das angegebene Passwort ist ung\u00fcltig!");
@@ -58,14 +58,14 @@ $(function () {
 
     $("#settings-2fa-enable").on("click", function () {
         var passwordFormGroup = $("#settings-2fa-password-group");
-        passwordFormGroup.removeClass("has-error");
+        passwordFormGroup.removeClass("has-error");// TODO
 
-        var passwordInfoBox = passwordFormGroup.find(".help-block");
+        var passwordInfoBox = passwordFormGroup.find(".form-text");
         passwordInfoBox.text("");
 
         var password = $("#settings-2fa-password").val();
         if (password == "") {
-            passwordFormGroup.addClass("has-error");
+            passwordFormGroup.addClass("has-error");// TODO
             passwordInfoBox.text("Bitte gebe dein aktuelles Passwort ein!");
             return;
         }
@@ -83,7 +83,7 @@ $(function () {
                 $("#settings-2fa-enable-modal").modal("show");
             },
             error: function (jqXHR) {
-                passwordFormGroup.addClass("has-error");
+                passwordFormGroup.addClass("has-error");// TODO
 
                 if (jqXHR.responseText == "INVALID_PASSWORD") {
                     passwordInfoBox.text("Das angegebene Passwort ist ung\u00fcltig!");
@@ -96,14 +96,14 @@ $(function () {
 
     $("#settings-2fa-enable-submit").on("click", function () {
         var tokenFormGroup = $("#settings-2fa-token-group");
-        tokenFormGroup.removeClass("has-error");
+        tokenFormGroup.removeClass("has-error");// TODO
 
-        var tokenInfoBox = tokenFormGroup.find(".help-block");
+        var tokenInfoBox = tokenFormGroup.find(".form-text");
         tokenInfoBox.text("");
 
         var token = $("#settings-2fa-token").val();
         if (token == "") {
-            tokenFormGroup.addClass("has-error");
+            tokenFormGroup.addClass("has-error");// TODO
             tokenInfoBox.text("Bitte gebe den Code ein!");
             return;
         }
@@ -118,7 +118,7 @@ $(function () {
                 document.location.reload();
             },
             error: function (jqXHR) {
-                tokenFormGroup.addClass("has-error");
+                tokenFormGroup.addClass("has-error");// TODO
 
                 if (jqXHR.responseText == "INVALID_TOKEN") {
                     tokenInfoBox.text("Der angegebene Code ist ung\u00fcltig!");

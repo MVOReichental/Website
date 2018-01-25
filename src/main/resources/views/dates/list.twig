@@ -27,21 +27,21 @@
                     {% if allowEdit %}
                         <td class="hidden-print minimum-width">
                             {% if entry.isPublic %}
-                                <span class="label label-success">&Ouml;ffentlich</span>
+                                <span class="badge badge-success">&Ouml;ffentlich</span>
                             {% else %}
                                 {% if entry.groups.count == 1 %}
-                                    <span class="label label-danger" title="{{ entry.groups.titles|join(", ") }}">1 Gruppe</span>
+                                    <span class="badge badge-danger" title="{{ entry.groups.titles|join(", ") }}">1 Gruppe</span>
                                 {% elseif entry.groups.count > 1 %}
-                                    <span class="label label-danger" title="{{ entry.groups.titles|join(", ") }}">{{ entry.groups.count }} Gruppen</span>
+                                    <span class="badge badge-danger" title="{{ entry.groups.titles|join(", ") }}">{{ entry.groups.count }} Gruppen</span>
                                 {% else %}
-                                    <span class="label label-danger">Intern</span>
+                                    <span class="badge badge-danger">Intern</span>
                                 {% endif %}
                             {% endif %}
                         </td>
 
                         <td class="hidden-print minimum-width">
-                            <div class="btn-group btn-group-xs">
-                                <a href="internal/dates/edit/{{ entry.id }}" class="btn btn-default edit" data-toggle="tooltip" title="Bearbeiten"><i class="fa fa-edit"></i></a>
+                            <div class="btn-group btn-group-sm">
+                                <a href="internal/dates/edit/{{ entry.id }}" class="btn btn-secondary edit" data-toggle="tooltip" title="Bearbeiten"><i class="fa fa-edit"></i></a>
                                 <button type="button" class="btn btn-danger remove" data-toggle="tooltip" title="L&ouml;schen"><i class="fa fa-remove"></i></button>
                             </div>
                         </td>
@@ -57,13 +57,13 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Termin entfernen</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">Bist du dir sicher, dass du den ausgew&auml;hlen Termin <strong id="dates-remove-title"></strong> entfernen m&ouml;chtest?</div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" id="dates-remove-confirm">Termin entfernen</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
                 </div>
             </div>
         </div>

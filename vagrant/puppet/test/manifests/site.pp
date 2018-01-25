@@ -111,17 +111,13 @@ class { "nodejs":
   npm_package_ensure => "present",
 }
 
-package { "bower":
-  provider => "npm",
-}
-
-exec { "bower_install":
+exec { "npm_install":
   path        => ["/bin", "/usr/bin", "/usr/local/bin"],
-  cwd         => "/opt/mvo-website",
+  cwd         => "/opt/mvo-website/httpdocs",
   user        => "vagrant",
-  command     => "bower install --config.interactive=false",
+  command     => "npm install",
   environment => ["HOME=/home/vagrant"],
-  require     => Package["bower"],
+  require     => Class["nodejs"],
 }
 
 file { "/opt/mvo-website/src/main/resources/config.ini":
