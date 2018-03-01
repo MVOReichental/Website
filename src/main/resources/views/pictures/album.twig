@@ -18,12 +18,12 @@
     </nav>
 
     {% if album.name %}
-        <h1 class="page-header">
-            Fotogalerie<br/>
-            <span class="small">{{ album.title }}</span>
-        </h1>
+        <h1 class="page-header"> Fotogalerie </h1>
 
-        <h4>Datum: {{ album.date.humanReadableDate }}</h4>
+        <h3>
+            {{ album.title }}
+            <span class="text-muted float-md-right">{{ album.date.humanReadableDate }}</span>
+        </h3>
 
         {% if album.text %}
             <div class="well">{{ album.text }}</div>
