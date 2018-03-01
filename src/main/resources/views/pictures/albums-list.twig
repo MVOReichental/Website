@@ -1,7 +1,7 @@
 {% if albums.count %}
     <div class="row">
         {% for album in albums %}
-            <div class="col-sm-6 col-md-4">
+            <div class="col-sm-6 col-md-4 mt-3">
                 <a href="{{ loop.parent.picturesBaseUrl }}/{{ album.year }}/{{ album.name }}" class="thumbnail">
                     <div class="card">
                         <img class="card-img-top" src="pictures/{{ album.year }}/{{ album.name }}/{{ album.cover.hash }}_small.jpg"/>

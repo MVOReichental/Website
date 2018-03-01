@@ -12,7 +12,7 @@
     {% if years.count %}
         <div class="row">
             {% for year in years %}
-                <div class="col-sm-6 col-md-4">
+                <div class="col-sm-6 col-md-4 mt-3">
                     <a href="{{ loop.parent.picturesBaseUrl }}/{{ year.year }}" class="thumbnail">
                         <div class="card">
                             <img class="card-img-top" src="pictures/{{ year.year }}/{{ year.coverAlbum.name }}/{{ year.coverAlbum.cover.hash }}_small.jpg"/>
