@@ -12,9 +12,11 @@
                 {% for user in group.users.enabledUsers %}
                     <div class="col-md-3">
                         <a href="users/{{ user.id }}/profile-picture.jpg?hash={{ user.profilePictureHash }}" class="thumbnail groupmembers-img" title="{{ user.firstName }} {{ user.lastName }}">
-                            <img src="users/{{ user.id }}/profile-picture.jpg?hash={{ user.profilePictureHash }}"/>
-                            <div class="caption">
-                                <h3>{{ user.firstName }} {{ user.lastName }}</h3>
+                            <div class="card">
+                                <img class="card-img-top" src="users/{{ user.id }}/profile-picture.jpg?hash={{ user.profilePictureHash }}"/>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ user.firstName }} {{ user.lastName }}</h5>
+                                </div>
                             </div>
                         </a>
                     </div>
