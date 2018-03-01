@@ -31,12 +31,14 @@
             {% for picture in album.pictures %}
                 <div class="col-sm-6 col-md-4">
                     <a href="pictures/{{ loop.parent.album.year }}/{{ loop.parent.album.name }}/{{ picture.hash }}_large.jpg" class="thumbnail" title="{{ picture.title }}">
-                        <img src="pictures/{{ loop.parent.album.year }}/{{ loop.parent.album.name }}/{{ picture.hash }}_small.jpg"/>
-                        {% if picture.title %}
-                            <div class="caption">
-                                <h3>{{ picture.title }}</h3>
-                            </div>
-                        {% endif %}
+                        <div class="card">
+                            <img class="card-img-top" src="pictures/{{ loop.parent.album.year }}/{{ loop.parent.album.name }}/{{ picture.hash }}_small.jpg"/>
+                            {% if picture.title %}
+                                <div class="card-body">
+                                    {{ picture.title }}
+                                </div>
+                            {% endif %}
+                        </div>
                     </a>
                 </div>
             {% else %}
