@@ -3,10 +3,12 @@
 {% block title %}{{ year }} - Fotogalerie{{ parent() }}{% endblock %}
 
 {% block content %}
-    <ol class="breadcrumb">
-        <li><a href="{{ picturesBaseUrl }}">Fotogalerie</a></li>
-        <li class="active">{{ year }}</li>
-    </ol>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ picturesBaseUrl }}">Fotogalerie</a></li>
+            <li class="breadcrumb-item active">{{ year }}</li>
+        </ol>
+    </nav>
 
     <h1 class="page-header">
         Fotogalerie<br/>
