@@ -21,6 +21,7 @@ use de\mvo\service\RoomOccupancyPlan;
 use de\mvo\service\StaticView;
 use de\mvo\service\Uploads;
 use de\mvo\service\UserManagement;
+use de\mvo\service\Videos;
 use de\mvo\service\Visits;
 
 class Endpoints
@@ -581,6 +582,15 @@ class Endpoints
             ->requireLogin();
     }
 
+    private static function mapVideosEndpoints()
+    {
+        Endpoint::create(HttpMethod::GET, "/internal/videos")
+            ->target()
+            ->className(Videos::class)
+            ->method("getList")
+            ->requireLogin();
+    }
+
     private static function mapAdminEndpoints()
     {
         Endpoint::create(HttpMethod::GET, "/internal/admin/visits")
@@ -664,6 +674,7 @@ class Endpoints
         self::mapProtocolsEndpoints();
         self::mapRoomOccupancyPlanEndpoints();
         self::mapUploadEndpoints();
+        self::mapVideosEndpoints();
         self::mapAdminEndpoints();
 
         Endpoint::create(HttpMethod::GET, "/internal")

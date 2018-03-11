@@ -1,0 +1,22 @@
+{% extends "base/internal-public-switch.twig" %}
+
+{% block title %}Videos{{ parent() }}{% endblock %}
+
+{% block content %}
+    <h1 class="page-header">Videos</h1>
+
+    <div class="row">
+        {% for video in videos %}
+            <div class="col-sm-6 col-md-4 mt-3">
+                <div class="card">
+                    <img class="card-img-top" src="{{ video.thumbnailUrl }}"/>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ video.title }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ video.date.humanReadableDate }}</h6>
+                        <a href="{{ video.url }}" target="_blank" class="btn btn-primary"><i class="fa fa-youtube-play"></i> Auf YouTube ansehen</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

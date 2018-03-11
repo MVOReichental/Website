@@ -111,6 +111,8 @@ class AlbumList extends ArrayObject
 
             return 0;
         });
+
+        return $this;
     }
 
     public function slice($offset, $length)

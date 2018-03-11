@@ -2,8 +2,7 @@
 /.vagrant/
 /httpdocs/node_modules/
 /src/main/resources/config.ini
-/src/main/resources/permissions.serialized
-/src/main/resources/pictures.serialized
+/src/main/resources/*.serialized
 /src/main/resources/news.html
 /src/main/resources/twig-cache
 /vendor/

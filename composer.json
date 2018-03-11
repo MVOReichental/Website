@@ -23,6 +23,7 @@
         "kelunik/two-factor": "^1.0",
         "twig/twig": "^1.24",
         "swiftmailer/swiftmailer": "^5.4",
-        "jaybizzle/crawler-detect": "^1.2"
+        "jaybizzle/crawler-detect": "^1.2",
+        "google/apiclient": "^2.2"
     }
 }
