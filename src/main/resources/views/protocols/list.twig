@@ -12,7 +12,7 @@
             <tbody>
                 {% for protocol in protocols %}
                     <tr data-id="{{ protocol.id }}">
-                        <td class="minimum-width"><a href="{{ protocol.upload.url }}" class="btn btn-success btn-xs hidden-print"><i class="fa fa-download"></i> Herunterladen</a></td>
+                        <td class="minimum-width"><a href="{{ protocol.upload.url }}" class="btn btn-success btn-xs d-print-none"><i class="fa fa-download"></i> Herunterladen</a></td>
                         <td data-value="{{ protocol.date.format("Ymd") }}">{{ protocol.date.humanReadableDate }}</td>
                         <td>{{ protocol.title }}</td>
                         <td>

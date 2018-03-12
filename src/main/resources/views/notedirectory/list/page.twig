@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="page-header hidden-print">
+    <h1 class="page-header d-print-none">
         Notenverzeichnis<br/>
         <span class="small">{{ title }}</span>
     </h1>
@@ -25,10 +25,10 @@
         <small class="pull-right">Stand: {{ currentFormattedDate }}</small>
     </h1>
 
-    <div class="mb-3 hidden-print" id=" notedirectory-button-toolbar">
+    <div class="mb-3 d-print-none" id=" notedirectory-button-toolbar">
         <div class="btn-group mr-3">
             {% if currentUser.hasPermission("notedirectory.edit") %}
-                <a href="internal/notedirectory/editor" class="btn btn-secondary hidden-print"><i class="fa fa-pencil"></i> Editor</a>
+                <a href="internal/notedirectory/editor" class="btn btn-secondary d-print-none"><i class="fa fa-pencil"></i> Editor</a>
             {% endif %}
         </div>
 

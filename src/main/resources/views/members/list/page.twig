@@ -17,7 +17,7 @@
 {% block content %}
     <h1 class="page-header">{{ title }}</h1>
 
-    <div class="btn-group mb-3 hidden-print" id="members-groups">
+    <div class="btn-group mb-3 d-print-none" id="members-groups">
         {% for group in groups %}
             {% if group.active %}
                 <a href="{{ group.url }}" class="btn btn-secondary active">{{ group.title }}</a>
@@ -29,7 +29,7 @@
 
     {% include("members/list/" ~ view ~ ".twig") %}
 
-    <div class="btn-group hidden-print">
+    <div class="btn-group d-print-none">
         <button type="button" class="btn btn-success" id="members-send-message-button"><i class="fa fa-send"></i> Nachricht senden</button>
     </div>
 
