@@ -13,7 +13,7 @@ class Videos extends AbstractService
      */
     public function getList()
     {
-        return TwigRenderer::render("videos", array
+        return TwigRenderer::render("videos/page", array
         (
             "videos" => VideoList::load()->sortByDate(false, true)
         ));

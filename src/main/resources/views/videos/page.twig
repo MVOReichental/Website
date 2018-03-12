@@ -1,0 +1,9 @@
+{% extends "base/internal-public-switch.twig" %}
+
+{% block title %}Videos{{ parent() }}{% endblock %}
+
+{% block content %}
+    <h1 class="page-header">Videos</h1>
+
+    {% include("videos/list.twig") %}
+{% endblock %}

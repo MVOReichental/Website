@@ -70,4 +70,14 @@
             <p class="text-muted">Klicke <a href="{{ picturesBaseUrl }}">hier</a> um weitere Alben zu sehen.</p>
         </div>
     {% endif %}
+
+    {% if videos.count %}
+        <div class="mb-4">
+            <h3>Neueste Videos</h3>
+
+            {% include("videos/list.twig") %}
+
+            <p class="text-muted">Klicke <a href="internal/videos">hier</a> um weitere Videos zu sehen.</p>
+        </div>
+    {% endif %}
 {% endblock %}

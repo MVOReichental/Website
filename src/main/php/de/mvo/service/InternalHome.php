@@ -8,6 +8,7 @@ use de\mvo\model\messages\Messages;
 use de\mvo\model\pictures\YearList;
 use de\mvo\model\users\User;
 use de\mvo\model\users\Users;
+use de\mvo\model\videos\VideoList;
 use de\mvo\TwigRenderer;
 use Twig_Error;
 
@@ -55,7 +56,8 @@ class InternalHome extends AbstractService
             "nextBirthdays" => array_slice(Users::getAll()->enabledUsers()->nextBirthdayBetween($nextBirthdayStart, $nextBirthdayEnd)->sortByNextBirthdays()->getArrayCopy(), 0, 5),
             "messages" => $latestMessage,
             "albums" => $albums->getVisibleToUser($currentUser)->slice(0, 3),
-            "picturesBaseUrl" => "internal/pictures"
+            "picturesBaseUrl" => "internal/pictures",
+            "videos" => VideoList::load()->sortByDate(false, true)->slice(0, 3)
         ));
     }
 }

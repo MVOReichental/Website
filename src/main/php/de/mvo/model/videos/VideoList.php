@@ -98,4 +98,9 @@ class VideoList extends ArrayObject
 
         return $this;
     }
+
+    public function slice($offset, $length)
+    {
+        return new self(array_slice($this->getArrayCopy(), $offset, $length));
+    }
 }

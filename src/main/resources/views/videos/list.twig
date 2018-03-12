@@ -1,10 +1,4 @@
-{% extends "base/internal-public-switch.twig" %}
-
-{% block title %}Videos{{ parent() }}{% endblock %}
-
-{% block content %}
-    <h1 class="page-header">Videos</h1>
-
+{% if videos.count %}
     <div class="row">
         {% for video in videos %}
             <div class="col-sm-6 col-md-4 mt-3">
@@ -19,4 +13,6 @@
             </div>
         {% endfor %}
     </div>
-{% endblock %}
+{% else %}
+    <div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Keine Videos verf&uuml;gbar!</div>
+{% endif %}
