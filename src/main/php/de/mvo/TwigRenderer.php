@@ -40,6 +40,10 @@ class TwigRenderer
             $pathParts = explode("/", trim($path, "/"));
 
             foreach ($urlParts as $index => $part) {
+                if (!isset($pathParts[$index])) {
+                    return false;
+                }
+
                 if ($pathParts[$index] !== $part) {
                     return false;
                 }
