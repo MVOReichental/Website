@@ -14,3 +14,35 @@
     height: 40px;
     border-radius: 3px;
 }
+
+@media (max-width: 991px) {
+    #navbar-links-toggler {
+        display: block !important
+    }
+}
+
+.navbar-links {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    margin-right: -15px;
+    margin-left: -15px
+}
+
+.nav-submenu {
+    padding-left: 20px;
+}
+
+@media (min-width: 992px) {
+    @supports ((position:-webkit-sticky) or (position:sticky)) {
+        .navbar-links {
+            max-height: calc(100vh - 9rem);
+            overflow-y: auto
+        }
+    }
+}
+
+@media (min-width: 992px) {
+    .navbar-links {
+        display: block !important
+    }
+}
