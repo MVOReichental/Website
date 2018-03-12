@@ -104,6 +104,10 @@ a.thumbnail.active {
     border-bottom-right-radius: 4px;
 }
 
+.single-image {
+    width: 300px;
+}
+
 .minimum-width {
     width: 1px;
 }
