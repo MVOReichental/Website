@@ -1,5 +1,13 @@
 {% extends "base/base.twig" %}
 
+{% macro navbar_link(url, title) %}
+    <li class="nav-item"><a class="nav-link" href="{{ url }}">{{ title }}</a></li>
+{% endmacro %}
+
+{% macro profile_dropdown_links(url, icon_class, title) %}
+    <a class="dropdown-item" href="{{ url }}"><i class="{{ icon_class }}"></i> {{ title }}</a>
+{% endmacro %}
+
 {% block title %} - Interner Bereich{% endblock %}
 
 {% block stylesheets %}
@@ -41,17 +49,17 @@
                         <div class="dropdown-menu dropdown-menu-right">
                             <div class="dropdown-header">Angemeldet als <strong>{{ currentUser.firstName }} {{ currentUser.lastName }}</strong></div>
 
-                            <a class="dropdown-item" href="internal/members/{{ currentUser.username }}"><i class="fa fa-user"></i> Dein Profil</a>
+                            {{ _self.profile_dropdown_links("internal/members/" ~ currentUser.username, "fa fa-user", "Dein Profil") }}
 
                             <div class="dropdown-divider"></div>
 
-                            <a class="dropdown-item" href="internal/messages/sent"><i class="fa fa-send"></i> Gesendete Nachrichten</a>
-                            <a class="dropdown-item" href="internal/messages/received"><i class="fa fa-inbox"></i> Empfangene Nachrichten</a>
+                            {{ _self.profile_dropdown_links("internal/messages/sent", "fa fa-send", "Gesendete Nachrichten") }}
+                            {{ _self.profile_dropdown_links("internal/messages/received", "fa fa-inbox", "Empfangene Nachrichten") }}
 
                             <div class="dropdown-divider"></div>
 
-                            <a class="dropdown-item" href="internal/settings"><i class="fa fa-cogs"></i> Einstellungen</a>
-                            <a class="dropdown-item" href="internal/logout"><i class="fa fa-sign-out"></i> Abmelden</a>
+                            {{ _self.profile_dropdown_links("internal/settings", "fa fa-cogs", "Einstellungen") }}
+                            {{ _self.profile_dropdown_links("internal/logout", "fa fa-sign-out", "Abmelden") }}
                         </div>
                     </li>
 
@@ -75,33 +83,32 @@
                         <li class="nav-item">
                             <span class="nav-link">Mitglieder</span>
                             <ul class="nav flex-column nav-submenu">
-                                <li class="nav-item"><a class="nav-link" href="internal/members/addresslist">Adressenliste</a></li>
-                                <li class="nav-item"><a class="nav-link" href="internal/members/birthdays">Geburtstage</a></li>
+                                {{ _self.navbar_link("internal/members/addresslist", "Adressenliste") }}
+                                {{ _self.navbar_link("internal/members/birthdays", "Geburtstage") }}
                             </ul>
                         </li>
                         {% if currentUser.hasPermission("forms.*") %}
-                            <li class="nav-item"><a class="nav-link" href="internal/forms">Formulare</a></li>
+                            {{ _self.navbar_link("internal/forms", "Formulare") }}
                         {% endif %}
                         {% if currentUser.hasPermission("notedirectory.*") %}
-                            <li class="nav-item"><a class="nav-link" href="internal/notedirectory">Notenverzeichnis</a></li>
+                            {{ _self.navbar_link("internal/notedirectory", "Notenverzeichnis") }}
                         {% endif %}
                         {% if currentUser.hasPermission("protocols.*") %}
-                            <li class="nav-item"><a class="nav-link" href="internal/protocols">Protokolle</a></li>
+                            {{ _self.navbar_link("internal/protocols", "Protokolle") }}
                         {% endif %}
                         {% if currentUser.hasPermission("roomoccupancyplan.*") %}
-                            <li class="nav-item"><a class="nav-link" href="internal/roomoccupancyplan">Proberaumbelegung</a></li>
+                            {{ _self.navbar_link("internal/roomoccupancyplan", "Proberaumbelegung") }}
                         {% endif %}
-                        <li class="nav-item"><a class="nav-link" href="internal/dates">Termine</a></li>
-                        <li class="nav-item"><a class="nav-link" href="internal/pictures">Fotogalerie</a></li>
-                        <li class="nav-item"><a class="nav-link" href="internal/videos">Videos</a></li>
+                        {{ _self.navbar_link("internal/dates", "Termine") }}
+                        {{ _self.navbar_link("internal/pictures", "Fotogalerie") }}
+                        {{ _self.navbar_link("internal/videos", "Videos") }}
                         {% if currentUser.hasPermission("admin") %}
                             <li class="nav-item">
                                 <span class="nav-link">Admin</span>
                                 <ul class="nav flex-column nav-submenu">
-                                    <li class="nav-item"><a class="nav-link" href="internal/admin/usermanagement">Benutzerverwaltung</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="internal/admin/newseditor">Aktuell</a></li>
-
-                                    <li class="nav-item"><a class="nav-link"  href="internal/admin/visits">Besucherstatistik</a></li>
+                                    {{ _self.navbar_link("internal/admin/usermanagement", "Benutzerverwaltung") }}
+                                    {{ _self.navbar_link("internal/admin/newseditor", "Aktuell") }}
+                                    {{ _self.navbar_link("internal/admin/visits", "Besucherstatistik") }}
                                 </ul>
                             </li>
                         {% endif %}
