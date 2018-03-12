@@ -1,7 +1,13 @@
 {% extends "base/base.twig" %}
 
 {% macro navbar_link(url, title) %}
-    <li class="nav-item"><a class="nav-link" href="{{ url }}">{{ title }}</a></li>
+    {% set class = "nav-item" %}
+
+    {% if isActivePage(url) %}
+        {% set class = class ~ " active" %}
+    {% endif %}
+
+    <li class="{{ class }}"><a class="nav-link" href="{{ url }}">{{ title }}</a></li>
 {% endmacro %}
 
 {% macro profile_dropdown_links(url, icon_class, title) %}

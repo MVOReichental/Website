@@ -112,6 +112,10 @@ a.thumbnail.active {
     width: 1px;
 }
 
+ul.nav li.nav-item.active {
+    font-weight: bold;
+}
+
 @media (min-width: 768px) {
     .dl-wide dt {
         width: 200px;
