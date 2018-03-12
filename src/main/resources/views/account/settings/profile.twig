@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block settingsHeader %}
-    {% if update.profile is constant ("UPDATE_PROFILE_OK", this) %}
+    {% if update.profile and update.profile is constant ("UPDATE_PROFILE_OK", classInstance) %}
         <div class="alert alert-success"><i class="fa fa-check"></i> Dein Benutzerprofil wurde erfolgreich aktualisiert.</div>
     {% endif %}
 {% endblock %}

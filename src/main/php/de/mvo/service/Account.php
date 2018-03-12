@@ -216,7 +216,7 @@ class Account extends AbstractService
 
         return TwigRenderer::render("account/settings/" . $activePage["name"], array
         (
-            "this" => $this,
+            "classInstance" => $this,
             "update" => $updateStatus,
             "pages" => array_values($pages),
             "title" => $activePage["title"],

@@ -2,9 +2,9 @@
 
 {% block settingsHeader %}
     {% if update.contact %}
-        {% if update.contact is constant("UPDATE_CONTACT_OK", this) %}
+        {% if update.contact is constant("UPDATE_CONTACT_OK", classInstance) %}
             <div class="alert alert-success"><i class="fa fa-check"></i> Deine Kontaktdaten wurden erfolgreich aktualisiert.</div>
-        {% elseif update.contact is constant("UPDATE_CONTACT_INVALID_ID", this) %}
+        {% elseif update.contact is constant("UPDATE_CONTACT_INVALID_ID", classInstance) %}
             <div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Beim Aktualisieren der Kontaktdaten ist ein Fehler aufgetreten! Bitte versuche es erneut.</div>
         {% endif %}
     {% endif %}
