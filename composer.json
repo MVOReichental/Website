@@ -21,7 +21,7 @@
         "eluceo/ical": "^0.10.0",
         "erusev/parsedown": "^1.6",
         "kelunik/two-factor": "^1.0",
-        "twig/twig": "^1.24",
+        "twig/twig": "^2.4",
         "swiftmailer/swiftmailer": "^5.4",
         "jaybizzle/crawler-detect": "^1.2",
         "google/apiclient": "^2.2"
