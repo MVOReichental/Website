@@ -5,34 +5,38 @@
         <a href="internal/notedirectory/editor/titles/new" class="btn btn-success"><i class="fa fa-plus"></i> Neuer Titel</a>
     </div>
 
-    <table class="table table-striped table-hover table-responsive" id="notedirectory-editor-titles-table">
-        <thead>
-            <tr>
-                <th>Titel</th>
-                <th>Komponist</th>
-                <th>Bearbeiter</th>
-                <th>Verleger</th>
-                <th></th>
-            </tr>
-        </thead>
-
-        <tbody>
-            {% for title in titles %}
-                <tr data-id="{{ title.id }}">
-                    <td class="entry-title">{{ title.title }}</td>
-                    <td>{{ title.composer }}</td>
-                    <td>{{ title.arranger }}</td>
-                    <td>{{ title.publisher }}</td>
-                    <td>
-                        <div class="btn-group btn-group-sm">
-                            <a href="internal/notedirectory/editor/titles/{{ title.id }}" class="btn btn-secondary" data-toggle="tooltip" title="Bearbeiten"><i class="fa fa-pencil"></i></a>
-                            <button type="button" class="btn btn-danger remove" data-toggle="tooltip" title="L&ouml;schen"><i class="fa fa-remove"></i></button>
-                        </div>
-                    </td>
+    {% if titles.count %}
+        <table class="table table-striped table-hover table-responsive" id="notedirectory-editor-titles-table">
+            <thead>
+                <tr>
+                    <th>Titel</th>
+                    <th>Komponist</th>
+                    <th>Bearbeiter</th>
+                    <th>Verleger</th>
+                    <th></th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+
+            <tbody>
+                {% for title in titles %}
+                    <tr data-id="{{ title.id }}">
+                        <td class="entry-title">{{ title.title }}</td>
+                        <td>{{ title.composer }}</td>
+                        <td>{{ title.arranger }}</td>
+                        <td>{{ title.publisher }}</td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <a href="internal/notedirectory/editor/titles/{{ title.id }}" class="btn btn-secondary" data-toggle="tooltip" title="Bearbeiten"><i class="fa fa-pencil"></i></a>
+                                <button type="button" class="btn btn-danger remove" data-toggle="tooltip" title="L&ouml;schen"><i class="fa fa-remove"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Keine Titel verf&uuml;gbar!</div>
+    {% endif %}
 
     <div class="modal fade" id="notedirectory-editor-title-remove-modal">
         <div class="modal-dialog">
