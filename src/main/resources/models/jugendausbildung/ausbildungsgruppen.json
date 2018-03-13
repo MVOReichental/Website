@@ -1,100 +1,100 @@
 {
-    "date": "11.12.2015",
-    "columns": [
+  "date": "11.12.2015",
+  "columns": [
+    {
+      "title": "Blockfl\u00f6tengruppen",
+      "types": [
         {
-            "title": "Blockfl\u00f6tengruppen",
-            "types": [
-                {
-                    "groups": [
-                        {
-                            "trainer": "Paula Sieb",
-                            "students": [
-                                "Vitus Balensiefen",
-                                "Tizian Gottschalk",
-                                "Silas Magfelder",
-                                "Jonas Melcher"
-                            ]
-                        },
-                        {
-                            "trainer": "Meike Klumpp",
-                            "students": [
-                                "Marie Merkel",
-                                "Alena Knapp"
-                            ]
-                        }
-                    ]
-                }
-            ]
+          "groups": [
+            {
+              "trainer": "Paula Sieb",
+              "students": [
+                "Vitus Balensiefen",
+                "Tizian Gottschalk",
+                "Silas Magfelder",
+                "Jonas Melcher"
+              ]
+            },
+            {
+              "trainer": "Meike Klumpp",
+              "students": [
+                "Marie Merkel",
+                "Alena Knapp"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Instrumentalausbildung",
+      "types": [
+        {
+          "name": "Klarinette",
+          "groups": [
+            {
+              "trainer": "Gisela Wieland",
+              "students": [
+                "Lola Kern",
+                "Hannah Klumpp",
+                "Annika Knapp",
+                "Julia Knapp",
+                "Judith Merkel"
+              ]
+            }
+          ]
         },
         {
-            "title": "Instrumentalausbildung",
-            "types": [
-                {
-                    "name": "Klarinette",
-                    "groups": [
-                        {
-                            "trainer": "Gisela Wieland",
-                            "students": [
-                                "Lola Kern",
-                                "Hannah Klumpp",
-                                "Annika Knapp",
-                                "Julia Knapp",
-                                "Judith Merkel"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "name": "Querfl\u00f6te",
-                    "groups": [
-                        {
-                            "trainer": "Musikschule",
-                            "students": [
-                                "Leonie Knapp",
-                                "Liana Knapp"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "name": "Schlagzeug",
-                    "groups": [
-                        {
-                            "trainer": "Jonathan Friedel",
-                            "students": [
-                                "Maximilian Merkel"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "name": "Trompete",
-                    "groups": [
-                        {
-                            "trainer": "David Brasseur",
-                            "students": [
-                                "Moritz Balensiefen",
-                                "Vincent Kast",
-                                "Lea Knapp"
-                            ]
-                        },
-                        {
-                            "trainer": "Wolfgang St\u00f6rtzer",
-                            "students": [
-                                "Julian Gottschalk",
-                                "Mark Knapp",
-                                "Jakob Sieb"
-                            ]
-                        },
-                        {
-                            "trainer": "Musikschule",
-                            "students": [
-                                "Jonas Magfelder"
-                            ]
-                        }
-                    ]
-                }
-            ]
+          "name": "Querfl\u00f6te",
+          "groups": [
+            {
+              "trainer": "Musikschule",
+              "students": [
+                "Leonie Knapp",
+                "Liana Knapp"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Schlagzeug",
+          "groups": [
+            {
+              "trainer": "Jonathan Friedel",
+              "students": [
+                "Maximilian Merkel"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Trompete",
+          "groups": [
+            {
+              "trainer": "David Brasseur",
+              "students": [
+                "Moritz Balensiefen",
+                "Vincent Kast",
+                "Lea Knapp"
+              ]
+            },
+            {
+              "trainer": "Wolfgang St\u00f6rtzer",
+              "students": [
+                "Julian Gottschalk",
+                "Mark Knapp",
+                "Jakob Sieb"
+              ]
+            },
+            {
+              "trainer": "Musikschule",
+              "students": [
+                "Jonas Magfelder"
+              ]
+            }
+          ]
         }
-    ]
+      ]
+    }
+  ]
 }

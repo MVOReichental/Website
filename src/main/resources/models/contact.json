@@ -1,41 +1,41 @@
 [
-    {
-        "name": "postalisch",
-        "text": "Musikverein \"Orgelfels\" Reichental e.V.\nBirgit Gerweck\nNeuer Weg 13/1\n76593 Gernsbach - Reichental"
-    },
-    {
-        "name": "Vorstand (Gleichberechtigt)",
-        "text": "Birgit Gerweck (07224 99 69 822)\nEdith Wieland (07224 69 70 467)",
-        "mailbox": "vorstand"
-    },
-    {
-        "name": "Musikervorstand",
-        "text": "Katrin H\u00f6rth\nJasmin Melcher",
-        "mailbox": "musikervorstand"
-    },
-    {
-        "name": "Kassenverwalter",
-        "text": "Florian Wieland",
-        "mailbox": "kassier"
-    },
-    {
-        "name": "Schriftf\u00fchrerin",
-        "text": "Heike Kast",
-        "mailbox": "schriftfuehrer"
-    },
-    {
-        "name": "Jugendleiterin",
-        "text": "Gisela Wieland\nDavid Brasseur",
-        "mailbox": "jugendleiter"
-    },
-    {
-        "name": "\u00d6ffentlichkeitsarbeit",
-        "text": "Edith Wieland",
-        "mailbox": "oeffentlichkeitsarbeit"
-    },
-    {
-        "name": "Webmaster",
-        "text": "Michael Wieland",
-        "mailbox": "webmaster"
-    }
+  {
+    "name": "postalisch",
+    "text": "Musikverein \"Orgelfels\" Reichental e.V.\nBirgit Gerweck\nNeuer Weg 13/1\n76593 Gernsbach - Reichental"
+  },
+  {
+    "name": "Vorstand (Gleichberechtigt)",
+    "text": "Birgit Gerweck (07224 99 69 822)\nEdith Wieland (07224 69 70 467)",
+    "mailbox": "vorstand"
+  },
+  {
+    "name": "Musikervorstand",
+    "text": "Katrin H\u00f6rth\nJasmin Melcher",
+    "mailbox": "musikervorstand"
+  },
+  {
+    "name": "Kassenverwalter",
+    "text": "Florian Wieland",
+    "mailbox": "kassier"
+  },
+  {
+    "name": "Schriftf\u00fchrerin",
+    "text": "Heike Kast",
+    "mailbox": "schriftfuehrer"
+  },
+  {
+    "name": "Jugendleiterin",
+    "text": "Gisela Wieland\nDavid Brasseur",
+    "mailbox": "jugendleiter"
+  },
+  {
+    "name": "\u00d6ffentlichkeitsarbeit",
+    "text": "Edith Wieland",
+    "mailbox": "oeffentlichkeitsarbeit"
+  },
+  {
+    "name": "Webmaster",
+    "text": "Michael Wieland",
+    "mailbox": "webmaster"
+  }
 ]
