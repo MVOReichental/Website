@@ -133,7 +133,7 @@ var Members = {
 
             $("#members-send-message-recipients-list").val(JSON.stringify(recipientUserIds));
 
-            var modal = $("#members-send-message-modal").modal("show");
+            $("#members-send-message-modal").modal("show");
         });
     },
 
