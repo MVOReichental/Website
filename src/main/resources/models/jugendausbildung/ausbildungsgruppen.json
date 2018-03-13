@@ -1,5 +1,5 @@
 {
-  "date": "11.12.2015",
+  "date": "01.12.2017",
   "columns": [
     {
       "title": "Blockfl\u00f6tengruppen",
@@ -7,19 +7,18 @@
         {
           "groups": [
             {
-              "trainer": "Paula Sieb",
+              "trainer": "Lisa Kozlevcar",
               "students": [
-                "Vitus Balensiefen",
-                "Tizian Gottschalk",
-                "Silas Magfelder",
-                "Jonas Melcher"
+                "Theo Sieb",
+                "Hanna Weber",
+                "Ida Wieland"
               ]
             },
             {
-              "trainer": "Meike Klumpp",
+              "trainer": "Paula Sieb",
               "students": [
-                "Marie Merkel",
-                "Alena Knapp"
+                "Lara Merkel",
+                "Giulia Viviani"
               ]
             }
           ]
@@ -36,10 +35,19 @@
               "trainer": "Gisela Wieland",
               "students": [
                 "Lola Kern",
-                "Hannah Klumpp",
                 "Annika Knapp",
-                "Julia Knapp",
-                "Judith Merkel"
+                "Julia Knapp"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Posaune",
+          "groups": [
+            {
+              "trainer": "Andreas Wieland",
+              "students": [
+                "Vitus Balensiefen"
               ]
             }
           ]
@@ -50,8 +58,19 @@
             {
               "trainer": "Musikschule",
               "students": [
-                "Leonie Knapp",
+                "Hannah Klumpp",
                 "Liana Knapp"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Saxophon",
+          "groups": [
+            {
+              "trainer": "Daniela Zapf",
+              "students": [
+                "Silas Magfelder"
               ]
             }
           ]
@@ -62,7 +81,19 @@
             {
               "trainer": "Jonathan Friedel",
               "students": [
+                "Jonas Melcher",
                 "Maximilian Merkel"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Tenorhorn",
+          "groups": [
+            {
+              "trainer": "Birgit Gerweck",
+              "students": [
+                "Tizian Gottschalk"
               ]
             }
           ]
@@ -81,8 +112,6 @@
             {
               "trainer": "Wolfgang St\u00f6rtzer",
               "students": [
-                "Julian Gottschalk",
-                "Mark Knapp",
                 "Jakob Sieb"
               ]
             },
