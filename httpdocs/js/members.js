@@ -5,7 +5,7 @@ $(function () {
         var checkbox = $(this);
 
         membersList.find("tbody > tr .members-select-checkbox").each(function () {
-            $(this).prop("checked", checkbox.prop("checked")).change();
+            $(this).prop("checked", checkbox.prop("checked"));
         });
     });
 
