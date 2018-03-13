@@ -36,7 +36,7 @@ $(function () {
             }
         }
 
-        $("#members-send-message-button").toggle(!!checkCount);
+        $("#members-send-message-button").toggle(!!checkCount).find(".badge").text(checkCount);
     });
 
     membersList.find("tbody > tr").on("click", function (event) {
