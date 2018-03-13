@@ -16,7 +16,7 @@ $(function () {
         rows.each(function () {
             var checked = $(this).find(".members-select-checkbox").prop("checked") && !$(this).data("own-user");
 
-            $(this).toggleClass("success", checked);
+            $(this).toggleClass("table-success", checked);
 
             if (checked) {
                 checkCount++;
