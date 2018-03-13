@@ -34,22 +34,21 @@
 
         <div class="btn-group mr-3">
             <div class="btn-group">
-                <button type="button" class="btn btn-secondary dropdown-toggle {% if active starts with "programs/" %}active{% endif %}" data-toggle="dropdown">
-                    Programme <span class="caret"></span>
-                </button>
+                <button type="button" class="btn btn-secondary dropdown-toggle {% if active starts with "programs/" %}active{% endif %}" data-toggle="dropdown">Programme <span class="caret"></span></button>
 
-                <ul class="dropdown-menu">
+                <div class="dropdown-menu">
                     {% for year in programs %}
-                        <li class="dropdown-header">{{ year.year }}</li>
+                        {% if not loop.first %}
+                            <div class="dropdown-divider"></div>
+                        {% endif %}
+
+                        <h6 class="dropdown-header">{{ year.year }}</h6>
                         {% for program in year.programs %}
-                            {% set path = "programs/#{program.year}/#{program.name}" %}
-                            <li class="{% if active == path %}active{% endif %}">
-                                <a href="internal/notedirectory/{{ path }}">{{ program.title }}</a>
-                            </li>
+                            {% set path = "programs/" ~ program.year ~ "/" ~ program.name %}
+                            <a class="dropdown-item{% if active == path %} active{% endif %}" href="internal/notedirectory/{{ path }}">{{ program.title }}</a>
                         {% endfor %}
-                        <li class="divider"></li>
                     {% endfor %}
-                </ul>
+                </div>
             </div>
 
             <a href="internal/notedirectory/titles" class="btn btn-secondary {% if active == "titles" %}active{% endif %}">Alle Titel</a>
