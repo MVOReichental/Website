@@ -56,7 +56,7 @@ $(function () {
             var row = membersList.find("tbody > tr > td.birthdate[data-next-birthday=\"" + moment(nextBirthday).format("YYYY-MM-DD") + "\"]").parent();
 
             var content = row.find(".birthday-days div");
-            content.removeClass("hidden");
+            content.removeClass("d-none");
             content.find(".badge").text(moment(nextBirthday).calendar(null, {
                 sameDay: "[heute]",
                 nextDay: "[morgen]",
