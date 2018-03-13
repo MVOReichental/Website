@@ -5,12 +5,12 @@
 {% block content %}
     <h1 class="page-header">Ausbildungsgruppen</h1>
 
-    <strong>Stand: {{ date }}</strong><br/>
+    <small class="text-muted">Stand: {{ date }}</small><br/>
 
-    <div class="row">
+    <div class="row mt-3">
         {% for column in columns %}
             <div class="col-md-6">
-                <h2>{{ column.title }}</h2>
+                <h2 class="mb-3">{{ column.title }}</h2>
 
                 {% for type in column.types %}
                     {% if type.name %}
