@@ -5,11 +5,11 @@ $(function () {
         var checkbox = $(this);
 
         membersList.find("tbody > tr .members-select-checkbox").each(function () {
-            $(this).prop("checked", checkbox.prop("checked"));
+            $(this).prop("checked", checkbox.prop("checked")).change();
         });
     });
 
-    membersList.find("tbody > tr .members-select-checkbox").on("change", function () {
+    membersList.find("tbody > tr .members-select-checkbox").on("change", function (event) {
         var rows = membersList.find("tbody > tr");
         var checkCount = 0;
 
@@ -23,14 +23,17 @@ $(function () {
             }
         });
 
-        var checkAllCheckbox = membersList.find("th > .members-select-checkbox");
+        // event.originalEvent is undefined if triggered by change() method
+        if (event.originalEvent) {
+            var checkAllCheckbox = membersList.find("th > .members-select-checkbox");
 
-        if (checkCount) {
-            if (checkCount == rows.length) {
-                checkAllCheckbox.prop("checked", true);
+            if (checkCount) {
+                if (checkCount == rows.length) {
+                    checkAllCheckbox.prop("checked", true);
+                }
+            } else {
+                checkAllCheckbox.prop("checked", false);
             }
-        } else {
-            checkAllCheckbox.prop("checked", false);
         }
 
         $("#members-send-message-button").toggle(!!checkCount);
