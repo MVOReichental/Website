@@ -2,7 +2,7 @@ $(function () {
     $(".messages-hide-button").on("click", function () {
         var modal = $("#messages-hide-modal");
 
-        modal.data("id", $(this).parent(".messages-list").data("id"));
+        modal.data("id", $(this).closest(".messages-list").data("id"));
         modal.modal("show");
     });
 
