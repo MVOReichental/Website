@@ -1,7 +1,3 @@
-.messages-date {
-    float: right;
-}
-
 .messages-hide-button {
     position: absolute;
     top: 0;
@@ -21,6 +17,6 @@
     opacity: 1;
 }
 
-.messages-list {
-    position: relative;
+.messages-list > .card-header > ul {
+    margin: 0;
 }
