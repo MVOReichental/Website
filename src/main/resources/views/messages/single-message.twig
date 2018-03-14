@@ -36,7 +36,7 @@
         <div class="card-footer">
             <ul class="list-unstyled">
                 {% for upload in message.attachments %}
-                    <li><a href="{{ upload.url }}" class="badge badge-default">{{ upload.filename }}</a></li>
+                    <li><a href="{{ upload.url }}">{{ upload.filename }}</a></li>
                 {% endfor %}
             </ul>
         </div>
