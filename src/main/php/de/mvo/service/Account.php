@@ -365,18 +365,13 @@ class Account extends AbstractService
 
         // Delete removed contacts
         foreach ($oldContacts as $contact) {
-            $found = false;
-
             foreach ($newContacts as $newContact) {
                 if ($newContact->id = $contact) {
-                    $found = true;
-                    break;
+                    continue 2;
                 }
             }
 
-            if (!$found) {
-                $contact->remove();
-            }
+            $contact->remove();
         }
 
         return self::UPDATE_CONTACT_OK;
