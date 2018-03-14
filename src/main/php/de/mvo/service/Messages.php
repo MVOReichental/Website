@@ -1,7 +1,6 @@
 <?php
 namespace de\mvo\service;
 
-use ArrayObject;
 use de\mvo\model\messages\Message;
 use de\mvo\model\messages\Messages as MessagesList;
 use de\mvo\model\uploads\Upload;
@@ -118,11 +117,31 @@ class Messages extends AbstractService
 
         $message->saveAsNew();
 
-        $message = Message::getById($message->id);
+        header(sprintf("Location: /internal/messages/%d?sent", $message->id));
+        return null;
+    }
 
-        return TwigRenderer::render("messages/send-success", array
+    /**
+     * @return string
+     * @throws NotFoundException
+     * @throws Twig_Error
+     */
+    public function showMessage()
+    {
+        $message = Message::getById($this->params->id);
+
+        if ($message === null) {
+            throw new NotFoundException;
+        }
+
+        if (!$message->isUserSenderOrRecipient(User::getCurrent())) {
+            throw new NotFoundException;
+        }
+
+        return TwigRenderer::render("messages/single-message-page", array
         (
-            "messages" => new ArrayObject(array($message))
+            "showSentInfo" => isset($_GET["sent"]),
+            "message" => $message
         ));
     }
 

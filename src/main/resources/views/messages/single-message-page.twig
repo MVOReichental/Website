@@ -1,7 +1,27 @@
-{% if messages.count %}
-    {% for message in messages %}
-        {% include("messages/single-message.twig") %}
-    {% endfor %}
+{% extends "base/internal-public-switch.twig" %}
+
+{% block title %}Nachricht{{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="css/messages.css"/>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+
+    <script src="js/messages.js"></script>
+{% endblock %}
+
+{% block content %}
+    <h1 class="page-header">Nachricht</h1>
+
+    {% if showSentInfo %}
+        <div class="alert alert-success"><i class="fa fa-check-circle"></i> Die Nachricht wurde erfolgreich gesendet.</div>
+    {% endif %}
+
+    {% include("messages/single-message.twig") %}
 
     <div class="modal fade" id="messages-hide-modal">
         <div class="modal-dialog">
@@ -22,6 +42,4 @@
             </div>
         </div>
     </div>
-{% else %}
-    <div class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Keine Nachrichten verf&uuml;gbar.</div>
-{% endif %}
+{% endblock %}

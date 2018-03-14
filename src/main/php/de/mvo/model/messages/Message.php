@@ -128,6 +128,19 @@ class Message
         return $parsedown->text($text);
     }
 
+    public function isUserSenderOrRecipient(User $user)
+    {
+        if ($this->sender->isEqualTo($user)) {
+            return true;
+        }
+
+        if ($this->recipients->hasUser($user)) {
+            return true;
+        }
+
+        return false;
+    }
+
     public function saveAsNew()
     {
         $query = Database::prepare("

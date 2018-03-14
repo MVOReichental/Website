@@ -366,6 +366,12 @@ class Endpoints
             ->method("sendMessage")
             ->requireLogin();
 
+        Endpoint::create(HttpMethod::GET, "/internal/messages/[i:id]")
+            ->target()
+            ->className(Messages::class)
+            ->method("showMessage")
+            ->requireLogin();
+
         Endpoint::create(HttpMethod::POST, "/internal/messages/[i:id]/hide-for-user")
             ->target()
             ->className(Messages::class)
