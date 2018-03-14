@@ -366,7 +366,7 @@ class Account extends AbstractService
         // Delete removed contacts
         foreach ($oldContacts as $contact) {
             foreach ($newContacts as $newContact) {
-                if ($newContact->id = $contact) {
+                if ($newContact->id == $contact->id) {
                     continue 2;
                 }
             }
