@@ -19,9 +19,11 @@
                 <input type="hidden" name="form" value="contact"/>
 
                 {% for contact in user.contacts %}
-                    <input type="hidden" name="id[]" value="{{ contact.id }}"/>
+                    <div class="settings-contact">
+                        <input type="hidden" name="id[]" value="{{ contact.id }}"/>
 
-                    {{ include("account/settings/single-contact.twig") }}
+                        {{ include("account/settings/single-contact.twig") }}
+                    </div>
                 {% endfor %}
 
                 {{ include("account/settings/single-contact.twig") }}
