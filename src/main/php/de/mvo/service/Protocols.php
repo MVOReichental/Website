@@ -1,6 +1,7 @@
 <?php
 namespace de\mvo\service;
 
+use de\mvo\Date;
 use de\mvo\model\protocols\Groups;
 use de\mvo\model\protocols\Protocol;
 use de\mvo\model\protocols\ProtocolsList;
@@ -13,15 +14,22 @@ use Twig_Error;
 class Protocols extends AbstractService
 {
     /**
-     * @param null $uploaded
      * @return string
      * @throws Twig_Error
      */
-    public function getList($uploaded = null)
+    public function getList()
     {
+        if (isset($_GET["uploaded"])) {
+            $uploadedState = "ok";
+        } elseif (isset($_GET["failed"])) {
+            $uploadedState = "failed";
+        } else {
+            $uploadedState = null;
+        }
+
         return TwigRenderer::render("protocols/page", array
         (
-            "uploaded" => $uploaded,
+            "uploaded" => $uploadedState,
             "groups" => Groups::getAll(),
             "allowUpload" => User::getCurrent()->hasPermission("protocols.upload.*"),
             "protocols" => ProtocolsList::get()->getVisibleForUser(User::getCurrent())
@@ -40,10 +48,6 @@ class Protocols extends AbstractService
         ));
     }
 
-    /**
-     * @return string
-     * @throws Twig_Error
-     */
     public function upload()
     {
         $files = new Files($_FILES["file"]);
@@ -58,7 +62,7 @@ class Protocols extends AbstractService
                 if ($upload !== null) {
                     $protocol = new Protocol;
 
-                    $protocol->date = $_POST["date"];
+                    $protocol->date = new Date($_POST["date"]);
                     $protocol->title = $_POST["title"];
                     $protocol->upload = $upload;
 
@@ -76,17 +80,13 @@ class Protocols extends AbstractService
 
                     $protocol->save();
 
-                    return $this->getList(array
-                    (
-                        "ok" => true
-                    ));
+                    header("Location: /internal/protocols?uploaded");
+                    return null;
                 }
             }
         }
 
-        return $this->getList(array
-        (
-            "ok" => false
-        ));
+        header("Location: /internal/protocols?failed");
+        return null;
     }
 }
