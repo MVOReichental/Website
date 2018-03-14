@@ -116,8 +116,8 @@ class Contact
 
         $query->execute();
 
-        if ($this->id !== null) {
-            $this->id = Database::lastInsertId();
+        if ($this->id === null) {
+            $this->id = (int)Database::lastInsertId();
         }
     }
 
