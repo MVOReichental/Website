@@ -10,6 +10,7 @@ use de\mvo\model\users\User;
 use de\mvo\model\users\Users;
 use de\mvo\model\videos\VideoList;
 use de\mvo\TwigRenderer;
+use Exception;
 use Twig_Error;
 
 class InternalHome extends AbstractService
@@ -17,6 +18,7 @@ class InternalHome extends AbstractService
     /**
      * @return string
      * @throws Twig_Error
+     * @throws Exception
      */
     public function get()
     {
