@@ -151,9 +151,8 @@ class Dates extends AbstractService
     }
 
     /**
-     * @return string
+     * @return null
      * @throws NotFoundException
-     * @throws Twig_Error
      */
     public function saveEntry()
     {
@@ -223,7 +222,8 @@ class Dates extends AbstractService
 
         $entry->save();
 
-        return $this->getHtml(true);
+        header("Location: /internal/dates");
+        return null;
     }
 
     /**
