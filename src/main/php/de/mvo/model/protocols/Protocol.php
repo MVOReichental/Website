@@ -73,7 +73,7 @@ class Protocol
             ":date" => $this->date->toDatabaseDate()
         ));
 
-        $this->id = Database::lastInsertId();
+        $this->id = (int)Database::lastInsertId();
 
         $query = Database::prepare("
             INSERT INTO `protocolgroups`

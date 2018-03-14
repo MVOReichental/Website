@@ -107,7 +107,7 @@ class Location
         $query->execute();
 
         if ($this->id === null) {
-            $this->id = Database::lastInsertId();
+            $this->id = (int)Database::lastInsertId();
         }
     }
 }

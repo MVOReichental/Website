@@ -157,7 +157,7 @@ class Message
             ":text" => $this->text
         ));
 
-        $this->id = Database::lastInsertId();
+        $this->id = (int)Database::lastInsertId();
 
         $query = Database::prepare("
             INSERT INTO `messagerecipients`

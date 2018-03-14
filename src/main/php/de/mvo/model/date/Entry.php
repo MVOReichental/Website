@@ -155,7 +155,7 @@ class Entry
         $query->execute();
 
         if ($this->id === null) {
-            $this->id = Database::lastInsertId();
+            $this->id = (int)Database::lastInsertId();
         }
 
         $this->groups->save($this);
