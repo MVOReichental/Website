@@ -18,6 +18,7 @@ use ParagonIE\ConstantTime\Base32;
 use PDOException;
 use RuntimeException;
 use Twig_Error;
+use TypeError;
 use UnexpectedValueException;
 
 class User implements JsonSerializable
@@ -603,7 +604,11 @@ class User implements JsonSerializable
 
         $oath = new Oath;
 
-        if (!$oath->verifyTotp(Base32::decode($key), $token)) {
+        try {
+            if (!$oath->verifyTotp(Base32::decode($key), $token)) {
+                return false;
+            }
+        } catch (TypeError $e) {
             return false;
         }
 
