@@ -29,6 +29,7 @@ apt::pin { "packages.sury.org_php":
 $php_modules = [
   "cli",
   "gd",
+  "mbstring",
   "mysql",
   "xml",
 ]
