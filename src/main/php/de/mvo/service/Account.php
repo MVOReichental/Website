@@ -11,6 +11,7 @@ use Kelunik\TwoFactor\Oath;
 use ParagonIE\ConstantTime\Base32;
 use PDOException;
 use Twig_Error;
+use TypeError;
 
 class Account extends AbstractService
 {
@@ -432,6 +433,10 @@ class Account extends AbstractService
         ));
     }
 
+    /**
+     * @return null
+     * @throws TypeError
+     */
     public function request2faKey()
     {
         if (!isset($_POST["password"])) {
