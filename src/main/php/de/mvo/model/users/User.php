@@ -273,7 +273,7 @@ class User implements JsonSerializable
      */
     public function sendPasswordResetMail()
     {
-        if ($this->email === null) {
+        if ($this->email === null or $this->email === "") {
             throw new UnexpectedValueException("Email address not defined");
         }
 

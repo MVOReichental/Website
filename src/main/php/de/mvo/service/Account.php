@@ -126,6 +126,13 @@ class Account extends AbstractService
                 ));
             }
 
+            if ($user->email === null or $user->email === "") {
+                return TwigRenderer::render("account/reset-password/request", array
+                (
+                    "errorMessage" => "Der Benutzer hat keine Email-Adresse hinterlegt! Bitte wende dich an den Webmaster."
+                ));
+            }
+
             $user->sendPasswordResetMail();
 
             return TwigRenderer::render("account/reset-password/send-ok");
