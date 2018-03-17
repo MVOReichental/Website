@@ -46,12 +46,10 @@ class Dates extends AbstractService
                     continue;
                 }
 
-                $active = (empty($selectedGroups) or in_array($group, $selectedGroups));
-
                 $groups[$group] = array
                 (
                     "title" => $title,
-                    "active" => $active
+                    "active" => (empty($selectedGroups) or in_array($group, $selectedGroups))
                 );
             }
 
