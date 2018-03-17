@@ -85,7 +85,18 @@ $(function () {
         modal.find("img.crop-img").cropper({
             aspectRatio: 1,
             zoomable: false,
-            //minSize: [200, 200],
+            cropmove: function (event) {
+                var data = $(this).cropper("getData");
+
+                if (data.width < 200 || data.height < 200) {
+                    event.preventDefault();
+
+                    data.width = 200;
+                    data.height = 200;
+
+                    $(this).cropper("setData", data);
+                }
+            },
             crop: function (event) {
                 profilePictureFileInput.data("crop", {
                     x: event.detail.x,
