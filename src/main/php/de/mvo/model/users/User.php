@@ -370,7 +370,7 @@ class User implements JsonSerializable
         (
             "user" => $this,
             "resetPasswordUrl" => Url::getBaseUrl() . "/internal/reset-password"
-        )));
+        )), "text/html");
         $message->setSubjectFromHtml($message->getBody());
 
         $sender->send($message);
