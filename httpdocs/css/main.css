@@ -112,6 +112,10 @@ a.thumbnail.active {
     width: 1px;
 }
 
+.input-group > .bootstrap-select {
+    width: 200px;
+}
+
 ul.nav li.nav-item.active {
     font-weight: bold;
 }

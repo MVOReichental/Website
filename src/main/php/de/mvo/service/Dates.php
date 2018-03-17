@@ -33,8 +33,8 @@ class Dates extends AbstractService
         if ($user === null) {
             $groups = null;
         } else {
-            if (isset($this->params->groups)) {
-                $selectedGroups = array_filter(explode("+", $this->params->groups));
+            if (isset($_GET["groups"])) {
+                $selectedGroups = array_filter(explode(" ", $_GET["groups"]));
             } else {
                 $selectedGroups = array();
             }
@@ -46,31 +46,13 @@ class Dates extends AbstractService
                     continue;
                 }
 
+                $active = (empty($selectedGroups) or in_array($group, $selectedGroups));
+
                 $groups[$group] = array
                 (
                     "title" => $title,
-                    "active" => false
+                    "active" => $active
                 );
-
-                $newSelectedGroups = $selectedGroups;
-
-                $enabledGroupIndex = array_search($group, $newSelectedGroups);
-                if ($enabledGroupIndex === false) {
-                    $newSelectedGroups[] = $group;
-                } else {
-                    unset($newSelectedGroups[$enabledGroupIndex]);
-                    $groups[$group]["active"] = true;
-                }
-
-                sort($newSelectedGroups);
-
-                $groups[$group]["url"] = "internal/dates/" . implode("+", array_unique($newSelectedGroups));
-            }
-
-            foreach ($selectedGroups as $group) {
-                if (!isset($groups[$group])) {
-                    unset($groups[$group]);
-                }
             }
 
             if (!empty($selectedGroups)) {

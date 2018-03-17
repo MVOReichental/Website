@@ -12,6 +12,7 @@
     {{ parent() }}
 
     <script src="js/date-editor.js"></script>
+    <script src="js/dates.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -29,13 +30,21 @@
         {% endif %}
 
         <div class="btn-group">
-            {% for group in groups %}
-                {% if group.active %}
-                    <a href="{{ group.url }}" class="btn btn-secondary active">{{ group.title|raw }}</a>
-                {% else %}
-                    <a href="{{ group.url }}" class="btn btn-secondary">{{ group.title|raw }}</a>
-                {% endif %}
-            {% endfor %}
+            <form class="form-inline" id="dates-groups-form">
+                <input type="hidden" name="groups" id="dates-groups-field"/>
+
+                <div class="input-group">
+                    <select id="dates-groups-select" class="selectpicker show-tick" multiple>
+                        {% for name,group in groups %}
+                            <option value="{{ name }}" {% if group.active %}selected{% endif %}>{{ group.title|raw }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-secondary">OK</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 

@@ -185,13 +185,6 @@ class Endpoints
             ->arguments(true)
             ->permission("dates.edit");
 
-        Endpoint::create(HttpMethod::GET, "/internal/dates/?[:groups]?")
-            ->target()
-            ->className(Dates::class)
-            ->method("getHtml")
-            ->arguments(true)
-            ->requireLogin();
-
         Endpoint::create(HttpMethod::GET, "/internal/dates.ics")
             ->target()
             ->className(Dates::class)
