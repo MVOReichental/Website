@@ -30,6 +30,7 @@ $php_modules = [
   "cli",
   "gd",
   "mysql",
+  "xml",
 ]
 
 $php_modules.each | $module | {

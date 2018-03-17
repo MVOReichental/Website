@@ -16,6 +16,7 @@
         }
     },
     "require": {
+        "ext-dom": "*",
         "altorouter/altorouter": "^1.1",
         "programie/pini": "dev-master",
         "eluceo/ical": "^0.10.0",
