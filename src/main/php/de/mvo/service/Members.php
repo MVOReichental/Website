@@ -31,22 +31,10 @@ class Members extends AbstractService
     {
         return array
         (
-            "vorstand" => array
-            (
-                "title" => "Vorstand"
-            ),
-            "sonderaufgaben" => array
-            (
-                "title" => "Sonderaufgaben"
-            ),
-            "dirigentin" => array
-            (
-                "title" => "Dirigentin"
-            ),
-            "musiker" => array
-            (
-                "title" => "Musiker"
-            )
+            "vorstand" => "Vorstand",
+            "sonderaufgaben" => "Sonderaufgaben",
+            "dirigentin" => "Dirigentin",
+            "musiker" => "Musiker"
         );
     }
 
@@ -56,38 +44,31 @@ class Members extends AbstractService
      */
     public function getList()
     {
-        $baseUrl = "internal/members";
-
         $users = new Users;
 
-        if (isset($this->params->groups)) {
-            $selectedGroups = array_filter(explode("+", $this->params->groups));
+        if (isset($_GET["groups"])) {
+            $selectedGroups = array_filter(explode(" ", $_GET["groups"]));
         } else {
             $selectedGroups = array();
         }
 
-        $groups = self::getListGroups();
+        $groups = array();
 
-        foreach ($groups as $name => &$group) {
-            $newSelectedGroups = $selectedGroups;
+        foreach (self::getListGroups() as $group => $title) {
+            $active = (empty($selectedGroups) or in_array($group, $selectedGroups));
 
-            $enabledGroupIndex = array_search($name, $newSelectedGroups);
-            if ($enabledGroupIndex === false) {
-                $newSelectedGroups[] = $name;
-                $group["active"] = false;
-            } else {
-                unset($newSelectedGroups[$enabledGroupIndex]);
-                $group["active"] = true;
+            $groups[$group] = array
+            (
+                "title" => $title,
+                "active" => $active
+            );
 
-                $permissionGroup = GroupList::load()->getGroupByPermission("group." . $name);
+            if ($active) {
+                $permissionGroup = GroupList::load()->getGroupByPermission("group." . $group);
                 if ($permissionGroup !== null) {
                     $users->addAll($permissionGroup->getAllUsers());
                 }
             }
-
-            sort($newSelectedGroups);
-
-            $group["url"] = $baseUrl . "/" . $this->params->view . "/" . implode("+", array_unique($newSelectedGroups));
         }
 
         $users->makeUnique();
@@ -101,7 +82,7 @@ class Members extends AbstractService
         return TwigRenderer::render("members/list/page", array
         (
             "title" => self::getListViews()[$this->params->view]["title"],
-            "groups" => array_values($groups),
+            "groups" => $groups,
             "view" => $this->params->view,
             "users" => $users->enabledUsers()
         ));

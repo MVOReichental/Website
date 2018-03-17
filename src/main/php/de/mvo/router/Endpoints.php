@@ -326,7 +326,7 @@ class Endpoints
     {
         $membersListViews = array_keys(Members::getListViews());
 
-        Endpoint::create(HttpMethod::GET, "/internal/members/[" . implode("|", $membersListViews) . ":view]/?[:groups]?")
+        Endpoint::create(HttpMethod::GET, "/internal/members/[" . implode("|", $membersListViews) . ":view]")
             ->target()
             ->className(Members::class)
             ->method("getList")

@@ -1,4 +1,8 @@
 $(function () {
+    $("#members-groups-form").on("submit", function () {
+        $("#members-groups-field").val($("#members-groups-select").selectpicker("val").join(" "));
+    });
+
     var membersList = $("#members-list");
 
     membersList.find("th > .members-select-checkbox").on("change", function () {
