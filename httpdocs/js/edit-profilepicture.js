@@ -22,27 +22,6 @@ $(function () {
 
                 image.attr("src", event.target.result);
                 image[0].onload = function () {
-                    var oldJcrop = image.Jcrop("api");
-                    if (oldJcrop) {
-                        oldJcrop.destroy();
-                    }
-
-                    // TODO: Replace with Cropper.js?
-                    image.Jcrop({
-                        aspectRatio: 1,
-                        minSize: [200, 200],
-                        boxWidth: 568,
-                        boxHeight: 568,
-                        onSelect: function (coords) {
-                            profilePictureFileInput.data("crop", {
-                                x: coords.x,
-                                y: coords.y,
-                                width: coords.w,
-                                height: coords.h
-                            });
-                        }
-                    });
-
                     modal.find(".upload-error").hide();
                     modal.modal("show");
 
@@ -100,5 +79,25 @@ $(function () {
         if (jqXHR) {
             jqXHR.abort();
         }
+    });
+
+    modal.on("shown.bs.modal", function () {
+        modal.find("img.crop-img").cropper({
+            aspectRatio: 1,
+            zoomable: false,
+            //minSize: [200, 200],
+            crop: function (event) {
+                profilePictureFileInput.data("crop", {
+                    x: event.detail.x,
+                    y: event.detail.y,
+                    width: event.detail.width,
+                    height: event.detail.height
+                });
+            }
+        });
+    });
+
+    modal.on("hidden.bs.modal", function () {
+        modal.find("img.crop-img").cropper("destroy");
     });
 });
