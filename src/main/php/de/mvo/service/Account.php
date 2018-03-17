@@ -273,6 +273,10 @@ class Account extends AbstractService
         return self::UPDATE_PROFILE_OK;
     }
 
+    /**
+     * @return string|null
+     * @throws Twig_Error
+     */
     private function updatePassword()
     {
         if (!isset($_POST["currentPassword"]) or !isset($_POST["newPassword"])) {
@@ -292,6 +296,10 @@ class Account extends AbstractService
         }
 
         $user->setPassword($newPassword);
+
+        if ($user->email !== null and $user->email !== "") {
+            $user->sendPasswordChangeMail();
+        }
 
         return self::UPDATE_PASSWORD_OK;
     }

@@ -352,6 +352,30 @@ class User implements JsonSerializable
         $sender->send($message);
     }
 
+    /**
+     * @throws Twig_Error
+     */
+    public function sendPasswordChangeMail()
+    {
+        if ($this->email === null) {
+            throw new UnexpectedValueException("Email address not defined");
+        }
+
+        $sender = new Sender;
+
+        $message = new Message;
+
+        $message->setTo($this->email, $this->getFullName());
+        $message->setBody(TwigRenderer::render("account/password-changed-mail", array
+        (
+            "user" => $this,
+            "resetPasswordUrl" => Url::getBaseUrl() . "/internal/reset-password"
+        )));
+        $message->setSubjectFromHtml($message->getBody());
+
+        $sender->send($message);
+    }
+
     public function setNewEmailAddress($newEmail)
     {
         $this->newEmail = $newEmail;
