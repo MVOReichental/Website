@@ -83,8 +83,8 @@
 {% block body %}
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-lg-3 col-xl-2 bg-light d-print-none">
-                <nav class="collapse navbar-links" id="navbar-links">
+            <div class="col-12 col-lg-3 col-xl-2 bg-light d-print-none" id="navbar-sidebar">
+                <nav class="collapse" id="navbar-links">
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <span class="nav-link">Mitglieder</span>
@@ -129,13 +129,4 @@
     </div>
 {% endblock %}
 
-{% block footer %}
-    <footer id="footer" class="py-3 d-print-none">
-        <div class="container">
-            <p>&copy; {{ currentYear }} Musikverein "Orgelfels" Reichental e.V.</p>
-            <ul class="list-inline">
-                <li class="list-inline-item"><a href="">Zur&uuml;ck zur Startseite</a></li>
-            </ul>
-        </div>
-    </footer>
-{% endblock %}
+{% block footer %}{% endblock %}

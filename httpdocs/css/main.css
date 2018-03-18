@@ -4,11 +4,6 @@
         min-height: 100%;
     }
 
-    body {
-        padding-top: 70px;
-        margin: 0 0 110px;
-    }
-
     #footer {
         position: absolute;
         bottom: 0;

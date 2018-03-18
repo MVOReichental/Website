@@ -1,4 +1,9 @@
 @media screen {
+    body {
+        padding-top: 70px;
+        margin: 0 0 110px;
+    }
+
     #content {
         background-color: white;
         border: 1px solid #ddd;
