@@ -18,7 +18,7 @@ class Visits extends AbstractService
     {
         return TwigRenderer::render("admin/visits", array
         (
-            "currentUsers" => count(Visit::getCurrentVisits()),
+            "currentVisits" => count(Visit::getCurrentVisits()),
             "stats" => array
             (
                 "today" => Stats::today(),

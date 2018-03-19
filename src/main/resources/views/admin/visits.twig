@@ -16,12 +16,12 @@
     <div class="alert alert-info">
         <i class="fas fa-info-circle"></i>
 
-        {% if currentUsers == 0 %}
-            Derzeit sind <strong>keine</strong> Benutzer online.
-        {% elseif currentUsers == 1 %}
-            Derzeit ist <strong>1</strong> Benutzer online.
+        {% if currentVisits == 0 %}
+            Derzeit sind <strong>keine</strong> Besucher online.
+        {% elseif currentVisits == 1 %}
+            Derzeit ist <strong>1</strong> Besucher online.
         {% else %}
-            Derzeit sind <strong>{{ currentUsers }}</strong> Benutzer online.
+            Derzeit sind <strong>{{ currentVisits }}</strong> Besucher online.
         {% endif %}
     </div>
 
