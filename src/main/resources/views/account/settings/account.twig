@@ -11,25 +11,25 @@
 
 {% block settingsHeader %}
     {% if user.requirePasswordChange %}
-        <div class="alert alert-info"><i class="fa fa-info-circle"></i> Du musst ein neues Passwort vergeben bevor du den internen Bereich nutzen kannst.</div>
+        <div class="alert alert-info"><i class="fas fa-info-circle"></i> Du musst ein neues Passwort vergeben bevor du den internen Bereich nutzen kannst.</div>
     {% endif %}
     {% if update.password %}
         {% if update.password is constant("UPDATE_PASSWORD_OK", classInstance) %}
-            <div class="alert alert-success"><i class="fa fa-check"></i> Das Passwort wurde erfolgreich ge&auml;ndert!</div>
+            <div class="alert alert-success"><i class="fas fa-check"></i> Das Passwort wurde erfolgreich ge&auml;ndert!</div>
         {% elseif update.password is constant("UPDATE_PASSWORD_INVALID", classInstance) %}
-            <div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Das angegebene Passwort ist nicht g&uuml;tig!</div>
+            <div class="alert alert-danger"><i class="fas fa-exclamation-triangle"></i> Das angegebene Passwort ist nicht g&uuml;tig!</div>
         {% elseif update.password is constant("UPDATE_PASSWORD_POLICY_ERROR", classInstance) %}
-            <div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Das Passwort muss aus mindestens 6 Zeichen und sowohl aus Buchstaben als auch aus Zahlen bestehen!</div>
+            <div class="alert alert-danger"><i class="fas fa-exclamation-triangle"></i> Das Passwort muss aus mindestens 6 Zeichen und sowohl aus Buchstaben als auch aus Zahlen bestehen!</div>
         {% else %}
-            <div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Ein unbekannter Fehler ist aufgetreten ({{ update.password }})</div>
+            <div class="alert alert-danger"><i class="fas fa-exclamation-triangle"></i> Ein unbekannter Fehler ist aufgetreten ({{ update.password }})</div>
         {% endif %}
     {% elseif update.username %}
         {% if update.username is constant("UPDATE_USERNAME_OK", classInstance) %}
-            <div class="alert alert-success"><i class="fa fa-check"></i> Der Benutzername wurde erfolgreich ge&auml;ndert!</div>
+            <div class="alert alert-success"><i class="fas fa-check"></i> Der Benutzername wurde erfolgreich ge&auml;ndert!</div>
         {% elseif update.username is constant("UPDATE_USERNAME_MIN_LENGTH", classInstance) %}
-            <div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Der Benutzername muss aus mindestens 3 Zeichen bestehen!</div>
+            <div class="alert alert-danger"><i class="fas fa-exclamation-triangle"></i> Der Benutzername muss aus mindestens 3 Zeichen bestehen!</div>
         {% elseif update.username is constant("UPDATE_USERNAME_ALREADY_IN_USE", classInstance) %}
-            <div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Der Benutzername wird bereits verwendet!</div>
+            <div class="alert alert-danger"><i class="fas fa-exclamation-triangle"></i> Der Benutzername wird bereits verwendet!</div>
         {% endif %}
     {% endif %}
 {% endblock %}

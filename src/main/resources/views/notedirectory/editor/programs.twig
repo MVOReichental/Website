@@ -2,7 +2,7 @@
 
 {% block editorContent %}
     <div class="btn-group mb-3">
-        <a href="internal/notedirectory/editor/programs/new" class="btn btn-success"><i class="fa fa-plus"></i> Neues Programm</a>
+        <a href="internal/notedirectory/editor/programs/new" class="btn btn-success"><i class="fas fa-plus"></i> Neues Programm</a>
     </div>
 
     {% if programs.count %}
@@ -22,9 +22,9 @@
                         <td class="entry-title">{{ program.title }}</td>
                         <td>
                             <div class="btn-group btn-group-sm">
-                                <a href="internal/notedirectory/editor/programs/{{ program.id }}" class="btn btn-secondary" data-toggle="tooltip" title="Bearbeiten"><i class="fa fa-pencil"></i></a>
-                                <a href="internal/notedirectory/editor/programs/{{ program.id }}/copy" class="btn btn-secondary" data-toggle="tooltip" title="Kopieren"><i class="fa fa-copy"></i></a>
-                                <button type="button" class="btn btn-danger remove" data-toggle="tooltip" title="L&ouml;schen"><i class="fa fa-remove"></i></button>
+                                <a href="internal/notedirectory/editor/programs/{{ program.id }}" class="btn btn-secondary" data-toggle="tooltip" title="Bearbeiten"><i class="fas fa-edit"></i></a>
+                                <a href="internal/notedirectory/editor/programs/{{ program.id }}/copy" class="btn btn-secondary" data-toggle="tooltip" title="Kopieren"><i class="fas fa-copy"></i></a>
+                                <button type="button" class="btn btn-danger remove" data-toggle="tooltip" title="L&ouml;schen"><i class="fas fa-times"></i></button>
                             </div>
                         </td>
                     </tr>
@@ -32,7 +32,7 @@
             </tbody>
         </table>
     {% else %}
-        <div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Keine Programme verf&uuml;gbar!</div>
+        <div class="alert alert-danger"><i class="fas fa-exclamation-triangle"></i> Keine Programme verf&uuml;gbar!</div>
     {% endif %}
 
     <div class="modal fade" id="notedirectory-editor-program-remove-modal">

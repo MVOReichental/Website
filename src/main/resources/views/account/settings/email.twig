@@ -3,13 +3,13 @@
 {% block settingsHeader %}
     {% if update.email %}
         {% if update.email is constant("UPDATE_EMAIL_OK", classInstance) %}
-            <div class="alert alert-success"><i class="fa fa-check"></i> Es wurde eine Email an deine neue Email-Adresse gesendet. Bitte klicke auf den Link in dieser Email um deine Email-Adresse zu best&auml;tigen.</div>
+            <div class="alert alert-success"><i class="fas fa-check"></i> Es wurde eine Email an deine neue Email-Adresse gesendet. Bitte klicke auf den Link in dieser Email um deine Email-Adresse zu best&auml;tigen.</div>
         {% elseif update.email is constant("UPDATE_EMAIL_INVALID_PASSWORD", classInstance) %}
-            <div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Das angegebene Passwort ist nicht g&uuml;tig!</div>
+            <div class="alert alert-danger"><i class="fas fa-exclamation-triangle"></i> Das angegebene Passwort ist nicht g&uuml;tig!</div>
         {% elseif update.email is constant("UPDATE_EMAIL_UNCHANGED", classInstance) %}
-            <div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Die neue Email-Adresse unterscheidet sich nicht von deiner aktuellen Email-Adresse!</div>
+            <div class="alert alert-danger"><i class="fas fa-exclamation-triangle"></i> Die neue Email-Adresse unterscheidet sich nicht von deiner aktuellen Email-Adresse!</div>
         {% elseif update.email is constant("UPDATE_EMAIL_INVALID", classInstance) %}
-            <div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Die angegebene Email-Adresse ist ung&uuml;ltig!</div>
+            <div class="alert alert-danger"><i class="fas fa-exclamation-triangle"></i> Die angegebene Email-Adresse ist ung&uuml;ltig!</div>
         {% endif %}
     {% endif %}
 {% endblock %}

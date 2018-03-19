@@ -55,17 +55,17 @@
                         <div class="dropdown-menu dropdown-menu-right">
                             <div class="dropdown-header">Angemeldet als <strong>{{ currentUser.firstName }} {{ currentUser.lastName }}</strong></div>
 
-                            {{ this.profile_dropdown_links("internal/members/" ~ currentUser.username, "fa fa-user", "Dein Profil") }}
+                            {{ this.profile_dropdown_links("internal/members/" ~ currentUser.username, "fas fa-user", "Dein Profil") }}
 
                             <div class="dropdown-divider"></div>
 
-                            {{ this.profile_dropdown_links("internal/messages/sent", "fa fa-send", "Gesendete Nachrichten") }}
-                            {{ this.profile_dropdown_links("internal/messages/received", "fa fa-inbox", "Empfangene Nachrichten") }}
+                            {{ this.profile_dropdown_links("internal/messages/sent", "fas fa-paper-plane", "Gesendete Nachrichten") }}
+                            {{ this.profile_dropdown_links("internal/messages/received", "fas fa-inbox", "Empfangene Nachrichten") }}
 
                             <div class="dropdown-divider"></div>
 
-                            {{ this.profile_dropdown_links("internal/settings", "fa fa-cogs", "Einstellungen") }}
-                            {{ this.profile_dropdown_links("internal/logout", "fa fa-sign-out", "Abmelden") }}
+                            {{ this.profile_dropdown_links("internal/settings", "fas fa-cogs", "Einstellungen") }}
+                            {{ this.profile_dropdown_links("internal/logout", "fas fa-sign-out-alt", "Abmelden") }}
                         </div>
                     </li>
 

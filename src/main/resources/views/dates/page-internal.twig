@@ -19,13 +19,13 @@
     <h1 class="page-header">Termine</h1>
 
     {% if saved %}
-        <div class="alert alert-success"><i class="fa fa-check"></i> Die &Auml;nderungen wurden erfolgreich gespeichert.</div>
+        <div class="alert alert-success"><i class="fas fa-check"></i> Die &Auml;nderungen wurden erfolgreich gespeichert.</div>
     {% endif %}
 
     <div class="mb-3 d-print-none">
         {% if allowEdit %}
             <div class="btn-group mr-3">
-                <a href="internal/dates/create" class="btn btn-success"><i class="fa fa-plus"></i> Neuer Termin</a>
+                <a href="internal/dates/create" class="btn btn-success"><i class="fas fa-plus"></i> Neuer Termin</a>
             </div>
         {% endif %}
 
@@ -51,7 +51,7 @@
     {% if dates.count %}
         {% include("dates/list.twig") %}
     {% else %}
-        <div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Keine Termine verf&uuml;gbar!</div>
+        <div class="alert alert-danger"><i class="fas fa-exclamation-triangle"></i> Keine Termine verf&uuml;gbar!</div>
     {% endif %}
 
     <p class="text-muted d-print-none">

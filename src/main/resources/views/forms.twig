@@ -19,7 +19,7 @@
                     {% for form in forms %}
                         <tr>
                             <td>
-                                <a href="internal/forms/{{ form.filename }}" class="btn btn-success btn-xs"><i class="fa fa-download"></i> Herunterladen</a>
+                                <a href="internal/forms/{{ form.filename }}" class="btn btn-success btn-xs"><i class="fas fa-download"></i> Herunterladen</a>
                                 {{ form.title }}
                             </td>
                             <td>{{ form.type }}</td>
@@ -30,6 +30,6 @@
             </table>
         </div>
     {% else %}
-        <div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Keine Formulare verf&uuml;gbar.</div>
+        <div class="alert alert-danger"><i class="fas fa-exclamation-triangle"></i> Keine Formulare verf&uuml;gbar.</div>
     {% endif %}
 {% endblock %}

@@ -36,7 +36,7 @@ $(function () {
             },
             error: function () {
                 $.notify({
-                    icon: "fa fa-exclamation-triangle",
+                    icon: "fas fa-exclamation-triangle",
                     message: "Beim Entfernen ist ein Fehler aufgetreten!"
                 }, {
                     type: "danger"

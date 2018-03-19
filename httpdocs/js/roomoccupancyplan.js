@@ -57,7 +57,7 @@ $(function () {
                     revertFunc();
 
                     $.notify({
-                        icon: "fa fa-exclamation-triangle",
+                        icon: "fas fa-exclamation-triangle",
                         message: "Verschieben fehlgeschlagen"
                     }, {
                         type: "danger"
@@ -77,7 +77,7 @@ $(function () {
                     revertFunc();
 
                     $.notify({
-                        icon: "fa fa-exclamation-triangle",
+                        icon: "fas fa-exclamation-triangle",
                         message: "\u00c4ndern der L\u00e4nge fehlgeschlagen"
                     }, {
                         type: "danger"
@@ -115,7 +115,7 @@ $(function () {
             },
             error: function () {
                 $.notify({
-                    icon: "fa fa-exclamation-triangle",
+                    icon: "fas fa-exclamation-triangle",
                     message: "Der Eintrag konnte nicht gespeichert werden"
                 }, {
                     type: "danger"

@@ -38,7 +38,7 @@
         <fieldset>
             <legend>Titel</legend>
 
-            <button type="button" class="btn btn-success" id="program-editor-add-title"><i class="fa fa-plus"></i> Titel hinzuf&uuml;gen</button>
+            <button type="button" class="btn btn-success" id="program-editor-add-title"><i class="fas fa-plus"></i> Titel hinzuf&uuml;gen</button>
 
             <table class="table table-striped table-hover table-responsive" id="notedirectory-editor-program-titles">
                 <thead>
@@ -61,7 +61,7 @@
                             <td class="entry-arranger">{{ title.arranger }}</td>
                             <td class="entry-publisher">{{ title.publisher }}</td>
                             <td>
-                                <button type="button" class="btn btn-xs btn-danger remove" data-toggle="tooltip" title="L&ouml;schen"><i class="fa fa-remove"></i></button>
+                                <button type="button" class="btn btn-xs btn-danger remove" data-toggle="tooltip" title="L&ouml;schen"><i class="fas fa-times"></i></button>
                             </td>
                         </tr>
                     {% endfor %}
@@ -70,8 +70,8 @@
         </fieldset>
 
         <div class="btn-group">
-            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Speichern</button>
-            <a href="internal/notedirectory/editor/programs" class="btn btn-secondary"><i class="fa fa-remove"></i> Abbrechen</a>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Speichern</button>
+            <a href="internal/notedirectory/editor/programs" class="btn btn-secondary"><i class="fas fa-times"></i> Abbrechen</a>
         </div>
     </form>
 
@@ -100,7 +100,7 @@
                             {% for title in titles %}
                                 <tr class="entry" data-id="{{ title.id }}">
                                     <td>
-                                        <button type="button" class="btn btn-xs btn-success add" data-toggle="tooltip" title="Hinzuf&uuml;gen"><i class="fa fa-plus"></i></button>
+                                        <button type="button" class="btn btn-xs btn-success add" data-toggle="tooltip" title="Hinzuf&uuml;gen"><i class="fas fa-plus"></i></button>
                                     </td>
                                     <td class="entry-title">{{ title.title }}</td>
                                     <td class="entry-composer">{{ title.composer }}</td>

@@ -17,7 +17,7 @@
 
 {% block settingsHeader %}
     {% if update.profile and update.profile is constant ("UPDATE_PROFILE_OK", classInstance) %}
-        <div class="alert alert-success"><i class="fa fa-check"></i> Dein Benutzerprofil wurde erfolgreich aktualisiert.</div>
+        <div class="alert alert-success"><i class="fas fa-check"></i> Dein Benutzerprofil wurde erfolgreich aktualisiert.</div>
     {% endif %}
 {% endblock %}
 
@@ -36,7 +36,7 @@
 
                     <div class="edit-profilepicture-box-right">
                         <div class="btn btn-success fileinput-button">
-                            <i class="fa fa-upload"></i> Neues Profilbild hochladen
+                            <i class="fas fa-upload"></i> Neues Profilbild hochladen
                             <input id="settings-profile-profilepicture" class="edit-profilepicture" type="file" name="file" data-url="users/{{ user.id }}/profile-picture.jpg" accept="image/bmp,image/gif,image/jpeg,image/png"/>
                         </div>
 

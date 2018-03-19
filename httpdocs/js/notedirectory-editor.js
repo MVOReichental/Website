@@ -17,7 +17,7 @@ $(function () {
             },
             error: function () {
                 $.notify({
-                    icon: "fa fa-exclamation-triangle",
+                    icon: "fas fa-exclamation-triangle",
                     message: "Beim Entfernen ist ein Fehler aufgetreten!"
                 }, {
                     type: "danger"
@@ -44,7 +44,7 @@ $(function () {
             },
             error: function () {
                 $.notify({
-                    icon: "fa fa-exclamation-triangle",
+                    icon: "fas fa-exclamation-triangle",
                     message: "Beim Entfernen ist ein Fehler aufgetreten!"
                 }, {
                     type: "danger"
@@ -116,7 +116,7 @@ $(function () {
         removeButton.attr("type", "button");
         removeButton.data("toggle", "tooltip");
         removeButton.attr("title", "L&ouml;schen");
-        removeButton.append($("<i>").addClass("fa fa-remove"));
+        removeButton.append($("<i>").addClass("fas fa-times"));
         titleRow.append($("<td>").append(removeButton));
 
         $("#notedirectory-editor-program-titles").find("tbody").append(titleRow);

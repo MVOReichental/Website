@@ -30,26 +30,26 @@
                         {% if user.email %}
                             <tr>
                                 <td>Email-Adresse</td>
-                                <td><i class="fa fa-envelope"></i> <a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
+                                <td><i class="fas fa-envelope"></i> <a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
                             </tr>
                         {% endif %}
                         {% for contact in user.contacts %}
                             <tr>
                                 <td>{{ contact.title|raw }}</td>
-                                <td><i class="fa fa-phone"></i> {{ contact.value }}</td>
+                                <td><i class="fas fa-phone"></i> {{ contact.value }}</td>
                             </tr>
                         {% endfor %}
                         {% if user.birthDate %}
                             <tr>
                                 <td>Geburtsdatum</td>
-                                <td><i class="fa fa-calendar"></i> {{ user.birthDate.humanReadableDate }} ({{ user.birthDate.yearsTillNow }})</td>
+                                <td><i class="fas fa-calendar-alt"></i> {{ user.birthDate.humanReadableDate }} ({{ user.birthDate.yearsTillNow }})</td>
                             </tr>
                         {% endif %}
                     </tbody>
                 </table>
 
                 {% if user.id != currentUser.id %}
-                    <button type="button" class="btn btn-sm btn-success" id="members-details-send-message-button"><i class="fa fa-send"></i> Nachricht senden</button>
+                    <button type="button" class="btn btn-sm btn-success" id="members-details-send-message-button"><i class="fas fa-paper-plane"></i> Nachricht senden</button>
                 {% endif %}
             </div>
         </div>

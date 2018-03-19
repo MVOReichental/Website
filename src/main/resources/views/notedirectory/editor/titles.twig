@@ -2,7 +2,7 @@
 
 {% block editorContent %}
     <div class="btn-group mb-3">
-        <a href="internal/notedirectory/editor/titles/new" class="btn btn-success"><i class="fa fa-plus"></i> Neuer Titel</a>
+        <a href="internal/notedirectory/editor/titles/new" class="btn btn-success"><i class="fas fa-plus"></i> Neuer Titel</a>
     </div>
 
     {% if titles.count %}
@@ -26,8 +26,8 @@
                         <td>{{ title.publisher }}</td>
                         <td>
                             <div class="btn-group btn-group-sm">
-                                <a href="internal/notedirectory/editor/titles/{{ title.id }}" class="btn btn-secondary" data-toggle="tooltip" title="Bearbeiten"><i class="fa fa-pencil"></i></a>
-                                <button type="button" class="btn btn-danger remove" data-toggle="tooltip" title="L&ouml;schen"><i class="fa fa-remove"></i></button>
+                                <a href="internal/notedirectory/editor/titles/{{ title.id }}" class="btn btn-secondary" data-toggle="tooltip" title="Bearbeiten"><i class="fas fa-edit"></i></a>
+                                <button type="button" class="btn btn-danger remove" data-toggle="tooltip" title="L&ouml;schen"><i class="fas fa-times"></i></button>
                             </div>
                         </td>
                     </tr>
@@ -35,7 +35,7 @@
             </tbody>
         </table>
     {% else %}
-        <div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Keine Titel verf&uuml;gbar!</div>
+        <div class="alert alert-danger"><i class="fas fa-exclamation-triangle"></i> Keine Titel verf&uuml;gbar!</div>
     {% endif %}
 
     <div class="modal fade" id="notedirectory-editor-title-remove-modal">
