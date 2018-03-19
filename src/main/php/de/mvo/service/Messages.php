@@ -116,6 +116,7 @@ class Messages extends AbstractService
         }
 
         $message->saveAsNew();
+        $message->sendMail();
 
         header(sprintf("Location: /internal/messages/%d?sent", $message->id));
         return null;

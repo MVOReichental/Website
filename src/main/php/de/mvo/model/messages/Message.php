@@ -3,11 +3,16 @@ namespace de\mvo\model\messages;
 
 use de\mvo\Database;
 use de\mvo\Date;
+use de\mvo\mail\Message as MailMessage;
+use de\mvo\mail\Sender as MailSender;
 use de\mvo\model\uploads\Upload;
 use de\mvo\model\uploads\Uploads;
 use de\mvo\model\users\User;
 use de\mvo\model\users\Users;
+use de\mvo\TwigRenderer;
+use de\mvo\utils\Url;
 use Parsedown;
+use Twig_Error;
 
 class Message
 {
@@ -230,5 +235,45 @@ class Message
             ":messageId" => $this->id,
             ":userId" => $user->id
         ));
+    }
+
+    /**
+     * @throws Twig_Error
+     */
+    public function sendMail()
+    {
+        $recipients = array();
+
+        /**
+         * @var $user User
+         */
+        foreach ($this->recipients as $user) {
+            if ($user->email === null or $user->email === "") {
+                continue;
+            }
+
+            $recipients[$user->email] = $user->getFullName();
+        }
+
+        if (empty($recipients)) {
+            return;
+        }
+
+        $sender = new MailSender;
+
+        $message = new MailMessage;
+
+        $message->setTo($recipients);
+        $message->setBody(TwigRenderer::render("messages/mail", array
+        (
+            "sender" => $this->sender,
+            "message" => $this->formatText(),
+            "attachments" => $this->attachments,
+            "baseUrl" => Url::getBaseUrl(),
+            "url" => sprintf("%s/internal/messages/%d", Url::getBaseUrl(), $this->id)
+        )), "text/html");
+        $message->setSubjectFromHtml($message->getBody());
+
+        $sender->send($message);
     }
 }

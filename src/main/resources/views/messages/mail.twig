@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Neue Nachricht</title>
+    </head>
+
+    <body>
+        <p>{{ sender.fullName }} hat eine Nachricht gesendet.</p>
+        <p>
+            {{ message|raw }}
+        </p>
+
+        {% if attachments.count %}
+            <ul>
+                {% for upload in attachments %}
+                    <li><a href="{{ baseUrl }}{{ upload.url }}">{{ upload.filename }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <p>Du findest diese Nachricht im <a href="{{ url }}">internen Bereich</a>.</p>
+    </body>
+</html>
