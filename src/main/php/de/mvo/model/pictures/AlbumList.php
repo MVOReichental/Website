@@ -61,6 +61,20 @@ class AlbumList extends ArrayObject
         return $albums;
     }
 
+    public function hasAlbumsVisibleToUser(User $user = null)
+    {
+        /**
+         * @var $album Album
+         */
+        foreach ($this as $album) {
+            if ($album->isVisibleToUser($user)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public function getVisibleToUser(User $user = null)
     {
         $albums = new self;

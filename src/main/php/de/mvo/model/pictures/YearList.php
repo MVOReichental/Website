@@ -2,6 +2,7 @@
 namespace de\mvo\model\pictures;
 
 use ArrayObject;
+use de\mvo\model\users\User;
 use DirectoryIterator;
 use UnexpectedValueException;
 
@@ -109,5 +110,31 @@ class YearList extends ArrayObject
         }
 
         return null;
+    }
+
+    /**
+     * @param User|null $user
+     * @return YearList
+     */
+    public function getYearsVisibleToUser(User $user = null)
+    {
+        $list = new self;
+
+        /**
+         * @var $year Year
+         */
+        foreach ($this as $year) {
+            if ($year->albums === null) {
+                continue;
+            }
+
+            if (!$year->albums->hasAlbumsVisibleToUser($user)) {
+                continue;
+            }
+
+            $list->append($year);
+        }
+
+        return $list;
     }
 }

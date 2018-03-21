@@ -15,7 +15,7 @@ class Pictures extends AbstractService
      */
     public function getYears($internal = false)
     {
-        $years = YearList::load();
+        $years = YearList::load()->getYearsVisibleToUser($internal ? User::getCurrent() : null);
         if (!$years->count()) {
             http_response_code(404);
         }
