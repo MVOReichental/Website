@@ -9,7 +9,7 @@
     border-radius: 3px;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 767px) {
     #navbar-links-toggler {
         display: block !important
     }
@@ -31,27 +31,21 @@
         border-right: 1px solid rgba(0, 0, 0, 0.1);
     }
 
-    @supports (position: sticky) {
+    #navbar-links {
+        display: block !important
+    }
+
+    @supports ((position:-webkit-sticky) or (position:sticky)) {
         #navbar-sidebar {
             position: sticky;
             top: 4rem;
             z-index: 1000;
             height: calc(100vh - 4rem);
         }
-    }
-}
 
-@media (min-width: 992px) {
-    @supports ((position:-webkit-sticky) or (position:sticky)) {
         #navbar-links {
             max-height: calc(100vh - 64px);
             overflow-y: auto
         }
-    }
-}
-
-@media (min-width: 992px) {
-    #navbar-links {
-        display: block !important
     }
 }
