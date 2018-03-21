@@ -48,6 +48,10 @@ class Protocols extends AbstractService
         ));
     }
 
+    /**
+     * @return null
+     * @throws Twig_Error
+     */
     public function upload()
     {
         $files = new Files($_FILES["file"]);
@@ -64,6 +68,7 @@ class Protocols extends AbstractService
 
                     $protocol->date = new Date($_POST["date"]);
                     $protocol->title = $_POST["title"];
+                    $protocol->uploader = User::getCurrent();
                     $protocol->upload = $upload;
 
                     $protocol->groups = new Groups;
@@ -79,6 +84,7 @@ class Protocols extends AbstractService
                     }
 
                     $protocol->save();
+                    $protocol->sendMail();
 
                     header("Location: /internal/protocols?uploaded");
                     return null;

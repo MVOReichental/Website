@@ -208,13 +208,17 @@ CREATE TABLE `notedirectoryprogramtitles` (
 
 
 CREATE TABLE `protocols` (
-  `id`       INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `uploadId` INT(11) UNSIGNED NOT NULL,
-  `title`    VARCHAR(200)     NOT NULL,
-  `date`     DATE             NOT NULL,
+  `id`             INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `uploadId`       INT(11) UNSIGNED NOT NULL,
+  `uploaderUserId` INT(11) UNSIGNED NOT NULL,
+  `title`          VARCHAR(200)     NOT NULL,
+  `date`           DATE             NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY (`uploadId`),
   CONSTRAINT FOREIGN KEY (`uploadId`) REFERENCES `uploads` (`id`)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT,
+  CONSTRAINT FOREIGN KEY (`uploaderUserId`) REFERENCES `users` (`id`)
     ON UPDATE CASCADE
     ON DELETE RESTRICT
 )
