@@ -6,6 +6,7 @@
                     <th data-defaultsort="disabled" class="minimum-width"></th>
                     <th>Datum</th>
                     <th>Titel</th>
+                    <th>Hochgeladen von</th>
                     <th data-defaultsort="disabled">Gruppen</th>
                 </tr>
             </thead>
@@ -15,6 +16,7 @@
                         <td class="minimum-width"><a href="{{ protocol.upload.url }}" class="btn btn-success btn-xs d-print-none"><i class="fas fa-download"></i> Herunterladen</a></td>
                         <td data-value="{{ protocol.date.format("Ymd") }}">{{ protocol.date.humanReadableDate }}</td>
                         <td>{{ protocol.title }}</td>
+                        <td>{{ protocol.uploader.fullName }}</td>
                         <td>
                             {% for group in protocol.groups %}
                                 <span class="badge badge-primary">{{ loop.parent.loop.parent.groups[group]|raw }}</span>
