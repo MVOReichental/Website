@@ -8,6 +8,7 @@ SHELL
 
 Vagrant.configure(2) do |config|
     config.vm.box = "debian/stretch64"
+    config.vm.network "private_network", ip: "192.168.100.2"
     config.vm.network "forwarded_port", guest: 80, host: 8080, auto_correct: true
     config.vm.synced_folder ".", "/opt/mvo-website"
     config.vm.provision "shell",
