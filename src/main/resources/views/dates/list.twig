@@ -6,8 +6,10 @@
                 <th>Zeit</th>
                 <th>Veranstaltung</th>
                 <th>Ort</th>
-                {% if allowEdit %}
+                {% if groups %}
                     <th class="d-print-none minimum-width" data-defaultsort="disabled"></th>
+                {% endif %}
+                {% if allowEdit %}
                     <th class="d-print-none minimum-width" data-defaultsort="disabled"></th>
                 {% endif %}
             </tr>
@@ -24,7 +26,7 @@
                     </td>
                     <td class="dates-title">{{ entry.title }}</td>
                     <td>{{ entry.location.name }}</td>
-                    {% if allowEdit %}
+                    {% if groups %}
                         <td class="d-print-none minimum-width">
                             {% if entry.isPublic %}
                                 <span class="badge badge-success">&Ouml;ffentlich</span>
@@ -38,7 +40,8 @@
                                 {% endif %}
                             {% endif %}
                         </td>
-
+                    {% endif %}
+                    {% if allowEdit %}
                         <td class="d-print-none minimum-width">
                             <div class="btn-group btn-group-sm">
                                 <a href="internal/dates/edit/{{ entry.id }}" class="btn btn-secondary edit" data-toggle="tooltip" title="Bearbeiten"><i class="fas fa-edit"></i></a>

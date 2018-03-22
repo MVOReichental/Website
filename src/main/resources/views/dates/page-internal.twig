@@ -39,6 +39,10 @@
                             {% for name,group in groups %}
                                 <option value="{{ name }}" {% if group.active %}selected{% endif %}>{{ group.title|raw }}</option>
                             {% endfor %}
+
+                            <option data-divider="true"></option>
+
+                            <option value="public" {% if includePublic %}selected{% endif %}>&Ouml;ffentlich</option>
                         </select>
 
                         <div class="input-group-append">

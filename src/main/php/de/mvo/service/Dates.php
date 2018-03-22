@@ -22,21 +22,27 @@ class Dates extends AbstractService
      */
     public function getHtml($internal = false)
     {
-        $user = User::getCurrent();
+        if ($internal) {
+            $user = User::getCurrent();
 
-        if ($internal and $user !== null) {
             $dates = DateList::get()->visibleForUser($user);
-        } else {
-            $dates = DateList::get()->publiclyVisible();
-        }
 
-        if ($user === null) {
-            $groups = null;
-        } else {
             if (isset($_GET["groups"])) {
                 $selectedGroups = array_filter(explode(" ", $_GET["groups"]));
+
+                if (in_array("public", $selectedGroups)) {
+                    $selectedGroups = array_diff($selectedGroups, array("__public__"));
+
+                    $includePublic = true;
+                } else {
+                    $includePublic = false;
+                }
             } else {
                 $selectedGroups = array();
+            }
+
+            if (empty($selectedGroups)) {
+                $includePublic = true;
             }
 
             $groups = array();
@@ -54,8 +60,13 @@ class Dates extends AbstractService
             }
 
             if (!empty($selectedGroups)) {
-                $dates = $dates->getInGroups(new Groups($selectedGroups));
+                $dates = $dates->getInGroups(new Groups($selectedGroups), $includePublic);
             }
+        } else {
+            $dates = DateList::get()->publiclyVisible();
+            $user = null;
+            $groups = null;
+            $includePublic = false;
         }
 
         return TwigRenderer::render("dates/" . ($internal ? "page-internal" : "page"), array
@@ -63,7 +74,8 @@ class Dates extends AbstractService
             "dates" => $dates,
             "yearlyDates" => json_decode(file_get_contents(MODELS_ROOT . "/yearly-events.json")),
             "allowEdit" => $internal and ($user === null ? false : $user->hasPermission("dates.edit")),
-            "groups" => $groups
+            "groups" => $groups,
+            "includePublic" => $includePublic
         ));
     }
 

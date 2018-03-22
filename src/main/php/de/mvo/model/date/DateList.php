@@ -84,15 +84,19 @@ class DateList extends ArrayObject
     {
         $list = new self;
 
+        /**
+         * @var $entry Entry
+         */
         foreach ($this as $entry) {
-            if (!count($entry->groups)) {
+            if ($entry->isPublic) {
                 $list->append($entry);
-            } else {
-                foreach ($entry->groups as $group) {
-                    if ($user->hasPermission("dates.view." . $group)) {
-                        $list->append($entry);
-                        break;
-                    }
+                continue;
+            }
+
+            foreach ($entry->groups as $group) {
+                if ($user->hasPermission("dates.view." . $group)) {
+                    $list->append($entry);
+                    break;
                 }
             }
         }
@@ -116,7 +120,7 @@ class DateList extends ArrayObject
         return $list;
     }
 
-    public function getInGroups(Groups $groups)
+    public function getInGroups(Groups $groups, bool $includePublic)
     {
         $list = new self;
 
@@ -124,6 +128,11 @@ class DateList extends ArrayObject
          * @var $entry Entry
          */
         foreach ($this as $entry) {
+            if ($includePublic and $entry->isPublic) {
+                $list->append($entry);
+                continue;
+            }
+
             if (!$entry->groups->isAnyIn($groups)) {
                 continue;
             }
