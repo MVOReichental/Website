@@ -114,15 +114,33 @@ class Dates extends AbstractService
 
     public function getAutoCompletionList()
     {
-        $groupedEntries = array();
+        $titles = array();
+        $locations = array();
 
+        /**
+         * @var $entry Entry
+         */
         foreach (DateList::getAll()->visibleForUser(User::getCurrent()) as $entry) {
-            $entry->name = $entry->title;// Required for Bootstrap-3-Typeahead
-            $groupedEntries[$entry->title] = $entry;
+            $titles[$entry->title] = array
+            (
+                "name" => $entry->title
+            );
+
+            $location = $entry->location;
+            if ($location !== null) {
+                $locations[$location->name] = array
+                (
+                    "name" => $location->name
+                );
+            }
         }
 
         header("Content-Type: application/json");
-        echo json_encode(array_values($groupedEntries));
+        echo json_encode(array
+        (
+            "titles" => array_values($titles),
+            "locations" => array_values($locations)
+        ));
         return null;
     }
 

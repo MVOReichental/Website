@@ -6,24 +6,17 @@ $(function () {
         $("#dates-remove-modal").modal("show").data("id", $(this).closest("tr").data("id"));
     });
 
-    var datesAutocompletion = null;
+    var datesAutocompletionData = null;
 
     $("#dates-edit-title").typeahead({
         source: function (query, process) {
-            if (datesAutocompletion === null) {
-                datesAutocompletion = [];
-                $.ajax({
-                    url: "internal/dates/autocompletion",
-                    method: "GET",
-                    dataType: "json",
-                    success: function (data) {
-                        datesAutocompletion = data;
-                        process(datesAutocompletion);
-                    }
-                });
-            } else {
-                process(datesAutocompletion);
-            }
+            loadDateEditorTypeaheadData("titles", process);
+        }
+    });
+
+    $("#dates-edit-location").typeahead({
+        source: function (query, process) {
+            loadDateEditorTypeaheadData("locations", process);
         }
     });
 
@@ -44,4 +37,28 @@ $(function () {
             }
         });
     });
+
+    function loadDateEditorTypeaheadData(type, callback) {
+        if (datesAutocompletionData !== null) {
+            if (datesAutocompletionData.hasOwnProperty(type)) {
+                callback(datesAutocompletionData[type]);
+            }
+
+            return;
+        }
+
+        datesAutocompletionData = {};
+        $.ajax({
+            url: "internal/dates/autocompletion",
+            method: "GET",
+            dataType: "json",
+            success: function (data) {
+                datesAutocompletionData = data;
+
+                if (datesAutocompletionData.hasOwnProperty(type)) {
+                    callback(datesAutocompletionData[type]);
+                }
+            }
+        });
+    }
 });

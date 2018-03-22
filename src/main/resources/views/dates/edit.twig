@@ -56,7 +56,7 @@
 
         <div class="form-group">
             <label for="dates-edit-location">Ort</label>
-            <input type="text" class="form-control" id="dates-edit-location" name="location" value="{{ entry.location.name }}"/>
+            <input type="text" class="form-control" id="dates-edit-location" name="location" autocomplete="off" data-provide="typeahead" value="{{ entry.location.name }}"/>
         </div>
 
         <div class="form-group">
