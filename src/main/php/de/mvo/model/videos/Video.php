@@ -30,6 +30,6 @@ class Video
 
     public function getThumbnailUrl()
     {
-        return sprintf("http://img.youtube.com/vi/%s/0.jpg", $this->videoId);
+        return sprintf("https://img.youtube.com/vi/%s/0.jpg", $this->videoId);
     }
 }
