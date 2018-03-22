@@ -23,7 +23,7 @@
                                 {{ form.title }}
                             </td>
                             <td>{{ form.type }}</td>
-                            <td data-value="{{ form.date }}">{{ form.date.humanReadableDate }}</td>
+                            <td data-value="{{ form.date.format("Ymd") }}">{{ form.date.humanReadableDate }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
