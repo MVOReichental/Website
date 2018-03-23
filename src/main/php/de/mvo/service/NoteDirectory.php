@@ -39,15 +39,15 @@ class NoteDirectory extends AbstractService
      * @return string
      * @throws Twig_Error
      */
-    private static function renderListPage($title, $activePath, $list)
+    private static function renderListPage($title, $activePath, $list, array $context = array())
     {
-        return TwigRenderer::render("notedirectory/list/page", array
+        return TwigRenderer::render("notedirectory/list/page", array_merge(array
         (
             "title" => $title,
             "active" => $activePath,
             "programs" => Programs::getAll()->getGroupedByYear(),
             "list" => $list
-        ));
+        ), $context));
     }
 
     /**
@@ -78,6 +78,32 @@ class NoteDirectory extends AbstractService
         (
             "titles" => Titles::getAll()
         )));
+    }
+
+    /**
+     * @return string
+     * @throws Twig_Error
+     */
+    public function search()
+    {
+        if (isset($_GET["query"])) {
+            $keyword = trim($_GET["query"]);
+        } else {
+            $keyword = "";
+        }
+
+        if ($keyword === "") {
+            header("Location: /internal/notedirectory/titles");
+            return null;
+        }
+
+        return self::renderListPage("Suchergebnisse", "search", TwigRenderer::render("notedirectory/list/titles", array
+        (
+            "titles" => Titles::search($keyword)
+        )), array
+        (
+            "searchQuery" => $keyword
+        ));
     }
 
     /**

@@ -25,7 +25,7 @@
         <small class="float-right">Stand: {{ currentFormattedDate }}</small>
     </h1>
 
-    <div class="mb-3 d-print-none" id=" notedirectory-button-toolbar">
+    <div class="btn-toolbar mb-3 d-print-none" id=" notedirectory-button-toolbar">
         <div class="btn-group mr-3">
             {% if currentUser.hasPermission("notedirectory.edit") %}
                 <a href="internal/notedirectory/editor" class="btn btn-secondary d-print-none"><i class="fas fa-edit"></i> Editor</a>
@@ -54,9 +54,18 @@
             <a href="internal/notedirectory/titles" class="btn btn-secondary {% if active == "titles" %}active{% endif %}">Alle Titel</a>
         </div>
 
-        <div class="btn-group">
+        <div class="btn-group mr-3">
             <select class="show-tick" id="notedirectory-columns" multiple></select>
         </div>
+
+        <form action="internal/notedirectory/search" class="ml-auto">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fas fa-search"></i></div>
+                </div>
+                <input type="text" class="form-control" name="query" placeholder="Suchen..." value="{{ searchQuery }}" {% if active == "search" %}autofocus{% endif %}/>
+            </div>
+        </form>
     </div>
 
     {{ list|raw }}
