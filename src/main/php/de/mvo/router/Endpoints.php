@@ -693,12 +693,6 @@ class Endpoints
     {
         self::mapPublicEndpoints();
         self::mapInternalEndpoints();
-
-        // Required for session keep alive
-        Endpoint::create(HttpMethod::GET, "/nop")
-            ->target()
-            ->className(StaticView::class)
-            ->method("getEmpty");
     }
 
     /**

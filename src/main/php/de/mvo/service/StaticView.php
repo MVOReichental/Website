@@ -6,11 +6,6 @@ use Twig_Error;
 
 class StaticView extends AbstractService
 {
-    public function getEmpty()
-    {
-        return "";
-    }
-
     /**
      * @param $name
      * @return string

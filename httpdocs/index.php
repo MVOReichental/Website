@@ -1,5 +1,6 @@
 <?php
 use de\mvo\Database;
+use de\mvo\DBSessionHandler;
 use de\mvo\model\users\User;
 use de\mvo\model\visits\Visit;
 use de\mvo\router\Endpoints;
@@ -12,9 +13,10 @@ use de\mvo\TwigRenderer;
 try {
     require_once __DIR__ . "/../bootstrap.php";
 
-    session_start();
-
     Database::init();
+
+    DBSessionHandler::start();
+
     TwigRenderer::init();
 
     Visit::track();
