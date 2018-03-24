@@ -132,3 +132,17 @@ exec { "/opt/mvo-website/vagrant/create-sample-data.php":
   refreshonly => true,
   require     => Package["php7.1-cli"],
 }
+
+cron { "session-gc":
+  command  => "/opt/mvo-website/bin/session-gc.php",
+  user     => "vagrant",
+  minute   => "*/5",
+  hour     => "*",
+  monthday => "*",
+  month    => "*",
+  weekday  => "*",
+  require  => [
+    Exec["composer_install"],
+    File["/opt/mvo-website/src/main/resources/config.ini"],
+  ],
+}
