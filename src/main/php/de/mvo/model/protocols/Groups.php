@@ -10,8 +10,9 @@ class Groups extends ArrayObject
     {
         return array
         (
-            "vorstand" => "Vorstand",
-            "foerderverein" => "F&ouml;rderverein"
+            "vorstandschaft" => "Vorstandschaft",
+            "foerderverein" => "F&ouml;rderverein",
+            "dirigentin" => "Dirigentin"
         );
     }
 
