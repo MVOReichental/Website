@@ -149,7 +149,7 @@ function migrateStage(PDO $oldDb, $stage)
                 $form->name = $row->name;
                 $form->title = $row->title;
 
-                copy(Config::getRequiredValue("migrate", "path") . "/files/forms" . $row->filename, $form->getAbsoluteFilePath());
+                copy(Config::getRequiredValue("migrate", "path") . "/files/forms/" . $row->filename, $form->getAbsoluteFilePath());
 
                 $form->save();
             }
