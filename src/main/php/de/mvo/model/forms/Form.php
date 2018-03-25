@@ -84,6 +84,7 @@ class Form
                     `filename` = :filename,
                     `name` = :name,
                     `title` = :title
+                WHERE `id` = :id
             ");
 
             $query->bindValue(":id", $this->id, PDO::PARAM_INT);
