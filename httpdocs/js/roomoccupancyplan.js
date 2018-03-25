@@ -2,6 +2,7 @@ $(function () {
     var container = $("#roomoccupancyplan-calendar");
 
     container.fullCalendar({
+        height: "parent",
         locale: "de",
         defaultView: "agendaWeek",
         events: "internal/roomoccupancyplan/entries.json",
