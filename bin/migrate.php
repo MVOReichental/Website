@@ -25,6 +25,13 @@ use de\mvo\model\users\Users;
 
 require_once __DIR__ . "/../bootstrap.php";
 
+function copyFile($source, $destination)
+{
+    if (copy($source, $destination)) {
+        touch($destination, filemtime($source));
+    }
+}
+
 function migratePermissions($groups)
 {
     $groupList = new GroupList;
@@ -70,7 +77,7 @@ function migrateUpload($oldKey, $filename)
 
     $upload->saveAsNew();
 
-    copy($oldFilePath, $upload->getAbsoluteFilePath());
+    copyFile($oldFilePath, $upload->getAbsoluteFilePath());
 
     return $upload;
 }
@@ -149,7 +156,7 @@ function migrateStage(PDO $oldDb, $stage)
                 $form->name = $row->name;
                 $form->title = $row->title;
 
-                copy(Config::getRequiredValue("migrate", "path") . "/files/forms/" . $row->filename, $form->getAbsoluteFilePath());
+                copyFile(Config::getRequiredValue("migrate", "path") . "/files/forms/" . $row->filename, $form->getAbsoluteFilePath());
 
                 $form->save();
             }
@@ -211,7 +218,7 @@ function migrateStage(PDO $oldDb, $stage)
                     ":id" => $row->id,
                 ));
 
-                copy(Config::getRequiredValue("migrate", "path") . "/files/profilepictures/" . $row->id . ".jpg", PROFILE_PICTURES_ROOT . "/" . $user->id . ".jpg");
+                copyFile(Config::getRequiredValue("migrate", "path") . "/files/profilepictures/" . $row->id . ".jpg", PROFILE_PICTURES_ROOT . "/" . $user->id . ".jpg");
             }
 
             $oldJson = json_decode(file_get_contents(Config::getRequiredValue("migrate", "path") . "/includes/permissions.json"));
