@@ -15,6 +15,10 @@ class Form
 
     public function __construct()
     {
+        if ($this->id === null) {
+            return;
+        }
+
         $this->id = (int)$this->id;
     }
 
