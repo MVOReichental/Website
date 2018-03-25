@@ -210,6 +210,8 @@ function migrateStage(PDO $oldDb, $stage)
                     ":lastOnline" => (new Date($row->lastOnline))->toDatabase(),
                     ":id" => $row->id,
                 ));
+
+                copy(Config::getRequiredValue("migrate", "path") . "/files/profilepictures/" . $row->id . ".jpg", PROFILE_PICTURES_ROOT . "/" . $user->id . ".jpg");
             }
 
             $oldJson = json_decode(file_get_contents(Config::getRequiredValue("migrate", "path") . "/includes/permissions.json"));
