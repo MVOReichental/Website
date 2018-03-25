@@ -58,6 +58,22 @@ function migratePermissions($groups)
     return $groupList;
 }
 
+function migrateUpload($oldKey, $filename)
+{
+    $oldFilePath = Config::getRequiredValue("migrate", "path") . "/uploads/" . $oldKey;
+
+    $upload = new Upload;
+
+    $upload->key = substr(md5_file($oldFilePath), 0, 8);
+    $upload->filename = $filename;
+
+    $upload->saveAsNew();
+
+    copy($oldFilePath, $upload->getAbsoluteFilePath());
+
+    return $upload;
+}
+
 function migrateStage(PDO $oldDb, $stage)
 {
     switch ($stage) {
@@ -243,12 +259,7 @@ function migrateStage(PDO $oldDb, $stage)
                 ));
 
                 while ($filesRow = $messageFilesQuery->fetch()) {
-                    $upload = new Upload;
-
-                    $upload->key = $filesRow->key;
-                    $upload->filename = $filesRow->title;
-
-                    $upload->saveAsNew();
+                    $upload = migrateUpload($filesRow->name, $filesRow->title);
 
                     $message->attachments->append($upload);
                 }
@@ -311,7 +322,7 @@ function migrateStage(PDO $oldDb, $stage)
             echo "Migrating protocols\n";
 
             $query = $oldDb->query("
-                SELECT `protocols`.`name`, `protocols`.`date`, `protocols`.`groups`, `uploads`.`name` AS `key`, `uploads`.`filename`
+                SELECT `protocols`.`name`, `protocols`.`date`, `protocols`.`groups`, `uploads`.`name` AS `uploadName`, `uploads`.`filename`
                 FROM `protocols`
                 LEFT JOIN `uploads` ON `uploads`.`id` = `protocols`.`uploadId`
             ");
@@ -323,14 +334,7 @@ function migrateStage(PDO $oldDb, $stage)
                 $protocol->date = new Date($row->date);
                 $protocol->groups = new Groups(explode(",", $row->groups));
 
-                $upload = new Upload;
-
-                $upload->key = $row->key;
-                $upload->filename = $row->filename;
-
-                $upload->saveAsNew();
-
-                $protocol->upload = $upload;
+                $protocol->upload = migrateUpload($row->uploadName, $row->filename);
 
                 $protocol->save();
             }
