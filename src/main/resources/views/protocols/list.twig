@@ -3,7 +3,7 @@
         <table class="table table-striped table-hover sortable">
             <thead>
                 <tr>
-                    <th data-defaultsort="disabled" class="minimum-width"></th>
+                    <th data-defaultsort="disabled" class="minimum-width d-print-none"></th>
                     <th>Datum</th>
                     <th>Titel</th>
                     <th>Hochgeladen von</th>
@@ -13,7 +13,7 @@
             <tbody>
                 {% for protocol in protocols %}
                     <tr data-id="{{ protocol.id }}">
-                        <td class="minimum-width"><a href="{{ protocol.upload.url }}" class="btn btn-success btn-xs d-print-none"><i class="fas fa-download"></i> Herunterladen</a></td>
+                        <td class="minimum-width d-print-none"><a href="{{ protocol.upload.url }}" class="btn btn-success btn-xs d-print-none"><i class="fas fa-download"></i> Herunterladen</a></td>
                         <td data-value="{{ protocol.date.format("Ymd") }}">{{ protocol.date.humanReadableDate }}</td>
                         <td>{{ protocol.title }}</td>
                         <td>{{ protocol.uploader.fullName }}</td>
