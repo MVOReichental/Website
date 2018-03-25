@@ -322,7 +322,7 @@ function migrateStage(PDO $oldDb, $stage)
             echo "Migrating protocols\n";
 
             $query = $oldDb->query("
-                SELECT `protocols`.`name`, `protocols`.`date`, `protocols`.`groups`, `uploads`.`name` AS `uploadName`, `uploads`.`filename`
+                SELECT `protocols`.`name`, `protocols`.`date`, `protocols`.`groups`, `uploads`.`name` AS `uploadName`, `uploads`.`title`
                 FROM `protocols`
                 LEFT JOIN `uploads` ON `uploads`.`id` = `protocols`.`uploadId`
             ");
@@ -334,7 +334,7 @@ function migrateStage(PDO $oldDb, $stage)
                 $protocol->date = new Date($row->date);
                 $protocol->groups = new Groups(explode(",", $row->groups));
 
-                $protocol->upload = migrateUpload($row->uploadName, $row->filename);
+                $protocol->upload = migrateUpload($row->uploadName, $row->title);
 
                 $protocol->save();
             }
