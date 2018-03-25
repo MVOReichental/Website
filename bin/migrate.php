@@ -5,7 +5,7 @@ use de\mvo\Database;
 use de\mvo\Date;
 use de\mvo\model\contacts\Contact;
 use de\mvo\model\date\Entry;
-use de\mvo\model\date\Groups;
+use de\mvo\model\date\Groups as DateGroups;
 use de\mvo\model\date\Location;
 use de\mvo\model\forms\Form;
 use de\mvo\model\messages\Message;
@@ -15,6 +15,7 @@ use de\mvo\model\notedirectory\Titles;
 use de\mvo\model\permissions\Group;
 use de\mvo\model\permissions\GroupList;
 use de\mvo\model\permissions\Permissions;
+use de\mvo\model\protocols\Groups as ProtocolGroups;
 use de\mvo\model\protocols\Protocol;
 use de\mvo\model\roomoccupancyplan\Entry as RoomOccupancyPlanEntry;
 use de\mvo\model\uploads\Upload;
@@ -122,7 +123,7 @@ function migrateStage(PDO $oldDb, $stage)
                 $entry->location = $location;
                 $entry->highlight = $row->bold;
 
-                $groups = new Groups;
+                $groups = new DateGroups;
 
                 foreach (explode(",", $row->groups) as $group) {
                     if ($group === "public") {
@@ -332,7 +333,7 @@ function migrateStage(PDO $oldDb, $stage)
 
                 $protocol->title = $row->name;
                 $protocol->date = new Date($row->date);
-                $protocol->groups = new Groups(explode(",", $row->groups));
+                $protocol->groups = new ProtocolGroups(explode(",", $row->groups));
                 $protocol->uploader = User::getById($row->userId);
 
                 $protocol->upload = migrateUpload($row->uploadName, $row->title);
