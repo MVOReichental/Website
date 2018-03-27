@@ -19,19 +19,14 @@
     "mailbox": "kassier"
   },
   {
-    "name": "Schriftf\u00fchrerin",
+    "name": "Schriftf\u00fchrer",
     "text": "Heike Kast",
     "mailbox": "schriftfuehrer"
   },
   {
-    "name": "Jugendleiterin",
-    "text": "Gisela Wieland\nDavid Brasseur",
+    "name": "Jugendleiter",
+    "text": "Gisela Wieland",
     "mailbox": "jugendleiter"
-  },
-  {
-    "name": "\u00d6ffentlichkeitsarbeit",
-    "text": "Edith Wieland",
-    "mailbox": "oeffentlichkeitsarbeit"
   },
   {
     "name": "Webmaster",
