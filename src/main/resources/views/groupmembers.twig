@@ -10,7 +10,7 @@
             <h2>{{ group.title }}</h2>
             <div class="row">
                 {% for user in group.users.enabledUsers.sortByLastNameAndFirstName %}
-                    <div class="col-md-3">
+                    <div class="col-sm-6 col-md-4 mt-3">
                         <a href="users/{{ user.id }}/profile-picture.jpg?hash={{ user.profilePictureHash }}" class="thumbnail groupmembers-img" title="{{ user.firstName }} {{ user.lastName }}">
                             <div class="card">
                                 <img class="card-img-top" src="users/{{ user.id }}/profile-picture.jpg?hash={{ user.profilePictureHash }}"/>
