@@ -7,7 +7,7 @@
 
     <div class="gallery-source">
         {% for group in groups if group.users.enabledUsers.count %}
-            <h2>{{ group.title }}</h2>
+            <h2 class="mt-3">{{ group.title }}</h2>
             <div class="row">
                 {% for user in group.users.enabledUsers.sortByLastNameAndFirstName %}
                     <div class="col-sm-6 col-md-4 mt-3">
