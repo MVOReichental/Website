@@ -86,27 +86,22 @@
             <div class="col-12 col-md-3 col-lg-2 bg-light d-print-none" id="navbar-sidebar">
                 <nav class="collapse" id="navbar-links">
                     <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <span class="nav-link">Mitglieder</span>
-                            <ul class="nav flex-column nav-submenu">
-                                {{ this.navbar_link("internal/members/addresslist", "Adressenliste") }}
-                                {{ this.navbar_link("internal/members/birthdays", "Geburtstage") }}
-                            </ul>
-                        </li>
+                        {{ this.navbar_link("internal/members/addresslist", "Adressenliste") }}
                         {% if currentUser.hasPermission("forms.*") %}
                             {{ this.navbar_link("internal/forms", "Formulare") }}
                         {% endif %}
+                        {{ this.navbar_link("internal/pictures", "Fotogalerie") }}
+                        {{ this.navbar_link("internal/members/birthdays", "Geburtstage") }}
                         {% if currentUser.hasPermission("notedirectory.*") %}
                             {{ this.navbar_link("internal/notedirectory", "Notenverzeichnis") }}
-                        {% endif %}
-                        {% if currentUser.hasPermission("protocols.*") %}
-                            {{ this.navbar_link("internal/protocols", "Protokolle") }}
                         {% endif %}
                         {% if currentUser.hasPermission("roomoccupancyplan.*") %}
                             {{ this.navbar_link("internal/roomoccupancyplan", "Proberaumbelegung") }}
                         {% endif %}
+                        {% if currentUser.hasPermission("protocols.*") %}
+                            {{ this.navbar_link("internal/protocols", "Protokolle") }}
+                        {% endif %}
                         {{ this.navbar_link("internal/dates", "Termine") }}
-                        {{ this.navbar_link("internal/pictures", "Fotogalerie") }}
                         {{ this.navbar_link("internal/videos", "Videos") }}
                         {% if currentUser.hasPermission("admin") %}
                             <li class="nav-item">
