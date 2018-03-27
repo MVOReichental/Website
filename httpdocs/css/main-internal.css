@@ -34,18 +34,4 @@
     #navbar-links {
         display: block !important
     }
-
-    @supports ((position:-webkit-sticky) or (position:sticky)) {
-        #navbar-sidebar {
-            position: sticky;
-            top: 4rem;
-            z-index: 1000;
-            height: calc(100vh - 4rem);
-        }
-
-        #navbar-links {
-            max-height: calc(100vh - 64px);
-            overflow-y: auto
-        }
-    }
 }
