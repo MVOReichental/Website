@@ -128,20 +128,20 @@ $root = new GroupList;
 
 $rootGroup = new Group;
 $rootGroup->title = "Musiker";
-$rootGroup->permissions->append("group.musicians");
+$rootGroup->permissions->append("group.musiker");
 $rootGroup->permissions->append("some.other.permission");
 $root->append($rootGroup);
 
 $group1 = new Group;
 $group1->title = "Group 1";
-$group1->permissions->append("group.musicians.group1");
+$group1->permissions->append("group.musiker.group1");
 $group1->permissions->append("another.permission");
 $group1->permissions->append("roomoccupancyplan.view");
 $rootGroup->addGroup($group1);
 
 $group2 = new Group;
 $group2->title = "Group 2";
-$group2->permissions->append("group.musicians.group2");
+$group2->permissions->append("group.musiker.group2");
 $group2->permissions->append("permissions.2");
 $group2->permissions->append("notedirectory.view");
 $rootGroup->addGroup($group2);
