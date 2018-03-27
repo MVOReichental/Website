@@ -9,7 +9,7 @@
         {% for group in groups if group.users.enabledUsers.count %}
             <h2>{{ group.title }}</h2>
             <div class="row">
-                {% for user in group.users.enabledUsers %}
+                {% for user in group.users.enabledUsers.sortByLastNameAndFirstName %}
                     <div class="col-md-3">
                         <a href="users/{{ user.id }}/profile-picture.jpg?hash={{ user.profilePictureHash }}" class="thumbnail groupmembers-img" title="{{ user.firstName }} {{ user.lastName }}">
                             <div class="card">
