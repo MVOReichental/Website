@@ -91,7 +91,7 @@ class Endpoints
             ->target()
             ->className(GroupMembers::class)
             ->method("get")
-            ->arguments("Musiker", "musicians");
+            ->arguments("Musiker", "musiker");
 
         Endpoint::create(HttpMethod::GET, "/kontakt")
             ->target()
