@@ -116,6 +116,10 @@ a.thumbnail.active {
     width: 200px;
 }
 
+.blueimp-gallery-controls {
+    color: white;
+}
+
 ul.nav li.nav-item.active {
     font-weight: bold;
 }
