@@ -22,6 +22,10 @@ class Dates extends AbstractService
      */
     public function getHtml($internal = false)
     {
+        $user = null;
+        $groups = null;
+        $includePublic = false;
+
         if ($internal) {
             $user = User::getCurrent();
 
@@ -64,9 +68,6 @@ class Dates extends AbstractService
             }
         } else {
             $dates = DateList::get()->publiclyVisible();
-            $user = null;
-            $groups = null;
-            $includePublic = false;
         }
 
         return TwigRenderer::render("dates/" . ($internal ? "page-internal" : "page"), array
