@@ -12,7 +12,7 @@ class ProtocolsList extends ArrayObject
         $query = Database::query("
             SELECT *
             FROM `protocols`
-            ORDER BY `date` DESC
+            ORDER BY `date` DESC, `title` ASC
         ");
 
         $list = new self;
