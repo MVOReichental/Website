@@ -9,7 +9,11 @@ class ProtocolsList extends ArrayObject
 {
     public static function get()
     {
-        $query = Database::query("SELECT * FROM `protocols`");
+        $query = Database::query("
+            SELECT *
+            FROM `protocols`
+            ORDER BY `date` DESC
+        ");
 
         $list = new self;
 
