@@ -63,6 +63,10 @@ $(function () {
 
     var addTitleModal = $("#notedirectory-editor-program-add-title-modal");
 
+    addTitleModal.on("shown.bs.modal", function () {
+        addTitleModal.find(".search").focus();
+    });
+
     addTitleModal.find(".search").on("keyup", function () {
         var search = $(this).val().toLowerCase().trim();
 

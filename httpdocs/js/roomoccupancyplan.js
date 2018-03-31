@@ -88,6 +88,10 @@ $(function () {
         }
     });
 
+    $("#roomoccupancyplan-edit-modal").on("shown.bs.modal", function() {
+        $("#roomoccupancyplan-edit-title").focus();
+    });
+
     $("#roomoccupancyplan-edit-form").on("submit", function (event) {
         event.preventDefault();
 
