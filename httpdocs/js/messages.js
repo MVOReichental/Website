@@ -23,4 +23,9 @@ $(function () {
             }
         });
     });
+
+    $(".message-recipient-toggle").on("click", function () {
+        $(this).hide();
+        $(this).parent().find(".message-recipient").removeClass("message-recipient-limited");
+    });
 });

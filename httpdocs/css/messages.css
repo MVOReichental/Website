@@ -20,3 +20,15 @@
 .messages-list > .card-header > ul {
     margin: 0;
 }
+
+.message-recipient-limited {
+    display: none;
+}
+
+.message-recipient-limited:nth-child(-n+5) {
+    display: inline-block;
+}
+
+.message-recipient-toggle {
+    cursor: pointer;
+}

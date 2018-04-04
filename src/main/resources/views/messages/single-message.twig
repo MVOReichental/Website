@@ -14,8 +14,11 @@
                     <div>
                         <strong>An:</strong>
                         {% for recipient in message.recipients %}
-                            <a href="internal/members/{{ recipient.username }}" class="badge badge-primary">{{ recipient.firstName }} {{ recipient.lastName }}</a>
+                            <a href="internal/members/{{ recipient.username }}" class="badge badge-primary message-recipient message-recipient-limited">{{ recipient.firstName }} {{ recipient.lastName }}</a>
                         {% endfor %}
+                        {% if message.recipients.count > 5 %}
+                            <span class="message-recipient-toggle">und {{ message.recipients.count - 5 }} weitere</span>
+                        {% endif %}
                     </div>
 
                     <div>
