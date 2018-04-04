@@ -41,6 +41,15 @@ class News extends AbstractService
 
     public function save()
     {
-        file_put_contents(RESOURCES_ROOT . "/news.html", $_POST["editabledata"]);
+        file_put_contents(RESOURCES_ROOT . "/news.html", $_POST["content"]);
+    }
+
+    public function delete()
+    {
+        if (!file_exists(RESOURCES_ROOT . "/news.html")) {
+            return;
+        }
+
+        unlink(RESOURCES_ROOT . "/news.html");
     }
 }

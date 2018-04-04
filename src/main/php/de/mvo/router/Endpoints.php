@@ -659,10 +659,16 @@ class Endpoints
             ->arguments(true)
             ->permission("admin.newsEditor");
 
-        Endpoint::create(HttpMethod::POST, "/internal/admin/newseditor")
+        Endpoint::create(HttpMethod::POST, "/internal/admin/newseditor/content.html")
             ->target()
             ->className(News::class)
             ->method("save")
+            ->permission("admin.newsEditor");
+
+        Endpoint::create(HttpMethod::DELETE, "/internal/admin/newseditor/content.html")
+            ->target()
+            ->className(News::class)
+            ->method("delete")
             ->permission("admin.newsEditor");
     }
 
