@@ -18,9 +18,11 @@
             <div class="alert alert-danger">{{ errorMessage|raw }}</div>
         {% endif %}
 
-        <div class="input-group">
-            <input type="text" name="username" class="form-control" placeholder="Benutzername" required autofocus/>
-            <span class="input-group-append"><button class="btn btn-primary">Weiter</button></span>
+        <div class="form-label-group">
+            <input type="text" name="username" class="form-control" id="login-reset-password-username" placeholder="Benutzername" required autofocus/>
+            <label for="login-reset-password-username">Benutzername</label>
         </div>
+
+        <button class="btn btn-lg btn-primary btn-block">Weiter</button>
     </form>
 {% endblock %}

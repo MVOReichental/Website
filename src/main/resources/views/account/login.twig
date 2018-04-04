@@ -9,8 +9,8 @@
 {% endblock %}
 
 {% block content %}
-    <form class="login-form input-list" id="login-form" method="post" action="internal/login?redirect={{ url }}">
-        <h2>Login im internen Bereich</h2>
+    <form class="login-form" id="login-form" method="post" action="internal/login?redirect={{ url }}">
+        <h2>Interner Bereich</h2>
 
         {% if errorMessage %}
             <div class="alert alert-danger">{{ errorMessage|raw }}</div>
@@ -22,12 +22,24 @@
                 Gebe den aus der App generierten Code in das nachfolgende Feld ein.
             </div>
 
-            <input type="text" id="login-2fa-token" name="2fa-token" class="form-control" placeholder="Code" required/>
+            <div class="form-label-group">
+                <input type="text" id="login-2fa-token" name="2fa-token" class="form-control" placeholder="Code" required/>
+                <label for="login-2fa-token">Code</label>
+            </div>
 
             <button class="btn btn-lg btn-primary">Login</button>
         {% else %}
-            <input type="text" id="login-username" name="username" class="form-control" placeholder="Benutzername" required autofocus/>
-            <input type="password" id="login-password" name="password" class="form-control" placeholder="Passwort" required/>
+            <p>Melde dich mit deinem Benutzername und Passwort im internen Bereich an.</p>
+
+            <div class="form-label-group">
+                <input type="text" id="login-username" name="username" class="form-control" placeholder="Benutzername" required autofocus/>
+                <label for="login-username">Benutzername</label>
+            </div>
+
+            <div class="form-label-group">
+                <input type="password" id="login-password" name="password" class="form-control" placeholder="Passwort" required/>
+                <label for="login-password">Passwort</label>
+            </div>
 
             <button class="btn btn-lg btn-primary btn-block">Login</button>
 
