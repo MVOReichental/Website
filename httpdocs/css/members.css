@@ -1,3 +1,8 @@
+#members-details-picture {
+    width: 100%;
+    max-width: 200px;
+}
+
 #members-send-message-button {
     display: none;
 }
