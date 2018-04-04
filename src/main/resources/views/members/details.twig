@@ -18,7 +18,7 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-xl-4">
             <div id="members-details-user" class="gallery-source" data-id="{{ user.id }}">
                 <a href="users/{{ user.id }}/profile-picture.jpg?hash={{ user.profilePictureHash }}">
                     <img src="users/{{ user.id }}/profile-picture.jpg?hash={{ user.profilePictureHash }}" class="img-rounded" id="members-details-picture"/>
@@ -54,7 +54,7 @@
             </div>
         </div>
 
-        <div class="col-md-8" id="members-details-messages">
+        <div class="col-xl-8" id="members-details-messages">
             <h3 class="page-header">Nachrichten von {{ user.firstName }}</h3>
 
             <p class="text-muted"><strong>Hinweis:</strong> Du siehst Nachrichten welche du an {{ user.firstName }} gesendet bzw. von {{ user.firstName }} erhalten hast.</p>
