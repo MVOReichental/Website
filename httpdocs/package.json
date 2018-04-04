@@ -21,7 +21,6 @@
     "fullcalendar": "^3.8.0",
     "highcharts": "^6.0.4",
     "jquery-cropper": "^1.0.0-beta",
-    "jquery-qrcode": "^1.0.0",
     "jquery-ui": "^1.12.1",
     "jstree-bootstrap-theme": "^1.0.1",
     "mustache": "^2.3.0",
