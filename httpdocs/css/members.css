@@ -1,13 +1,3 @@
-@media (min-width: 992px) {
-    #members-details-user {
-        position: fixed;
-    }
-
-    #members-list tbody td {
-        vertical-align: middle;
-    }
-}
-
 #members-send-message-button {
     display: none;
 }
