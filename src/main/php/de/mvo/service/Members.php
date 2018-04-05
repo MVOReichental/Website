@@ -131,8 +131,6 @@ class Members extends AbstractService
             }
         }
 
-        $filteredMessages->makeUnique();
-
         return TwigRenderer::render("members/details", array
         (
             "user" => $user,
