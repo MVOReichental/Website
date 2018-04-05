@@ -353,6 +353,12 @@ class Endpoints
             ->method("getReceivedMessages")
             ->requireLogin();
 
+        Endpoint::create(HttpMethod::GET, "/internal/messages/all")
+            ->target()
+            ->className(Messages::class)
+            ->method("getAllMessages")
+            ->permission("messages.all");
+
         Endpoint::create(HttpMethod::POST, "/internal/messages/send")
             ->target()
             ->className(Messages::class)

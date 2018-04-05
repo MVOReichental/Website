@@ -14,6 +14,10 @@
    * `forms.list`
    * `forms.view.$name`
 
+# Messages
+
+   * `messages.all`
+
 # Note directory
 
    * `notedirectory.view`

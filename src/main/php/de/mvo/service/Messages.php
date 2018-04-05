@@ -42,6 +42,19 @@ class Messages extends AbstractService
     }
 
     /**
+     * @return string
+     * @throws Twig_Error
+     */
+    public function getAllMessages()
+    {
+        return TwigRenderer::render("messages/page", array
+        (
+            "title" => "Alle Nachrichten",
+            "messages" => MessagesList::getAll()
+        ));
+    }
+
+    /**
      * @return null|string
      * @throws Twig_Error
      */
