@@ -107,13 +107,6 @@ class Messages extends ArrayObject
         }
     }
 
-    public function makeUnique()
-    {
-        $this->exchangeArray(array_unique((array)$this));
-
-        return $this;
-    }
-
     /**
      * @param mixed $index
      *

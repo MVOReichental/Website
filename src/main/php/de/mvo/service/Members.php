@@ -121,6 +121,11 @@ class Members extends AbstractService
          * @var $message Message
          */
         foreach ($messages as $message) {
+            // Prevent duplicate messages if sender is also in recipients list
+            if ($messages->hasMessage($message)) {
+                continue;
+            }
+
             if ($message->sender->isEqualTo($currentUser)) {
                 $filteredMessages->append($message);
             }
