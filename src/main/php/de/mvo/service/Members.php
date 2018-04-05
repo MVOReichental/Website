@@ -102,19 +102,31 @@ class Members extends AbstractService
             throw new NotFoundException;
         }
 
-        $messages = Messages::getBySender($user);
-        $messages->addAll(Messages::getByRecipient($user));
-
         $filteredMessages = new Messages;
+
+        $messages = Messages::getBySender($user);
 
         /**
          * @var $message Message
          */
         foreach ($messages as $message) {
-            if ($message->sender->isEqualTo($currentUser) or $message->recipients->hasUser($currentUser)) {
+            if ($message->recipients->hasUser($currentUser)) {
                 $filteredMessages->append($message);
             }
         }
+
+        $messages = Messages::getByRecipient($user);
+
+        /**
+         * @var $message Message
+         */
+        foreach ($messages as $message) {
+            if ($message->sender->isEqualTo($currentUser)) {
+                $filteredMessages->append($message);
+            }
+        }
+
+        $filteredMessages->makeUnique();
 
         return TwigRenderer::render("members/details", array
         (
