@@ -5,7 +5,6 @@ use de\mvo\Database;
 use de\mvo\Date;
 use de\mvo\model\contacts\Contact;
 use de\mvo\model\date\Entry;
-use de\mvo\model\date\Groups as DateGroups;
 use de\mvo\model\date\Location;
 use de\mvo\model\forms\Form;
 use de\mvo\model\messages\Message;
@@ -130,13 +129,11 @@ function migrateStage(PDO $oldDb, $stage)
                 $entry->location = $location;
                 $entry->highlight = $row->bold;
 
-                $groups = new DateGroups;
-
                 foreach (explode(",", $row->groups) as $group) {
                     if ($group === "public") {
                         $entry->isPublic = true;
                     } else {
-                        $groups->append($group);
+                        $entry->groups->append($group);
                     }
                 }
 
