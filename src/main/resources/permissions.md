@@ -19,6 +19,7 @@
 * `group.foerderverein`
 * `group.musiker`
 * `group.vorstandschaft`
+* `group.$name`
 
 # Messages
 
