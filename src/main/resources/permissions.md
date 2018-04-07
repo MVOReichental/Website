@@ -14,6 +14,10 @@
    * `forms.list`
    * `forms.view.$name`
 
+# Group members
+
+   * `group.$name`
+
 # Messages
 
    * `messages.all`
