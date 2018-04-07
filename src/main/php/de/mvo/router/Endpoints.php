@@ -156,6 +156,11 @@ class Endpoints
             ->className(Pictures::class)
             ->method("getAlbum");
 
+        Endpoint::create(HttpMethod::GET, "/pictures/album/[i:id]")
+            ->target()
+            ->className(Pictures::class)
+            ->method("redirectLegacyAlbumId");
+
         // Profile pictures
         Endpoint::create(HttpMethod::GET, "/users/[i:id]/profile-picture.jpg")
             ->target()

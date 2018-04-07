@@ -1,8 +1,10 @@
 <?php
 namespace de\mvo\service;
 
+use de\mvo\model\pictures\Album;
 use de\mvo\model\pictures\YearList;
 use de\mvo\model\users\User;
+use de\mvo\service\exception\NotFoundException;
 use de\mvo\TwigRenderer;
 use Twig_Error;
 
@@ -91,5 +93,25 @@ class Pictures extends AbstractService
             "title" => $album === null ? $this->params->album : $album->title,
             "album" => $album
         ));
+    }
+
+    /**
+     * @return null
+     * @throws NotFoundException
+     */
+    public function redirectLegacyAlbumId()
+    {
+        $album = Album::getAlbumByLegacyId($this->params->id);
+
+        if ($album === null) {
+            throw new NotFoundException;
+        }
+
+        if (!$album->isVisibleToUser(null)) {
+            throw new NotFoundException;
+        }
+
+        header(sprintf("Location: /fotogalerie/%d/%s", $album->year, $album->name));
+        return null;
     }
 }

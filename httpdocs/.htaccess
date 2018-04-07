@@ -6,6 +6,41 @@ RewriteRule album.json - [F]
 RewriteRule package.json - [F]
 RewriteRule package-lock.json - [F]
 
+# Redirects for URLs used by old website
+RedirectMatch 301 ^/home$ /
+RedirectMatch 301 ^/imprint$ /impressum
+RedirectMatch 301 ^/contact$ /kontakt
+RedirectMatch 301 ^/chronicle$ /chronik
+RedirectMatch 301 ^/history$ /vereinsgeschichte
+RedirectMatch 301 ^/newmember$ /beitreten
+RedirectMatch 301 ^/jugendausbildung$ /jugendausbildung/ausbildung_im_verein
+RedirectMatch 301 ^/jugendausbildung/verein$ /jugendausbildung/ausbildung_im_verein
+RedirectMatch 301 ^/jugendausbildung/groups$ /jugendausbildung/ausbildungsgruppen
+RedirectMatch 301 ^/foerderverein$ /foerderverein/warum_foerderverein
+RedirectMatch 301 ^/foerderverein/why$ /foerderverein/warum_foerderverein
+RedirectMatch 301 ^/foerderverein/contact$ /foerderverein/kontakt
+RedirectMatch 301 ^/dates$ /termine
+RedirectMatch 301 ^/dates/ /termine
+RedirectMatch 301 ^/pictures$ /fotogalerie
+RedirectMatch 301 ^/pictures/year/([0-9]+)$ /fotogalerie/$1
+RedirectMatch 301 ^/internalarea$ /internal
+RedirectMatch 301 ^/internalarea/editprofile$ /internal/settings/profile
+RedirectMatch 301 ^/internalarea/addresslist$ /internal/members/addresslist
+RedirectMatch 301 ^/internalarea/usermanager$ /internal/admin/usermanagement
+RedirectMatch 301 ^/internalarea/visitstats$ /internal/admin/visits
+RedirectMatch 301 ^/internalarea/forms$ /internal/forms
+RedirectMatch 301 ^/internalarea/birthdays$ /internal/members/birthdays
+RedirectMatch 301 ^/internalarea/birthdays/ /internal/members/birthdays
+RedirectMatch 301 ^/internalarea/messages$ /internal/messages/received
+RedirectMatch 301 ^/internalarea/notedirectory$ /internal/notedirectory
+RedirectMatch 301 ^/internalarea/notedirectory/all$ /internal/notedirectory/titles
+RedirectMatch 301 ^/internalarea/notedirectory/search/(.*)$ /internal/notedirectory/search?query=$1
+RedirectMatch 301 ^/internalarea/notedirectory/ /internal/notedirectory
+RedirectMatch 301 ^/internalarea/notedirectoryeditor$ /internal/notedirectory/editor
+RedirectMatch 301 ^/internalarea/roomoccupancyplan$ /internal/roomoccupancyplan
+RedirectMatch 301 ^/internalarea/protocols$ /internal/protocols
+RedirectMatch 301 ^/internalarea/ /internal
+
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule (.*) index.php/$1 [L,QSA]
