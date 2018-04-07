@@ -20,6 +20,10 @@ RedirectMatch 301 ^/foerderverein$ /foerderverein/warum_foerderverein
 RedirectMatch 301 ^/foerderverein/why$ /foerderverein/warum_foerderverein
 RedirectMatch 301 ^/foerderverein/contact$ /foerderverein/kontakt
 RedirectMatch 301 ^/dates$ /termine
+RedirectMatch 301 ^/dates/public.ics$ /termine.ics
+RedirectMatch 301 ^/dates/public.ics/ /termine.ics
+RedirectMatch 301 ^/dates/internal.ics$ /internal/dates.ics
+RedirectMatch 301 ^/dates/internal.ics/ /internal/dates.ics
 RedirectMatch 301 ^/dates/ /termine
 RedirectMatch 301 ^/pictures$ /fotogalerie
 RedirectMatch 301 ^/pictures/year/([0-9]+)$ /fotogalerie/$1
