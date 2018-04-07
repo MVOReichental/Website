@@ -26,7 +26,6 @@
     "mustache": "^2.3.0",
     "popper.js": "^1.12.9",
     "pwstrength-bootstrap": "^2.1.1",
-    "require": "^2.4.20",
     "zxcvbn": "^4.4.2"
   }
 }
