@@ -1,37 +1,37 @@
 # Admin
 
-   * `admin.newsEditor`
-   * `admin.userManagement`
-   * `admin.visits`
+* `admin.newsEditor`
+* `admin.userManagement`
+* `admin.visits`
 
 # Dates
 
-   * `dates.edit`
-   * `dates.view.$group`
+* `dates.edit`
+* `dates.view.$group`
 
 # Forms
 
-   * `forms.list`
-   * `forms.view.$name`
+* `forms.list`
+* `forms.view.$name`
 
 # Group members
 
-   * `group.$name`
+* `group.$name`
 
 # Messages
 
-   * `messages.all`
+* `messages.all`
 
 # Note directory
 
-   * `notedirectory.view`
+* `notedirectory.view`
 
 # Protocols
 
-   * `protocols.upload.$group`
-   * `protocols.view.$group`
+* `protocols.upload.$group`
+* `protocols.view.$group`
 
 # Room occupancy plan
 
-   * `roomoccupancyplan.edit`
-   * `roomoccupancyplan.view`
+* `roomoccupancyplan.edit`
+* `roomoccupancyplan.view`
