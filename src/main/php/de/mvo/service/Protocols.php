@@ -5,6 +5,7 @@ use de\mvo\Date;
 use de\mvo\model\protocols\Groups;
 use de\mvo\model\protocols\Protocol;
 use de\mvo\model\protocols\ProtocolsList;
+use de\mvo\model\users\Groups as UserGroups;
 use de\mvo\model\users\User;
 use de\mvo\TwigRenderer;
 use de\mvo\uploadhandler\File;
@@ -30,7 +31,7 @@ class Protocols extends AbstractService
         return TwigRenderer::render("protocols/page", array
         (
             "uploaded" => $uploadedState,
-            "groups" => Groups::getAll(),
+            "groups" => UserGroups::getAll(),
             "allowUpload" => User::getCurrent()->hasPermission("protocols.upload.*"),
             "protocols" => ProtocolsList::get()->getVisibleForUser(User::getCurrent())
         ));
@@ -44,7 +45,7 @@ class Protocols extends AbstractService
     {
         return TwigRenderer::render("protocols/upload", array
         (
-            "groups" => Groups::getAll()
+            "groups" => UserGroups::getAll()
         ));
     }
 
@@ -75,7 +76,7 @@ class Protocols extends AbstractService
 
                     if (isset($_POST["groups"]) and is_array($_POST["groups"])) {
                         foreach ($_POST["groups"] as $group) {
-                            if (!isset(Groups::getAll()[$group])) {
+                            if (!UserGroups::hasGroup($group)) {
                                 continue;
                             }
 

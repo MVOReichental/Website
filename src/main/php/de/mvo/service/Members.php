@@ -4,6 +4,7 @@ namespace de\mvo\service;
 use de\mvo\model\messages\Message;
 use de\mvo\model\messages\Messages;
 use de\mvo\model\permissions\GroupList;
+use de\mvo\model\users\Groups;
 use de\mvo\model\users\User;
 use de\mvo\model\users\Users;
 use de\mvo\service\exception\NotFoundException;
@@ -27,17 +28,6 @@ class Members extends AbstractService
         );
     }
 
-    public static function getListGroups()
-    {
-        return array
-        (
-            "vorstand" => "Vorstand",
-            "sonderaufgaben" => "Sonderaufgaben",
-            "dirigentin" => "Dirigentin",
-            "musiker" => "Musiker"
-        );
-    }
-
     /**
      * @return string
      * @throws Twig_Error
@@ -54,7 +44,7 @@ class Members extends AbstractService
 
         $groups = array();
 
-        foreach (self::getListGroups() as $group => $title) {
+        foreach (Groups::getAll() as $group => $title) {
             $active = (empty($selectedGroups) or in_array($group, $selectedGroups));
 
             $groups[$group] = array

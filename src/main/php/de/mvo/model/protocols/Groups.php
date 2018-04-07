@@ -6,16 +6,6 @@ use de\mvo\Database;
 
 class Groups extends ArrayObject
 {
-    public static function getAll()
-    {
-        return array
-        (
-            "vorstandschaft" => "Vorstandschaft",
-            "foerderverein" => "F&ouml;rderverein",
-            "dirigentin" => "Dirigentin"
-        );
-    }
-
     public static function getForProtocol(Protocol $protocol)
     {
         $query = Database::prepare("

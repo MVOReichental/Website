@@ -3,22 +3,11 @@ namespace de\mvo\model\date;
 
 use ArrayObject;
 use de\mvo\Database;
+use de\mvo\model\users\Groups as UserGroups;
 use stdClass;
 
 class Groups extends ArrayObject
 {
-    public static function getAll()
-    {
-        return array
-        (
-            "vorstandschaft" => "Vorstandschaft",
-            "sonderaufgaben" => "Sonderaufgaben",
-            "foerderverein" => "F&ouml;rderverein",
-            "dirigentin" => "Dirigentin",
-            "musiker" => "Musiker"
-        );
-    }
-
     public static function getForEntry(Entry $entry)
     {
         $groups = new self;
@@ -109,7 +98,7 @@ class Groups extends ArrayObject
 
     public function getTitles()
     {
-        $allGroups = self::getAll();
+        $allGroups = UserGroups::getAll();
         $titles = array();
 
         foreach ($this as $group) {

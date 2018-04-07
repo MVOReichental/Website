@@ -6,6 +6,7 @@ use de\mvo\model\date\DateList;
 use de\mvo\model\date\Entry;
 use de\mvo\model\date\Groups;
 use de\mvo\model\date\Location;
+use de\mvo\model\users\Groups as UserGroups;
 use de\mvo\model\users\User;
 use de\mvo\service\exception\NotFoundException;
 use de\mvo\TwigRenderer;
@@ -51,7 +52,7 @@ class Dates extends AbstractService
 
             $groups = array();
 
-            foreach (Groups::getAll() as $group => $title) {
+            foreach (UserGroups::getAll() as $group => $title) {
                 if (!$user->hasPermission("dates.view." . $group)) {
                     continue;
                 }
@@ -223,7 +224,7 @@ class Dates extends AbstractService
 
         if (isset($_POST["groups"]) and is_array($_POST["groups"])) {
             foreach ($_POST["groups"] as $group) {
-                if (!isset(Groups::getAll()[$group])) {
+                if (!UserGroups::hasGroup($group)) {
                     continue;
                 }
 
@@ -245,7 +246,7 @@ class Dates extends AbstractService
     {
         return TwigRenderer::render("dates/edit", array
         (
-            "groups" => Groups::getAll()
+            "groups" => UserGroups::getAll()
         ));
     }
 
@@ -263,7 +264,7 @@ class Dates extends AbstractService
 
         return TwigRenderer::render("dates/edit", array
         (
-            "groups" => Groups::getAll(),
+            "groups" => UserGroups::getAll(),
             "entry" => $entry
         ));
     }
