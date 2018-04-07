@@ -16,7 +16,9 @@
 
 # Group members
 
-* `group.$name`
+* `group.foerderverein`
+* `group.musiker`
+* `group.vorstandschaft`
 
 # Messages
 
