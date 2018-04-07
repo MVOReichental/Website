@@ -35,7 +35,7 @@
                     <input type="hidden" name="groups" id="dates-groups-field"/>
 
                     <div class="input-group">
-                        <select id="dates-groups-select" class="selectpicker show-tick" multiple>
+                        <select id="dates-groups-select" class="selectpicker show-tick" data-actions-box="true" multiple>
                             {% for name,group in groups %}
                                 <option value="{{ name }}" {% if group.active %}selected{% endif %}>{{ group.title|raw }}</option>
                             {% endfor %}
