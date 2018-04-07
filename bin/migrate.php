@@ -132,6 +132,8 @@ function migrateStage(PDO $oldDb, $stage)
                 foreach (explode(",", $row->groups) as $group) {
                     if ($group === "public") {
                         $entry->isPublic = true;
+                        $entry->groups->exchangeArray(array());
+                        break;
                     } else {
                         $entry->groups->append($group);
                     }
