@@ -1,12 +1,30 @@
 {
+  "blockfloetenausbildung": {
+    "title": "Blockfl\u00f6tenausbildung"
+  },
   "dirigentin": {
     "title": "Dirigentin"
   },
   "foerderverein": {
     "title": "F\u00f6rderverein"
   },
+  "frauenstammtisch": {
+    "title": "Frauenstammtisch"
+  },
+  "helfer": {
+    "title": "Helfer"
+  },
+  "instrumentalausbildung": {
+    "title": "Instrumentalausbildung"
+  },
+  "maennerballett": {
+    "title": "Männerballett"
+  },
   "musiker": {
     "title": "Musiker"
+  },
+  "musiker-paused": {
+    "title": "Musiker in Pause"
   },
   "sonderaufgaben": {
     "title": "Sonderaufgaben"
