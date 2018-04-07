@@ -3,7 +3,7 @@
     "description": "The MVO website",
     "homepage": "https://musikverein-reichental.de",
     "minimum-stability": "stable",
-    "license": "proprietary",
+    "license": "",
     "authors": [
         {
             "name": "Michael Wieland",
