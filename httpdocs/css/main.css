@@ -24,10 +24,6 @@
     a[href]:after {
         content: "";
     }
-
-    .footer {
-        display: none;
-    }
 }
 
 a {
