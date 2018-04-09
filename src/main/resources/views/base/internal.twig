@@ -39,7 +39,7 @@
     <script src="js/internal.js"></script>
 {% endblock %}
 
-{% block header %}
+{% block body %}
     {% if currentUser %}
         <nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
             <div class="container-fluid">
@@ -77,9 +77,7 @@
             </div>
         </nav>
     {% endif %}
-{% endblock %}
 
-{% block body %}
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-3 col-lg-2 bg-light d-print-none" id="navbar-sidebar">
@@ -124,5 +122,3 @@
         </div>
     </div>
 {% endblock %}
-
-{% block footer %}{% endblock %}

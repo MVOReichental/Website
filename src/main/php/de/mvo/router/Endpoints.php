@@ -30,12 +30,6 @@ class Endpoints
     {
         Endpoint::create(HttpMethod::GET, "/")
             ->target()
-            ->className(StaticView::class)
-            ->method("get")
-            ->arguments("home");
-
-        Endpoint::create(HttpMethod::GET, "/aktuell")
-            ->target()
             ->className(News::class)
             ->method("get");
 
