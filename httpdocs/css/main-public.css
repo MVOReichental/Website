@@ -16,6 +16,10 @@
         }
     }
 
+    #navbar-container {
+        background-color: #24292e;
+    }
+
     #header-img {
         width: 100%;
     }
