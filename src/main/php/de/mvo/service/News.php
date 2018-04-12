@@ -4,6 +4,8 @@ namespace de\mvo\service;
 use de\mvo\model\date\DateList;
 use de\mvo\model\pictures\YearList;
 use de\mvo\TwigRenderer;
+use DOMDocument;
+use DOMElement;
 use Twig_Error;
 
 class News extends AbstractService
@@ -41,7 +43,19 @@ class News extends AbstractService
 
     public function save()
     {
-        file_put_contents(RESOURCES_ROOT . "/news.html", $_POST["content"]);
+        $domDocument = new DOMDocument;
+        $domDocument->loadHTML($_POST["content"]);
+
+        /**
+         * @var $node DOMElement
+         */
+        foreach ($domDocument->getElementsByTagName("img") as $node) {
+            if ($node->hasAttribute("width") and $node->hasAttribute("height")) {
+                $node->removeAttribute("height");
+            }
+        }
+
+        file_put_contents(RESOURCES_ROOT . "/news.html", $domDocument->saveHTML());
     }
 
     public function delete()
