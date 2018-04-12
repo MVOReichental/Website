@@ -213,7 +213,7 @@ function migrateStage(PDO $oldDb, $stage)
                 $updateQuery->execute(array
                 (
                     ":password" => $row->newPasswordHash,
-                    ":lastOnline" => (new Date($row->lastOnline))->toDatabase(),
+                    ":lastOnline" => $row->lastOnline === null ? null : (new Date($row->lastOnline))->toDatabase(),
                     ":id" => $row->id,
                 ));
 
