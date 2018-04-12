@@ -1,12 +1,11 @@
 $(function () {
     $("#news-content").ckeditor({
         language: "de",
-        extraPlugins: "colorbutton,dragresize,justify,save,uploadimage",
+        extraPlugins: "colorbutton,image2,justify,save,uploadimage",
         uploadUrl: "internal/upload",
         baseFloatZIndex: 1000
     });
 
-    CKEDITOR.plugins.addExternal("dragresize", "/ckeditor_plugins/dragresize/");
     CKEDITOR.plugins.addExternal("save", "/ckeditor_plugins/save/");
 
     $("#news-editor-remove-button").on("click", function () {
