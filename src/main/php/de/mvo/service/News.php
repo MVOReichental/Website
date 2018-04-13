@@ -10,16 +10,16 @@ use Twig_Error;
 
 class News extends AbstractService
 {
+    const NEWS_FILE = RESOURCES_ROOT . "/news.html";
+
     /**
-     * @param bool $allowEdit
      * @return string
      * @throws Twig_Error
      */
-    public function get($allowEdit = false)
+    public function get()
     {
-        $newsFile = RESOURCES_ROOT . "/news.html";
-        if (file_exists($newsFile)) {
-            $newsContent = file_get_contents($newsFile);
+        if (file_exists(self::NEWS_FILE)) {
+            $newsContent = file_get_contents(self::NEWS_FILE);
         } else {
             $newsContent = null;
         }
@@ -30,14 +30,28 @@ class News extends AbstractService
 
         return TwigRenderer::render("news", array
         (
-            "news" => array
-            (
-                "allowEdit" => $allowEdit,
-                "content" => $newsContent
-            ),
+            "news" => $newsContent,
             "dates" => DateList::get(3)->publiclyVisible(),
             "albums" => $albums->getVisibleToUser(null)->slice(0, 3),
             "picturesBaseUrl" => "fotogalerie"
+        ));
+    }
+
+    /**
+     * @return string
+     * @throws Twig_Error
+     */
+    public function getEditor()
+    {
+        if (file_exists(self::NEWS_FILE)) {
+            $content = file_get_contents(self::NEWS_FILE);
+        } else {
+            $content = null;
+        }
+
+        return TwigRenderer::render("admin/news-editor", array
+        (
+            "content" => $content
         ));
     }
 
@@ -60,10 +74,10 @@ class News extends AbstractService
 
     public function delete()
     {
-        if (!file_exists(RESOURCES_ROOT . "/news.html")) {
+        if (!file_exists(self::NEWS_FILE)) {
             return;
         }
 
-        unlink(RESOURCES_ROOT . "/news.html");
+        unlink(self::NEWS_FILE);
     }
 }

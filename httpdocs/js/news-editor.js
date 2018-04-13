@@ -1,9 +1,10 @@
 $(function () {
-    $("#news-content").ckeditor({
+    $("#news-editor-content").ckeditor({
         language: "de",
         extraPlugins: "colorbutton,image2,justify,save,uploadimage",
         uploadUrl: "internal/upload",
-        baseFloatZIndex: 1000
+        baseFloatZIndex: 1000,
+        height: 500
     });
 
     CKEDITOR.plugins.addExternal("save", "/ckeditor_plugins/save/");
@@ -11,7 +12,7 @@ $(function () {
     $("#news-editor-remove-button").on("click", function () {
         $("#news-editor-remove-modal").modal("hide");
 
-        CKEDITOR.instances["news-content"].setData("");
+        CKEDITOR.instances["news-editor-content"].setData("");
 
         $.ajax({
             url: "internal/admin/newseditor/content.html",

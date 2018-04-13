@@ -1,0 +1,47 @@
+{% extends "base/internal-public-switch.twig" %}
+
+{% block title %}Aktuell{{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="css/news-editor.css"/>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+
+    <script src="node_modules/ckeditor/ckeditor.js"></script>
+    <script src="node_modules/ckeditor/adapters/jquery.js"></script>
+    <script src="js/news-editor.js"></script>
+{% endblock %}
+
+{% block content %}
+    <h1 class="page-header">Aktuell</h1>
+
+    <textarea id="news-editor-content">
+        {% if content %}
+            {{ content|raw }}
+        {% endif %}
+    </textarea>
+
+    <div class="modal" role="dialog" id="news-editor-remove-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Inhalt entfernen</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Soll der Inhalt wirklich entfernt werden?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="news-editor-remove-button">Inhalt entfernen</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

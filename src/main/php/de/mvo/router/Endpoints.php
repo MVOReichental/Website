@@ -660,7 +660,7 @@ class Endpoints
         Endpoint::create(HttpMethod::GET, "/internal/admin/newseditor")
             ->target()
             ->className(News::class)
-            ->method("get")
+            ->method("getEditor")
             ->arguments(true)
             ->permission("admin.newsEditor");
 
