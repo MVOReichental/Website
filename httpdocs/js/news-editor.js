@@ -3,7 +3,6 @@ $(function () {
         language: "de",
         extraPlugins: "colorbutton,image2,justify,save,uploadimage",
         uploadUrl: "internal/upload",
-        baseFloatZIndex: 1000,
         height: 500
     });
 
