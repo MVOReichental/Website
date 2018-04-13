@@ -58,7 +58,7 @@ class News extends AbstractService
     public function save()
     {
         $domDocument = new DOMDocument;
-        $domDocument->loadHTML($_POST["content"]);
+        $domDocument->loadHTML($_POST["content"], LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
         /**
          * @var $node DOMElement
