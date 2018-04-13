@@ -3,7 +3,8 @@ $(function () {
         language: "de",
         extraPlugins: "colorbutton,image2,justify,save,uploadimage",
         uploadUrl: "internal/upload",
-        height: 500
+        height: 500,
+        disallowedContent: "img[width,height]"
     });
 
     CKEDITOR.plugins.addExternal("save", "/ckeditor_plugins/save/");

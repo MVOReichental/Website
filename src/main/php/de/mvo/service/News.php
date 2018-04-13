@@ -57,19 +57,7 @@ class News extends AbstractService
 
     public function save()
     {
-        $domDocument = new DOMDocument;
-        $domDocument->loadHTML($_POST["content"], LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-
-        /**
-         * @var $node DOMElement
-         */
-        foreach ($domDocument->getElementsByTagName("img") as $node) {
-            if ($node->hasAttribute("width") and $node->hasAttribute("height")) {
-                $node->removeAttribute("height");
-            }
-        }
-
-        file_put_contents(RESOURCES_ROOT . "/news.html", $domDocument->saveHTML());
+        file_put_contents(RESOURCES_ROOT . "/news.html", $_POST["content"]);
     }
 
     public function delete()
