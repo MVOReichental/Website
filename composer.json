@@ -25,6 +25,7 @@
         "twig/twig": "^2.4",
         "swiftmailer/swiftmailer": "^5.4",
         "jaybizzle/crawler-detect": "^1.2",
-        "google/apiclient": "^2.2"
+        "google/apiclient": "^2.2",
+        "ezyang/htmlpurifier": "^4.10"
     }
 }

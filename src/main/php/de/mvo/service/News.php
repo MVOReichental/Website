@@ -4,8 +4,7 @@ namespace de\mvo\service;
 use de\mvo\model\date\DateList;
 use de\mvo\model\pictures\YearList;
 use de\mvo\TwigRenderer;
-use DOMDocument;
-use DOMElement;
+use HTMLPurifier;
 use Twig_Error;
 
 class News extends AbstractService
@@ -57,7 +56,9 @@ class News extends AbstractService
 
     public function save()
     {
-        file_put_contents(RESOURCES_ROOT . "/news.html", $_POST["content"]);
+        $htmlPurifier = new HTMLPurifier;
+
+        file_put_contents(RESOURCES_ROOT . "/news.html", $htmlPurifier->purify($_POST["content"]));
     }
 
     public function delete()
