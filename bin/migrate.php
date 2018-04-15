@@ -219,6 +219,10 @@ function migrateStage(PDO $oldDb, $stage)
 
                 copyFile(Config::getRequiredValue("migrate", "path") . "/files/profilepictures/" . $row->id . ".jpg", PROFILE_PICTURES_ROOT . "/" . $user->id . ".jpg");
             }
+            break;
+
+        case "permissions":
+            echo "Migrating permissions\n";
 
             $oldJson = json_decode(file_get_contents(Config::getRequiredValue("migrate", "path") . "/includes/permissions.json"));
 
@@ -393,7 +397,7 @@ array_shift($stages);// Remove script path ($argv[0])
 if (empty($stages)) {
     echo "Usage: " . $argv[0] . " <stage> [<stage> [...]]\n";
     echo "\n";
-    echo "Stages: dates, forms, users, messages, notedirectory, protocols, roomoccupancyplan\n";
+    echo "Stages: dates, forms, users, permissions, messages, notedirectory, protocols, roomoccupancyplan\n";
 }
 
 foreach ($stages as $stage) {
