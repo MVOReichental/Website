@@ -7,6 +7,7 @@ use de\mvo\service\AbstractService;
 use de\mvo\service\exception\LoginException;
 use de\mvo\service\exception\PermissionViolationException;
 use ReflectionClass;
+use ReflectionException;
 use ReflectionMethod;
 
 class Target
@@ -72,6 +73,7 @@ class Target
      * @throws LoginException
      * @throws PermissionViolationException
      * @throws TargetConfigurationException
+     * @throws ReflectionException
      */
     public function call()
     {
