@@ -14,7 +14,7 @@ define("PICTURES_ROOT", HTTPDOCS_ROOT . "/pictures");
 define("APP_NAMESPACE", "de\\mvo\\website");
 
 if (file_exists(APP_ROOT . "/version")) {
-    define("APP_VERSION", file_get_contents(APP_ROOT . "/version"));
+    define("APP_VERSION", trim(file_get_contents(APP_ROOT . "/version")));
 } else {
     define("APP_VERSION", null);
 }
