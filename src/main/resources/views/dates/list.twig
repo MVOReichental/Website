@@ -24,7 +24,13 @@
                             - {{ entry.endDate.humanReadableTime }}
                         {% endif %}
                     </td>
-                    <td class="dates-title">{{ entry.title }}</td>
+                    <td class="dates-title">
+                        {{ entry.title }}
+
+                        {% if entry.description %}
+                            <p class="mt-3">{{ entry.formatDescription|raw }}</p>
+                        {% endif %}
+                    </td>
                     <td>{{ entry.location.name }}</td>
                     {% if groups %}
                         <td class="d-print-none minimum-width">

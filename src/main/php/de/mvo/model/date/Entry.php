@@ -3,6 +3,7 @@ namespace de\mvo\model\date;
 
 use de\mvo\Database;
 use de\mvo\Date;
+use Parsedown;
 use PDO;
 
 class Entry
@@ -98,6 +99,18 @@ class Entry
         }
 
         return $query->fetchObject(self::class);
+    }
+
+    public function formatDescription()
+    {
+        $parsedown = Parsedown::instance("dates");
+
+        $parsedown->setBreaksEnabled(true);
+        $parsedown->setMarkupEscaped(true);
+
+        $description = str_replace("javascript:", "javascript%3A", $this->description);// Escape JavaScript links (e.g. javascript:someFunction())
+
+        return $parsedown->text($description);
     }
 
     public function delete()
