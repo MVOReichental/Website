@@ -5,15 +5,15 @@
 {% block stylesheets %}
     {{ parent() }}
 
-    <link rel="stylesheet" href="css/members.css"/>
-    <link rel="stylesheet" href="css/messages.css"/>
+    <link rel="stylesheet" href="{{ asset("css/members.css") }}"/>
+    <link rel="stylesheet" href="{{ asset("css/messages.css") }}"/>
 {% endblock %}
 
 {% block scripts %}
     {{ parent() }}
 
-    <script src="js/members.js"></script>
-    <script src="js/messages.js"></script>
+    <script src="{{ asset("js/members.js") }}"></script>
+    <script src="{{ asset("js/messages.js") }}"></script>
 {% endblock %}
 
 {% block content %}

@@ -21,29 +21,29 @@
 {% block stylesheets %}
     {{ parent() }}
 
-    <link rel="stylesheet" href="node_modules/blueimp-file-upload/css/jquery.fileupload.css"/>
-    <link rel="stylesheet" href="node_modules/bootstrap-select/dist/css/bootstrap-select.min.css"/>
+    <link rel="stylesheet" href="{{ asset("node_modules/blueimp-file-upload/css/jquery.fileupload.css") }}"/>
+    <link rel="stylesheet" href="{{ asset("node_modules/bootstrap-select/dist/css/bootstrap-select.min.css") }}"/>
 
-    <link rel="stylesheet" href="css/main-internal.css"/>
+    <link rel="stylesheet" href="{{ asset("css/main-internal.css") }}"/>
 {% endblock %}
 
 {% block scripts %}
     {{ parent() }}
 
-    <script src="node_modules/jquery-ui/ui/widget.js"></script>
-    <script src="node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
-    <script src="node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
-    <script src="node_modules/bootstrap-select/dist/js/i18n/defaults-de_DE.min.js"></script>
-    <script src="node_modules/mustache/mustache.min.js"></script>
+    <script src="{{ asset("node_modules/jquery-ui/ui/widget.js") }}"></script>
+    <script src="{{ asset("node_modules/blueimp-file-upload/js/jquery.fileupload.js") }}"></script>
+    <script src="{{ asset("node_modules/bootstrap-select/dist/js/bootstrap-select.min.js") }}"></script>
+    <script src="{{ asset("node_modules/bootstrap-select/dist/js/i18n/defaults-de_DE.min.js") }}"></script>
+    <script src="{{ asset("node_modules/mustache/mustache.min.js") }}"></script>
 
-    <script src="js/internal.js"></script>
+    <script src="{{ asset("js/internal.js") }}"></script>
 {% endblock %}
 
 {% block body %}
     {% if currentUser %}
         <nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
             <div class="container-fluid">
-                <a class="navbar-brand" href="internal" id="logo"><img src="img/logo.svg"/> Interner Bereich</a>
+                <a class="navbar-brand" href="internal" id="logo"><img src="{{ asset("img/logo.svg") }}"/> Interner Bereich</a>
 
                 <ul class="navbar-nav flex-row ml-auto">
                     <li class="nav-item dropdown">

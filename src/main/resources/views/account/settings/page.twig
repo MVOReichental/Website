@@ -5,14 +5,14 @@
 {% block stylesheets %}
     {{ parent() }}
 
-    <link rel="stylesheet" href="css/account.css"/>
+    <link rel="stylesheet" href="{{ asset("css/account.css") }}"/>
 {% endblock %}
 
 {% block scripts %}
     {{ parent() }}
 
-    <script src="js/jquery-qrcode.js"></script>
-    <script src="js/account.js"></script>
+    <script src="{{ asset("js/jquery-qrcode.js") }}"></script>
+    <script src="{{ asset("js/account.js") }}"></script>
 {% endblock %}
 
 {% block content %}

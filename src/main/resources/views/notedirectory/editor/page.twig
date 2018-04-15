@@ -5,13 +5,13 @@
 {% block stylesheets %}
     {{ parent() }}
 
-    <link rel="stylesheet" href="css/notedirectoryeditor.css"/>
+    <link rel="stylesheet" href="{{ asset("css/notedirectoryeditor.css") }}"/>
 {% endblock %}
 
 {% block scripts %}
     {{ parent() }}
 
-    <script src="js/notedirectory-editor.js"></script>
+    <script src="{{ asset("js/notedirectory-editor.js") }}"></script>
 {% endblock %}
 
 {% block content %}

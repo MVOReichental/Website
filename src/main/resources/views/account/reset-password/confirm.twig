@@ -5,17 +5,17 @@
 {% block stylesheets %}
     {{ parent() }}
 
-    <link rel="stylesheet" href="css/account.css"/>
+    <link rel="stylesheet" href="{{ asset("css/account.css") }}"/>
 {% endblock %}
 
 {% block scripts %}
     {{ parent() }}
 
-    <script src="node_modules/pwstrength-bootstrap/dist/pwstrength-bootstrap.min.js"></script>
-    <script src="node_modules/zxcvbn/dist/zxcvbn.js"></script>
+    <script src="{{ asset("node_modules/pwstrength-bootstrap/dist/pwstrength-bootstrap.min.js") }}"></script>
+    <script src="{{ asset("node_modules/zxcvbn/dist/zxcvbn.js") }}"></script>
 
-    <script src="js/reset-password.js"></script>
-    <script src="js/password-validation.js"></script>
+    <script src="{{ asset("js/reset-password.js") }}"></script>
+    <script src="{{ asset("js/password-validation.js") }}"></script>
 {% endblock %}
 
 {% block content %}

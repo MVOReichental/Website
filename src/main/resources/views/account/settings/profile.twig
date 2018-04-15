@@ -3,16 +3,16 @@
 {% block stylesheets %}
     {{ parent() }}
 
-    <link rel="stylesheet" href="node_modules/cropperjs/dist/cropper.min.css"/>
-    <link rel="stylesheet" href="css/edit-profilepicture.css"/>
+    <link rel="stylesheet" href="{{ asset("node_modules/cropperjs/dist/cropper.min.css") }}"/>
+    <link rel="stylesheet" href="{{ asset("css/edit-profilepicture.css") }}"/>
 {% endblock %}
 
 {% block scripts %}
     {{ parent() }}
 
-    <script src="node_modules/cropperjs/dist/cropper.min.js"></script>
-    <script src="node_modules/jquery-cropper/dist/jquery-cropper.min.js"></script>
-    <script src="js/edit-profilepicture.js"></script>
+    <script src="{{ asset("node_modules/cropperjs/dist/cropper.min.js") }}"></script>
+    <script src="{{ asset("node_modules/jquery-cropper/dist/jquery-cropper.min.js") }}"></script>
+    <script src="{{ asset("js/edit-profilepicture.js") }}"></script>
 {% endblock %}
 
 {% block settingsHeader %}

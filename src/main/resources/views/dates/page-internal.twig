@@ -5,14 +5,14 @@
 {% block stylesheets %}
     {{ parent() }}
 
-    <link rel="stylesheet" href="css/dates.css"/>
+    <link rel="stylesheet" href="{{ asset("css/dates.css") }}"/>
 {% endblock %}
 
 {% block scripts %}
     {{ parent() }}
 
-    <script src="js/date-editor.js"></script>
-    <script src="js/dates.js"></script>
+    <script src="{{ asset("js/date-editor.js") }}"></script>
+    <script src="{{ asset("js/dates.js") }}"></script>
 {% endblock %}
 
 {% block content %}

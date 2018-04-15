@@ -13,18 +13,18 @@
 {% block stylesheets %}
     {{ parent() }}
 
-    <link rel="stylesheet" href="node_modules/jstree-bootstrap-theme/dist/themes/proton/style.min.css"/>
+    <link rel="stylesheet" href="{{ asset("node_modules/jstree-bootstrap-theme/dist/themes/proton/style.min.css") }}"/>
 
-    <link rel="stylesheet" href="css/usermanagement.css"/>
+    <link rel="stylesheet" href="{{ asset("css/usermanagement.css") }}"/>
 {% endblock %}
 
 {% block scripts %}
     {{ parent() }}
 
-    <script src="node_modules/jstree-bootstrap-theme/dist/jstree.min.js"></script>
+    <script src="{{ asset("node_modules/jstree-bootstrap-theme/dist/jstree.min.js") }}"></script>
 
-    <script src="js/permissions.js"></script>
-    <script src="js/usermanagement.js"></script>
+    <script src="{{ asset("js/permissions.js") }}"></script>
+    <script src="{{ asset("js/usermanagement.js") }}"></script>
 {% endblock %}
 
 {% block content %}

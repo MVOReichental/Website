@@ -35,6 +35,15 @@ class TwigRenderer
         self::$twig->addGlobal("currentUser", User::getCurrent());
         self::$twig->addGlobal("internal", (substr(ltrim($path, "/"), 0, 8) == "internal" and User::getCurrent()));
         self::$twig->addGlobal("path", $path);
+
+        self::$twig->addFunction(new Twig_Function("asset", function (string $path) {
+            if (APP_VERSION === null) {
+                return $path;
+            }
+
+            return sprintf("%s?v=%s", $path, APP_VERSION);
+        }));
+
         self::$twig->addFunction(new Twig_Function("isActivePage", function (string $url) use ($path) {
             $urlParts = explode("/", trim($url, "/"));
             $pathParts = explode("/", trim($path, "/"));

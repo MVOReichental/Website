@@ -5,15 +5,15 @@
 {% block stylesheets %}
     {{ parent() }}
 
-    <link rel="stylesheet" href="css/news-editor.css"/>
+    <link rel="stylesheet" href="{{ asset("css/news-editor.css") }}"/>
 {% endblock %}
 
 {% block scripts %}
     {{ parent() }}
 
-    <script src="node_modules/ckeditor/ckeditor.js"></script>
-    <script src="node_modules/ckeditor/adapters/jquery.js"></script>
-    <script src="js/news-editor.js"></script>
+    <script src="{{ asset("node_modules/ckeditor/ckeditor.js") }}"></script>
+    <script src="{{ asset("node_modules/ckeditor/adapters/jquery.js") }}"></script>
+    <script src="{{ asset("js/news-editor.js") }}"></script>
 {% endblock %}
 
 {% block content %}
