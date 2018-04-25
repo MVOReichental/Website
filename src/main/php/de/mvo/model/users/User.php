@@ -569,10 +569,6 @@ class User implements JsonSerializable
             return false;
         }
 
-        if ($this->permissions->hasPermission("*")) {
-            return true;
-        }
-
         return $this->permissions->hasPermission($permission, false);
     }
 
