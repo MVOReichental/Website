@@ -69,7 +69,7 @@ class GroupList extends ArrayObject implements JsonSerializable
      * Get the first group matching the given permission string.
      *
      * @param string $permission The permission to search for
-     * @param bool $requireExactMatch Whether an exact match is required, false if also the wildcard placeholder "*" and regular expressions (prefixed with "@") are allowed
+     * @param bool $requireExactMatch Whether an exact match is required, false if also the wildcard placeholder "*" is allowed
      *
      * @return Group|null
      */
