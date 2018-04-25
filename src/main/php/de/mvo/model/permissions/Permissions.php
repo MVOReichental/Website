@@ -17,12 +17,13 @@ class Permissions extends ArrayObject implements JsonSerializable
                 continue;
             }
 
-            $wildcardIndex = strpos($permission, "*");
-            if ($wildcardIndex !== false and substr($thisPermission, 0, $wildcardIndex) == substr($permission, 0, $wildcardIndex)) {
+            // The given permission matches a wildcard of this permission
+            if (fnmatch($thisPermission, $permission)) {
                 return true;
             }
 
-            if ($permission[0] == "@" and preg_match(substr($permission, 1), $thisPermission)) {
+            // This permission matches a wildcard of the given permission
+            if (fnmatch($permission, $thisPermission)) {
                 return true;
             }
         }
