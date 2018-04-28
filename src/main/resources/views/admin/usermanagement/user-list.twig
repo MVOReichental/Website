@@ -26,6 +26,10 @@
                         <div class="btn-group btn-group-sm">
                             <a href="internal/admin/usermanagement/user/{{ user.id }}" class="btn btn-secondary" data-toggle="tooltip" title="Bearbeiten"><i class="fas fa-edit"></i></a>
                             <a href="internal/admin/usermanagement/user/{{ user.id }}/profile-picture" class="btn btn-secondary" data-toggle="tooltip" title="Profilbild bearbeiten"><i class="fas fa-camera"></i></a>
+
+                            {% if currentUser.hasPermission("admin.switchUser") %}
+                                <button class="btn btn-secondary usermanagement-switch-user-button" data-userid="{{ user.id }}" data-toggle="tooltip" title="Als diesen Benutzer anmelden"><i class="fas fa-sign-in-alt"></i></button>
+                            {% endif %}
                         </div>
                     </td>
                 </tr>

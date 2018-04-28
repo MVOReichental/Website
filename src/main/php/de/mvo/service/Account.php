@@ -5,6 +5,7 @@ use de\mvo\model\contacts\Contact;
 use de\mvo\model\contacts\Contacts;
 use de\mvo\model\users\User;
 use de\mvo\service\exception\LoginException;
+use de\mvo\service\exception\NotFoundException;
 use de\mvo\TwigRenderer;
 use Exception;
 use Kelunik\TwoFactor\Oath;
@@ -509,6 +510,34 @@ class Account extends AbstractService
         }
 
         $user->setTotpKey(null);
+
+        return null;
+    }
+
+    public function switchUser()
+    {
+        $_SESSION["originUserId"] = User::getCurrent()->id;
+        $_SESSION["userId"] = $this->params->id;
+
+        header("Location: /internal", true, 302);
+
+        return null;
+    }
+
+    /**
+     * @return null
+     * @throws NotFoundException
+     */
+    public function switchUserToOrigin()
+    {
+        if (!isset($_SESSION["originUserId"])) {
+            throw new NotFoundException;
+        }
+
+        $_SESSION["userId"] = $_SESSION["originUserId"];
+        unset($_SESSION["originUserId"]);
+
+        header("Location: /internal", true, 302);
 
         return null;
     }

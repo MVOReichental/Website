@@ -64,6 +64,11 @@
                             <div class="dropdown-divider"></div>
 
                             {{ this.profile_dropdown_links("internal/settings", "fas fa-cogs", "Einstellungen") }}
+
+                            {% if hasOriginUser %}
+                                {{ this.profile_dropdown_links("internal/switch-user", "fas fa-sign-out-alt", "Benutzer wechseln") }}
+                            {% endif %}
+
                             {{ this.profile_dropdown_links("internal/logout", "fas fa-sign-out-alt", "Abmelden") }}
                         </div>
                     </li>

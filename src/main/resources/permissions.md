@@ -1,6 +1,7 @@
 # Admin
 
 * `admin.newsEditor`
+* `admin.switchUser`
 * `admin.userManagement`
 * `admin.visits`
 

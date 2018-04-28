@@ -132,6 +132,7 @@ class User implements JsonSerializable
 
             if ($user === null or !$user->enabled) {
                 unset($_SESSION["userId"]);
+                unset($_SESSION["originUserId"]);
                 $user = null;
             }
 
@@ -148,6 +149,7 @@ class User implements JsonSerializable
     public static function logout()
     {
         unset($_SESSION["userId"]);
+        unset($_SESSION["originUserId"]);
 
         self::$currentUser = null;
     }
@@ -745,7 +747,9 @@ class User implements JsonSerializable
 
     public function doLogin()
     {
-        $this->updateLastOnline();
+        if (!isset($_SESSION["originUserId"])) {
+            $this->updateLastOnline();
+        }
 
         $_SESSION["userId"] = $this->id;
     }

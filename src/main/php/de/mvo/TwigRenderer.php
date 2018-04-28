@@ -35,6 +35,7 @@ class TwigRenderer
         self::$twig->addGlobal("currentUser", User::getCurrent());
         self::$twig->addGlobal("internal", (substr(ltrim($path, "/"), 0, 8) == "internal" and User::getCurrent()));
         self::$twig->addGlobal("path", $path);
+        self::$twig->addGlobal("hasOriginUser", isset($_SESSION["originUserId"]));
 
         self::$twig->addFunction(new Twig_Function("asset", function (string $path) {
             if (APP_VERSION === null) {

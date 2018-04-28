@@ -675,6 +675,18 @@ class Endpoints
             ->className(News::class)
             ->method("delete")
             ->permission("admin.newsEditor");
+
+        Endpoint::create(HttpMethod::GET, "/internal/switch-user")
+            ->target()
+            ->className(Account::class)
+            ->method("switchUserToOrigin")
+            ->requireLogin();
+
+        Endpoint::create(HttpMethod::GET, "/internal/switch-user/[i:id]")
+            ->target()
+            ->className(Account::class)
+            ->method("switchUser")
+            ->permission("admin.switchUser");
     }
 
     private static function mapInternalEndpoints()
