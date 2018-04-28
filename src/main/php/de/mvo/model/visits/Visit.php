@@ -271,4 +271,29 @@ class Visit
             ));
         }
     }
+
+    public static function removeIps(Date $beforeDate)
+    {
+        $query = Database::prepare("
+            UPDATE `visits`
+            SET `ip` = '0.0.0.0'
+            WHERE `date` < :date
+        ");
+
+        $query->bindValue(":date", $beforeDate->toDatabaseDate());
+
+        $query->execute();
+    }
+
+    public static function cleanup(Date $beforeDate)
+    {
+        $query = Database::prepare("
+            DELETE FROM `visits`
+            WHERE `date` < :date
+        ");
+
+        $query->bindValue(":date", $beforeDate->toDatabaseDate());
+
+        $query->execute();
+    }
 }
