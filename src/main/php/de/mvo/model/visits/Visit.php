@@ -276,7 +276,7 @@ class Visit
     {
         $query = Database::prepare("
             UPDATE `visits`
-            SET `ip` = '0.0.0.0'
+            SET `ip` = NULL
             WHERE `date` < :date
         ");
 

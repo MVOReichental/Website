@@ -255,7 +255,7 @@ CREATE TABLE `roomoccupancyplan` (
 
 CREATE TABLE `visits` (
   `id`         INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `ip`         VARCHAR(50)      NOT NULL,
+  `ip`         VARCHAR(50),
   `date`       DATE             NOT NULL,
   `firstVisit` TIME             NOT NULL,
   `lastVisit`  TIME             NOT NULL,
