@@ -132,7 +132,7 @@ class Endpoints
         Endpoint::create(HttpMethod::GET, "/termine.ics")
             ->target()
             ->className(Dates::class)
-            ->method("getIcal");
+            ->method("getPublicIcal");
 
         Endpoint::create(HttpMethod::GET, "/fotogalerie")
             ->target()
@@ -184,11 +184,15 @@ class Endpoints
             ->arguments(true)
             ->permission("dates.edit");
 
-        Endpoint::create(HttpMethod::GET, "/internal/dates.ics")
+        Endpoint::create(HttpMethod::GET, "/internal/dates/[:token].ics")
             ->target()
             ->className(Dates::class)
-            ->method("getIcal")
-            ->arguments(true)
+            ->method("getInternalIcalWithToken");
+
+        Endpoint::create(HttpMethod::GET, "/internal/dates/generate-token")
+            ->target()
+            ->className(Dates::class)
+            ->method("generateToken")
             ->requireLogin();
 
         Endpoint::create(HttpMethod::GET, "/internal/dates/edit/[i:id]")

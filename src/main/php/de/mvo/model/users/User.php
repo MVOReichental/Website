@@ -90,6 +90,10 @@ class User implements JsonSerializable
      */
     private $totpKey;
     /**
+     * @var string
+     */
+    private $datesToken;
+    /**
      * @var Permissions|null|false The permissions of the user, null if not loaded yet, false if the user does not have any permission
      */
     private $permissions;
@@ -195,6 +199,30 @@ class User implements JsonSerializable
         $query->execute(array
         (
             ":username" => $username
+        ));
+
+        if (!$query->rowCount()) {
+            return null;
+        }
+
+        return $query->fetchObject(self::class);
+    }
+
+    /**
+     * @param string $token
+     * @return User|null
+     */
+    public static function getByDatesToken($token)
+    {
+        $query = Database::prepare("
+            SELECT *
+            FROM `users`
+            WHERE `datesToken` = :token
+        ");
+
+        $query->execute(array
+        (
+            ":token" => $token
         ));
 
         if (!$query->rowCount()) {
@@ -776,6 +804,32 @@ class User implements JsonSerializable
         }
 
         return true;
+    }
+
+    public function generateDatesToken()
+    {
+        $this->datesToken = bin2hex(random_bytes(16));
+
+        $query = Database::prepare("
+                UPDATE `users`
+                SET `datesToken` = :token
+                WHERE `id` = :id
+            ");
+
+        $query->execute(array
+        (
+            ":token" => $this->datesToken,
+            ":id" => $this->id
+        ));
+    }
+
+    public function getDatesToken()
+    {
+        if ($this->datesToken === null) {
+            $this->generateDatesToken();
+        }
+
+        return $this->datesToken;
     }
 
     public function save($forceInsertWithId = false)

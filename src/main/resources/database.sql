@@ -57,6 +57,7 @@ CREATE TABLE `users` (
   `lastName`              VARCHAR(100)              DEFAULT NULL,
   `birthDate`             DATE                      DEFAULT NULL,
   `totpKey`               VARCHAR(32)               DEFAULT NULL,
+  `datesToken`            VARCHAR(32)               DEFAULT NULL,
   `lastOnline`            DATETIME                  DEFAULT NULL,
   `enabled`               BOOLEAN          NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`id`),

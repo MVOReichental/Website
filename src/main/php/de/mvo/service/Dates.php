@@ -81,16 +81,11 @@ class Dates extends AbstractService
         ));
     }
 
-    public function getIcal($internal = false)
+    public function getPublicIcal()
     {
         $calendar = new Calendar($_SERVER["HTTP_HOST"]);
 
-        $user = User::getCurrent();
-        if ($internal and $user !== null) {
-            $dates = DateList::get()->visibleForUser($user);
-        } else {
-            $dates = DateList::get()->publiclyVisible();
-        }
+        $dates = DateList::get()->publiclyVisible();
 
         /**
          * @var $date Entry
@@ -111,6 +106,49 @@ class Dates extends AbstractService
 
         header("Content-Type: text/calendar; charset=utf-8");
         echo $calendar->render();
+        return null;
+    }
+
+    public function getInternalIcalWithToken()
+    {
+        $user = User::getByDatesToken($this->params->token);
+
+        if ($user === null) {
+            http_response_code(401);
+            return null;
+        }
+
+        $calendar = new Calendar($_SERVER["HTTP_HOST"]);
+
+        $dates = DateList::get()->visibleForUser($user);
+
+        /**
+         * @var $date Entry
+         */
+        foreach ($dates as $date) {
+            $event = new Event;
+
+            $event->setDtStart($date->startDate);
+            $event->setDtEnd($date->endDate);
+
+            $event->setNoTime(!$date->startDate->hasTime());
+
+            $event->setSummary($date->title);
+            $event->setDescription($date->description);
+
+            $calendar->addComponent($event);
+        }
+
+        header("Content-Type: text/calendar; charset=utf-8");
+        echo $calendar->render();
+        return null;
+    }
+
+    public function generateToken()
+    {
+        User::getCurrent()->generateDatesToken();
+
+        header("Location: /internal/dates");
         return null;
     }
 
