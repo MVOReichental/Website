@@ -131,6 +131,7 @@ class Dates extends AbstractService
             $event->setDtStart($date->startDate);
             $event->setDtEnd($date->endDate);
 
+            $event->setUseUtc(false);
             $event->setNoTime(!$date->startDate->hasTime());
 
             $event->setSummary($date->title);
