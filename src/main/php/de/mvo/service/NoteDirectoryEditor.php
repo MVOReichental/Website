@@ -165,6 +165,7 @@ class NoteDirectoryEditor extends AbstractService
         $title->composer = $_POST["composer"];
         $title->arranger = $_POST["arranger"];
         $title->publisher = $_POST["publisher"];
+        $title->details = $_POST["details"];
 
         $title->save();
 
@@ -180,6 +181,7 @@ class NoteDirectoryEditor extends AbstractService
         $title->composer = $_POST["composer"];
         $title->arranger = $_POST["arranger"];
         $title->publisher = $_POST["publisher"];
+        $title->details = $_POST["details"];
 
         $title->save();
 

@@ -185,6 +185,7 @@ CREATE TABLE `notedirectorytitles` (
   `composer`  VARCHAR(200)              DEFAULT NULL,
   `arranger`  VARCHAR(200)              DEFAULT NULL,
   `publisher` VARCHAR(200)              DEFAULT NULL,
+  `details`   TEXT                      DEFAULT NULL,
   PRIMARY KEY (`id`)
 )
   ENGINE = InnoDB

@@ -12,6 +12,10 @@
     <dd>{{ title.publisher }}</dd>
 </dl>
 
+{% if title.details %}
+    {{ title.formatDetails|raw }}
+{% endif %}
+
 <h3 class="page-header">Programme</h3>
 
 {% if title.programs.count %}

@@ -2,6 +2,7 @@
 namespace de\mvo\model\notedirectory;
 
 use de\mvo\Database;
+use de\mvo\utils\StringUtil;
 use PDO;
 
 class Title
@@ -30,6 +31,10 @@ class Title
      * @var string
      */
     public $publisher;
+    /**
+     * @var string
+     */
+    public $details;
 
     public function __construct()
     {
@@ -77,7 +82,8 @@ class Title
                         `title` = :title,
                         `composer` = :composer,
                         `arranger` = :arranger,
-                        `publisher` = :publisher
+                        `publisher` = :publisher,
+                        `details` = :details
                 ");
 
                 $query->bindValue(":id", $this->id, PDO::PARAM_INT);
@@ -88,7 +94,8 @@ class Title
                         `title` = :title,
                         `composer` = :composer,
                         `arranger` = :arranger,
-                        `publisher` = :publisher
+                        `publisher` = :publisher,
+                        `details` = :details
                 ");
             }
         } else {
@@ -98,7 +105,8 @@ class Title
                     `title` = :title,
                     `composer` = :composer,
                     `arranger` = :arranger,
-                    `publisher` = :publisher
+                    `publisher` = :publisher,
+                    `details` = :details
                 WHERE `id` = :id
             ");
 
@@ -109,6 +117,7 @@ class Title
         $query->bindValue(":composer", $this->composer);
         $query->bindValue(":arranger", $this->arranger);
         $query->bindValue(":publisher", $this->publisher);
+        $query->bindValue(":details", $this->details);
 
         $query->execute();
 
@@ -133,5 +142,10 @@ class Title
     public function programs()
     {
         return Programs::getProgramsContainingTitle($this);
+    }
+
+    public function formatDetails()
+    {
+        return StringUtil::format($this->details);
     }
 }
