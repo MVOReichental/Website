@@ -36,6 +36,7 @@ class NoteDirectory extends AbstractService
      * @param $title
      * @param $activePath
      * @param $list
+     * @param array $context
      * @return string
      * @throws Twig_Error
      */
