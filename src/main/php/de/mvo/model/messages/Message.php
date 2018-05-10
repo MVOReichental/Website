@@ -10,8 +10,8 @@ use de\mvo\model\uploads\Uploads;
 use de\mvo\model\users\User;
 use de\mvo\model\users\Users;
 use de\mvo\TwigRenderer;
+use de\mvo\utils\StringUtil;
 use de\mvo\utils\Url;
-use Parsedown;
 use Twig_Error;
 
 class Message
@@ -123,14 +123,7 @@ class Message
 
     public function formatText()
     {
-        $parsedown = Parsedown::instance("messages");
-
-        $parsedown->setBreaksEnabled(true);
-        $parsedown->setMarkupEscaped(true);
-
-        $text = str_replace("javascript:", "javascript%3A", $this->text);// Escape JavaScript links (e.g. javascript:someFunction())
-
-        return $parsedown->text($text);
+        return StringUtil::format($this->text);
     }
 
     public function isUserSenderOrRecipient(User $user)

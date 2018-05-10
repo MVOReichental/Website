@@ -3,7 +3,7 @@ namespace de\mvo\model\date;
 
 use de\mvo\Database;
 use de\mvo\Date;
-use Parsedown;
+use de\mvo\utils\StringUtil;
 use PDO;
 
 class Entry
@@ -103,14 +103,7 @@ class Entry
 
     public function formatDescription()
     {
-        $parsedown = Parsedown::instance("dates");
-
-        $parsedown->setBreaksEnabled(true);
-        $parsedown->setMarkupEscaped(true);
-
-        $description = str_replace("javascript:", "javascript%3A", $this->description);// Escape JavaScript links (e.g. javascript:someFunction())
-
-        return $parsedown->text($description);
+        return StringUtil::format($this->description);
     }
 
     public function delete()
