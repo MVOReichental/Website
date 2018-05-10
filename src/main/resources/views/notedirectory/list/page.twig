@@ -28,7 +28,10 @@
     <div class="btn-toolbar mb-3 d-print-none" id=" notedirectory-button-toolbar">
         <div class="btn-group mr-3">
             {% if currentUser.hasPermission("notedirectory.edit") %}
-                <a href="internal/notedirectory/editor" class="btn btn-secondary d-print-none"><i class="fas fa-edit"></i> Editor</a>
+                <a href="internal/notedirectory/editor" class="btn btn-secondary"><i class="fas fa-edit"></i> Editor</a>
+                {% if editPage %}
+                    <a href="internal/notedirectory/editor/{{ editPage }}?origin={{ path }}" class="btn btn-secondary"><i class="fas fa-pencil-alt"></i> Bearbeiten</a>
+                {% endif %}
             {% endif %}
         </div>
 

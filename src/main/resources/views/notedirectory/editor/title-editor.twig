@@ -14,7 +14,7 @@
         <span class="small">Titel {% if title.id %}bearbeiten{% else %}erstellen{% endif %}</span>
     </h1>
 
-    <form action="{{ path }}" method="post">
+    <form action="{{ path }}?origin={{ originUrl }}" method="post">
         <div class="form-group">
             <label for="title-editor-title">Titel</label>
             <input type="text" class="form-control" id="title-editor-title" name="title" value="{{ title.title }}" autofocus/>
@@ -42,7 +42,7 @@
 
         <div class="btn-group">
             <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Speichern</button>
-            <a href="internal/notedirectory/editor/titles" class="btn btn-secondary"><i class="fas fa-times"></i> Abbrechen</a>
+            <a href="{{ originUrl }}" class="btn btn-secondary"><i class="fas fa-times"></i> Abbrechen</a>
         </div>
     </form>
 {% endblock %}

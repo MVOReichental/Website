@@ -71,7 +71,7 @@ class NoteDirectoryEditor extends AbstractService
 
         $program->save();
 
-        header("Location: /internal/notedirectory/editor/programs", true, 302);
+        header("Location: " . $_GET["origin"], true, 302);
         return null;
     }
 
@@ -88,7 +88,7 @@ class NoteDirectoryEditor extends AbstractService
 
         $program->save();
 
-        header("Location: /internal/notedirectory/editor/programs", true, 302);
+        header("Location: " . $_GET["origin"], true, 302);
         return null;
     }
 
@@ -122,7 +122,8 @@ class NoteDirectoryEditor extends AbstractService
         (
             "program" => $program,
             "titles" => Titles::getAll(),
-            "createNewOnSave" => $createNewOnSave
+            "createNewOnSave" => $createNewOnSave,
+            "originUrl" => $_GET["origin"] ?? "/internal/notedirectory/editor/programs"
         ));
     }
 
@@ -134,7 +135,8 @@ class NoteDirectoryEditor extends AbstractService
     {
         return TwigRenderer::render("notedirectory/editor/program-editor", array
         (
-            "titles" => Titles::getAll()
+            "titles" => Titles::getAll(),
+            "originUrl" => $_GET["origin"] ?? "/internal/notedirectory/editor/programs"
         ));
     }
 
@@ -169,7 +171,7 @@ class NoteDirectoryEditor extends AbstractService
 
         $title->save();
 
-        header("Location: /internal/notedirectory/editor/titles", true, 302);
+        header("Location: " . $_GET["origin"], true, 302);
         return null;
     }
 
@@ -185,7 +187,7 @@ class NoteDirectoryEditor extends AbstractService
 
         $title->save();
 
-        header("Location: /internal/notedirectory/editor/titles", true, 302);
+        header("Location: " . $_GET["origin"], true, 302);
         return null;
     }
 
@@ -216,7 +218,8 @@ class NoteDirectoryEditor extends AbstractService
 
         return TwigRenderer::render("notedirectory/editor/title-editor", array
         (
-            "title" => $title
+            "title" => $title,
+            "originUrl" => $_GET["origin"] ?? "/internal/notedirectory/editor/titles"
         ));
     }
 
@@ -226,7 +229,10 @@ class NoteDirectoryEditor extends AbstractService
      */
     public function getCreateTitlePage()
     {
-        return TwigRenderer::render("notedirectory/editor/title-editor");
+        return TwigRenderer::render("notedirectory/editor/title-editor", array
+        (
+            "originUrl" => $_GET["origin"] ?? "/internal/notedirectory/editor/titles"
+        ));
     }
 
     /**

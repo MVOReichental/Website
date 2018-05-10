@@ -66,7 +66,10 @@ class NoteDirectory extends AbstractService
         return self::renderListPage($program->title . " " . $program->year, "programs/" . $program->year . "/" . $program->name, TwigRenderer::render("notedirectory/list/program", array
         (
             "program" => $program
-        )));
+        )), array
+        (
+            "editPage" => "programs/" . $program->id
+        ));
     }
 
     /**
@@ -122,6 +125,9 @@ class NoteDirectory extends AbstractService
         return self::renderListPage($title->title, null, TwigRenderer::render("notedirectory/list/title-details", array
         (
             "title" => $title
-        )));
+        )), array
+        (
+            "editPage" => "titles/" . $title->id
+        ));
     }
 }

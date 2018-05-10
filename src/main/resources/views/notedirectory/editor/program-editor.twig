@@ -20,7 +20,7 @@
         <span class="small">Programm {% if program.id and not createNewOnSave %}bearbeiten{% else %}erstellen{% endif %}</span>
     </h1>
 
-    <form action="{{ path }}" method="post">
+    <form action="{{ path }}?origin={{ originUrl }}" method="post">
         <fieldset>
             <legend>Details</legend>
 
@@ -73,7 +73,7 @@
 
         <div class="btn-group">
             <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Speichern</button>
-            <a href="internal/notedirectory/editor/programs" class="btn btn-secondary"><i class="fas fa-times"></i> Abbrechen</a>
+            <a href="{{ originUrl }}" class="btn btn-secondary"><i class="fas fa-times"></i> Abbrechen</a>
         </div>
     </form>
 
