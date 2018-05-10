@@ -197,15 +197,3 @@ ul.nav li.nav-item.active {
 #logo img {
     height: 40px;
 }
-
-#background-image {
-    background-image: url("../img/background.jpg");
-    background-size: cover;
-    display: block;
-    height: 100%;
-    left: 0;
-    top: 0;
-    position: fixed;
-    right: 0;
-    z-index: -1;
-}
