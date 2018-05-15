@@ -109,7 +109,7 @@ class Entry
 
     public function getIcalEvent()
     {
-        $event = new Event;
+        $event = new Event(sprintf("dates-%d@%s", $this->id, $_SERVER["SERVER_NAME"]));
 
         $event->setDtStart($this->startDate);
         $event->setDtEnd($this->endDate);
