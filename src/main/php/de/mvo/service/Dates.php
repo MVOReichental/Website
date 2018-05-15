@@ -91,17 +91,7 @@ class Dates extends AbstractService
          * @var $date Entry
          */
         foreach ($dates as $date) {
-            $event = new Event;
-
-            $event->setDtStart($date->startDate);
-            $event->setDtEnd($date->endDate);
-
-            $event->setNoTime(!$date->startDate->hasTime());
-
-            $event->setSummary($date->title);
-            $event->setDescription($date->description);
-
-            $calendar->addComponent($event);
+            $calendar->addComponent($date->getIcalEvent());
         }
 
         header("Content-Type: text/calendar; charset=utf-8");
@@ -137,7 +127,7 @@ class Dates extends AbstractService
             $event->setSummary($date->title);
             $event->setDescription($date->description);
 
-            $calendar->addComponent($event);
+            $calendar->addComponent($date->getIcalEvent());
         }
 
         header("Content-Type: text/calendar; charset=utf-8");

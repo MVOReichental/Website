@@ -4,6 +4,7 @@ namespace de\mvo\model\date;
 use de\mvo\Database;
 use de\mvo\Date;
 use de\mvo\utils\StringUtil;
+use Eluceo\iCal\Component\Event;
 use PDO;
 
 class Entry
@@ -104,6 +105,21 @@ class Entry
     public function formatDescription()
     {
         return StringUtil::format($this->description);
+    }
+
+    public function getIcalEvent()
+    {
+        $event = new Event;
+
+        $event->setDtStart($this->startDate);
+        $event->setDtEnd($this->endDate);
+
+        $event->setNoTime(!$this->startDate->hasTime());
+
+        $event->setSummary($this->title);
+        $event->setDescription($this->description);
+
+        return $event;
     }
 
     public function delete()
