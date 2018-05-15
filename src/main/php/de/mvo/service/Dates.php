@@ -85,7 +85,7 @@ class Dates extends AbstractService
     {
         $calendar = new Calendar($_SERVER["HTTP_HOST"]);
 
-        $dates = DateList::get()->publiclyVisible();
+        $dates = DateList::getAllPublic();
 
         /**
          * @var $date Entry
@@ -120,7 +120,7 @@ class Dates extends AbstractService
 
         $calendar = new Calendar($_SERVER["HTTP_HOST"]);
 
-        $dates = DateList::get()->visibleForUser($user);
+        $dates = DateList::getAll()->visibleForUser($user);
 
         /**
          * @var $date Entry

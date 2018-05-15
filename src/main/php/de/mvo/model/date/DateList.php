@@ -80,6 +80,26 @@ class DateList extends ArrayObject
         return $list;
     }
 
+    public static function getAllPublic()
+    {
+        $query = Database::query("
+            SELECT *
+            FROM `dates`
+            WHERE `isPublic`
+        ");
+
+        $list = new self;
+
+        /**
+         * @var $entry Entry
+         */
+        while ($entry = $query->fetchObject(Entry::class)) {
+            $list->append($entry);
+        }
+
+        return $list;
+    }
+
     public function visibleForUser(User $user)
     {
         $list = new self;
