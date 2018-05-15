@@ -127,7 +127,7 @@ class Endpoints
         Endpoint::create(HttpMethod::GET, "/termine")
             ->target()
             ->className(Dates::class)
-            ->method("getHtml");
+            ->method("getPublicHtml");
 
         Endpoint::create(HttpMethod::GET, "/termine.ics")
             ->target()
@@ -167,8 +167,13 @@ class Endpoints
         Endpoint::create(HttpMethod::GET, "/internal/dates")
             ->target()
             ->className(Dates::class)
-            ->method("getHtml")
-            ->arguments(true)
+            ->method("getInternalHtml")
+            ->requireLogin();
+
+        Endpoint::create(HttpMethod::GET, "/internal/dates/[i:year]")
+            ->target()
+            ->className(Dates::class)
+            ->method("getInternalHtml")
             ->requireLogin();
 
         Endpoint::create(HttpMethod::GET, "/internal/dates/autocompletion")

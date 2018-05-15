@@ -29,6 +29,16 @@
             </div>
         {% endif %}
 
+        <div class="btn-group">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" data-flip="false">Jahre <span class="caret"></span></button>
+
+            <div class="dropdown-menu">
+                {% for year in years %}
+                    <a class="dropdown-item {% if year == activeYear %}active{% endif %}" href="internal/dates/{{ year }}">{{ year }}</a>
+                {% endfor %}
+            </div>
+        </div>
+
         {% if groups %}
             <div class="btn-group">
                 <form class="form-inline" id="dates-groups-form">

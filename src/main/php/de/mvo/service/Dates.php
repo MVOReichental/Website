@@ -17,65 +17,88 @@ use Twig_Error;
 class Dates extends AbstractService
 {
     /**
-     * @param bool $internal
      * @return string
      * @throws Twig_Error
      */
-    public function getHtml($internal = false)
+    public function getPublicHtml()
     {
-        $user = null;
+        $dates = DateList::get()->publiclyVisible();
+
+        return TwigRenderer::render("dates/page", array
+        (
+            "dates" => $dates,
+            "yearlyDates" => json_decode(file_get_contents(MODELS_ROOT . "/yearly-events.json"))
+        ));
+    }
+
+    /**
+     * @return string
+     * @throws Twig_Error
+     */
+    public function getInternalHtml()
+    {
         $groups = null;
         $includePublic = false;
 
-        if ($internal) {
-            $user = User::getCurrent();
+        $user = User::getCurrent();
 
-            $dates = DateList::get()->visibleForUser($user);
+        $dates = DateList::getAll()->visibleForUser($user);
 
-            if (isset($_GET["groups"])) {
-                $selectedGroups = array_filter(explode(" ", $_GET["groups"]));
+        $years = $dates->getYears();
+        rsort($years, SORT_NUMERIC);
 
-                if (in_array("public", $selectedGroups)) {
-                    $selectedGroups = array_diff($selectedGroups, array("__public__"));
+        $activeYear = $this->params->year ?? null;
 
-                    $includePublic = true;
-                } else {
-                    $includePublic = false;
-                }
-            } else {
-                $selectedGroups = array();
-            }
-
-            if (empty($selectedGroups)) {
-                $includePublic = true;
-            }
-
-            $groups = array();
-
-            foreach (UserGroups::getAll() as $group => $title) {
-                if (!$user->hasPermission("dates.view." . $group)) {
-                    continue;
-                }
-
-                $groups[$group] = array
-                (
-                    "title" => $title,
-                    "active" => (empty($selectedGroups) or in_array($group, $selectedGroups))
-                );
-            }
-
-            if (!empty($selectedGroups)) {
-                $dates = $dates->getInGroups(new Groups($selectedGroups), $includePublic);
-            }
+        if ($activeYear) {
+            $dates = $dates->withYear($activeYear);
         } else {
-            $dates = DateList::get()->publiclyVisible();
+            $dates = $dates->startingAt(new Date);
+            $activeYear = null;
         }
 
-        return TwigRenderer::render("dates/" . ($internal ? "page-internal" : "page"), array
+        if (isset($_GET["groups"])) {
+            $selectedGroups = array_filter(explode(" ", $_GET["groups"]));
+
+            if (in_array("public", $selectedGroups)) {
+                $selectedGroups = array_diff($selectedGroups, array("__public__"));
+
+                $includePublic = true;
+            } else {
+                $includePublic = false;
+            }
+        } else {
+            $selectedGroups = array();
+        }
+
+        if (empty($selectedGroups)) {
+            $includePublic = true;
+        }
+
+        $groups = array();
+
+        foreach (UserGroups::getAll() as $group => $title) {
+            if (!$user->hasPermission("dates.view." . $group)) {
+                continue;
+            }
+
+            $groups[$group] = array
+            (
+                "title" => $title,
+                "active" => (empty($selectedGroups) or in_array($group, $selectedGroups))
+            );
+        }
+
+        if (!empty($selectedGroups)) {
+            $dates = $dates->getInGroups(new Groups($selectedGroups), $includePublic);
+        }
+
+        return TwigRenderer::render("dates/page-internal", array
         (
             "dates" => $dates,
             "yearlyDates" => json_decode(file_get_contents(MODELS_ROOT . "/yearly-events.json")),
-            "allowEdit" => $internal and ($user === null ? false : $user->hasPermission("dates.edit")),
+            "allowEdit" => $user->hasPermission("dates.edit"),
+            "years" => $years,
+            "activeYear" => $activeYear,
             "groups" => $groups,
             "includePublic" => $includePublic
         ));

@@ -140,6 +140,60 @@ class DateList extends ArrayObject
         return $list;
     }
 
+    public function startingAt(Date $date)
+    {
+        $list = new self;
+
+        /**
+         * @var $entry Entry
+         */
+        foreach ($this as $entry) {
+            if ($entry->endDate === null) {
+                $endDate = clone $entry->startDate;
+                $endDate->setTime(23, 59, 59);
+            } else {
+                $endDate = $entry->endDate;
+            }
+
+            if ($endDate >= $date) {
+                $list->append($entry);
+                continue;
+            }
+        }
+
+        return $list;
+    }
+
+    public function withYear(int $year)
+    {
+        $list = new self;
+
+        /**
+         * @var $entry Entry
+         */
+        foreach ($this as $entry) {
+            if ((int)$entry->startDate->format("Y") === $year) {
+                $list->append($entry);
+            }
+        }
+
+        return $list;
+    }
+
+    public function getYears()
+    {
+        $years = array();
+
+        /**
+         * @var $entry Entry
+         */
+        foreach ($this as $entry) {
+            $years[] = (int)$entry->startDate->format("Y");
+        }
+
+        return array_unique($years);
+    }
+
     public function getInGroups(Groups $groups, bool $includePublic)
     {
         $list = new self;
