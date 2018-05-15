@@ -66,6 +66,7 @@ class DateList extends ArrayObject
         $query = Database::query("
             SELECT *
             FROM `dates`
+            ORDER BY `startDate` ASC
         ");
 
         $list = new self;
@@ -86,6 +87,7 @@ class DateList extends ArrayObject
             SELECT *
             FROM `dates`
             WHERE `isPublic`
+            ORDER BY `startDate` ASC
         ");
 
         $list = new self;
