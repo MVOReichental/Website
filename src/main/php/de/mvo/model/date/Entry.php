@@ -113,6 +113,7 @@ class Entry
 
         $event->setDtStart($this->startDate);
         $event->setDtEnd($this->endDate);
+        $event->setUseUtc(false);
 
         $event->setNoTime(!$this->startDate->hasTime());
 
