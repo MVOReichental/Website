@@ -11,7 +11,6 @@ use de\mvo\model\users\User;
 use de\mvo\service\exception\NotFoundException;
 use de\mvo\TwigRenderer;
 use Eluceo\iCal\Component\Calendar;
-use Eluceo\iCal\Component\Event;
 use Twig_Error;
 
 class Dates extends AbstractService
