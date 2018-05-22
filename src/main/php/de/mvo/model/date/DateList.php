@@ -40,7 +40,7 @@ class DateList extends ArrayObject
         $query = Database::prepare("
             SELECT *
             FROM `dates`
-            WHERE `isPublic` AND `startDate` >= NOW() OR (`endDate` IS NOT NULL AND `endDate` > NOW())
+            WHERE `isPublic` AND (`startDate` >= NOW() OR (`endDate` IS NOT NULL AND `endDate` > NOW()))
             ORDER BY `startDate` ASC
             LIMIT :limit
         ");
