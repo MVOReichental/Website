@@ -35,6 +35,32 @@ class DateList extends ArrayObject
         return $list;
     }
 
+    public static function getPublic($limit = 1000)
+    {
+        $query = Database::prepare("
+            SELECT *
+            FROM `dates`
+            WHERE `isPublic` AND `startDate` >= NOW() OR (`endDate` IS NOT NULL AND `endDate` > NOW())
+            ORDER BY `startDate` ASC
+            LIMIT :limit
+        ");
+
+        $query->bindValue(":limit", $limit, PDO::PARAM_INT);
+
+        $query->execute();
+
+        $list = new self;
+
+        /**
+         * @var $entry Entry
+         */
+        while ($entry = $query->fetchObject(Entry::class)) {
+            $list->append($entry);
+        }
+
+        return $list;
+    }
+
     public static function getBetween(Date $start, Date $end)
     {
         $query = Database::prepare("
