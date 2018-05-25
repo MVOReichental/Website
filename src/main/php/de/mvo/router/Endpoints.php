@@ -75,7 +75,7 @@ class Endpoints
             ->method("get")
             ->arguments("verein/vereinsgeschichte");
 
-        Endpoint::create(HttpMethod::GET, "/vorstand")
+        /*Endpoint::create(HttpMethod::GET, "/vorstand")
             ->target()
             ->className(GroupMembers::class)
             ->method("get")
@@ -85,7 +85,7 @@ class Endpoints
             ->target()
             ->className(GroupMembers::class)
             ->method("get")
-            ->arguments("Musiker", "musiker");
+            ->arguments("Musiker", "musiker");*/
 
         Endpoint::create(HttpMethod::GET, "/kontakt")
             ->target()
@@ -111,11 +111,11 @@ class Endpoints
             ->method("get")
             ->arguments("foerderverein/warum_foerderverein");
 
-        Endpoint::create(HttpMethod::GET, "/foerderverein/vorstand")
+        /*Endpoint::create(HttpMethod::GET, "/foerderverein/vorstand")
             ->target()
             ->className(GroupMembers::class)
             ->method("get")
-            ->arguments("Der Vorstand des F&ouml;rdervereins", "foerderverein");
+            ->arguments("Der Vorstand des F&ouml;rdervereins", "foerderverein");*/
 
         Endpoint::create(HttpMethod::GET, "/foerderverein/kontakt")
             ->target()
