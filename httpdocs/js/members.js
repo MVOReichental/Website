@@ -18,7 +18,7 @@ $(function () {
         var checkCount = 0;
 
         rows.each(function () {
-            var checked = $(this).find(".members-select-checkbox").prop("checked") && !$(this).data("own-user");
+            var checked = $(this).find(".members-select-checkbox").prop("checked");
 
             $(this).toggleClass("table-success", checked);
 
@@ -74,7 +74,7 @@ $(function () {
         var recipients = [];
 
         membersList.find("tbody > tr").each(function () {
-            if (!$(this).find(".members-select-checkbox").prop("checked") || $(this).data("own-user")) {
+            if (!$(this).find(".members-select-checkbox").prop("checked")) {
                 return;
             }
 
