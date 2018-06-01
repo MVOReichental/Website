@@ -79,13 +79,7 @@ class Endpoints
             ->target()
             ->className(GroupMembers::class)
             ->method("get")
-            ->arguments("Vorstand", "vorstandschaft");
-
-        Endpoint::create(HttpMethod::GET, "/musiker")
-            ->target()
-            ->className(GroupMembers::class)
-            ->method("get")
-            ->arguments("Musiker", "musiker");*/
+            ->arguments("Vorstand", "vorstandschaft");*/
 
         Endpoint::create(HttpMethod::GET, "/kontakt")
             ->target()
@@ -713,6 +707,13 @@ class Endpoints
         self::mapUploadEndpoints();
         self::mapVideosEndpoints();
         self::mapAdminEndpoints();
+
+        Endpoint::create(HttpMethod::GET, "/internal/musicians")
+            ->target()
+            ->className(GroupMembers::class)
+            ->method("get")
+            ->arguments("Musiker", "musiker")
+            ->requireLogin();
 
         Endpoint::create(HttpMethod::GET, "/internal")
             ->target()
