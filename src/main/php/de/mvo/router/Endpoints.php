@@ -482,6 +482,12 @@ class Endpoints
             ->method("createProgram")
             ->permission($permission);
 
+        Endpoint::create(HttpMethod::POST, $baseUrl . "/programs/[i:id]/copy")
+            ->target()
+            ->className(NoteDirectoryEditor::class)
+            ->method("createProgram")
+            ->permission($permission);
+
         Endpoint::create(HttpMethod::DELETE, $baseUrl . "/programs/[i:id]")
             ->target()
             ->className(NoteDirectoryEditor::class)
