@@ -140,6 +140,7 @@ class Protocol
         $message = new Message;
 
         $message->setTo($recipients);
+        $message->setReplyTo($this->uploader->email, $this->uploader->getFullName());
         $message->setBody(TwigRenderer::render("protocols/mail", array
         (
             "uploader" => $this->uploader,
