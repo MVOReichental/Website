@@ -257,6 +257,7 @@ class Message
         $message = new MailMessage;
 
         $message->setTo($recipients);
+        $message->setReplyTo($this->sender->email, $this->sender->getFullName());
         $message->setBody(TwigRenderer::render("messages/mail", array
         (
             "sender" => $this->sender,
