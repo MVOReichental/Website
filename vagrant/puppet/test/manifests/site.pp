@@ -23,7 +23,7 @@ apt::source { "packages.sury.org_php":
 apt::pin { "packages.sury.org_php":
   priority   => 1000,
   originator => "deb.sury.org",
-  require    => Apt::Source["packages.sury.org_php"],
+  require    => Class["apt::update"],
 }
 
 $php_modules = [
@@ -37,7 +37,7 @@ $php_modules = [
 $php_modules.each | $module | {
   package { "php7.1-${module}":
     require => [
-      Apt::Source["packages.sury.org_php"],
+      Class["apt::update"],
       Apt::Pin["packages.sury.org_php"],
     ],
   }
@@ -59,7 +59,7 @@ class { "apache":
 package { "libapache2-mod-php7.1":
   require => [
     Class["apache"],
-    Apt::Source["packages.sury.org_php"],
+    Class["apt::update"],
     Apt::Pin["packages.sury.org_php"],
   ],
 }
