@@ -22,23 +22,23 @@
                 Gebe den aus der App generierten Code in das nachfolgende Feld ein.
             </div>
 
-            <div class="form-label-group">
-                <input type="text" id="login-2fa-token" name="2fa-token" class="form-control" placeholder="Code" required/>
+            <div class="form-group">
                 <label for="login-2fa-token">Code</label>
+                <input type="text" id="login-2fa-token" name="2fa-token" class="form-control" required autofocus/>
             </div>
 
             <button class="btn btn-lg btn-primary">Login</button>
         {% else %}
             <p>Melde dich mit deinem Benutzername und Passwort im internen Bereich an.</p>
 
-            <div class="form-label-group">
-                <input type="text" id="login-username" name="username" class="form-control" placeholder="Benutzername" required autofocus/>
+            <div class="form-group">
                 <label for="login-username">Benutzername</label>
+                <input type="text" id="login-username" name="username" class="form-control" required autofocus/>
             </div>
 
-            <div class="form-label-group">
-                <input type="password" id="login-password" name="password" class="form-control" placeholder="Passwort" required/>
+            <div class="form-group">
                 <label for="login-password">Passwort</label>
+                <input type="password" id="login-password" name="password" class="form-control" required/>
             </div>
 
             <button class="btn btn-lg btn-primary btn-block">Login</button>
