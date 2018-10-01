@@ -1,5 +1,5 @@
 {
-  "date": "02.06.2018",
+  "date": "01.09.2018",
   "columns": [
     {
       "title": "Blockfl\u00f6tengruppen",
@@ -28,18 +28,6 @@
     {
       "title": "Instrumentalausbildung",
       "types": [
-        {
-          "name": "Klarinette",
-          "groups": [
-            {
-              "trainer": "Gisela Wieland",
-              "students": [
-                "Lola Kern",
-                "Annika Knapp"
-              ]
-            }
-          ]
-        },
         {
           "name": "Posaune",
           "groups": [
