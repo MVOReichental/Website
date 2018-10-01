@@ -91,13 +91,7 @@ class Endpoints
             ->target()
             ->className(StaticView::class)
             ->method("get")
-            ->arguments("jugendausbildung/ausbildung_im_verein");
-
-        Endpoint::create(HttpMethod::GET, "/jugendausbildung/ausbildungsgruppen")
-            ->target()
-            ->className(JsonView::class)
-            ->method("get")
-            ->arguments("jugendausbildung/ausbildungsgruppen", "jugendausbildung/ausbildungsgruppen");
+            ->arguments("jugendausbildung");
 
         Endpoint::create(HttpMethod::GET, "/foerderverein/warum_foerderverein")
             ->target()
@@ -713,6 +707,12 @@ class Endpoints
         self::mapUploadEndpoints();
         self::mapVideosEndpoints();
         self::mapAdminEndpoints();
+
+        Endpoint::create(HttpMethod::GET, "/internal/traininggroups")
+            ->target()
+            ->className(JsonView::class)
+            ->method("get")
+            ->arguments("traininggroups", "traininggroups");
 
         Endpoint::create(HttpMethod::GET, "/internal/musicians")
             ->target()
