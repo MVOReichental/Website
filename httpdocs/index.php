@@ -25,11 +25,6 @@ try {
 
     $router = new Router;
 
-    // Fix for https://github.com/dannyvankooten/AltoRouter/issues/221
-    $router->addMatchTypes(array(
-        "" => "[^/]++"
-    ));
-
     $router->mapAll(Endpoints::get());
 
     if (isset($_SERVER["PATH_INFO"])) {

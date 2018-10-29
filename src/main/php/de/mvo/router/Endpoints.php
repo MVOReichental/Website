@@ -133,7 +133,7 @@ class Endpoints
             ->className(Pictures::class)
             ->method("getAlbums");
 
-        Endpoint::create(HttpMethod::GET, "/fotogalerie/[i:year]/[:album]")
+        Endpoint::create(HttpMethod::GET, "/fotogalerie/[i:year]/[*:album]")
             ->target()
             ->className(Pictures::class)
             ->method("getAlbum");
@@ -226,7 +226,7 @@ class Endpoints
             ->arguments(true)
             ->requireLogin();
 
-        Endpoint::create(HttpMethod::GET, "/internal/pictures/[i:year]/[:album]")
+        Endpoint::create(HttpMethod::GET, "/internal/pictures/[i:year]/[*:album]")
             ->target()
             ->className(Pictures::class)
             ->method("getAlbum")
@@ -328,7 +328,7 @@ class Endpoints
             ->method("getList")
             ->requireLogin();
 
-        Endpoint::create(HttpMethod::GET, "/internal/members/[:username]")
+        Endpoint::create(HttpMethod::GET, "/internal/members/[*:username]")
             ->target()
             ->className(Members::class)
             ->method("getDetails")
