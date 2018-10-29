@@ -15,6 +15,10 @@ class VideoList extends ArrayObject
      */
     public static function load()
     {
+        if (!file_exists(RESOURCES_ROOT . "/videos.serialized")) {
+            return new VideoList;
+        }
+
         $data = unserialize(file_get_contents(RESOURCES_ROOT . "/videos.serialized"));
 
         if ($data instanceof self) {
