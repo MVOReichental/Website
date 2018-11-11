@@ -3,6 +3,7 @@ namespace de\mvo\model\pictures;
 
 use de\mvo\Date;
 use de\mvo\model\users\User;
+use de\mvo\utils\StringUtil;
 
 class Album
 {
@@ -84,6 +85,11 @@ class Album
         }
 
         return $user !== null;
+    }
+
+    public function formatText()
+    {
+        return StringUtil::format($this->text);
     }
 
     /**
