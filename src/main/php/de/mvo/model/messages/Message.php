@@ -4,7 +4,7 @@ namespace de\mvo\model\messages;
 use de\mvo\Database;
 use de\mvo\Date;
 use de\mvo\mail\Message as MailMessage;
-use de\mvo\mail\Sender as MailSender;
+use de\mvo\mail\Queue;
 use de\mvo\model\uploads\Upload;
 use de\mvo\model\uploads\Uploads;
 use de\mvo\model\users\User;
@@ -235,8 +235,6 @@ class Message
      */
     public function sendMail()
     {
-        $recipients = array();
-
         /**
          * @var $user User
          */
@@ -245,29 +243,21 @@ class Message
                 continue;
             }
 
-            $recipients[$user->email] = $user->getFullName();
+            $message = new MailMessage;
+
+            $message->setTo($user->email, $user->getFullName());
+            $message->setReplyTo($this->sender->email, $this->sender->getFullName());
+            $message->setBody(TwigRenderer::render("messages/mail", array
+            (
+                "sender" => $this->sender,
+                "message" => $this->formatText(),
+                "attachments" => $this->attachments,
+                "baseUrl" => Url::getBaseUrl(),
+                "url" => sprintf("%s/internal/messages/%d", Url::getBaseUrl(), $this->id)
+            )), "text/html");
+            $message->setSubjectFromHtml($message->getBody());
+
+            Queue::add($message);
         }
-
-        if (empty($recipients)) {
-            return;
-        }
-
-        $sender = new MailSender;
-
-        $message = new MailMessage;
-
-        $message->setTo($recipients);
-        $message->setReplyTo($this->sender->email, $this->sender->getFullName());
-        $message->setBody(TwigRenderer::render("messages/mail", array
-        (
-            "sender" => $this->sender,
-            "message" => $this->formatText(),
-            "attachments" => $this->attachments,
-            "baseUrl" => Url::getBaseUrl(),
-            "url" => sprintf("%s/internal/messages/%d", Url::getBaseUrl(), $this->id)
-        )), "text/html");
-        $message->setSubjectFromHtml($message->getBody());
-
-        $sender->send($message);
     }
 }

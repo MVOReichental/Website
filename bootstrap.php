@@ -10,6 +10,7 @@ define("VIEWS_ROOT", RESOURCES_ROOT . "/views");
 define("PROFILE_PICTURES_ROOT", RESOURCES_ROOT . "/profile-pictures");
 define("UPLOADS_ROOT", RESOURCES_ROOT . "/uploads");
 define("PICTURES_ROOT", HTTPDOCS_ROOT . "/pictures");
+define("MAIL_QUEUE_ROOT", RESOURCES_ROOT . "/mail-queue");
 
 define("APP_NAMESPACE", "de\\mvo\\website");
 

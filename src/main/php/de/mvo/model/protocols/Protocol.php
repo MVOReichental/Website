@@ -4,7 +4,7 @@ namespace de\mvo\model\protocols;
 use de\mvo\Database;
 use de\mvo\Date;
 use de\mvo\mail\Message;
-use de\mvo\mail\Sender;
+use de\mvo\mail\Queue;
 use de\mvo\model\uploads\Upload;
 use de\mvo\model\users\User;
 use de\mvo\model\users\Users;
@@ -113,8 +113,6 @@ class Protocol
      */
     public function sendMail()
     {
-        $recipients = array();
-
         /**
          * @var $user User
          */
@@ -125,31 +123,23 @@ class Protocol
 
             foreach ($this->groups as $group) {
                 if ($user->hasPermission(sprintf("protocols.view.%s", $group))) {
-                    $recipients[$user->email] = $user->getFullName();
+                    $message = new Message;
+
+                    $message->setTo($user->email, $user->getFullName());
+                    $message->setReplyTo($this->uploader->email, $this->uploader->getFullName());
+                    $message->setBody(TwigRenderer::render("protocols/mail", array
+                    (
+                        "uploader" => $this->uploader,
+                        "date" => $this->date,
+                        "title" => $this->title,
+                        "url" => Url::getBaseUrl() . $this->upload->getUrl()
+                    )), "text/html");
+                    $message->setSubjectFromHtml($message->getBody());
+
+                    Queue::add($message);
                     break;
                 }
             }
         }
-
-        if (empty($recipients)) {
-            return;
-        }
-
-        $sender = new Sender;
-
-        $message = new Message;
-
-        $message->setTo($recipients);
-        $message->setReplyTo($this->uploader->email, $this->uploader->getFullName());
-        $message->setBody(TwigRenderer::render("protocols/mail", array
-        (
-            "uploader" => $this->uploader,
-            "date" => $this->date,
-            "title" => $this->title,
-            "url" => Url::getBaseUrl() . $this->upload->getUrl()
-        )), "text/html");
-        $message->setSubjectFromHtml($message->getBody());
-
-        $sender->send($message);
     }
 }

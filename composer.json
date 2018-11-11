@@ -27,6 +27,8 @@
         "swiftmailer/swiftmailer": "^5.4",
         "jaybizzle/crawler-detect": "^1.2",
         "google/apiclient": "^2.2",
-        "ezyang/htmlpurifier": "^4.10"
+        "ezyang/htmlpurifier": "^4.10",
+        "symfony/finder": "^4.1",
+        "symfony/filesystem": "^4.1"
     }
 }
