@@ -1,5 +1,5 @@
 {
-  "date": "01.09.2018",
+  "date": "01.11.2018",
   "columns": [
     {
       "title": "Blockfl\u00f6tengruppen",
@@ -19,6 +19,13 @@
               "students": [
                 "Lara Merkel",
                 "Giulia Viviani"
+              ]
+            },
+            {
+              "trainer": "Gisela Wieland",
+              "students": [
+                "Marlen Lang",
+                "Philipp Lang"
               ]
             }
           ]
@@ -68,8 +75,7 @@
             {
               "trainer": "Jonathan Friedel",
               "students": [
-                "Jonas Melcher",
-                "Maximilian Merkel"
+                "Jonas Melcher"
               ]
             }
           ]
@@ -91,8 +97,6 @@
             {
               "trainer": "David Brasseur",
               "students": [
-                "Moritz Balensiefen",
-                "Vincent Kast",
                 "Lea Knapp"
               ]
             },
