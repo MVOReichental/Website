@@ -9,27 +9,32 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="page-header">Aktuell</h1>
+    <div class="row">
+        <div class="col-lg-3"><img src="{{ asset("img/logo.svg") }}" id="logo" class="d-print-none"/></div>
+        <div class="col-lg-9">
+            <h1 class="page-header">Aktuell</h1>
 
-    <div id="news-content">
-        {% if news %}
-            {{ news|raw }}
-        {% endif %}
+            <div id="news-content">
+                {% if news %}
+                    {{ news|raw }}
+                {% endif %}
+            </div>
+
+            {% if dates.count %}
+                <h2 class="page-header">Unsere n&auml;chsten Termine</h2>
+
+                {% include("dates/list.twig") %}
+
+                <p class="text-muted d-print-none">Klicken Sie <a href="termine">hier</a> um weitere Termine zu sehen.</p>
+            {% endif %}
+
+            {% if albums.count %}
+                <h2 class="page-header">Neueste Bilder</h2>
+
+                {% include("pictures/albums-list.twig") %}
+
+                <p class="text-muted d-print-none">Klicken Sie <a href="{{ picturesBaseUrl }}">hier</a> um weitere Alben zu sehen.</p>
+            {% endif %}
+        </div>
     </div>
-
-    {% if dates.count %}
-        <h2 class="page-header">Unsere n&auml;chsten Termine</h2>
-
-        {% include("dates/list.twig") %}
-
-        <p class="text-muted d-print-none">Klicken Sie <a href="termine">hier</a> um weitere Termine zu sehen.</p>
-    {% endif %}
-
-    {% if albums.count %}
-        <h2 class="page-header">Neueste Bilder</h2>
-
-        {% include("pictures/albums-list.twig") %}
-
-        <p class="text-muted d-print-none">Klicken Sie <a href="{{ picturesBaseUrl }}">hier</a> um weitere Alben zu sehen.</p>
-    {% endif %}
 {% endblock %}

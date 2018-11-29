@@ -191,9 +191,5 @@ ul.nav li.nav-item.active {
 }
 
 #logo {
-    padding: 0;
-}
-
-#logo img {
-    height: 40px;
+    width: 100%;
 }
