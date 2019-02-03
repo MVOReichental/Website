@@ -589,7 +589,7 @@ class User implements JsonSerializable
         }
     }
 
-    public function hasPermission($permission)
+    public function hasPermission($permission, $requireExactMatch = false)
     {
         if ($this->permissions === null) {
             $this->permissions = GroupList::load()->getPermissionsForUser($this);
@@ -602,7 +602,7 @@ class User implements JsonSerializable
             return false;
         }
 
-        return $this->permissions->hasPermission($permission, false);
+        return $this->permissions->hasPermission($permission, $requireExactMatch);
     }
 
     public function has2FA()
@@ -862,6 +862,16 @@ class User implements JsonSerializable
         } catch (VCardException $exception) {
             // ignore exception and do not add the photo
         }
+
+        $groups = array();
+
+        foreach (Groups::getAll() as $group => $title) {
+            if ($this->hasPermission(sprintf("group.%s", $group), true)) {
+                $groups[] = $title;
+            }
+        }
+
+        $vcard->addCategories($groups);
 
         /**
          * @var $contact Contact
