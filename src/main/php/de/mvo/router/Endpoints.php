@@ -322,6 +322,12 @@ class Endpoints
     {
         $membersListViews = array_keys(Members::getListViews());
 
+        Endpoint::create(HttpMethod::GET, "/internal/members/addresslist.vcf")
+            ->target()
+            ->className(Members::class)
+            ->method("getListAsVCard")
+            ->requireLogin();
+
         Endpoint::create(HttpMethod::GET, "/internal/members/[" . implode("|", $membersListViews) . ":view]")
             ->target()
             ->className(Members::class)
@@ -331,7 +337,7 @@ class Endpoints
         Endpoint::create(HttpMethod::GET, "/internal/members/[*:username].vcf")
             ->target()
             ->className(Members::class)
-            ->method("getVCard")
+            ->method("getVCardForUser")
             ->requireLogin();
 
         Endpoint::create(HttpMethod::GET, "/internal/members/[*:username]")
