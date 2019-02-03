@@ -21,7 +21,7 @@
         "ext-pdo": "*",
         "ext-json": "*",
         "altorouter/altorouter": "^1.1",
-        "programie/pini": "dev-master",
+        "programie/pini": "^1.4",
         "eluceo/ical": "^0.10.0",
         "erusev/parsedown": "^1.6",
         "kelunik/two-factor": "^1.0",
