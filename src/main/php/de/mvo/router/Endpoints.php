@@ -328,6 +328,12 @@ class Endpoints
             ->method("getList")
             ->requireLogin();
 
+        Endpoint::create(HttpMethod::GET, "/internal/members/[*:username].vcf")
+            ->target()
+            ->className(Members::class)
+            ->method("getVCard")
+            ->requireLogin();
+
         Endpoint::create(HttpMethod::GET, "/internal/members/[*:username]")
             ->target()
             ->className(Members::class)

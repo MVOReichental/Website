@@ -5,6 +5,7 @@ use de\mvo\Database;
 use de\mvo\Date;
 use de\mvo\mail\Message;
 use de\mvo\mail\Sender;
+use de\mvo\model\contacts\Contact;
 use de\mvo\model\contacts\Contacts;
 use de\mvo\model\exception\DuplicateEntryException;
 use de\mvo\model\permissions\Group;
@@ -12,6 +13,8 @@ use de\mvo\model\permissions\GroupList;
 use de\mvo\model\permissions\Permissions;
 use de\mvo\TwigRenderer;
 use de\mvo\utils\Url;
+use JeroenDesloovere\VCard\VCard;
+use JeroenDesloovere\VCard\VCardException;
 use JsonSerializable;
 use Kelunik\TwoFactor\Oath;
 use ParagonIE\ConstantTime\Base32;
@@ -733,6 +736,17 @@ class User implements JsonSerializable
         return md5_file(self::getProfilePicturePath($this->id));
     }
 
+    public function profilePictureUrl($fullUrl = false)
+    {
+        $url = sprintf("users/%d/profile-picture.jpg?hash=%s", $this->id, $this->profilePictureHash());
+
+        if ($fullUrl) {
+            $url = sprintf("%s/%s", Url::getBaseUrl(), $url);
+        }
+
+        return $url;
+    }
+
     public function contacts()
     {
         return Contacts::forUser($this);
@@ -830,6 +844,53 @@ class User implements JsonSerializable
         }
 
         return $this->datesToken;
+    }
+
+    public function getVCard()
+    {
+        $vcard = new VCard;
+
+        $vcard->addName($this->lastName, $this->firstName);
+        $vcard->addEmail($this->email);
+
+        if ($this->birthDate !== null) {
+            $vcard->addBirthday($this->birthDate->format("Y-m-d"));
+        }
+
+        try {
+            $vcard->addPhoto($this->profilePictureUrl(true), false);
+        } catch (VCardException $exception) {
+            // ignore exception and do not add the photo
+        }
+
+        /**
+         * @var $contact Contact
+         */
+        foreach ($this->contacts() as $contact) {
+            $type = array();
+
+            switch ($contact->category) {
+                case "business":
+                    $type[] = "WORK";
+                    break;
+                case "private":
+                    $type[] = "HOME";
+                    break;
+            }
+
+            switch ($contact->type) {
+                case "phone":
+                    $type[] = "VOICE";
+                    break;
+                case "mobile":
+                    $type[] = "CELL";
+                    break;
+            }
+
+            $vcard->addPhoneNumber($contact->value, implode(";", $type));
+        }
+
+        return $vcard;
     }
 
     public function save($forceInsertWithId = false)

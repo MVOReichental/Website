@@ -127,4 +127,21 @@ class Members extends AbstractService
             "messages" => $filteredMessages
         ));
     }
+
+    /**
+     * @return null
+     * @throws NotFoundException
+     */
+    public function getVCard()
+    {
+        $user = User::getByUsername($this->params->username);
+
+        if ($user === null) {
+            throw new NotFoundException;
+        }
+
+        $user->getVCard()->download();
+
+        return null;
+    }
 }
