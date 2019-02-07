@@ -41,9 +41,11 @@
         <button type="button" class="btn btn-success" id="members-send-message-button"><i class="fas fa-paper-plane"></i> Nachricht senden <span class="badge badge-dark"></span></button>
     </div>
 
-    <p class="text-muted d-print-none">
-        <a href="internal/members/addresslist.vcf"><i class="fas fa-download"></i> Adressenliste als VCard herunterladen</a>
-    </p>
+    {% if currentUser.hasPermission("members.vcard") %}
+        <p class="text-muted d-print-none">
+            <a href="internal/members/addresslist.vcf"><i class="fas fa-download"></i> Adressenliste als VCard herunterladen</a>
+        </p>
+    {% endif %}
 
     {% include("messages/send-modal.twig") %}
 {% endblock %}

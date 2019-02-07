@@ -326,7 +326,7 @@ class Endpoints
             ->target()
             ->className(Members::class)
             ->method("getListAsVCard")
-            ->requireLogin();
+            ->permission("members.vcard");
 
         Endpoint::create(HttpMethod::GET, "/internal/members/[" . implode("|", $membersListViews) . ":view]")
             ->target()
@@ -338,7 +338,7 @@ class Endpoints
             ->target()
             ->className(Members::class)
             ->method("getVCardForUser")
-            ->requireLogin();
+            ->permission("members.vcard");
 
         Endpoint::create(HttpMethod::GET, "/internal/members/[*:username]")
             ->target()

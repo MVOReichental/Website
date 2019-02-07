@@ -22,6 +22,10 @@
 * `group.vorstandschaft`
 * `group.$name`
 
+# Members
+
+* `members.vcard`
+
 # Messages
 
 * `messages.all`
