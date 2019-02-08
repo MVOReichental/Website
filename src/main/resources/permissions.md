@@ -41,5 +41,4 @@
 
 # Room occupancy plan
 
-* `roomoccupancyplan.edit`
 * `roomoccupancyplan.view`

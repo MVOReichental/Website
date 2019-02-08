@@ -573,24 +573,6 @@ class Endpoints
             ->className(RoomOccupancyPlan::class)
             ->method("getEntries")
             ->permission("roomoccupancyplan.view");
-
-        Endpoint::create(HttpMethod::POST, "/internal/roomoccupancyplan/entries/[i:id]/move-resize")
-            ->target()
-            ->className(RoomOccupancyPlan::class)
-            ->method("moveResizeEntry")
-            ->permission("roomoccupancyplan.edit");
-
-        Endpoint::create(HttpMethod::POST, "/internal/roomoccupancyplan/entries/[i:id]")
-            ->target()
-            ->className(RoomOccupancyPlan::class)
-            ->method("editEntry")
-            ->permission("roomoccupancyplan.edit");
-
-        Endpoint::create(HttpMethod::POST, "/internal/roomoccupancyplan/entries")
-            ->target()
-            ->className(RoomOccupancyPlan::class)
-            ->method("createEntry")
-            ->permission("roomoccupancyplan.edit");
     }
 
     private static function mapUploadEndpoints()

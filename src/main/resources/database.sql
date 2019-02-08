@@ -241,20 +241,6 @@ CREATE TABLE `protocolgroups` (
   DEFAULT CHARSET = utf8;
 
 
-CREATE TABLE `roomoccupancyplan` (
-  `id`             INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `startTime`      TIME             NOT NULL,
-  `endTime`        TIME             NOT NULL,
-  `date`           DATE             NOT NULL,
-  `repeatTillDate` DATE                      DEFAULT NULL,
-  `repeatWeekly`   BOOLEAN          NOT NULL DEFAULT TRUE,
-  `title`          VARCHAR(200)     NOT NULL,
-  PRIMARY KEY (`id`)
-)
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
-
-
 CREATE TABLE `visits` (
   `id`         INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `ip`         VARCHAR(50),
