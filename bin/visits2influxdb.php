@@ -59,7 +59,7 @@ for ($try = 1; $try <= 10; $try++) {
     }
 
     try {
-        $database->writePoints($points);
+        $database->writePoints($points, InfluxDB\Database::PRECISION_SECONDS);
         exit(0);
     } catch (Exception $e) {
         error_log($e);
