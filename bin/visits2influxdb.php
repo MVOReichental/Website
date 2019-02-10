@@ -15,15 +15,13 @@ Database::init();
 $dateString = $argv[1] ?? null;
 
 if ($dateString) {
-    $startDate = new Date($dateString);
+    $date = new Date($dateString);
 } else {
-    $startDate = new Date;
-    $startDate->sub(new DateInterval("PT1H"));
+    $date = new Date;
+    $date->sub(new DateInterval("PT1H"));
 }
 
-$startDate->setTime($startDate->format("H"), 0, 0);
-$endDate = clone $startDate;
-$endDate->add(new DateInterval("PT1H"));
+$date->setTime($date->format("H"), 0, 0);
 
 $host = Config::getRequiredValue("influxdb", "host");
 $port = Config::getValue("influxdb", "port", 8086);
@@ -34,7 +32,7 @@ $dbName = Config::getRequiredValue("influxdb", "database");
 $client = new Client($host, $port, $username, $password);
 $database = $client->selectDB($dbName);
 
-$visits = Visit::getInDateRange($startDate, $endDate);
+$visits = Visit::getAtDate($date);
 
 $guests = 0;
 $users = 0;
@@ -52,7 +50,7 @@ $fields = array(
     "users" => $users
 );
 
-$points = array(new Point("visitors", null, array(), $fields, $startDate->getTimestamp()));
+$points = array(new Point("visitors", null, array(), $fields, $date->getTimestamp()));
 
 for ($try = 1; $try <= 10; $try++) {
     if ($try > 1) {
