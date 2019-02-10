@@ -21,7 +21,7 @@ if ($dateString) {
     $startDate->sub(new DateInterval("PT1H"));
 }
 
-$startDate->setTime($date->format("H"), 0, 0);
+$startDate->setTime($startDate->format("H"), 0, 0);
 $endDate = clone $startDate;
 $endDate->add(new DateInterval("PT1H"));
 
