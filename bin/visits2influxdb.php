@@ -15,13 +15,15 @@ Database::init();
 $dateString = $argv[1] ?? null;
 
 if ($dateString) {
-    $date = new Date($dateString);
+    $startDate = new Date($dateString);
 } else {
-    $date = new Date;
-    $date->sub(new DateInterval("PT1H"));
+    $startDate = new Date;
+    $startDate->sub(new DateInterval("PT1H"));
 }
 
-$date->setTime($date->format("H"), 0, 0);
+$startDate->setTime($date->format("H"), 0, 0);
+$endDate = clone $startDate;
+$endDate->add(new DateInterval("PT1H"));
 
 $host = Config::getRequiredValue("influxdb", "host");
 $port = Config::getValue("influxdb", "port", 8086);
@@ -32,7 +34,7 @@ $dbName = Config::getRequiredValue("influxdb", "database");
 $client = new Client($host, $port, $username, $password);
 $database = $client->selectDB($dbName);
 
-$visits = Visit::getAtDate($date);
+$visits = Visit::getInDateRange($startDate, $endDate);
 
 $guests = 0;
 $users = 0;
