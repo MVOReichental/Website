@@ -18,10 +18,10 @@ if ($dateString) {
     $date = new Date($dateString);
 } else {
     $date = new Date;
-    $date->sub(new DateInterval("P1D"));
+    $date->sub(new DateInterval("PT1H"));
 }
 
-$date->setTime(0, 0, 0);
+$date->setTime($date->format("H"), 0, 0);
 
 $host = Config::getRequiredValue("influxdb", "host");
 $port = Config::getValue("influxdb", "port", 8086);
