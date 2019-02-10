@@ -52,7 +52,7 @@ $fields = array(
     "users" => $users
 );
 
-$points = array(new Point("visitors", null, array(), $fields, $date->getTimestamp()));
+$points = array(new Point("visitors", null, array(), $fields, $startDate->getTimestamp()));
 
 for ($try = 1; $try <= 10; $try++) {
     if ($try > 1) {
