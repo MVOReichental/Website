@@ -53,10 +53,17 @@ $fields = array(
 $points = array(new Point("visitors", null, array(), $fields, $date->getTimestamp()));
 
 for ($try = 1; $try <= 10; $try++) {
-    try {
-        $database->writePoints($points);
-        break;
-    } catch (Exception $e) {
+    if ($try > 1) {
+        echo "Retrying in 60 seconds...\n";
         sleep(60);
     }
+
+    try {
+        $database->writePoints($points);
+        exit(0);
+    } catch (Exception $e) {
+        error_log($e);
+    }
 }
+
+exit(1);
