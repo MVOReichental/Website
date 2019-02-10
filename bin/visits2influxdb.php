@@ -12,9 +12,16 @@ require_once __DIR__ . "/../bootstrap.php";
 
 Database::init();
 
-$date = new Date;
+$dateString = $argv[1] ?? null;
+
+if ($dateString) {
+    $date = new Date($dateString);
+} else {
+    $date = new Date;
+    $date->sub(new DateInterval("P1D"));
+}
+
 $date->setTime(0, 0, 0);
-$date->sub(new DateInterval("P1D"));
 
 $host = Config::getRequiredValue("influxdb", "host");
 $port = Config::getValue("influxdb", "port", 8088);
