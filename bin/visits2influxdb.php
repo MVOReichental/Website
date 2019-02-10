@@ -24,7 +24,7 @@ if ($dateString) {
 $date->setTime(0, 0, 0);
 
 $host = Config::getRequiredValue("influxdb", "host");
-$port = Config::getValue("influxdb", "port", 8088);
+$port = Config::getValue("influxdb", "port", 8086);
 $username = Config::getValue("influxdb", "username");
 $password = Config::getValue("influxdb", "password");
 $dbName = Config::getRequiredValue("influxdb", "database");
