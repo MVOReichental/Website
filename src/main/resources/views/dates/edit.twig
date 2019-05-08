@@ -26,7 +26,7 @@
         {% endif %}
     </h1>
 
-    <form action="internal/dates" method="post">
+    <form id="dates-edit-form" action="internal/dates" method="post">
         {% if entry.id %}
             <input type="hidden" name="id" value="{{ entry.id }}"/>
         {% endif %}
@@ -97,4 +97,19 @@
             <a href="internal/dates" class="btn btn-secondary"><i class="fas fa-times"></i> Abbrechen</a>
         </div>
     </form>
+
+    <div class="modal fade" id="dates-edit-missing-group-info">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Keine Gruppe ausgew&auml;hlt</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">Bitte w&auml;hle mindestens eine Gruppe aus oder aktiviere die Option <b>&Ouml;ffentlich sichtbar</b>.</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

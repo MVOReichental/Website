@@ -8,6 +8,16 @@ $(function () {
 
     var datesAutocompletionData = null;
 
+    $("#dates-edit-form").on("submit", function (event) {
+        if ($("#dates-edit-groups :selected").length || $("#dates-edit-public").is(":checked")) {
+            return;
+        }
+
+        $("#dates-edit-missing-group-info").modal("show");
+
+        event.preventDefault();
+    });
+
     $("#dates-edit-title").typeahead({
         source: function (query, process) {
             loadDateEditorTypeaheadData("titles", process);
