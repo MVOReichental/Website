@@ -7,10 +7,10 @@ $(function () {
         $(this).text(date.calendar(null, {
             sameDay: hasTime ? "[heute] LT" : "[heute]",
             nextDay: hasTime ? "[morgen] LT" : "[morgen]",
-            nextWeek: hasTime ? "LLL" : "LL",
-            sameElse: hasTime ? "LLL" : "LL"
+            nextWeek: hasTime ? "dd, LLL" : "dd, LL",
+            sameElse: hasTime ? "dd, LLL" : "dd, LL"
         }));
 
-        $(this).attr("title", date.format(hasTime ? "LLL" : "LL"));
+        $(this).attr("title", date.format(hasTime ? "dd, LLL" : "dd, LL"));
     });
 });
