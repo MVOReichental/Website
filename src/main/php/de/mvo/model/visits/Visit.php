@@ -195,7 +195,7 @@ class Visit
 
     public static function track()
     {
-        if (preg_match("/^check_http/", $_SERVER["HTTP_USER_AGENT"])) {
+        if (!isset($_SERVER["HTTP_USER_AGENT"]) or preg_match("/^check_http/", $_SERVER["HTTP_USER_AGENT"])) {
             return;
         }
 
