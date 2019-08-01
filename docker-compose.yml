@@ -20,8 +20,12 @@ services:
       - network
     volumes:
       - mysql:/var/lib/mysql
+      - ./src/main/resources/database.sql:/docker-entrypoint-initdb.d/database.sql:ro
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: 'true'
+      MYSQL_DATABASE: mvo
+      MYSQL_USER: mvo
+      MYSQL_PASSWORD: mvo
 
 networks:
   network:
