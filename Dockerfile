@@ -19,6 +19,11 @@ RUN npm install
 
 FROM php:7.3-apache
 
+ENV TZ=Europe/Berlin
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
+    echo $TZ > /etc/timezone && \
+    echo "date.timezone=\"$TZ\"" > $PHP_INI_DIR/conf.d/timezone.ini
+
 RUN savedAptMark="$(apt-mark showmanual)" && \
     apt-get update && \
     apt-get install -y --no-install-recommends libfreetype6-dev libjpeg-dev libpng-dev && \
