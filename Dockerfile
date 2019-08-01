@@ -52,5 +52,5 @@ COPY docker-entrypoint.sh /entrypoint.sh
 VOLUME /app/data
 WORKDIR /app
 
-ENTRYPOINT /entrypoint.sh
-CMD apache2-foreground
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["apache2-foreground"]
