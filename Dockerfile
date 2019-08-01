@@ -22,11 +22,27 @@ RUN npm install
 
 FROM php:7.3-apache
 
+RUN savedAptMark="$(apt-mark showmanual)" && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends libfreetype6-dev libjpeg-dev libpng-dev && \
+    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
+    docker-php-ext-install -j "$(nproc)" gd pdo_mysql && \
+    apt-mark auto '.*' > /dev/null && \
+    apt-mark manual $savedAptMark && \
+    ldd "$(php -r 'echo ini_get("extension_dir");')"/*.so \
+        | awk '/=>/ { print $3 }' \
+        | sort -u \
+        | xargs -r dpkg-query -S \
+        | cut -d: -f1 \
+        | sort -u \
+        | xargs -rt apt-mark manual && \
+    apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
+    rm -rf /var/lib/apt/lists/*
+
 RUN sed -ri -e 's!/var/www/html!/app/httpdocs!g' /etc/apache2/sites-available/*.conf && \
     sed -ri -e 's!/var/www/!/app/httpdocs!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf && \
     echo "ServerTokens Prod" > /etc/apache2/conf-enabled/z-server-tokens.conf && \
     a2enmod rewrite && \
-    docker-php-ext-install pdo_mysql && \
     mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
 COPY --from=composer /app /app
