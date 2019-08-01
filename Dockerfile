@@ -47,6 +47,7 @@ RUN sed -ri -e 's!/var/www/html!/app/httpdocs!g' /etc/apache2/sites-available/*.
 
 COPY --from=composer /app /app
 COPY --from=npm /app/node_modules /app/httpdocs/node_modules
+COPY docker-entrypoint.sh /entrypoint.sh
 
 VOLUME /app/data
 WORKDIR /app
