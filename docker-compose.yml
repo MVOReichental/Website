@@ -5,6 +5,8 @@ services:
     image: registry.gitlab.com/mvoreichental/website
     hostname: app
     restart: unless-stopped
+    depends_on:
+      - mysql
     networks:
       - network
     ports:
