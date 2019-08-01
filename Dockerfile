@@ -7,7 +7,7 @@ COPY bootstrap.php composer.json composer.lock /app/
 
 WORKDIR /app
 
-RUN composer install --no-dev && \
+RUN composer install --no-dev --ignore-platform-reqs && \
     rm /app/composer.json /app/composer.lock
 
 
