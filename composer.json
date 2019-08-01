@@ -18,6 +18,7 @@
     "require": {
         "php": ">=7.1",
         "ext-dom": "*",
+        "ext-gd": "*",
         "ext-pdo": "*",
         "ext-json": "*",
         "altorouter/altorouter": "^1.1",
