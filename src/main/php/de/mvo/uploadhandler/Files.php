@@ -15,6 +15,8 @@ class Files extends ArrayObject
      */
     public function __construct(array $item)
     {
+        parent::__construct();
+
         $this->item = $item;
 
         if (is_array($this->item["name"])) {
