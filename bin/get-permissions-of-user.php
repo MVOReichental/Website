@@ -23,6 +23,11 @@ if ($user === null) {
 
 $permissions = GroupList::load()->getPermissionsForUser($user);
 
+if ($permissions === null) {
+    echo "User '" . $username . "' does not have any permissions!\n";
+    exit(1);
+}
+
 foreach ($permissions as $permission) {
     echo $permission . "\n";
 }
