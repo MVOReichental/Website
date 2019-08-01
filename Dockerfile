@@ -1,9 +1,6 @@
 FROM composer AS composer
 
-COPY bin /app/bin
-COPY httpdocs /app/httpdocs
-COPY src /app/src
-COPY bootstrap.php composer.json composer.lock /app/
+COPY composer.* /app/
 
 WORKDIR /app
 
@@ -45,8 +42,14 @@ RUN sed -ri -e 's!/var/www/html!/app/httpdocs!g' /etc/apache2/sites-available/*.
     a2enmod rewrite && \
     mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
-COPY --from=composer /app /app
+COPY --from=composer /app/vendor /app/vendor
 COPY --from=npm /app/node_modules /app/httpdocs/node_modules
+
+COPY bootstrap.php /app/
+COPY bin /app/bin
+COPY httpdocs /app/httpdocs
+COPY src /app/src
+
 COPY docker-entrypoint.sh /entrypoint.sh
 
 VOLUME /app/data
