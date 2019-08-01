@@ -50,3 +50,6 @@ COPY --from=npm /app/node_modules /app/httpdocs/node_modules
 
 VOLUME /app/data
 WORKDIR /app
+
+ENTRYPOINT /entrypoint.sh
+CMD apache2-foreground
