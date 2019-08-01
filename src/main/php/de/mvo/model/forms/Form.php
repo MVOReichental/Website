@@ -49,7 +49,7 @@ class Form
 
     public function getAbsoluteFilePath()
     {
-        return RESOURCES_ROOT . "/forms/" . basename($this->filename);
+        return FORMS_ROOT . "/" . basename($this->filename);
     }
 
     public function type()

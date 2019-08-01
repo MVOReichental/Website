@@ -63,7 +63,7 @@ class TwigRenderer
         }));
 
         if (Config::getValue("twig", "cache", false)) {
-            self::$twig->setCache(RESOURCES_ROOT . "/twig-cache");
+            self::$twig->setCache(TWIG_CACHE_ROOT);
         }
     }
 

@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+  app:
+    image: registry.gitlab.com/mvoreichental/website
+    hostname: app
+    restart: unless-stopped
+    networks:
+      - network
+    ports:
+      - '8080:80'
+    volumes:
+      - ./data:/app/data
+
+  mysql:
+    image: mariadb
+    hostname: mysql
+    restart: unless-stopped
+    networks:
+      - network
+    volumes:
+      - mysql:/var/lib/mysql
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: 'true'
+
+networks:
+  network:
+
+volumes:
+  mysql:

@@ -15,11 +15,11 @@ class VideoList extends ArrayObject
      */
     public static function load()
     {
-        if (!file_exists(RESOURCES_ROOT . "/videos.serialized")) {
+        if (!file_exists(DATA_ROOT . "/videos.serialized")) {
             return new VideoList;
         }
 
-        $data = unserialize(file_get_contents(RESOURCES_ROOT . "/videos.serialized"));
+        $data = unserialize(file_get_contents(DATA_ROOT . "/videos.serialized"));
 
         if ($data instanceof self) {
             return $data;
@@ -30,7 +30,7 @@ class VideoList extends ArrayObject
 
     public function save()
     {
-        file_put_contents(RESOURCES_ROOT . "/videos.serialized", serialize($this));
+        file_put_contents(DATA_ROOT . "/videos.serialized", serialize($this));
     }
 
     /**

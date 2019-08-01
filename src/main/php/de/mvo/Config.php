@@ -17,7 +17,7 @@ class Config extends Pini
             return self::$pini;
         }
 
-        self::$pini = new self(RESOURCES_ROOT . "/config.ini");
+        self::$pini = new self(DATA_ROOT . "/config.ini");
 
         return self::$pini;
     }

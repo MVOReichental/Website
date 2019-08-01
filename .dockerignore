@@ -1,8 +1,7 @@
+*.git*
 /.idea/
 /.vagrant/
-/data/config.ini
-/data/news.html
-/data/*.serialized
+/data/
 /httpdocs/node_modules/
 /vendor/
 /version

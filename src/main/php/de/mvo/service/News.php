@@ -9,7 +9,7 @@ use Twig_Error;
 
 class News extends AbstractService
 {
-    const NEWS_FILE = RESOURCES_ROOT . "/news.html";
+    const NEWS_FILE = DATA_ROOT . "/news.html";
 
     /**
      * @return string
@@ -58,7 +58,7 @@ class News extends AbstractService
     {
         $htmlPurifier = new HTMLPurifier;
 
-        file_put_contents(RESOURCES_ROOT . "/news.html", $htmlPurifier->purify($_POST["content"]));
+        file_put_contents(self::NEWS_FILE, $htmlPurifier->purify($_POST["content"]));
     }
 
     public function delete()

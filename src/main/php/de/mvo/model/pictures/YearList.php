@@ -22,7 +22,7 @@ class YearList extends ArrayObject
             return self::$yearList;
         }
 
-        $filename = RESOURCES_ROOT . "/pictures.serialized";
+        $filename = DATA_ROOT . "/pictures.serialized";
 
         if (file_exists($filename)) {
             self::$yearList = unserialize(file_get_contents($filename));
@@ -39,7 +39,7 @@ class YearList extends ArrayObject
 
     public function save()
     {
-        file_put_contents(RESOURCES_ROOT . "/pictures.serialized", serialize($this));
+        file_put_contents(DATA_ROOT . "/pictures.serialized", serialize($this));
     }
 
     /**

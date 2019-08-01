@@ -94,24 +94,4 @@ class Pictures extends AbstractService
             "album" => $album
         ));
     }
-
-    /**
-     * @return null
-     * @throws NotFoundException
-     */
-    public function redirectLegacyAlbumId()
-    {
-        $album = Album::getAlbumByLegacyId($this->params->id);
-
-        if ($album === null) {
-            throw new NotFoundException;
-        }
-
-        if (!$album->isVisibleToUser(null)) {
-            throw new NotFoundException;
-        }
-
-        header(sprintf("Location: /fotogalerie/%d/%s", $album->year, $album->name));
-        return null;
-    }
 }

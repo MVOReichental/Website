@@ -91,36 +91,4 @@ class Album
     {
         return StringUtil::format($this->text);
     }
-
-    /**
-     * @param int $id
-     * @return Album|null
-     */
-    public static function getAlbumByLegacyId(int $id)
-    {
-        $filename = RESOURCES_ROOT . "/legacy-picture-albums.list";
-
-        if (!file_exists($filename)) {
-            return null;
-        }
-
-        foreach (file($filename, FILE_IGNORE_NEW_LINES) as $line) {
-            list($albumId, $year, $name) = explode("|", $line);
-            $albumId = (int)$albumId;
-
-            if ($albumId !== $id) {
-                continue;
-            }
-
-            $year = YearList::load()->getYear($year);
-
-            if ($year !== null) {
-                return $year->albums->getAlbum($name);
-            }
-
-            break;
-        }
-
-        return null;
-    }
 }

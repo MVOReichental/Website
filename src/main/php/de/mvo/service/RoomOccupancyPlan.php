@@ -31,7 +31,7 @@ class RoomOccupancyPlan extends AbstractService
             return null;
         }
 
-        $filename = RESOURCES_ROOT . "/roomoccupancyplan.serialized";
+        $filename = DATA_ROOT . "/roomoccupancyplan.serialized";
         $ical = null;
 
         if (!file_exists($filename) or filemtime($filename) < time() - Config::getValue("roomoccupancyplan", "ttl", 3600)) {

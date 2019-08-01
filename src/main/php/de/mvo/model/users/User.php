@@ -725,7 +725,7 @@ class User implements JsonSerializable
     {
         $filename = PROFILE_PICTURES_ROOT . "/" . $userId . ".jpg";
         if (!file_exists($filename)) {
-            $filename = PROFILE_PICTURES_ROOT . "/default.jpg";
+            $filename = RESOURCES_ROOT . "/default-profile-picture.jpg";
         }
 
         return $filename;
