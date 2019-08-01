@@ -24,7 +24,7 @@ class GroupList extends ArrayObject implements JsonSerializable
             return self::$root;
         }
 
-        $filename = RESOURCES_ROOT . "/permissions.serialized";
+        $filename = DATA_ROOT . "/permissions.serialized";
 
         if (file_exists($filename)) {
             self::$root = unserialize(file_get_contents($filename));
@@ -44,7 +44,7 @@ class GroupList extends ArrayObject implements JsonSerializable
      */
     public function save()
     {
-        file_put_contents(RESOURCES_ROOT . "/permissions.serialized", serialize($this));
+        file_put_contents(DATA_ROOT . "/permissions.serialized", serialize($this));
     }
 
     public static function loadFromArray(array $array)
