@@ -2,9 +2,11 @@
 namespace de\mvo\model\visits;
 
 use DateInterval;
+use de\mvo\Config;
 use de\mvo\Database;
 use de\mvo\Date;
 use de\mvo\model\users\User;
+use de\mvo\utils\IPUtil;
 use Jaybizzle\CrawlerDetect\CrawlerDetect;
 
 class Visit
@@ -205,7 +207,7 @@ class Visit
             return;
         }
 
-        $ip = $_SERVER["REMOTE_ADDR"];
+        $ip = IPUtil::getClientIP(Config::getValue("visits", "trusted-proxies", []));
         $date = new Date;
         $user = User::getCurrent();
 
