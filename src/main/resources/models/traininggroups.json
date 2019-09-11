@@ -1,5 +1,5 @@
 {
-  "date": "01.11.2018",
+  "date": "31.07.2019",
   "columns": [
     {
       "title": "Blockfl\u00f6tengruppen",
@@ -94,12 +94,6 @@
         {
           "name": "Trompete",
           "groups": [
-            {
-              "trainer": "David Brasseur",
-              "students": [
-                "Lea Knapp"
-              ]
-            },
             {
               "trainer": "Wolfgang St\u00f6rtzer",
               "students": [
