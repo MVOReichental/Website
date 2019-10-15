@@ -290,7 +290,7 @@ class User implements JsonSerializable
         $query->execute(array
         (
             ":password" => $password,
-            ":requirePasswordChange" => $requireChange,
+            ":requirePasswordChange" => (int)$requireChange,
             ":id" => $this->id
         ));
 
