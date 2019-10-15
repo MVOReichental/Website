@@ -1,5 +1,5 @@
 {
-  "date": "31.07.2019",
+  "date": "01.10.2019",
   "columns": [
     {
       "title": "Blockfl\u00f6tengruppen",
@@ -12,13 +12,6 @@
                 "Theo Sieb",
                 "Hanna Weber",
                 "Ida Wieland"
-              ]
-            },
-            {
-              "trainer": "Paula Sieb",
-              "students": [
-                "Lara Merkel",
-                "Giulia Viviani"
               ]
             },
             {
@@ -36,6 +29,17 @@
       "title": "Instrumentalausbildung",
       "types": [
         {
+          "name": "Klarinette",
+          "groups": [
+            {
+              "trainer": "Gisela Wieland",
+              "students": [
+                "Lara Merkel"
+              ]
+            }
+          ]
+        },
+        {
           "name": "Posaune",
           "groups": [
             {
@@ -52,8 +56,9 @@
             {
               "trainer": "Musikschule",
               "students": [
-                "Hannah Klumpp",
-                "Liana Knapp"
+                "Liana Knapp",
+                "Tom Melcher",
+                "Giulia Viviani"
               ]
             }
           ]
@@ -95,15 +100,16 @@
           "name": "Trompete",
           "groups": [
             {
-              "trainer": "Wolfgang St\u00f6rtzer",
-              "students": [
-                "Jakob Sieb"
-              ]
-            },
-            {
               "trainer": "Musikschule",
               "students": [
                 "Jonas Magfelder"
+              ]
+            },
+            {
+              "trainer": "Joachim Kölmel",
+              "students": [
+                "Moritz Balensiefen",
+                "Vincent Kast"
               ]
             }
           ]
