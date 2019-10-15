@@ -10,6 +10,7 @@ use de\mvo\model\users\User;
 use de\mvo\model\users\Users;
 use de\mvo\TwigRenderer;
 use de\mvo\utils\Url;
+use PDO;
 use Twig_Error;
 
 class Protocol
@@ -82,13 +83,12 @@ class Protocol
                 `date` = :date
         ");
 
-        $query->execute(array
-        (
-            ":uploaderUserId" => $this->uploader->id,
-            ":uploadId" => $this->upload->id,
-            ":title" => $this->title,
-            ":date" => $this->date->toDatabaseDate()
-        ));
+        $query->bindValue(":uploaderUserId", $this->uploader->id, PDO::PARAM_INT);
+        $query->bindValue(":uploadId", $this->upload->id, PDO::PARAM_INT);
+        $query->bindValue(":title", $this->title);
+        $query->bindValue(":date", $this->date->toDatabaseDate());
+
+        $query->execute();
 
         $this->id = (int)Database::lastInsertId();
 
@@ -100,11 +100,10 @@ class Protocol
         ");
 
         foreach ($this->groups as $group) {
-            $query->execute(array
-            (
-                ":protocolId" => $this->id,
-                ":name" => $group
-            ));
+            $query->bindValue(":protocolId", $this->id, PDO::PARAM_INT);
+            $query->bindValue(":name", $group);
+
+            $query->execute();
         }
     }
 

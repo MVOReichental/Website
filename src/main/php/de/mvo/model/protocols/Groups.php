@@ -3,6 +3,7 @@ namespace de\mvo\model\protocols;
 
 use ArrayObject;
 use de\mvo\Database;
+use PDO;
 
 class Groups extends ArrayObject
 {
@@ -14,10 +15,9 @@ class Groups extends ArrayObject
             WHERE `protocolId` = :protocolId
         ");
 
-        $query->execute(array
-        (
-            ":protocolId" => $protocol->id
-        ));
+        $query->bindValue(":protocolId", $protocol->id, PDO::PARAM_INT);
+
+        $query->execute();
 
         $list = new self;
 

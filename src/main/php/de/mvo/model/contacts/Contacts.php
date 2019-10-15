@@ -4,6 +4,7 @@ namespace de\mvo\model\contacts;
 use ArrayObject;
 use de\mvo\Database;
 use de\mvo\model\users\User;
+use PDO;
 
 class Contacts extends ArrayObject
 {
@@ -17,10 +18,9 @@ class Contacts extends ArrayObject
             WHERE `userId` = :userId
         ");
 
-        $query->execute(array
-        (
-            ":userId" => $user->id
-        ));
+        $query->bindValue(":userId", $user->id, PDO::PARAM_INT);
+
+        $query->execute();
 
         while ($contact = $query->fetchObject(Contact::class)) {
             $contacts->append($contact);

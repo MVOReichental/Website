@@ -49,10 +49,9 @@ class Location
     {
         $query = Database::prepare("SELECT * FROM `locations` WHERE `id` = :id");
 
-        $query->execute(array
-        (
-            ":id" => $id
-        ));
+        $query->bindValue(":id", $id, PDO::PARAM_INT);
+
+        $query->execute();
 
         if (!$query->rowCount()) {
             return null;
@@ -65,10 +64,9 @@ class Location
     {
         $query = Database::prepare("SELECT * FROM `locations` WHERE `name` = :name");
 
-        $query->execute(array
-        (
-            ":name" => $name
-        ));
+        $query->bindValue(":name", $name);
+
+        $query->execute();
 
         if (!$query->rowCount()) {
             return null;

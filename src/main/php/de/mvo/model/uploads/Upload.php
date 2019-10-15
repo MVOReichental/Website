@@ -2,6 +2,7 @@
 namespace de\mvo\model\uploads;
 
 use de\mvo\Database;
+use PDO;
 
 class Upload
 {
@@ -40,10 +41,9 @@ class Upload
             WHERE `id` = :id
         ");
 
-        $query->execute(array
-        (
-            ":id" => $id
-        ));
+        $query->bindValue(":id", $id, PDO::PARAM_INT);
+
+        $query->execute();
 
         if (!$query->rowCount()) {
             return null;
@@ -93,11 +93,10 @@ class Upload
                 `filename` = :filename
         ");
 
-        $query->execute(array
-        (
-            ":key" => $this->key,
-            ":filename" => $this->filename
-        ));
+        $query->bindValue(":key", $this->key);
+        $query->bindValue(":filename", $this->filename);
+
+        $query->execute();
 
         $this->id = (int)Database::lastInsertId();
     }

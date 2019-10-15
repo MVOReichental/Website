@@ -35,10 +35,9 @@ class Form
             WHERE `filename` = :filename
         ");
 
-        $query->execute(array
-        (
-            ":filename" => $filename
-        ));
+        $query->bindValue(":filename", $filename);
+
+        $query->execute();
 
         if (!$query->rowCount()) {
             return null;

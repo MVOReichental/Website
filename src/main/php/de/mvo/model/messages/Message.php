@@ -12,6 +12,7 @@ use de\mvo\model\users\Users;
 use de\mvo\TwigRenderer;
 use de\mvo\utils\StringUtil;
 use de\mvo\utils\Url;
+use PDO;
 use Twig_Error;
 
 class Message
@@ -66,10 +67,9 @@ class Message
             WHERE `messageId` = :messageId
         ");
 
-        $query->execute(array
-        (
-            ":messageId" => $this->id
-        ));
+        $query->bindValue(":messageId", $this->id, PDO::PARAM_INT);
+
+        $query->execute();
 
         $this->recipients = new Users;
 
@@ -84,10 +84,9 @@ class Message
             WHERE `messageId` = :messageId
         ");
 
-        $query->execute(array
-        (
-            ":messageId" => $this->id
-        ));
+        $query->bindValue(":messageId", $this->id, PDO::PARAM_INT);
+
+        $query->execute();
 
         $this->attachments = new Uploads;
 
@@ -109,10 +108,9 @@ class Message
             WHERE `id` = :id
         ");
 
-        $query->execute(array
-        (
-            ":id" => $id
-        ));
+        $query->bindValue(":id", $id, PDO::PARAM_INT);
+
+        $query->execute();
 
         if (!$query->rowCount()) {
             return null;
@@ -149,11 +147,10 @@ class Message
                 `text` = :text
         ");
 
-        $query->execute(array
-        (
-            ":senderUserId" => $this->sender->id,
-            ":text" => $this->text
-        ));
+        $query->bindValue(":senderUserId", $this->sender->id, PDO::PARAM_INT);
+        $query->bindValue(":text", $this->text);
+
+        $query->execute();
 
         $this->id = (int)Database::lastInsertId();
 
@@ -168,11 +165,10 @@ class Message
          * @var $recipient User
          */
         foreach ($this->recipients as $recipient) {
-            $query->execute(array
-            (
-                ":messageId" => $this->id,
-                ":userId" => $recipient->id
-            ));
+            $query->bindValue(":messageId", $this->id, PDO::PARAM_INT);
+            $query->bindValue(":userId", $recipient->id, PDO::PARAM_INT);
+
+            $query->execute();
         }
 
         $query = Database::prepare("
@@ -186,11 +182,10 @@ class Message
          * @var $attachment Upload
          */
         foreach ($this->attachments as $attachment) {
-            $query->execute(array
-            (
-                ":messageId" => $this->id,
-                ":uploadId" => $attachment->id
-            ));
+            $query->bindValue(":messageId", $this->id, PDO::PARAM_INT);
+            $query->bindValue(":uploadId", $attachment->id, PDO::PARAM_INT);
+
+            $query->execute();
         }
     }
 
@@ -205,11 +200,10 @@ class Message
             WHERE `id` = :id
         ");
 
-        $query->execute(array
-        (
-            ":visibleToSender" => (int)$state,
-            ":id" => $this->id
-        ));
+        $query->bindValue(":visibleToSender", $state, PDO::PARAM_BOOL);
+        $query->bindValue(":id", $this->id, PDO::PARAM_INT);
+
+        $query->execute();
 
         $this->visibleToSender = $state;
     }
@@ -222,12 +216,11 @@ class Message
             WHERE `messageId` = :messageId AND `userId` = :userId
         ");
 
-        $query->execute(array
-        (
-            ":visible" => (int)$state,
-            ":messageId" => $this->id,
-            ":userId" => $user->id
-        ));
+        $query->bindValue(":visible", $state, PDO::PARAM_BOOL);
+        $query->bindValue(":messageId", $this->id, PDO::PARAM_INT);
+        $query->bindValue(":userId", $user->id, PDO::PARAM_INT);
+
+        $query->execute();
     }
 
     /**

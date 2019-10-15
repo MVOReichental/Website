@@ -71,10 +71,9 @@ class Contact
             WHERE `id` = :id
         ");
 
-        $query->execute(array
-        (
-            ":id" => $id
-        ));
+        $query->bindValue(":id", $id, PDO::PARAM_INT);
+
+        $query->execute();
 
         return $query->fetchObject(Contact::class);
     }

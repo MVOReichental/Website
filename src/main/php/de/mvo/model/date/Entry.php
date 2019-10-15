@@ -90,10 +90,9 @@ class Entry
             WHERE `id` = :id
         ");
 
-        $query->execute(array
-        (
-            ":id" => $id
-        ));
+        $query->bindValue(":id", $id, PDO::PARAM_INT);
+
+        $query->execute();
 
         if (!$query->rowCount()) {
             return null;
@@ -131,10 +130,9 @@ class Entry
             WHERE `id` = :id
         ");
 
-        $query->execute(array
-        (
-            ":id" => $this->id
-        ));
+        $query->bindValue(":id", $this->id, PDO::PARAM_INT);
+
+        $query->execute();
     }
 
     public function save()

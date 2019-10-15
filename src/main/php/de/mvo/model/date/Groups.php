@@ -4,6 +4,7 @@ namespace de\mvo\model\date;
 use ArrayObject;
 use de\mvo\Database;
 use de\mvo\model\users\Groups as UserGroups;
+use PDO;
 use stdClass;
 
 class Groups extends ArrayObject
@@ -13,15 +14,14 @@ class Groups extends ArrayObject
         $groups = new self;
 
         $query = Database::prepare("
-                SELECT `name`
-                FROM `dategroups`
-                WHERE `dateId` = :dateId
-            ");
+            SELECT `name`
+            FROM `dategroups`
+            WHERE `dateId` = :dateId
+        ");
 
-        $query->execute(array
-        (
-            ":dateId" => $entry->id
-        ));
+        $query->bindValue(":dateId", $entry->id, PDO::PARAM_INT);
+
+        $query->execute();
 
         while ($group = $query->fetchColumn(0)) {
             $groups->append($group);
@@ -40,10 +40,9 @@ class Groups extends ArrayObject
             WHERE `dateId` = :dateId
         ");
 
-        $query->execute(array
-        (
-            ":dateId" => $entry->id
-        ));
+        $query->bindValue(":dateId", $entry->id, PDO::PARAM_INT);
+
+        $query->execute();
 
         $deleteQuery = Database::prepare("
             DELETE FROM `dategroups`
@@ -53,10 +52,9 @@ class Groups extends ArrayObject
         while ($row = $query->fetchObject(stdClass::class)) {
             $index = array_search($row->group, $newGroups);
             if ($index === false) {
-                $deleteQuery->execute(array
-                (
-                    ":id" => $row->id
-                ));
+                $deleteQuery->bindValue(":id", $row->id, PDO::PARAM_INT);
+
+                $deleteQuery->execute();
             } else {
                 unset($newGroups[$index]);
             }
@@ -70,11 +68,10 @@ class Groups extends ArrayObject
         ");
 
         foreach ($newGroups as $group) {
-            $query->execute(array
-            (
-                ":dateId" => $entry->id,
-                ":name" => $group
-            ));
+            $query->bindValue(":dateId", $entry->id, PDO::PARAM_INT);
+            $query->bindValue(":name", $group);
+
+            $query->execute();
         }
 
         $this->exchangeArray(self::getForEntry($entry)->getArrayCopy());
