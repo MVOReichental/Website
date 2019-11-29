@@ -5,12 +5,12 @@
   },
   {
     "name": "Vorstand (Gleichberechtigt)",
-    "text": "Birgit Engel (07224 99 69 822)\nEdith Wieland (07224 69 70 467)",
+    "text": "Birgit Engel (07224 99 69 822)\nKatrin H\u00f6rth (07224 40280)",
     "mailbox": "vorstand"
   },
   {
     "name": "Musikervorstand",
-    "text": "Katrin H\u00f6rth\nJasmin Melcher",
+    "text": "Jasmin Melcher\nPhilipp Wieland",
     "mailbox": "musikervorstand"
   },
   {
@@ -30,7 +30,7 @@
   },
   {
     "name": "Webmaster",
-    "text": "Michael Wieland",
+    "text": "Edith Wieland, Michael Wieland",
     "mailbox": "webmaster"
   }
 ]
