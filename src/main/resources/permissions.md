@@ -30,6 +30,10 @@
 
 * `messages.all`
 
+# News (internal)
+
+* `newsEditor`
+
 # Note directory
 
 * `notedirectory.view`
