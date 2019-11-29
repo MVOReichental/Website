@@ -15,7 +15,22 @@ $(function () {
 
         $.ajax({
             url: $("#news-editor-content").data("save-url"),
-            method: "DELETE"
+            method: "DELETE",
+            error: function () {
+                $.notify({
+                    icon: "fas fa-exclamation-triangle",
+                    message: "Beim Entfernen ist ein Fehler aufgetreten!"
+                }, {
+                    type: "danger"
+                });
+            },
+            success: function () {
+                $.notify({
+                    message: "Der Inhalt wurde erfolgreich entfernt."
+                }, {
+                    type: "success"
+                });
+            }
         });
     });
 });

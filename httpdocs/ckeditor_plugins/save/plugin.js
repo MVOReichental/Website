@@ -9,6 +9,21 @@ CKEDITOR.plugins.add("save", {
                         method: "POST",
                         data: {
                             content: editor.getData()
+                        },
+                        error: function () {
+                            $.notify({
+                                icon: "fas fa-exclamation-triangle",
+                                message: "Beim Speichern ist ein Fehler aufgetreten!"
+                            }, {
+                                type: "danger"
+                            });
+                        },
+                        success: function () {
+                            $.notify({
+                                message: "Der Inhalt wurde erfolgreich gespeichert."
+                            }, {
+                                type: "success"
+                            });
                         }
                     });
                 }
