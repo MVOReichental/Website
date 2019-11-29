@@ -24,6 +24,12 @@ class InternalHome extends AbstractService
     {
         $currentUser = User::getCurrent();
 
+        if (file_exists(News::INTERNAL_NEWS_FILE)) {
+            $newsContent = file_get_contents(News::INTERNAL_NEWS_FILE);
+        } else {
+            $newsContent = null;
+        }
+
         $receivedMessages = Messages::getByRecipient($currentUser, 1);
         $sentMessages = Messages::getBySender($currentUser, 1);
 
@@ -54,6 +60,7 @@ class InternalHome extends AbstractService
         return TwigRenderer::render("home-internal", array
         (
             "user" => User::getCurrent(),
+            "news" => $newsContent,
             "nextDates" => array_slice(DateList::getBetween($nextDatesStart, $nextDatesEnd)->visibleForUser($currentUser)->getArrayCopy(), 0, 5),
             "nextBirthdays" => array_slice(Users::getAll()->enabledUsers()->nextBirthdayBetween($nextBirthdayStart, $nextBirthdayEnd)->sortByNextBirthdays()->getArrayCopy(), 0, 5),
             "messages" => $latestMessage,

@@ -89,6 +89,9 @@
                 <nav class="collapse" id="navbar-links">
                     <ul class="nav flex-column">
                         {{ this.navbar_link("internal/members/addresslist", "Adressenliste") }}
+                        {% if currentUser.hasPermission("newsEditor") %}
+                            {{ this.navbar_link("internal/newseditor", "Aktuell intern") }}
+                        {% endif %}
                         {% if currentUser.hasPermission("forms.*") %}
                             {{ this.navbar_link("internal/forms", "Formulare") }}
                         {% endif %}

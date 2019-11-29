@@ -10,6 +10,7 @@ use Twig_Error;
 class News extends AbstractService
 {
     const NEWS_FILE = DATA_ROOT . "/news.html";
+    const INTERNAL_NEWS_FILE = DATA_ROOT . "/news-internal.html";
 
     /**
      * @return string
@@ -54,19 +55,37 @@ class News extends AbstractService
         ));
     }
 
-    public function save()
+    /**
+     * @return string
+     * @throws Twig_Error
+     */
+    public function getInternalEditor()
+    {
+        if (file_exists(self::INTERNAL_NEWS_FILE)) {
+            $content = file_get_contents(self::INTERNAL_NEWS_FILE);
+        } else {
+            $content = null;
+        }
+
+        return TwigRenderer::render("internal-news-editor", array
+        (
+            "content" => $content
+        ));
+    }
+
+    public function save(string $filename)
     {
         $htmlPurifier = new HTMLPurifier;
 
-        file_put_contents(self::NEWS_FILE, $htmlPurifier->purify($_POST["content"]));
+        file_put_contents($filename, $htmlPurifier->purify($_POST["content"]));
     }
 
-    public function delete()
+    public function delete(string $filename)
     {
-        if (!file_exists(self::NEWS_FILE)) {
+        if (!file_exists($filename)) {
             return;
         }
 
-        unlink(self::NEWS_FILE);
+        unlink($filename);
     }
 }

@@ -381,6 +381,30 @@ class Endpoints
             ->requireLogin();
     }
 
+    private static function mapInternalNewsEditorEndpoints()
+    {
+        Endpoint::create(HttpMethod::GET, "/internal/newseditor")
+            ->target()
+            ->className(News::class)
+            ->method("getInternalEditor")
+            ->arguments(true)
+            ->permission("newsEditor");
+
+        Endpoint::create(HttpMethod::POST, "/internal/newseditor/content.html")
+            ->target()
+            ->className(News::class)
+            ->method("save")
+            ->arguments(News::INTERNAL_NEWS_FILE)
+            ->permission("newsEditor");
+
+        Endpoint::create(HttpMethod::DELETE, "/internal/newseditor/content.html")
+            ->target()
+            ->className(News::class)
+            ->method("delete")
+            ->arguments(News::INTERNAL_NEWS_FILE)
+            ->permission("newsEditor");
+    }
+
     private static function mapFormsEndpoints()
     {
         Endpoint::create(HttpMethod::GET, "/internal/forms")
@@ -660,12 +684,14 @@ class Endpoints
             ->target()
             ->className(News::class)
             ->method("save")
+            ->arguments(News::NEWS_FILE)
             ->permission("admin.newsEditor");
 
         Endpoint::create(HttpMethod::DELETE, "/internal/admin/newseditor/content.html")
             ->target()
             ->className(News::class)
             ->method("delete")
+            ->arguments(News::NEWS_FILE)
             ->permission("admin.newsEditor");
 
         Endpoint::create(HttpMethod::GET, "/internal/switch-user")
@@ -688,6 +714,7 @@ class Endpoints
         self::mapAccountEndpoints();
         self::mapMembersEndpoints();
         self::mapMessagesEndpoints();
+        self::mapInternalNewsEditorEndpoints();
         self::mapFormsEndpoints();
         self::mapNoteDirectoryEndpoints();
         self::mapNoteDirectoryEditorEndpoints();

@@ -14,7 +14,7 @@ $(function () {
         CKEDITOR.instances["news-editor-content"].setData("");
 
         $.ajax({
-            url: "internal/admin/newseditor/content.html",
+            url: $("#news-editor-content").data("save-url"),
             method: "DELETE"
         });
     });
