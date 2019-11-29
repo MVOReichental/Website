@@ -1,5 +1,4 @@
 /.idea/
-/.vagrant/
 /data/config.ini
 /data/news.html
 /data/*.serialized
