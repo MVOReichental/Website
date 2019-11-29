@@ -45,6 +45,6 @@ class Permissions extends ArrayObject implements JsonSerializable
 
     function jsonSerialize()
     {
-        return $this->getArrayCopy();
+        return array_values($this->getArrayCopy());
     }
 }
