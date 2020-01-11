@@ -18,7 +18,13 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="page-header">Termine</h1>
+    <h1 class="page-header d-print-none">Termine</h1>
+
+    <h1 class="page-header d-none d-print-block" id="dates-header">
+        <p>Musikverein Orgelfels Reichental e.V.</p>
+        Termine
+        <img src="{{ asset("img/logo.svg") }}" id="dates-logo"/>
+    </h1>
 
     {% if saved %}
         <div class="alert alert-success"><i class="fas fa-check"></i> Die &Auml;nderungen wurden erfolgreich gespeichert.</div>

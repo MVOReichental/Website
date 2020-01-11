@@ -1,3 +1,17 @@
+@media print {
+    #dates-header {
+        margin-top: 0;
+        font-size: 20px;
+    }
+}
+
+#dates-logo {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 80px;
+}
+
 #dates-table tr.highlight {
     font-weight: bold;
 }

@@ -19,6 +19,13 @@
     }
 }
 
+#notedirectory-logo {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 80px;
+}
+
 #notedirectory-button-toolbar {
     margin-bottom: 20px;
 }
