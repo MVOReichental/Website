@@ -108,7 +108,7 @@ class Dates extends AbstractService
         $calendar = new Calendar($_SERVER["HTTP_HOST"]);
 
         $calendar->setName("MVO Termine");
-        $calendar->setDescription("Termine vom Musikverein \"Orgelfels\" Reichental e.V.");
+        $calendar->setDescription("Termine vom Musikverein Orgelfels Reichental e.V.");
         $calendar->setPublishedTTL("PT1H");
 
         $dates = DateList::getAllPublic();
@@ -137,7 +137,7 @@ class Dates extends AbstractService
         $calendar = new Calendar($_SERVER["HTTP_HOST"]);
 
         $calendar->setName("MVO Termine");
-        $calendar->setDescription("Termine vom Musikverein \"Orgelfels\" Reichental e.V.");
+        $calendar->setDescription("Termine vom Musikverein Orgelfels Reichental e.V.");
         $calendar->setPublishedTTL("PT1H");
 
         $dates = DateList::getAll()->visibleForUser($user);
