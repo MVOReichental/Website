@@ -1,6 +1,7 @@
 <?php
 namespace de\mvo\service;
 
+use de\mvo\Date;
 use de\mvo\model\date\DateList;
 use de\mvo\model\pictures\YearList;
 use de\mvo\TwigRenderer;
@@ -53,6 +54,23 @@ class News extends AbstractService
         (
             "content" => $content
         ));
+    }
+
+    public function getInternal()
+    {
+        if (file_exists(self::INTERNAL_NEWS_FILE)) {
+            $content = file_get_contents(self::INTERNAL_NEWS_FILE);
+            $date = new Date;
+            $date->setTimestamp(filemtime(self::INTERNAL_NEWS_FILE));
+        } else {
+            $content = null;
+            $date = null;
+        }
+
+        return TwigRenderer::render("news-single", [
+            "content" => $content,
+            "date" => $date
+        ]);
     }
 
     /**

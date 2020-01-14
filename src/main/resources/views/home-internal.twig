@@ -14,6 +14,7 @@
 
     <script src="{{ asset("js/internal-home.js") }}"></script>
     <script src="{{ asset("js/messages.js") }}"></script>
+    <script src="{{ asset("js/news.js") }}"></script>
 {% endblock %}
 
 {% block content %}
@@ -27,6 +28,7 @@
     <div class="mb-4">
         {% if news %}
             <h3>Aktuell intern <small class="text-muted">{{ newsDate.humanReadableDate }}</small></h3>
+            <a class="fas fa-print" id="news-print" title="Ausdrucken"></a>
             <div id="news-content">
                 {{ news|raw }}
             </div>

@@ -737,6 +737,12 @@ class Endpoints
             ->arguments("Musiker", "musiker")
             ->requireLogin();
 
+        Endpoint::create(HttpMethod::GET, "/internal/news")
+            ->target()
+            ->className(News::class)
+            ->method("getInternal")
+            ->requireLogin();
+
         Endpoint::create(HttpMethod::GET, "/internal")
             ->target()
             ->className(InternalHome::class)

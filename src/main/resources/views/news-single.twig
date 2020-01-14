@@ -1,0 +1,18 @@
+{% extends "base/internal-public-switch.twig" %}
+
+{% block title %}Aktuell intern{{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ asset("css/news.css") }}"/>
+{% endblock %}
+
+{% block content %}
+    {% if content %}
+        <h3>Aktuell intern <small class="text-muted">{{ date.humanReadableDate }}</small></h3>
+        <div id="news-content">
+            {{ content|raw }}
+        </div>
+    {% endif %}
+{% endblock %}
