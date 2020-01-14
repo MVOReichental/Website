@@ -26,7 +26,7 @@
 
     <div class="mb-4">
         {% if news %}
-            <h3>Aktuell intern</h3>
+            <h3>Aktuell intern <small class="text-muted">{{ newsDate.humanReadableDate }}</small></h3>
             <div id="news-content">
                 {{ news|raw }}
             </div>

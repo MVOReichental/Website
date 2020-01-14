@@ -26,8 +26,11 @@ class InternalHome extends AbstractService
 
         if (file_exists(News::INTERNAL_NEWS_FILE)) {
             $newsContent = file_get_contents(News::INTERNAL_NEWS_FILE);
+            $newsDate = new Date;
+            $newsDate->setTimestamp(filemtime(News::INTERNAL_NEWS_FILE));
         } else {
             $newsContent = null;
+            $newsDate = null;
         }
 
         $receivedMessages = Messages::getByRecipient($currentUser, 1);
@@ -61,6 +64,7 @@ class InternalHome extends AbstractService
         (
             "user" => User::getCurrent(),
             "news" => $newsContent,
+            "newsDate" => $newsDate,
             "nextDates" => array_slice(DateList::getBetween($nextDatesStart, $nextDatesEnd)->visibleForUser($currentUser)->getArrayCopy(), 0, 5),
             "nextBirthdays" => array_slice(Users::getAll()->enabledUsers()->nextBirthdayBetween($nextBirthdayStart, $nextBirthdayEnd)->sortByNextBirthdays()->getArrayCopy(), 0, 5),
             "messages" => $latestMessage,
