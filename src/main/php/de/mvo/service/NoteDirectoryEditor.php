@@ -42,8 +42,19 @@ class NoteDirectoryEditor extends AbstractService
     {
         $program->titles = new Titles;
 
+        $maxNumber = 0;
+
+        foreach ($_POST["title_number"] as $index => $number) {
+            $maxNumber = max($maxNumber, $number);
+        }
+
         foreach ($_POST["title_number"] as $index => $number) {
             $title = Title::getById($_POST["title_id"][$index]);
+
+            if (!$number) {
+                $number = $maxNumber + 1;
+                $maxNumber = $number;
+            }
 
             $title->number = $number;
 
