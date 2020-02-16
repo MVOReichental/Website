@@ -124,5 +124,12 @@ $(function () {
         titleRow.append($("<td>").append(removeButton));
 
         $("#notedirectory-editor-program-titles").find("tbody").append(titleRow);
+
+        $.notify({
+            message: "Der Titel wurde hinzugefügt."
+        }, {
+            type: "success",
+            z_index: 1100
+        });
     });
 });
