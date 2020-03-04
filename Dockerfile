@@ -45,7 +45,9 @@ RUN sed -ri -e 's!/var/www/html!/app/httpdocs!g' /etc/apache2/sites-available/*.
     sed -ri -e 's!/var/www/!/app/httpdocs!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf && \
     echo "ServerTokens Prod" > /etc/apache2/conf-enabled/z-server-tokens.conf && \
     a2enmod rewrite && \
-    mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+    mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" && \
+    mkdir -p /app/twig-cache && \
+    chown www-data: /app/twig-cache
 
 COPY --from=composer /app/vendor /app/vendor
 COPY --from=npm /app/node_modules /app/httpdocs/node_modules
