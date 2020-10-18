@@ -1,4 +1,5 @@
 <?php
+
 namespace de\mvo\service;
 
 use DateInterval;
@@ -50,11 +51,6 @@ class InternalHome extends AbstractService
 
         $albums->sortByDate(false);
 
-        $nextDatesStart = new Date;
-        $nextDatesStart->setTime(0, 0);
-        $nextDatesEnd = clone $nextDatesStart;
-        $nextDatesEnd->add(new DateInterval("P4W"));
-
         $nextBirthdayStart = new Date;
         $nextBirthdayStart->setTime(0, 0);
         $nextBirthdayEnd = clone $nextBirthdayStart;
@@ -65,7 +61,7 @@ class InternalHome extends AbstractService
             "user" => User::getCurrent(),
             "news" => $newsContent,
             "newsDate" => $newsDate,
-            "nextDates" => array_slice(DateList::getBetween($nextDatesStart, $nextDatesEnd)->visibleForUser($currentUser)->getArrayCopy(), 0, 5),
+            "nextDates" => DateList::get(3),
             "nextBirthdays" => array_slice(Users::getAll()->enabledUsers()->nextBirthdayBetween($nextBirthdayStart, $nextBirthdayEnd)->sortByNextBirthdays()->getArrayCopy(), 0, 5),
             "messages" => $latestMessage,
             "albums" => $albums->getVisibleToUser($currentUser)->slice(0, 3),
