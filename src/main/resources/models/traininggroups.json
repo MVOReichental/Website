@@ -1,5 +1,5 @@
 {
-  "date": "26.09.2020",
+  "date": "30.10.2021",
   "columns": [
     {
       "title": "Blockfl\u00f6tengruppen",
@@ -7,10 +7,10 @@
         {
           "groups": [
             {
-              "trainer": "Gisela Wieland",
+              "trainer": "Liana Knapp",
               "students": [
-                "Marlen Lang",
-                "Philipp Lang"
+                "Lotte Bervoets",
+                "Emma Wieland"
               ]
             }
           ]
@@ -32,7 +32,8 @@
             {
               "trainer": "Gisela Wieland",
               "students": [
-                "Hanna Weber"
+                "Hanna Weber",
+                "Marlen Lang"
               ]
             }
           ]
@@ -55,7 +56,6 @@
             {
               "trainer": "Musikschule",
               "students": [
-                "Tom Melcher",
                 "Giulia Viviani"
               ]
             }
@@ -65,7 +65,7 @@
           "name": "Saxophon",
           "groups": [
             {
-              "trainer": "Benjamin Lubanski",
+              "trainer": "Daniela Merz",
               "students": [
                 "Silas Magfelder"
               ]
@@ -90,17 +90,6 @@
               "trainer": "Josef Minet",
               "students": [
                 "Tizian Gottschalk"
-              ]
-            }
-          ]
-        },
-        {
-          "name": "Trompete",
-          "groups": [
-            {
-              "trainer": "Musikschule",
-              "students": [
-                "Jonas Magfelder"
               ]
             }
           ]
