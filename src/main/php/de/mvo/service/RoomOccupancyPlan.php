@@ -69,12 +69,18 @@ class RoomOccupancyPlan extends AbstractService
          * @var $event Event
          */
         foreach ($events as $event) {
+            $text = $event->summary;
+
+            if ($event->location !== null and $event->location !== "") {
+                $text = sprintf("%s\nOrt: %s", $text, $event->location);
+            }
+
             $entries[] = array
             (
                 "id" => $event->uid,
                 "start" => $event->dtstart,
                 "end" => $event->dtend,
-                "title" => $event->summary
+                "title" => $text
             );
         }
 
