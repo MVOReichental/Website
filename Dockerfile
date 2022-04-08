@@ -17,7 +17,7 @@ WORKDIR /app
 RUN npm install
 
 
-FROM php:7.3-apache
+FROM php:8.1-apache
 
 ENV TZ=Europe/Berlin
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
@@ -27,7 +27,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
 RUN savedAptMark="$(apt-mark showmanual)" && \
     apt-get update && \
     apt-get install -y --no-install-recommends libfreetype6-dev libjpeg-dev libpng-dev && \
-    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
+    docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ && \
     docker-php-ext-install -j "$(nproc)" gd pdo_mysql && \
     apt-mark auto '.*' > /dev/null && \
     apt-mark manual $savedAptMark && \
