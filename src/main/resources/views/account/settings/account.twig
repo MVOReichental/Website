@@ -1,14 +1,5 @@
 {% extends "account/settings/page.twig" %}
 
-{% block scripts %}
-    {{ parent() }}
-
-    <script src="{{ asset("node_modules/pwstrength-bootstrap/dist/pwstrength-bootstrap.min.js") }}"></script>
-    <script src="{{ asset("node_modules/zxcvbn/dist/zxcvbn.js") }}"></script>
-
-    <script src="{{ asset("js/password-validation.js") }}"></script>
-{% endblock %}
-
 {% block settingsHeader %}
     {% if user.requirePasswordChange %}
         <div class="alert alert-info"><i class="fas fa-info-circle"></i> Du musst ein neues Passwort vergeben bevor du den internen Bereich nutzen kannst.</div>

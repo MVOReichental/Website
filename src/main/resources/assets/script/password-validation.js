@@ -1,3 +1,11 @@
+import $ from "jquery";
+import zxcvbn from "zxcvbn";
+
+// Workaround as pwstrength-bootstrap is not compatible with webpack
+window.zxcvbn = zxcvbn;
+
+import "pwstrength-bootstrap/dist/pwstrength-bootstrap";
+
 $(function () {
     $(".password-meter").pwstrength({
         common: {

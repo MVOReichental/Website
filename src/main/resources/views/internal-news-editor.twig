@@ -2,21 +2,6 @@
 
 {% block title %}Aktuell intern{{ parent() }}{% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-
-    <link rel="stylesheet" href="{{ asset("css/news-editor.css") }}"/>
-{% endblock %}
-
-{% block scripts %}
-    {{ parent() }}
-
-    <script src="{{ asset("node_modules/ckeditor/ckeditor.js") }}"></script>
-    <script src="{{ asset("node_modules/ckeditor/adapters/jquery.js") }}"></script>
-    <script src="{{ asset("node_modules/bootstrap-notify/bootstrap-notify.min.js") }}"></script>
-    <script src="{{ asset("js/news-editor.js") }}"></script>
-{% endblock %}
-
 {% block content %}
     <h1 class="page-header">Aktuell intern</h1>
 

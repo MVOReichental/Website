@@ -1,3 +1,6 @@
+import $ from "jquery";
+import "../style/news.scss";
+
 $(function () {
     $("#news-print").on("click", function () {
         var link = document.createElement("a");

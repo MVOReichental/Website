@@ -1,3 +1,11 @@
+import $ from "jquery";
+
+import "cropperjs";
+import "jquery-cropper";
+import "blueimp-file-upload";
+
+import "../style/edit-profilepicture.scss";
+
 $(function () {
     var modal = $(".edit-profilepicture-crop-modal");
     var profilePictureFileInput = $("input.edit-profilepicture");

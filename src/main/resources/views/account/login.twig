@@ -2,12 +2,6 @@
 
 {% block title %}Login{{ parent() }}{% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-
-    <link rel="stylesheet" href="{{ asset("css/account.css") }}"/>
-{% endblock %}
-
 {% block content %}
     <form class="login-form" id="login-form" method="post" action="internal/login?redirect={{ url }}">
         <h2>Interner Bereich</h2>

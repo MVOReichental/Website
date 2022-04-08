@@ -1,3 +1,6 @@
+import $ from "jquery";
+import "bootstrap-notify";
+
 $(function () {
     $(".messages-hide-button").on("click", function () {
         var modal = $("#messages-hide-modal");

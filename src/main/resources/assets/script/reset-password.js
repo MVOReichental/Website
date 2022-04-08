@@ -1,3 +1,5 @@
+import $ from "jquery";
+
 $(function () {
     $("#reset-password-confirm-form").submit(function (event) {
         if ($("#reset-password-confirm-password1").val() != $("#reset-password-confirm-password2").val()) {

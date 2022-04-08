@@ -2,15 +2,9 @@
 
 {% block title %}Aktuell{{ parent() }}{% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-
-    <link rel="stylesheet" href="{{ asset("css/news.css") }}"/>
-{% endblock %}
-
 {% block content %}
     <div class="row">
-        <div class="col-lg-3"><img src="{{ asset("img/logo.svg") }}" id="logo" class="d-print-none"/></div>
+        <div class="col-lg-3"><img src="{{ asset("logo.svg") }}" id="logo" class="d-print-none"/></div>
         <div class="col-lg-9">
             <div id="news-content">
                 {% if news %}

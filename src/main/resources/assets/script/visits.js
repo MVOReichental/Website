@@ -1,3 +1,6 @@
+import $ from "jquery";
+import Highcharts from "highcharts";
+
 $(function () {
     Highcharts.setOptions({
         global: {
@@ -24,41 +27,43 @@ $(function () {
         }
     });
 
-    $.get("/internal/admin/visits/chart.json", function (data) {
-        Highcharts.chart("visits-chart", {
-            chart: {
-                type: "area",
-                zoomType: "x"
-            },
-            title: {
-                text: null
-            },
-            xAxis: {
-                type: "datetime"
-            },
-            yAxis: {
+    if ($("#visits-chart").length) {
+        $.get("/internal/admin/visits/chart.json", function (data) {
+            Highcharts.chart("visits-chart", {
+                chart: {
+                    type: "area",
+                    zoomType: "x"
+                },
                 title: {
                     text: null
-                }
-            },
-            tooltip: {
-                xDateFormat: "%A, %d. %B %Y",
-                shared: true
-            },
-            plotOptions: {
-                area: {
-                    stacking: "normal"
-                }
-            },
-            series: [
-                {
-                    name: "G\u00e4ste",
-                    data: data.guests
-                }, {
-                    name: "Benutzer",
-                    data: data.users
-                }
-            ]
+                },
+                xAxis: {
+                    type: "datetime"
+                },
+                yAxis: {
+                    title: {
+                        text: null
+                    }
+                },
+                tooltip: {
+                    xDateFormat: "%A, %d. %B %Y",
+                    shared: true
+                },
+                plotOptions: {
+                    area: {
+                        stacking: "normal"
+                    }
+                },
+                series: [
+                    {
+                        name: "G\u00e4ste",
+                        data: data.guests
+                    }, {
+                        name: "Benutzer",
+                        data: data.users
+                    }
+                ]
+            });
         });
-    });
+    }
 });

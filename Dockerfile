@@ -8,16 +8,19 @@ RUN composer install --no-dev --ignore-platform-reqs && \
     rm /app/composer.json /app/composer.lock
 
 
-FROM node:current AS npm
-
-COPY httpdocs/package.json httpdocs/package-lock.json /app/
+FROM node:15 AS webpack
 
 WORKDIR /app
 
+COPY package.json package-lock.json /app/
 RUN npm install
 
+COPY webpack.config.js /app/
+COPY src/main/resources /app/src/main/resources
+RUN npm run build
 
-FROM php:7.3-apache
+
+FROM php:7.4-apache
 
 ENV TZ=Europe/Berlin
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
@@ -27,7 +30,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
 RUN savedAptMark="$(apt-mark showmanual)" && \
     apt-get update && \
     apt-get install -y --no-install-recommends libfreetype6-dev libjpeg-dev libpng-dev && \
-    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
+    docker-php-ext-configure gd --with-freetype --with-jpeg && \
     docker-php-ext-install -j "$(nproc)" gd pdo_mysql && \
     apt-mark auto '.*' > /dev/null && \
     apt-mark manual $savedAptMark && \
@@ -50,7 +53,8 @@ RUN sed -ri -e 's!/var/www/html!/app/httpdocs!g' /etc/apache2/sites-available/*.
     chown www-data: /app/twig-cache
 
 COPY --from=composer /app/vendor /app/vendor
-COPY --from=npm /app/node_modules /app/httpdocs/node_modules
+COPY --from=webpack /app/httpdocs/assets /app/httpdocs/assets
+COPY --from=webpack /app/webpack.assets.json /app/webpack.assets.json
 
 COPY bootstrap.php /app/
 COPY bin /app/bin

@@ -1,3 +1,7 @@
+import $ from "jquery";
+import "fullcalendar";
+import "../style/roomoccupancyplan.scss";
+
 $(function () {
     $("#roomoccupancyplan-calendar").fullCalendar({
         height: "parent",

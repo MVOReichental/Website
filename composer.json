@@ -16,7 +16,7 @@
         }
     },
     "require": {
-        "php": ">=7.1",
+        "php": ">=7.4",
         "ext-dom": "*",
         "ext-gd": "*",
         "ext-pdo": "*",
@@ -36,6 +36,7 @@
         "jeroendesloovere/vcard": "^1.7",
         "johngrogg/ics-parser": "^2.1",
         "guzzlehttp/guzzle": "^6.3",
-        "influxdb/influxdb-php": "^1.14"
+        "influxdb/influxdb-php": "^1.14",
+        "symfony/asset": "^v5.4.0"
     }
 }

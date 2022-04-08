@@ -2,12 +2,6 @@
 
 {% block title %}Aktuell intern{{ parent() }}{% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-
-    <link rel="stylesheet" href="{{ asset("css/news.css") }}"/>
-{% endblock %}
-
 {% block content %}
     {% if content %}
         <h3>Aktuell intern <small class="text-muted">{{ date.humanReadableDate }}</small></h3>

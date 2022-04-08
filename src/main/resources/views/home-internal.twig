@@ -2,21 +2,6 @@
 
 {% block title %}Home{{ parent() }}{% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-
-    <link rel="stylesheet" href="{{ asset("css/messages.css") }}"/>
-    <link rel="stylesheet" href="{{ asset("css/news.css") }}"/>
-{% endblock %}
-
-{% block scripts %}
-    {{ parent() }}
-
-    <script src="{{ asset("js/internal-home.js") }}"></script>
-    <script src="{{ asset("js/messages.js") }}"></script>
-    <script src="{{ asset("js/news.js") }}"></script>
-{% endblock %}
-
 {% block content %}
     <div class="mb-4">
         <h3 class="page-header">

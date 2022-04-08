@@ -9,6 +9,8 @@ use de\mvo\service\exception\LoginException;
 use de\mvo\service\exception\NotFoundException;
 use de\mvo\service\exception\PermissionViolationException;
 use de\mvo\TwigRenderer;
+use Symfony\Component\Asset\Package;
+use Symfony\Component\Asset\VersionStrategy\JsonManifestVersionStrategy;
 
 try {
     require_once __DIR__ . "/../bootstrap.php";
@@ -17,7 +19,7 @@ try {
 
     DBSessionHandler::start();
 
-    TwigRenderer::init();
+    TwigRenderer::init(new Package(new JsonManifestVersionStrategy(APP_ROOT . "/webpack.assets.json")));
 
     Visit::track();
 

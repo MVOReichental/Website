@@ -1,0 +1,33 @@
+@import "main.scss";
+
+#navbar-profile > img {
+  height: 32px;
+  border-radius: 3px;
+}
+
+@media (max-width: 767px) {
+  #navbar-links-toggler {
+    display: block !important
+  }
+}
+
+#navbar-links {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin-right: -15px;
+  margin-left: -15px
+}
+
+.nav-submenu {
+  padding-left: 20px;
+}
+
+@media (min-width: 768px) {
+  #navbar-sidebar {
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  #navbar-links {
+    display: block !important
+  }
+}

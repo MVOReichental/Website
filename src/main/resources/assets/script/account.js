@@ -1,3 +1,10 @@
+import $ from "jquery";
+
+import "./password-validation";
+import "./jquery-qrcode";
+
+import "../style/account.scss";
+
 $(function () {
     $("#settings-password-form").submit(function (event) {
         if ($("#settings-password-new").val() != $("#settings-password-new-confirm").val()) {

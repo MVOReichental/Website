@@ -2,19 +2,6 @@
 
 {% block title %}{{ activePage.title }} - Einstellungen{{ parent() }}{% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-
-    <link rel="stylesheet" href="{{ asset("css/account.css") }}"/>
-{% endblock %}
-
-{% block scripts %}
-    {{ parent() }}
-
-    <script src="{{ asset("js/jquery-qrcode.js") }}"></script>
-    <script src="{{ asset("js/account.js") }}"></script>
-{% endblock %}
-
 {% block content %}
     <h1 class="page-header">Einstellungen</h1>
 

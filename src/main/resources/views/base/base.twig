@@ -7,25 +7,10 @@
 
         <base href="{% block baseUrl %}/{% endblock %}"/>
 
-        {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset("node_modules/bootstrap/dist/css/bootstrap.min.css") }}"/>
-            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S" crossorigin="anonymous">
-            <link rel="stylesheet" href="{{ asset("node_modules/blueimp-gallery/css/blueimp-gallery.min.css") }}"/>
-            <link rel="stylesheet" href="{{ asset("node_modules/bootstrap-sortable/Contents/bootstrap-sortable.css") }}"/>
+        {% set assetPrefix = internal ? "internal" : "public" %}
 
-            <link rel="stylesheet" href="{{ asset("css/main.css") }}"/>
-        {% endblock %}
-
-        {% block scripts %}
-            <script src="{{ asset("node_modules/jquery/dist/jquery.min.js") }}"></script>
-            <script src="{{ asset("node_modules/popper.js/dist/umd/popper.min.js") }}"></script>
-            <script src="{{ asset("node_modules/bootstrap/dist/js/bootstrap.min.js") }}"></script>
-            <script src="{{ asset("node_modules/blueimp-gallery/js/blueimp-gallery.min.js") }}"></script>
-            <script src="{{ asset("node_modules/bootstrap-sortable/Scripts/bootstrap-sortable.js") }}"></script>
-            <script src="{{ asset("node_modules/moment/min/moment-with-locales.min.js") }}"></script>
-
-            <script src="{{ asset("js/main.js") }}"></script>
-        {% endblock %}
+        <link rel="stylesheet" href="{{ asset("main-#{assetPrefix}.css") }}"/>
+        <script src="{{ asset("main-#{assetPrefix}.js") }}"></script>
 
         <!--
             Why are you looking at the code of this website?

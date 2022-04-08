@@ -2,6 +2,7 @@
 namespace de\mvo;
 
 use de\mvo\model\users\User;
+use Symfony\Component\Asset\Package;
 use Twig_Environment;
 use Twig_Error;
 use Twig_Function;
@@ -14,7 +15,7 @@ class TwigRenderer
      */
     public static $twig;
 
-    public static function init()
+    public static function init(Package $assetsPackage)
     {
         if (self::$twig !== null) {
             return;
@@ -30,19 +31,18 @@ class TwigRenderer
 
         self::$twig = new Twig_Environment($loader);
 
+        $isInternal = (substr(ltrim($path, "/"), 0, 8) == "internal" and User::getCurrent());
+
         self::$twig->addGlobal("currentYear", date("Y"));
         self::$twig->addGlobal("currentFormattedDate", date("d.m.Y"));
         self::$twig->addGlobal("currentUser", User::getCurrent());
-        self::$twig->addGlobal("internal", (substr(ltrim($path, "/"), 0, 8) == "internal" and User::getCurrent()));
+        self::$twig->addGlobal("internal", $isInternal);
         self::$twig->addGlobal("path", $path);
         self::$twig->addGlobal("hasOriginUser", isset($_SESSION["originUserId"]));
+        self::$twig->addGlobal("assetPrefix", $isInternal ? "main-internal" : "main-public");
 
-        self::$twig->addFunction(new Twig_Function("asset", function (string $path) {
-            if (APP_VERSION === null) {
-                return $path;
-            }
-
-            return sprintf("%s?v=%s", $path, APP_VERSION);
+        self::$twig->addFunction(new Twig_Function("asset", function (string $path) use ($assetsPackage) {
+            return $assetsPackage->getUrl($path);
         }));
 
         self::$twig->addFunction(new Twig_Function("isActivePage", function (string $url) use ($path) {

@@ -1,3 +1,8 @@
+import $ from "jquery";
+import moment from "moment";
+import Mustache from "mustache";
+import "bootstrap-select/js/bootstrap-select";
+
 $(function () {
     $("#members-groups-form").on("submit", function () {
         $("#members-groups-field").val($("#members-groups-select").selectpicker("val").join(" "));

@@ -1,3 +1,18 @@
+import $ from "jquery";
+import moment from "moment";
+import blueimp from "blueimp-gallery";
+
+import "bootstrap/js/src/tooltip";
+import "popper.js";
+import "bootstrap";
+import "bootstrap-sortable";
+
+import "./news";
+
+
+// Workaround for some libraries (e.g. pwstrength-bootstrap)
+window.jQuery = $;
+
 $(function () {
     moment.locale("de");
 

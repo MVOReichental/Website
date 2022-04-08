@@ -1,3 +1,6 @@
+import $ from "jquery";
+import "bootstrap-select/js/bootstrap-select";
+
 $(function () {
     var columnSelection = $("#notedirectory-columns");
 

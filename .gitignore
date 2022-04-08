@@ -3,6 +3,8 @@
 /data/news.html
 /data/news-internal.html
 /data/*.serialized
-/httpdocs/node_modules/
+/httpdocs/assets/
+/node_modules/
 /vendor/
 /version
+/webpack.assets.json

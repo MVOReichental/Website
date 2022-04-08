@@ -1,3 +1,6 @@
+import $ from "jquery";
+import moment from "moment";
+
 $(function () {
     $(".home-next-date").each(function () {
         var date = moment($(this).data("date"));

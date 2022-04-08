@@ -1,3 +1,7 @@
+import $ from "jquery";
+import "jstree-bootstrap-theme/dist/jstree";
+import Permissions2jsTree from "./permissions";
+
 $(function () {
     var form = $("#usermanagement-edit-form");
 

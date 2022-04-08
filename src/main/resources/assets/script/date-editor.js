@@ -1,3 +1,6 @@
+import $ from "jquery";
+import "bootstrap-3-typeahead";
+
 $(function () {
     var table = $("#dates-table");
 

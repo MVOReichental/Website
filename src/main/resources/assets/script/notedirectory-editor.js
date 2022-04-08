@@ -1,3 +1,6 @@
+import $ from "jquery";
+import "bootstrap-notify";
+
 $(function () {
     $("#notedirectory-editor-titles-table").find("button.remove").on("click", function () {
         var modal = $("#notedirectory-editor-title-remove-modal");
