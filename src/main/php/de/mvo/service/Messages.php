@@ -86,7 +86,6 @@ class Messages extends AbstractService
                     (
                         "message" => "Die maximale Dateigr&ouml;&szlig;e wurde erreicht!"
                     ));
-                    break;
                 default:
                     return TwigRenderer::render("messages/send-error", array
                     (
