@@ -258,7 +258,7 @@ CREATE TABLE `visits` (
   DEFAULT CHARSET = utf8;
 
 CREATE TABLE `sessions` (
-  `id`     VARCHAR(32) NOT NULL,
+  `id`     VARCHAR(100) NOT NULL,
   `date`   DATETIME    NOT NULL,
   `data`   TEXT        NOT NULL,
   `userId` INT(11) UNSIGNED DEFAULT NULL,

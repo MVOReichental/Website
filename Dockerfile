@@ -8,7 +8,7 @@ RUN composer install --no-dev --ignore-platform-reqs && \
     rm /app/composer.json /app/composer.lock
 
 
-FROM node:15 AS webpack
+FROM node:17 AS webpack
 
 WORKDIR /app
 
@@ -20,7 +20,7 @@ COPY src/main/resources /app/src/main/resources
 RUN npm run build
 
 
-FROM php:7.4-apache
+FROM php:8.1-apache
 
 ENV TZ=Europe/Berlin
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
@@ -30,7 +30,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
 RUN savedAptMark="$(apt-mark showmanual)" && \
     apt-get update && \
     apt-get install -y --no-install-recommends libfreetype6-dev libjpeg-dev libpng-dev && \
-    docker-php-ext-configure gd --with-freetype --with-jpeg && \
+    docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ && \
     docker-php-ext-install -j "$(nproc)" gd pdo_mysql && \
     apt-mark auto '.*' > /dev/null && \
     apt-mark manual $savedAptMark && \
