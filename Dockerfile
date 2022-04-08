@@ -8,7 +8,7 @@ RUN composer install --no-dev --ignore-platform-reqs && \
     rm /app/composer.json /app/composer.lock
 
 
-FROM node:current AS npm
+FROM node:17 AS npm
 
 COPY httpdocs/package.json httpdocs/package-lock.json /app/
 
