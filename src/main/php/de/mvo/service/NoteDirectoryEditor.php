@@ -7,7 +7,7 @@ use de\mvo\model\notedirectory\Title;
 use de\mvo\model\notedirectory\Titles;
 use de\mvo\service\exception\NotFoundException;
 use de\mvo\TwigRenderer;
-use Twig_Error;
+use Twig\Error\Error;
 
 class NoteDirectoryEditor extends AbstractService
 {
@@ -120,7 +120,7 @@ class NoteDirectoryEditor extends AbstractService
      * @param bool $createNewOnSave
      * @return string
      * @throws NotFoundException
-     * @throws Twig_Error
+     * @throws Error
      */
     public function getProgramEditPage($createNewOnSave = false)
     {
@@ -140,7 +140,7 @@ class NoteDirectoryEditor extends AbstractService
 
     /**
      * @return string
-     * @throws Twig_Error
+     * @throws Error
      */
     public function getCreateProgramPage()
     {
@@ -153,7 +153,7 @@ class NoteDirectoryEditor extends AbstractService
 
     /**
      * @return string
-     * @throws Twig_Error
+     * @throws Error
      */
     public function getProgramsPage()
     {
@@ -218,7 +218,7 @@ class NoteDirectoryEditor extends AbstractService
     /**
      * @return string
      * @throws NotFoundException
-     * @throws Twig_Error
+     * @throws Error
      */
     public function getTitleEditPage()
     {
@@ -236,7 +236,7 @@ class NoteDirectoryEditor extends AbstractService
 
     /**
      * @return string
-     * @throws Twig_Error
+     * @throws Error
      */
     public function getCreateTitlePage()
     {
@@ -248,7 +248,7 @@ class NoteDirectoryEditor extends AbstractService
 
     /**
      * @return string
-     * @throws Twig_Error
+     * @throws Error
      */
     public function getTitlesPage()
     {

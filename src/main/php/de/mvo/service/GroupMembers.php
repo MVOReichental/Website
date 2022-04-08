@@ -3,7 +3,7 @@ namespace de\mvo\service;
 
 use de\mvo\model\GroupMembersList;
 use de\mvo\TwigRenderer;
-use Twig_Error;
+use Twig\Error\Error;
 
 class GroupMembers extends AbstractService
 {
@@ -11,7 +11,7 @@ class GroupMembers extends AbstractService
      * @param $title
      * @param $group
      * @return string
-     * @throws Twig_Error
+     * @throws Error
      */
     public function get($title, $group)
     {

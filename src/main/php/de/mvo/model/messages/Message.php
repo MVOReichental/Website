@@ -13,7 +13,7 @@ use de\mvo\TwigRenderer;
 use de\mvo\utils\StringUtil;
 use de\mvo\utils\Url;
 use PDO;
-use Twig_Error;
+use Twig\Error\Error;
 
 class Message
 {
@@ -224,7 +224,7 @@ class Message
     }
 
     /**
-     * @throws Twig_Error
+     * @throws Error
      */
     public function sendMail()
     {

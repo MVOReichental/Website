@@ -8,7 +8,7 @@ use de\mvo\model\notedirectory\Titles;
 use de\mvo\model\users\User;
 use de\mvo\service\exception\NotFoundException;
 use de\mvo\TwigRenderer;
-use Twig_Error;
+use Twig\Error\Error;
 
 class NoteDirectory extends AbstractService
 {
@@ -38,7 +38,7 @@ class NoteDirectory extends AbstractService
      * @param $list
      * @param array $context
      * @return string
-     * @throws Twig_Error
+     * @throws Error
      */
     private static function renderListPage($title, $activePath, $list, array $context = array())
     {
@@ -54,7 +54,7 @@ class NoteDirectory extends AbstractService
     /**
      * @return string
      * @throws NotFoundException
-     * @throws Twig_Error
+     * @throws Error
      */
     public function getProgram()
     {
@@ -74,7 +74,7 @@ class NoteDirectory extends AbstractService
 
     /**
      * @return string
-     * @throws Twig_Error
+     * @throws Error
      */
     public function getAllTitles()
     {
@@ -86,7 +86,7 @@ class NoteDirectory extends AbstractService
 
     /**
      * @return string
-     * @throws Twig_Error
+     * @throws Error
      */
     public function search()
     {
@@ -113,7 +113,7 @@ class NoteDirectory extends AbstractService
     /**
      * @return string
      * @throws NotFoundException
-     * @throws Twig_Error
+     * @throws Error
      */
     public function getTitleDetails()
     {

@@ -11,7 +11,7 @@ use Exception;
 use Kelunik\TwoFactor\Oath;
 use ParagonIE\ConstantTime\Base32;
 use PDOException;
-use Twig_Error;
+use Twig\Error\Error;
 use TypeError;
 
 class Account extends AbstractService
@@ -104,7 +104,7 @@ class Account extends AbstractService
 
     /**
      * @return string
-     * @throws Twig_Error
+     * @throws Error
      */
     public function logout()
     {
@@ -115,7 +115,7 @@ class Account extends AbstractService
 
     /**
      * @return string
-     * @throws Twig_Error
+     * @throws Error
      */
     public function resetPassword()
     {
@@ -145,7 +145,7 @@ class Account extends AbstractService
 
     /**
      * @return string
-     * @throws Twig_Error
+     * @throws Error
      */
     public function confirmResetPassword()
     {
@@ -180,7 +180,7 @@ class Account extends AbstractService
 
     /**
      * @return string
-     * @throws Twig_Error
+     * @throws Error
      */
     public function confirmEmailChange()
     {
@@ -201,7 +201,7 @@ class Account extends AbstractService
     /**
      * @param null $updateStatus
      * @return string
-     * @throws Twig_Error
+     * @throws Error
      */
     public function showSettings($updateStatus = null)
     {
@@ -277,7 +277,7 @@ class Account extends AbstractService
 
     /**
      * @return string|null
-     * @throws Twig_Error
+     * @throws Error
      */
     private function updatePassword()
     {
@@ -308,7 +308,7 @@ class Account extends AbstractService
 
     /**
      * @return string|null
-     * @throws Twig_Error
+     * @throws Error
      */
     private function updateEmailAddress()
     {
@@ -396,7 +396,7 @@ class Account extends AbstractService
 
     /**
      * @return string
-     * @throws Twig_Error
+     * @throws Error
      */
     public function updateSettings()
     {

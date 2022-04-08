@@ -6,13 +6,13 @@ use de\mvo\Date;
 use de\mvo\model\visits\Stats;
 use de\mvo\model\visits\Visit;
 use de\mvo\TwigRenderer;
-use Twig_Error;
+use Twig\Error\Error;
 
 class Visits extends AbstractService
 {
     /**
      * @return string
-     * @throws Twig_Error
+     * @throws Error
      */
     public function getPage()
     {

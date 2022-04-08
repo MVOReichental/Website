@@ -20,7 +20,7 @@ use Kelunik\TwoFactor\Oath;
 use ParagonIE\ConstantTime\Base32;
 use PDOException;
 use RuntimeException;
-use Twig_Error;
+use Twig\Error\Error;
 use TypeError;
 use UnexpectedValueException;
 
@@ -303,7 +303,7 @@ class User implements JsonSerializable
     }
 
     /**
-     * @throws Twig_Error
+     * @throws Error
      */
     public function sendPasswordResetMail()
     {
@@ -358,7 +358,7 @@ class User implements JsonSerializable
     }
 
     /**
-     * @throws Twig_Error
+     * @throws Error
      */
     public function sendAccountCreatedMail()
     {
@@ -387,7 +387,7 @@ class User implements JsonSerializable
     }
 
     /**
-     * @throws Twig_Error
+     * @throws Error
      */
     public function sendPasswordChangeMail()
     {
@@ -428,7 +428,7 @@ class User implements JsonSerializable
     }
 
     /**
-     * @throws Twig_Error
+     * @throws Error
      */
     public function sendEmailChangeMail()
     {
