@@ -11,13 +11,13 @@ use de\mvo\service\exception\NotFoundException;
 use de\mvo\TwigRenderer;
 use de\mvo\uploadhandler\File;
 use de\mvo\uploadhandler\Files;
-use Twig_Error;
+use Twig\Error\Error;
 
 class Messages extends AbstractService
 {
     /**
      * @return string
-     * @throws Twig_Error
+     * @throws Error
      */
     public function getSentMessages()
     {
@@ -30,7 +30,7 @@ class Messages extends AbstractService
 
     /**
      * @return string
-     * @throws Twig_Error
+     * @throws Error
      */
     public function getReceivedMessages()
     {
@@ -43,7 +43,7 @@ class Messages extends AbstractService
 
     /**
      * @return string
-     * @throws Twig_Error
+     * @throws Error
      */
     public function getAllMessages()
     {
@@ -56,7 +56,7 @@ class Messages extends AbstractService
 
     /**
      * @return null|string
-     * @throws Twig_Error
+     * @throws Error
      */
     public function sendMessage()
     {
@@ -138,7 +138,7 @@ class Messages extends AbstractService
     /**
      * @return string
      * @throws NotFoundException
-     * @throws Twig_Error
+     * @throws Error
      */
     public function showMessage()
     {

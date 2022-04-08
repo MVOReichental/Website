@@ -3,13 +3,13 @@ namespace de\mvo\service;
 
 use de\mvo\model\videos\VideoList;
 use de\mvo\TwigRenderer;
-use Twig_Error;
+use Twig\Error\Error;
 
 class Videos extends AbstractService
 {
     /**
      * @return string
-     * @throws Twig_Error
+     * @throws Error
      */
     public function getList()
     {

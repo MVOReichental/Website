@@ -11,7 +11,7 @@ use de\mvo\model\users\Users;
 use de\mvo\TwigRenderer;
 use de\mvo\utils\Url;
 use PDO;
-use Twig_Error;
+use Twig\Error\Error;
 
 class Protocol
 {
@@ -108,7 +108,7 @@ class Protocol
     }
 
     /**
-     * @throws Twig_Error
+     * @throws Error
      */
     public function sendMail()
     {

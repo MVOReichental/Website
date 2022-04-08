@@ -2,14 +2,14 @@
 namespace de\mvo\service;
 
 use de\mvo\TwigRenderer;
-use Twig_Error;
+use Twig\Error\Error;
 
 class StaticView extends AbstractService
 {
     /**
      * @param $name
      * @return string
-     * @throws Twig_Error
+     * @throws Error
      */
     public function get($name)
     {

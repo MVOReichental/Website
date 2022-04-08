@@ -1,19 +1,17 @@
 <?php
 namespace de\mvo\service;
 
-use de\mvo\model\pictures\Album;
 use de\mvo\model\pictures\YearList;
 use de\mvo\model\users\User;
-use de\mvo\service\exception\NotFoundException;
 use de\mvo\TwigRenderer;
-use Twig_Error;
+use Twig\Error\Error;
 
 class Pictures extends AbstractService
 {
     /**
      * @param bool $internal
      * @return string
-     * @throws Twig_Error
+     * @throws Error
      */
     public function getYears($internal = false)
     {
@@ -32,7 +30,7 @@ class Pictures extends AbstractService
     /**
      * @param bool $internal
      * @return string
-     * @throws Twig_Error
+     * @throws Error
      */
     public function getAlbums($internal = false)
     {
@@ -62,7 +60,7 @@ class Pictures extends AbstractService
     /**
      * @param bool $internal
      * @return string
-     * @throws Twig_Error
+     * @throws Error
      */
     public function getAlbum($internal = false)
     {

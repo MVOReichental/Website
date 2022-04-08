@@ -6,7 +6,7 @@ use de\mvo\model\date\DateList;
 use de\mvo\model\pictures\YearList;
 use de\mvo\TwigRenderer;
 use HTMLPurifier;
-use Twig_Error;
+use Twig\Error\Error;
 
 class News extends AbstractService
 {
@@ -15,7 +15,7 @@ class News extends AbstractService
 
     /**
      * @return string
-     * @throws Twig_Error
+     * @throws Error
      */
     public function get()
     {
@@ -40,7 +40,7 @@ class News extends AbstractService
 
     /**
      * @return string
-     * @throws Twig_Error
+     * @throws Error
      */
     public function getEditor()
     {
@@ -75,7 +75,7 @@ class News extends AbstractService
 
     /**
      * @return string
-     * @throws Twig_Error
+     * @throws Error
      */
     public function getInternalEditor()
     {

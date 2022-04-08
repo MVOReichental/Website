@@ -2,15 +2,15 @@
 namespace de\mvo;
 
 use de\mvo\model\users\User;
-use Twig_Environment;
-use Twig_Error;
-use Twig_Function;
-use Twig_Loader_Filesystem;
+use Twig\Environment;
+use Twig\Error\Error;
+use Twig\Loader\FilesystemLoader;
+use Twig\TwigFunction;
 
 class TwigRenderer
 {
     /**
-     * @var Twig_Environment
+     * @var Environment
      */
     public static $twig;
 
@@ -26,9 +26,9 @@ class TwigRenderer
             $path = "";
         }
 
-        $loader = new Twig_Loader_Filesystem(VIEWS_ROOT);
+        $loader = new FilesystemLoader(VIEWS_ROOT);
 
-        self::$twig = new Twig_Environment($loader);
+        self::$twig = new Environment($loader);
 
         self::$twig->addGlobal("currentYear", date("Y"));
         self::$twig->addGlobal("currentFormattedDate", date("d.m.Y"));
@@ -37,7 +37,7 @@ class TwigRenderer
         self::$twig->addGlobal("path", $path);
         self::$twig->addGlobal("hasOriginUser", isset($_SESSION["originUserId"]));
 
-        self::$twig->addFunction(new Twig_Function("asset", function (string $path) {
+        self::$twig->addFunction(new TwigFunction("asset", function (string $path) {
             if (APP_VERSION === null) {
                 return $path;
             }
@@ -45,7 +45,7 @@ class TwigRenderer
             return sprintf("%s?v=%s", $path, APP_VERSION);
         }));
 
-        self::$twig->addFunction(new Twig_Function("isActivePage", function (string $url) use ($path) {
+        self::$twig->addFunction(new TwigFunction("isActivePage", function (string $url) use ($path) {
             $urlParts = explode("/", trim($url, "/"));
             $pathParts = explode("/", trim($path, "/"));
 
@@ -71,7 +71,7 @@ class TwigRenderer
      * @param $name
      * @param array $context
      * @return string
-     * @throws Twig_Error
+     * @throws Error
      */
     public static function render($name, $context = array())
     {

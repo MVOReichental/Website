@@ -10,13 +10,13 @@ use de\mvo\model\users\User;
 use de\mvo\TwigRenderer;
 use de\mvo\uploadhandler\File;
 use de\mvo\uploadhandler\Files;
-use Twig_Error;
+use Twig\Error\Error;
 
 class Protocols extends AbstractService
 {
     /**
      * @return string
-     * @throws Twig_Error
+     * @throws Error
      */
     public function getList()
     {
@@ -39,7 +39,7 @@ class Protocols extends AbstractService
 
     /**
      * @return string
-     * @throws Twig_Error
+     * @throws Error
      */
     public function showUploadForm()
     {
@@ -51,7 +51,7 @@ class Protocols extends AbstractService
 
     /**
      * @return null
-     * @throws Twig_Error
+     * @throws Error
      */
     public function upload()
     {

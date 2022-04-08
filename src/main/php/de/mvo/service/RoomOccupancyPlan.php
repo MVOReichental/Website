@@ -7,13 +7,13 @@ use Exception;
 use GuzzleHttp\Client;
 use ICal\Event;
 use ICal\ICal;
-use Twig_Error;
+use Twig\Error\Error;
 
 class RoomOccupancyPlan extends AbstractService
 {
     /**
      * @return string
-     * @throws Twig_Error
+     * @throws Error
      */
     public function getCalendar()
     {
