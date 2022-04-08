@@ -17,9 +17,11 @@ before_script:
 
 Build:
   stage: build
+  only:
+    - master
   script:
     # fetches the latest image (not failing if image is not found)
-    - if [[ -z $BUILD_SKIP_DOCKER_PULL ]]; then docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG || true; fi
+    - if [[ -z $BUILD_SKIP_DOCKER_PULL ]]; then docker pull $CI_REGISTRY_IMAGE:latest || true; fi
     # builds the project and passes vcs vars for LABEL
     # notice the cache-from, which is going to use the image we just pulled locally
     # the built image is tagged locally with the commit SHA, and then pushed to
@@ -29,7 +31,7 @@ Build:
       --pull
       --build-arg VCS_REF=$CI_COMMIT_SHA
       --build-arg VCS_URL=$CI_PROJECT_URL
-      --cache-from $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
-      --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+      --cache-from $CI_REGISTRY_IMAGE:latest
+      --tag $CI_REGISTRY_IMAGE:latest
       .
-    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+    - docker push $CI_REGISTRY_IMAGE:latest
