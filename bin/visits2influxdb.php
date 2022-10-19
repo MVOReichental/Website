@@ -28,8 +28,10 @@ $port = Config::getValue("influxdb", "port", 8086);
 $username = Config::getValue("influxdb", "username");
 $password = Config::getValue("influxdb", "password");
 $dbName = Config::getRequiredValue("influxdb", "database");
+$ssl = filter_var(Config::getValue("influxdb", "ssl", "false"), FILTER_VALIDATE_BOOLEAN);
+$verifySsl = filter_var(Config::getValue("influxdb", "verify-ssl", "false"), FILTER_VALIDATE_BOOLEAN);
 
-$client = new Client($host, $port, $username, $password);
+$client = new Client($host, $port, $username, $password, $ssl, $verifySsl);
 $database = $client->selectDB($dbName);
 
 $visits = Visit::getAtDate($date);
