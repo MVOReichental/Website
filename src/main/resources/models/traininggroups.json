@@ -1,5 +1,5 @@
 {
-  "date": "10.10.2022",
+  "date": "22.12.2022",
   "columns": [
     {
       "title": "Blockfl\u00f6tengruppen",
@@ -11,6 +11,14 @@
               "students": [
                 "Lotte Bervoets",
                 "Emma Wieland"
+              ]
+            },
+            {
+              "trainer": "Liana Knapp",
+              "students": [
+                "Marilyn M\u00f6hrle",
+                "Amelie Ronecker",
+                "Clara Weber"
               ]
             }
           ]
@@ -24,15 +32,10 @@
           "name": "Klarinette",
           "groups": [
             {
-              "trainer": "Liliane Brasseur",
-              "students": [
-                "Lara Merkel"
-              ]
-            },
-            {
               "trainer": "Gisela Wieland",
               "students": [
-                "Hanna Weber"
+                "Hanna Weber",
+                "Lara Merkel"
               ]
             }
           ]
@@ -43,7 +46,6 @@
             {
               "trainer": "Andreas Wieland",
               "students": [
-                "Vitus Balensiefen",
                 "Theo Sieb"
               ]
             }
@@ -61,34 +63,12 @@
           ]
         },
         {
-          "name": "Saxophon",
-          "groups": [
-            {
-              "trainer": "Daniela Merz",
-              "students": [
-                "Silas Magfelder"
-              ]
-            }
-          ]
-        },
-        {
           "name": "Schlagzeug",
           "groups": [
             {
               "trainer": "Jonathan Friedel",
               "students": [
                 "Jonas Melcher"
-              ]
-            }
-          ]
-        },
-        {
-          "name": "Tenorhorn",
-          "groups": [
-            {
-              "trainer": "Josef Minet",
-              "students": [
-                "Tizian Gottschalk"
               ]
             }
           ]
