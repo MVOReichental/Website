@@ -2,6 +2,8 @@
 namespace de\mvo\service;
 
 use de\mvo\Date;
+use de\mvo\model\contacts\Contact;
+use de\mvo\model\contacts\Contacts;
 use de\mvo\model\exception\DuplicateEntryException;
 use de\mvo\model\permissions\GroupList;
 use de\mvo\model\users\User;
@@ -43,7 +45,10 @@ class UserManagement extends AbstractService
 
         return TwigRenderer::render("admin/usermanagement/edit", array
         (
-            "user" => $user
+            "user" => $user,
+            "contactTypes" => Contact::TYPE_TILES,
+            "contactCategories" => Contact::CATEGORY_TITLES,
+            "showSuccessMessage" => isset($_GET["saved"]),
         ));
     }
 
@@ -138,13 +143,54 @@ class UserManagement extends AbstractService
             ));
         }
 
+        $oldContacts = Contacts::forUser($user);
+        $newContacts = new Contacts;
+
+        foreach ($_POST["contactValue"] as $index => $value) {
+            if (!$value) {
+                continue;
+            }
+
+            if (isset($_POST["contactId"][$index])) {
+                $contact = Contact::getById($_POST["contactId"][$index]);
+            } else {
+                $contact = new Contact;
+
+                $contact->user = $user;
+            }
+
+            if (!isset($_POST["contactType"][$index]) or !isset($_POST["contactCategory"][$index])) {
+                http_response_code(400);
+                return null;
+            }
+
+            $contact->type = $_POST["contactType"][$index];
+            $contact->category = $_POST["contactCategory"][$index];
+            $contact->value = $value;
+
+            $contact->save();
+
+            $newContacts->append($contact);
+        }
+
+        // Delete removed contacts
+        foreach ($oldContacts as $contact) {
+            foreach ($newContacts as $newContact) {
+                if ($newContact->id == $contact->id) {
+                    continue 2;
+                }
+            }
+
+            $contact->remove();
+        }
+
         if (isset($_POST["sendCredentials"]) and $_POST["sendCredentials"]) {
             $user->sendAccountCreatedMail();
         }
 
         GroupList::load()->save();
 
-        header("Location: /internal/admin/usermanagement");
+        header(sprintf("Location: /internal/admin/usermanagement/user/%d?saved", $user->id));
         return null;
     }
 }
