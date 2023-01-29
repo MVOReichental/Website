@@ -13,8 +13,6 @@ use de\mvo\model\permissions\GroupList;
 use de\mvo\model\permissions\Permissions;
 use de\mvo\TwigRenderer;
 use de\mvo\utils\Url;
-use JeroenDesloovere\VCard\VCard;
-use JeroenDesloovere\VCard\VCardException;
 use JsonSerializable;
 use Kelunik\TwoFactor\Oath;
 use ParagonIE\ConstantTime\Base32;
@@ -844,63 +842,6 @@ class User implements JsonSerializable
         }
 
         return $this->datesToken;
-    }
-
-    public function getVCard()
-    {
-        $vcard = new VCard;
-
-        $vcard->addName($this->lastName, $this->firstName);
-        $vcard->addEmail($this->email);
-
-        if ($this->birthDate !== null) {
-            $vcard->addBirthday($this->birthDate->format("Y-m-d"));
-        }
-
-        try {
-            $vcard->addPhoto($this->profilePictureUrl(true), false);
-        } catch (VCardException $exception) {
-            // ignore exception and do not add the photo
-        }
-
-        $groups = array();
-
-        foreach (Groups::getAll() as $group => $title) {
-            if ($this->hasPermission(sprintf("group.%s", $group), true)) {
-                $groups[] = $title;
-            }
-        }
-
-        $vcard->addCategories($groups);
-
-        /**
-         * @var $contact Contact
-         */
-        foreach ($this->contacts() as $contact) {
-            $type = array();
-
-            switch ($contact->category) {
-                case "business":
-                    $type[] = "WORK";
-                    break;
-                case "private":
-                    $type[] = "HOME";
-                    break;
-            }
-
-            switch ($contact->type) {
-                case "phone":
-                    $type[] = "VOICE";
-                    break;
-                case "mobile":
-                    $type[] = "CELL";
-                    break;
-            }
-
-            $vcard->addPhoneNumber($contact->value, implode(";", $type));
-        }
-
-        return $vcard;
     }
 
     public function save($forceInsertWithId = false)

@@ -45,12 +45,6 @@
                                 <td><i class="fas fa-calendar-alt"></i> {{ user.birthDate.humanReadableDate }} ({{ user.birthDate.yearsTillNow }})</td>
                             </tr>
                         {% endif %}
-                        {% if currentUser.hasPermission("members.vcard") %}
-                            <tr>
-                                <td></td>
-                                <td><i class="fas fa-address-card"></i> <a href="internal/members/{{ user.username }}.vcf">VCard herunterladen</a></td>
-                            </tr>
-                        {% endif %}
                     </tbody>
                 </table>
 

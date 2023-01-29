@@ -33,7 +33,6 @@
         "ezyang/htmlpurifier": "^4.10",
         "symfony/finder": "^4.1",
         "symfony/filesystem": "^4.1",
-        "jeroendesloovere/vcard": "^1.7",
         "johngrogg/ics-parser": "^2.1",
         "guzzlehttp/guzzle": "^6.3",
         "influxdb/influxdb-php": "^1.14"
