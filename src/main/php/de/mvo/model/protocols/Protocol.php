@@ -134,7 +134,7 @@ class Protocol
                         "title" => $this->title,
                         "url" => Url::getBaseUrl() . $this->upload->getUrl()
                     )), "text/html");
-                    $message->setSubjectFromHtml($message->getBody());
+                    $message->setSubjectFromHtml();
 
                     Queue::add($message);
                     break;

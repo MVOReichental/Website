@@ -249,7 +249,7 @@ class Message
                 "baseUrl" => Url::getBaseUrl(),
                 "url" => sprintf("%s/internal/messages/%d", Url::getBaseUrl(), $this->id)
             )), "text/html");
-            $message->setSubjectFromHtml($message->getBody());
+            $message->setSubjectFromHtml();
 
             Queue::add($message);
         }

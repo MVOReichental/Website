@@ -336,7 +336,7 @@ class User implements JsonSerializable
             "user" => $this,
             "url" => Url::getBaseUrl() . "/internal/reset-password/confirm?id=" . $this->id . "&key=" . $key
         )), "text/html");
-        $message->setSubjectFromHtml($message->getBody());
+        $message->setSubjectFromHtml();
 
         $sender->send($message);
     }
@@ -380,7 +380,7 @@ class User implements JsonSerializable
             "password" => $password,
             "url" => Url::getBaseUrl() . "/internal"
         )), "text/html");
-        $message->setSubjectFromHtml($message->getBody());
+        $message->setSubjectFromHtml();
 
         $sender->send($message);
     }
@@ -404,7 +404,7 @@ class User implements JsonSerializable
             "user" => $this,
             "resetPasswordUrl" => Url::getBaseUrl() . "/internal/reset-password"
         )), "text/html");
-        $message->setSubjectFromHtml($message->getBody());
+        $message->setSubjectFromHtml();
 
         $sender->send($message);
     }
@@ -461,7 +461,7 @@ class User implements JsonSerializable
             "user" => $this,
             "url" => Url::getBaseUrl() . "/internal/change-email/confirm?id=" . $this->id . "&key=" . $key
         )), "text/html");
-        $message->setSubjectFromHtml($message->getBody());
+        $message->setSubjectFromHtml();
 
         $sender->send($message);
     }
