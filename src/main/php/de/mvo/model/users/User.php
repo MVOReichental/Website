@@ -18,6 +18,7 @@ use Kelunik\TwoFactor\Oath;
 use ParagonIE\ConstantTime\Base32;
 use PDOException;
 use RuntimeException;
+use Symfony\Component\Mime\Address;
 use Twig\Error\Error;
 use TypeError;
 use UnexpectedValueException;
@@ -329,8 +330,8 @@ class User implements JsonSerializable
 
         $message = new Message;
 
-        $message->setTo($this->email, $this->getFullName());
-        $message->setBody(TwigRenderer::render("account/reset-password/mail", array
+        $message->to(new Address($this->email, $this->getFullName()));
+        $message->html(TwigRenderer::render("account/reset-password/mail", array
         (
             "user" => $this,
             "url" => Url::getBaseUrl() . "/internal/reset-password/confirm?id=" . $this->id . "&key=" . $key
@@ -372,8 +373,8 @@ class User implements JsonSerializable
 
         $message = new Message;
 
-        $message->setTo($this->email, $this->getFullName());
-        $message->setBody(TwigRenderer::render("account-created-mail", array
+        $message->to(new Address($this->email, $this->getFullName()));
+        $message->html(TwigRenderer::render("account-created-mail", array
         (
             "user" => $this,
             "password" => $password,
@@ -397,8 +398,8 @@ class User implements JsonSerializable
 
         $message = new Message;
 
-        $message->setTo($this->email, $this->getFullName());
-        $message->setBody(TwigRenderer::render("account/password-changed-mail", array
+        $message->to(new Address($this->email, $this->getFullName()));
+        $message->html(TwigRenderer::render("account/password-changed-mail", array
         (
             "user" => $this,
             "resetPasswordUrl" => Url::getBaseUrl() . "/internal/reset-password"
@@ -454,8 +455,8 @@ class User implements JsonSerializable
 
         $message = new Message;
 
-        $message->setTo($this->newEmail, $this->getFullName());
-        $message->setBody(TwigRenderer::render("account/change-email/confirm-mail", array
+        $message->to(new Address($this->newEmail, $this->getFullName()));
+        $message->html(TwigRenderer::render("account/change-email/confirm-mail", array
         (
             "user" => $this,
             "url" => Url::getBaseUrl() . "/internal/change-email/confirm?id=" . $this->id . "&key=" . $key
