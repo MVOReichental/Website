@@ -34,7 +34,7 @@
                 <div class="col-sm-6 col-md-4 mt-3">
                     <a href="pictures/{{ loop.parent.album.year }}/{{ loop.parent.album.name }}/{{ picture.hash }}_large.jpg" class="thumbnail" title="{{ picture.title }}">
                         <div class="card">
-                            <img class="card-img-top" src="pictures/{{ loop.parent.album.year }}/{{ loop.parent.album.name }}/{{ picture.hash }}_small.jpg"/>
+                            <img class="card-img-top" src="pictures/{{ loop.parent.album.year }}/{{ loop.parent.album.name }}/{{ picture.hash }}_small.jpg" loading="lazy"/>
                             {% if picture.title %}
                                 <div class="card-body">
                                     {{ picture.title }}

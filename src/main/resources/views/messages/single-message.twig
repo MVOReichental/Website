@@ -3,7 +3,7 @@
         <ul class="list-unstyled">
             <li class="media gallery-source">
                 <a href="users/{{ message.sender.id }}/profile-picture.jpg?hash={{ message.sender.profilePictureHash }}">
-                    <img class="img-rounded" src="users/{{ message.sender.id }}/profile-picture.jpg?hash={{ message.sender.profilePictureHash }}" width="100"/>
+                    <img class="img-rounded" src="users/{{ message.sender.id }}/profile-picture.jpg?hash={{ message.sender.profilePictureHash }}" width="100" loading="lazy"/>
                 </a>
                 <div class="media-body ml-3">
                     <div>

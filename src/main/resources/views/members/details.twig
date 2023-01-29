@@ -21,7 +21,7 @@
         <div class="col-xl-4">
             <div id="members-details-user" class="gallery-source" data-id="{{ user.id }}">
                 <a href="users/{{ user.id }}/profile-picture.jpg?hash={{ user.profilePictureHash }}">
-                    <img src="users/{{ user.id }}/profile-picture.jpg?hash={{ user.profilePictureHash }}" class="img-rounded" id="members-details-picture"/>
+                    <img src="users/{{ user.id }}/profile-picture.jpg?hash={{ user.profilePictureHash }}" class="img-rounded" id="members-details-picture" loading="lazy"/>
                 </a>
                 <h3 class="mt-3 mb-3"><span id="members-details-firstname">{{ user.firstName }}</span> <span id="members-details-lastname">{{ user.lastName }}</span></h3>
 
