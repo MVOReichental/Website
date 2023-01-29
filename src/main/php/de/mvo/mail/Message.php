@@ -9,20 +9,18 @@ use Symfony\Component\Mime\Email;
 
 class Message extends Email
 {
-    public function __construct($subject = null, $body = null, $contentType = null, $charset = null)
+    public function __construct()
     {
         parent::__construct();
 
         $this->from(new Address(Config::getValue("mail", "from"), Config::getValue("mail", "fromName")));
-        $this->subject($subject);
-        $this->html($body);
     }
 
-    public function setSubjectFromHtml($html)
+    public function setSubjectFromHtml()
     {
         $document = new DOMDocument;
 
-        $document->loadHTML($html);
+        $document->loadHTML($this->getHtmlBody());
 
         $xpath = new DOMXPath($document);
 
