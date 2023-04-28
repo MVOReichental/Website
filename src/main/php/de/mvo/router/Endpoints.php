@@ -39,7 +39,7 @@ class Endpoints
             ->method("get")
             ->arguments("imprint");
 
-        /*Endpoint::create(HttpMethod::GET, "/beitreten")
+        Endpoint::create(HttpMethod::GET, "/beitreten")
             ->target()
             ->className(StaticView::class)
             ->method("get")
@@ -49,7 +49,7 @@ class Endpoints
             ->target()
             ->className(File::class)
             ->method("get")
-            ->arguments(RESOURCES_ROOT . "/beitrittserklaerung.pdf", "application/pdf");*/
+            ->arguments(DATA_ROOT . "/forms/beitrittserklaerung.pdf", "application/pdf");
 
         Endpoint::create(HttpMethod::GET, "/bisherige_dirigenten")
             ->target()
