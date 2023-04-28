@@ -49,7 +49,7 @@ class Endpoints
             ->target()
             ->className(File::class)
             ->method("get")
-            ->arguments(DATA_ROOT . "/forms/beitrittserklaerung.pdf", "application/pdf");
+            ->arguments(DATA_ROOT . "/forms/Beitrittserklaerung.pdf", "application/pdf");
 
         Endpoint::create(HttpMethod::GET, "/bisherige_dirigenten")
             ->target()
