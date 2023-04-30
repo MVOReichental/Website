@@ -14,23 +14,6 @@ module.exports = {
         publicPath: "/assets/",
         filename: "[name].[contenthash].js"
     },
-    optimization: {
-        splitChunks: {
-            cacheGroups: {
-                styles: {
-                    name: "styles",
-                    type: "css/mini-extract",
-                    chunks: "all",
-                    enforce: true
-                },
-                vendor: {
-                    test: /[\\/]node_modules[\\/].*\.js$/,
-                    name: "vendor",
-                    chunks: "all",
-                }
-            }
-        }
-    },
     devtool: "source-map",
     plugins: [
         new CleanWebpackPlugin(),
