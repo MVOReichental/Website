@@ -14,7 +14,7 @@
             {% for user in users %}
                 <tr data-id="{{ user.id }}">
                     <td class="d-print-none minimum-width"><input type="checkbox" class="members-select-checkbox"/></td>
-                    <td class="d-print-none minimum-width"><img src="users/{{ user.id }}/profile-picture.jpg?hash={{ user.profilePictureHash }}" height="40" loading="lazy"/></td>
+                    <td class="d-print-none minimum-width"><img src="{{ user.profilePictureUrl }}" height="40" loading="lazy"/></td>
                     <td class="first-name">
                         <a href="internal/members/{{ user.username }}" class="d-print-none"><i class="fas fa-info-circle"></i></a>
                         {{ user.firstName }}

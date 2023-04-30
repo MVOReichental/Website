@@ -18,9 +18,10 @@
     "require": {
         "php": "^8.1",
         "ext-dom": "*",
+        "ext-fileinfo": "*",
         "ext-gd": "*",
-        "ext-pdo": "*",
         "ext-json": "*",
+        "ext-pdo": "*",
         "altorouter/altorouter": "^1.1",
         "programie/pini": "^1.4",
         "eluceo/ical": "^0.10.0",

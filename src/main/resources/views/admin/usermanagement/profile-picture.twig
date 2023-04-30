@@ -22,13 +22,13 @@
 
     <div class="edit-profilepicture-dropzone">
         <div class="edit-profilepicture-box-left">
-            <img src="users/{{ user.id }}/profile-picture.jpg?hash={{ user.profilePictureHash }}" class="edit-profilepicture-img"/>
+            <img src="{{ user.profilePictureUrl }}" class="edit-profilepicture-img"/>
         </div>
 
         <div class="edit-profilepicture-box-right">
             <div class="btn btn-secondary fileinput-button">
                 <strong>Neues Profilbild hochladen</strong>
-                <input class="edit-profilepicture" type="file" name="file" data-url="users/{{ user.id }}/profile-picture.jpg" accept="image/bmp,image/gif,image/jpeg,image/png"/>
+                <input class="edit-profilepicture" type="file" name="file" data-url="users/{{ user.id }}/profile-picture" accept="image/bmp,image/gif,image/jpeg,image/png"/>
             </div>
 
             <small class="form-text">Unterst&uuml;tzte Dateiformate: BMP, GIF, JPEG und PNG</small>

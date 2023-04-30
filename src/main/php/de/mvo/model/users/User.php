@@ -724,7 +724,7 @@ class User implements JsonSerializable
     {
         $filename = PROFILE_PICTURES_ROOT . "/" . $userId . ".jpg";
         if (!file_exists($filename)) {
-            $filename = RESOURCES_ROOT . "/default-profile-picture.jpg";
+            $filename = RESOURCES_ROOT . "/default-profile-picture.svg";
         }
 
         return $filename;
@@ -737,7 +737,7 @@ class User implements JsonSerializable
 
     public function profilePictureUrl($fullUrl = false)
     {
-        $url = sprintf("users/%d/profile-picture.jpg?hash=%s", $this->id, $this->profilePictureHash());
+        $url = sprintf("users/%d/profile-picture?hash=%s", $this->id, $this->profilePictureHash());
 
         if ($fullUrl) {
             $url = sprintf("%s/%s", Url::getBaseUrl(), $url);

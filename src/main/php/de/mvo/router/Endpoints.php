@@ -139,7 +139,7 @@ class Endpoints
             ->method("getAlbum");
 
         // Profile pictures
-        Endpoint::create(HttpMethod::GET, "/users/[i:id]/profile-picture.jpg")
+        Endpoint::create(HttpMethod::GET, "/users/[i:id]/profile-picture")
             ->target()
             ->className(ProfilePicture::class)
             ->method("get");
@@ -306,7 +306,7 @@ class Endpoints
             ->method("disable2fa")
             ->requireLogin();
 
-        Endpoint::create(HttpMethod::POST, "/users/[i:id]/profile-picture.jpg")
+        Endpoint::create(HttpMethod::POST, "/users/[i:id]/profile-picture")
             ->target()
             ->className(ProfilePicture::class)
             ->method("upload")

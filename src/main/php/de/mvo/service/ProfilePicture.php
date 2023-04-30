@@ -23,7 +23,7 @@ class ProfilePicture extends AbstractService
             return null;
         }
 
-        header("Content-Type: image/jpeg");
+        header(sprintf("Content-Type: %s", mime_content_type($filename)));
         readfile($filename);
         return null;
     }

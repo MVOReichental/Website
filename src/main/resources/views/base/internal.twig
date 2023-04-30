@@ -27,7 +27,7 @@
                 <ul class="navbar-nav flex-row ml-auto">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle p-2" data-toggle="dropdown" role="button" id="navbar-profile">
-                            <img src="users/{{ currentUser.id }}/profile-picture.jpg?hash={{ currentUser.profilePictureHash }}"/>
+                            <img src="{{ currentUser.profilePictureUrl }}"/>
                             <span class="caret"></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
