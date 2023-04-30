@@ -9,8 +9,7 @@
 
         {% set assetPrefix = internal ? "internal" : "public" %}
 
-        <link rel="stylesheet" href="{{ asset("styles.css") }}"/>
-        <script src="{{ asset("vendor.js") }}"></script>
+        <link rel="stylesheet" href="{{ asset("#{assetPrefix}.css") }}"/>
         <script src="{{ asset("#{assetPrefix}.js") }}"></script>
 
         <!--

@@ -22,7 +22,14 @@ module.exports = {
         }),
         new WebpackAssetsManifest({
             output: path.resolve(__dirname, "webpack.assets.json"),
-            publicPath: true
+            publicPath: true,
+            contextRelativeKeys: true,
+            customize(entry) {
+                return {
+                    key: entry.key.replace(/^src\/main\/resources\/assets\//, "assets/"),
+                    value: entry.value
+                };
+            }
         })
     ],
     module: {

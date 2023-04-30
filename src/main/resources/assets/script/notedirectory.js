@@ -1,5 +1,6 @@
 import $ from "jquery";
 import "bootstrap-select/js/bootstrap-select";
+import "../images/logo.svg";// Required for print view which includes the logo
 
 $(function () {
     var columnSelection = $("#notedirectory-columns");
