@@ -1,4 +1,4 @@
-import "./main";
+import "./common";
 import "./account";
 import "./date-editor";
 import "./edit-profilepicture";
@@ -13,4 +13,4 @@ import "./usereditor";
 import "./usermanagement";
 import "./visits";
 
-import "../style/main-internal.scss";
+import "../style/index-internal.scss";
