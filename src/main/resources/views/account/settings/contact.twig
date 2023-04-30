@@ -18,15 +18,17 @@
             <form method="post">
                 <input type="hidden" name="form" value="contact"/>
 
+                {% set contactFields = {"type": "type[]", "category": "category[]", "value": "value[]"} %}
+
                 {% for contact in user.contacts %}
                     <div class="settings-contact">
                         <input type="hidden" name="id[]" value="{{ contact.id }}"/>
 
-                        {{ include("account/settings/single-contact.twig") }}
+                        {{ include("account/settings/single-contact.twig", {"fieldNames": contactFields, "removeButtonClass": "settings-contact-remove"}) }}
                     </div>
                 {% endfor %}
 
-                {{ include("account/settings/single-contact.twig") }}
+                {{ include("account/settings/single-contact.twig", {"fieldNames": contactFields, "removeButtonClass": "settings-contact-remove"}) }}
 
                 <button type="submit" class="btn btn-success">Speichern</button>
             </form>

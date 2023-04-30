@@ -54,7 +54,7 @@ class Files extends ArrayObject
         $this->append($file);
     }
 
-    public function append(File $file)
+    public function append($file)
     {
         if ($file->error == UPLOAD_ERR_NO_FILE) {
             return;

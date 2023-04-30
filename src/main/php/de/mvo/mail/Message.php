@@ -4,22 +4,23 @@ namespace de\mvo\mail;
 use de\mvo\Config;
 use DOMDocument;
 use DOMXPath;
-use Swift_Message;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email;
 
-class Message extends Swift_Message
+class Message extends Email
 {
-    public function __construct($subject = null, $body = null, $contentType = null, $charset = null)
+    public function __construct()
     {
-        parent::__construct($subject, $body, $contentType, $charset);
+        parent::__construct();
 
-        $this->setFrom(Config::getValue("mail", "from"), Config::getValue("mail", "fromName"));
+        $this->from(new Address(Config::getValue("mail", "from"), Config::getValue("mail", "fromName")));
     }
 
-    public function setSubjectFromHtml($html)
+    public function setSubjectFromHtml()
     {
         $document = new DOMDocument;
 
-        $document->loadHTML($html);
+        $document->loadHTML($this->getHtmlBody());
 
         $xpath = new DOMXPath($document);
 
@@ -28,7 +29,7 @@ class Message extends Swift_Message
             return false;
         }
 
-        $this->setSubject($titleElement->nodeValue);
+        $this->subject($titleElement->nodeValue);
 
         return true;
     }

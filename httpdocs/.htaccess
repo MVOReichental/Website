@@ -48,3 +48,6 @@ RedirectMatch 301 ^/internalarea/ /internal
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule (.*) index.php/$1 [L,QSA]
+
+php_value post_max_size 24M
+php_value upload_max_filesize 16M

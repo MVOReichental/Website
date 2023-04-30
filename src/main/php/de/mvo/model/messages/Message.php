@@ -13,6 +13,7 @@ use de\mvo\TwigRenderer;
 use de\mvo\utils\StringUtil;
 use de\mvo\utils\Url;
 use PDO;
+use Symfony\Component\Mime\Address;
 use Twig\Error\Error;
 
 class Message
@@ -238,9 +239,9 @@ class Message
 
             $message = new MailMessage;
 
-            $message->setTo($user->email, $user->getFullName());
-            $message->setReplyTo($this->sender->email, $this->sender->getFullName());
-            $message->setBody(TwigRenderer::render("messages/mail", array
+            $message->to(new Address($user->email, $user->getFullName()));
+            $message->replyTo(new Address($this->sender->email, $this->sender->getFullName()));
+            $message->html(TwigRenderer::render("messages/mail", array
             (
                 "sender" => $this->sender,
                 "message" => $this->formatText(),
@@ -248,7 +249,7 @@ class Message
                 "baseUrl" => Url::getBaseUrl(),
                 "url" => sprintf("%s/internal/messages/%d", Url::getBaseUrl(), $this->id)
             )), "text/html");
-            $message->setSubjectFromHtml($message->getBody());
+            $message->setSubjectFromHtml();
 
             Queue::add($message);
         }

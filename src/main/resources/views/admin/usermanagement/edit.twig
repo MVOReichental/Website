@@ -38,6 +38,8 @@
 
     {% if showDuplicateUsernameError %}
         <div class="alert alert-danger"><i class="fas fa-exclamation-triangle"></i> Der Benutzername wird bereits verwendet!</div>
+    {% elseif showSuccessMessage %}
+        <div class="alert alert-success"><i class="fas fa-info"></i> Der Benutzer wurde erfolgreich gespeichert.</div>
     {% endif %}
 
     {% if user.id == currentUser.id %}
@@ -62,7 +64,8 @@
         <div>
             <ul class="nav nav-tabs">
                 <li class="nav-item"><a class="nav-link active" href="#usermanagement-edit-tab-general" data-toggle="tab">Allgemein</a></li>
-                <li class="nav-item"><a class="nav-link" href="#usermanagement-edit-tab-permissiongroups" data-toggle="tab">Bereichtigungsgruppen</a></li>
+                <li class="nav-item"><a class="nav-link" href="#usermanagement-edit-tab-contact" data-toggle="tab">Kontakt</a></li>
+                <li class="nav-item"><a class="nav-link" href="#usermanagement-edit-tab-permissiongroups" data-toggle="tab">Berechtigungsgruppen</a></li>
             </ul>
 
             <div class="tab-content">
@@ -116,6 +119,20 @@
                             </label>
                         </div>
                     </div>
+                </div>
+
+                <div class="tab-pane" id="usermanagement-edit-tab-contact">
+                    {% set contactFields = {"type": "contactType[]", "category": "contactCategory[]", "value": "contactValue[]"} %}
+
+                    {% for contact in user.contacts %}
+                        <div class="usermanagement-edit-contact">
+                            <input type="hidden" name="contactId[]" value="{{ contact.id }}"/>
+
+                            {{ include("account/settings/single-contact.twig", {"fieldNames": contactFields, "removeButtonClass": "usermanagement-edit-contact-remove"}) }}
+                        </div>
+                    {% endfor %}
+
+                    {{ include("account/settings/single-contact.twig", {"fieldNames": contactFields, "removeButtonClass": "usermanagement-edit-contact-remove"}) }}
                 </div>
 
                 <div class="tab-pane" id="usermanagement-edit-tab-permissiongroups"></div>

@@ -11,6 +11,7 @@ use de\mvo\model\users\Users;
 use de\mvo\TwigRenderer;
 use de\mvo\utils\Url;
 use PDO;
+use Symfony\Component\Mime\Address;
 use Twig\Error\Error;
 
 class Protocol
@@ -124,16 +125,16 @@ class Protocol
                 if ($user->hasPermission(sprintf("protocols.view.%s", $group))) {
                     $message = new Message;
 
-                    $message->setTo($user->email, $user->getFullName());
-                    $message->setReplyTo($this->uploader->email, $this->uploader->getFullName());
-                    $message->setBody(TwigRenderer::render("protocols/mail", array
+                    $message->to(new Address($user->email, $user->getFullName()));
+                    $message->replyTo(new Address($this->uploader->email, $this->uploader->getFullName()));
+                    $message->html(TwigRenderer::render("protocols/mail", array
                     (
                         "uploader" => $this->uploader,
                         "date" => $this->date,
                         "title" => $this->title,
                         "url" => Url::getBaseUrl() . $this->upload->getUrl()
                     )), "text/html");
-                    $message->setSubjectFromHtml($message->getBody());
+                    $message->setSubjectFromHtml();
 
                     Queue::add($message);
                     break;

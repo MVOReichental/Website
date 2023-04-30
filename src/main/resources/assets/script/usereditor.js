@@ -53,6 +53,10 @@ $(function () {
         $("#usermanagement-send-credentials-modal").modal("show");
     });
 
+    $(".usermanagement-edit-contact-remove").on("click", function () {
+        $(this).closest(".usermanagement-edit-contact").remove();
+    });
+
     $.getJSON("internal/admin/usermanagement/permission-groups", function (data) {
         var treeElement = $("#usermanagement-edit-tab-permissiongroups");
 

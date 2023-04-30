@@ -16,7 +16,7 @@
         }
     },
     "require": {
-        "php": ">=7.4",
+        "php": "^8.1",
         "ext-dom": "*",
         "ext-gd": "*",
         "ext-pdo": "*",
@@ -27,13 +27,12 @@
         "erusev/parsedown": "^1.6",
         "kelunik/two-factor": "^1.0",
         "twig/twig": "^2.4",
-        "swiftmailer/swiftmailer": "^5.4",
+        "symfony/mailer": "^6.2",
         "jaybizzle/crawler-detect": "^1.2",
         "google/apiclient": "^2.2",
         "ezyang/htmlpurifier": "^4.10",
         "symfony/finder": "^4.1",
         "symfony/filesystem": "^4.1",
-        "jeroendesloovere/vcard": "^1.7",
         "johngrogg/ics-parser": "^2.1",
         "guzzlehttp/guzzle": "^6.3",
         "influxdb/influxdb-php": "^1.14",

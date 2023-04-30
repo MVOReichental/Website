@@ -49,7 +49,7 @@ class Endpoints
             ->target()
             ->className(File::class)
             ->method("get")
-            ->arguments(RESOURCES_ROOT . "/beitrittserklaerung.pdf", "application/pdf");
+            ->arguments(DATA_ROOT . "/forms/Beitrittserklaerung.pdf", "application/pdf");
 
         Endpoint::create(HttpMethod::GET, "/bisherige_dirigenten")
             ->target()
@@ -317,23 +317,11 @@ class Endpoints
     {
         $membersListViews = array_keys(Members::getListViews());
 
-        Endpoint::create(HttpMethod::GET, "/internal/members/addresslist.vcf")
-            ->target()
-            ->className(Members::class)
-            ->method("getListAsVCard")
-            ->permission("members.vcard");
-
         Endpoint::create(HttpMethod::GET, "/internal/members/[" . implode("|", $membersListViews) . ":view]")
             ->target()
             ->className(Members::class)
             ->method("getList")
             ->requireLogin();
-
-        Endpoint::create(HttpMethod::GET, "/internal/members/[*:username].vcf")
-            ->target()
-            ->className(Members::class)
-            ->method("getVCardForUser")
-            ->permission("members.vcard");
 
         Endpoint::create(HttpMethod::GET, "/internal/members/[*:username]")
             ->target()

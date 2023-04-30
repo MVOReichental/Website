@@ -1,21 +1,21 @@
 <div class="input-group mb-3">
-    <select class="custom-select show-tick" name="type[]">
+    <select class="custom-select show-tick" name="{{ fieldNames.type }}">
         {% for name, title in contactTypes %}
             <option value="{{ name }}" {% if contact.type == name %}selected{% endif %}>{{ title|raw }}</option>
         {% endfor %}
     </select>
 
-    <select class="custom-select show-tick" name="category[]">
+    <select class="custom-select show-tick" name="{{ fieldNames.category }}">
         {% for name, title in contactCategories %}
             <option value="{{ name }}" {% if contact.category == name %}selected{% endif %}>{{ title|raw }}</option>
         {% endfor %}
     </select>
 
-    <input type="text" class="form-control" name="value[]" value="{{ contact.value }}"/>
+    <input type="text" class="form-control" name="{{ fieldNames.value }}" value="{{ contact.value }}"/>
 
     <div class="input-group-append">
         {% if contact.id %}
-            <button type="button" class="btn btn-danger settings-contact-remove"><i class="fas fa-times"></i></button>
+            <button type="button" class="btn btn-danger {{ removeButtonClass }}"><i class="fas fa-times"></i></button>
         {% else %}
             <button type="button" class="btn btn-danger invisible" disabled><i class="fas fa-times"></i></button>
         {% endif %}

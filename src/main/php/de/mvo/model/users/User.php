@@ -13,13 +13,12 @@ use de\mvo\model\permissions\GroupList;
 use de\mvo\model\permissions\Permissions;
 use de\mvo\TwigRenderer;
 use de\mvo\utils\Url;
-use JeroenDesloovere\VCard\VCard;
-use JeroenDesloovere\VCard\VCardException;
 use JsonSerializable;
 use Kelunik\TwoFactor\Oath;
 use ParagonIE\ConstantTime\Base32;
 use PDOException;
 use RuntimeException;
+use Symfony\Component\Mime\Address;
 use Twig\Error\Error;
 use TypeError;
 use UnexpectedValueException;
@@ -331,13 +330,13 @@ class User implements JsonSerializable
 
         $message = new Message;
 
-        $message->setTo($this->email, $this->getFullName());
-        $message->setBody(TwigRenderer::render("account/reset-password/mail", array
+        $message->to(new Address($this->email, $this->getFullName()));
+        $message->html(TwigRenderer::render("account/reset-password/mail", array
         (
             "user" => $this,
             "url" => Url::getBaseUrl() . "/internal/reset-password/confirm?id=" . $this->id . "&key=" . $key
         )), "text/html");
-        $message->setSubjectFromHtml($message->getBody());
+        $message->setSubjectFromHtml();
 
         $sender->send($message);
     }
@@ -374,14 +373,14 @@ class User implements JsonSerializable
 
         $message = new Message;
 
-        $message->setTo($this->email, $this->getFullName());
-        $message->setBody(TwigRenderer::render("account-created-mail", array
+        $message->to(new Address($this->email, $this->getFullName()));
+        $message->html(TwigRenderer::render("account-created-mail", array
         (
             "user" => $this,
             "password" => $password,
             "url" => Url::getBaseUrl() . "/internal"
         )), "text/html");
-        $message->setSubjectFromHtml($message->getBody());
+        $message->setSubjectFromHtml();
 
         $sender->send($message);
     }
@@ -399,13 +398,13 @@ class User implements JsonSerializable
 
         $message = new Message;
 
-        $message->setTo($this->email, $this->getFullName());
-        $message->setBody(TwigRenderer::render("account/password-changed-mail", array
+        $message->to(new Address($this->email, $this->getFullName()));
+        $message->html(TwigRenderer::render("account/password-changed-mail", array
         (
             "user" => $this,
             "resetPasswordUrl" => Url::getBaseUrl() . "/internal/reset-password"
         )), "text/html");
-        $message->setSubjectFromHtml($message->getBody());
+        $message->setSubjectFromHtml();
 
         $sender->send($message);
     }
@@ -456,13 +455,13 @@ class User implements JsonSerializable
 
         $message = new Message;
 
-        $message->setTo($this->newEmail, $this->getFullName());
-        $message->setBody(TwigRenderer::render("account/change-email/confirm-mail", array
+        $message->to(new Address($this->newEmail, $this->getFullName()));
+        $message->html(TwigRenderer::render("account/change-email/confirm-mail", array
         (
             "user" => $this,
             "url" => Url::getBaseUrl() . "/internal/change-email/confirm?id=" . $this->id . "&key=" . $key
         )), "text/html");
-        $message->setSubjectFromHtml($message->getBody());
+        $message->setSubjectFromHtml();
 
         $sender->send($message);
     }
@@ -844,63 +843,6 @@ class User implements JsonSerializable
         }
 
         return $this->datesToken;
-    }
-
-    public function getVCard()
-    {
-        $vcard = new VCard;
-
-        $vcard->addName($this->lastName, $this->firstName);
-        $vcard->addEmail($this->email);
-
-        if ($this->birthDate !== null) {
-            $vcard->addBirthday($this->birthDate->format("Y-m-d"));
-        }
-
-        try {
-            $vcard->addPhoto($this->profilePictureUrl(true), false);
-        } catch (VCardException $exception) {
-            // ignore exception and do not add the photo
-        }
-
-        $groups = array();
-
-        foreach (Groups::getAll() as $group => $title) {
-            if ($this->hasPermission(sprintf("group.%s", $group), true)) {
-                $groups[] = $title;
-            }
-        }
-
-        $vcard->addCategories($groups);
-
-        /**
-         * @var $contact Contact
-         */
-        foreach ($this->contacts() as $contact) {
-            $type = array();
-
-            switch ($contact->category) {
-                case "business":
-                    $type[] = "WORK";
-                    break;
-                case "private":
-                    $type[] = "HOME";
-                    break;
-            }
-
-            switch ($contact->type) {
-                case "phone":
-                    $type[] = "VOICE";
-                    break;
-                case "mobile":
-                    $type[] = "CELL";
-                    break;
-            }
-
-            $vcard->addPhoneNumber($contact->value, implode(";", $type));
-        }
-
-        return $vcard;
     }
 
     public function save($forceInsertWithId = false)
