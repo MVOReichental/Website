@@ -31,6 +31,7 @@
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
+    "@symfony/webpack-encore": "^4.3.0",
     "autoprefixer": "^10.2.5",
     "clean-webpack-plugin": "^3.0.0",
     "css": "^3.0.0",
@@ -38,7 +39,7 @@
     "file-loader": "^6.2.0",
     "loader": "^2.1.1",
     "mini-css-extract-plugin": "^1.6.0",
-    "postcss-loader": "^5.3.0",
+    "postcss-loader": "^7.3.0",
     "sass": "^1.62.0",
     "sass-loader": "^13.0.0",
     "style-loader": "^2.0.0",
@@ -49,8 +50,8 @@
     "webpack-cli": "^4.7.0"
   },
   "scripts": {
-    "build": "NODE_OPTIONS=--openssl-legacy-provider webpack --mode production",
-    "build-dev": "NODE_OPTIONS=--openssl-legacy-provider webpack --mode development",
-    "watch": "NODE_OPTIONS=--openssl-legacy-provider webpack --mode development --watch"
+    "build": "encore production --progress",
+    "build-dev": "encore dev",
+    "watch": "encore dev --watch"
   }
 }

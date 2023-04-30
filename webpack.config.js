@@ -1,73 +1,31 @@
 const path = require("path");
-const {CleanWebpackPlugin} = require("clean-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const WebpackAssetsManifest = require("webpack-assets-manifest");
+const Encore = require("@symfony/webpack-encore");
 const scriptRoot = "./src/main/resources/assets/script";
 
-module.exports = {
-    entry: {
-        "public": `${scriptRoot}/index-public.js`,
-        "internal": `${scriptRoot}/index-internal.js`
-    },
-    output: {
-        path: path.resolve(__dirname, "httpdocs/assets"),
-        publicPath: "/assets/",
-        filename: "[name].[contenthash].js"
-    },
-    devtool: "source-map",
-    plugins: [
-        new CleanWebpackPlugin(),
-        new MiniCssExtractPlugin({
-            filename: "[name].[contenthash].css"
-        }),
-        new WebpackAssetsManifest({
-            output: path.resolve(__dirname, "webpack.assets.json"),
-            publicPath: true,
-            contextRelativeKeys: true,
-            customize(entry) {
-                return {
-                    key: entry.key.replace(/^src\/main\/resources\/assets\//, "assets/"),
-                    value: entry.value
-                };
-            }
-        })
-    ],
-    module: {
-        rules: [
-            {
-                test: /\.tsx?$/,
-                use: "ts-loader",
-                exclude: /node_modules/
-            },
-            {
-                test: /\.(scss)$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    "css-loader",
-                    {
-                        loader: "postcss-loader",
-                        options: {
-                            postcssOptions: {
-                                plugins: function () {
-                                    return [
-                                        require("autoprefixer")
-                                    ];
-                                }
-                            }
-                        }
-                    },
-                    "sass-loader"
-                ]
-            },
-            {
-                test: /.(gif|png|jpg|ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-                use: [
-                    "file-loader"
-                ]
-            }
-        ]
-    },
-    resolve: {
-        extensions: [".tsx", ".ts", ".js"]
-    }
-};
+const entryPoints = [
+    "public",
+    "internal"
+];
+
+Encore
+    .configureManifestPlugin((options) => {
+        options.fileName = path.resolve(__dirname, "webpack.assets.json");
+    })
+    .setOutputPath("httpdocs/assets")
+    .setPublicPath("/assets");
+
+entryPoints.forEach((entryPoint) => {
+    Encore.addEntry(entryPoint, `${scriptRoot}/index-${entryPoint}.js`);
+});
+
+Encore
+    .splitEntryChunks()
+    .enableSingleRuntimeChunk()
+    .cleanupOutputBeforeBuild()
+    .enableSourceMaps(!Encore.isProduction())
+    .enableVersioning(Encore.isProduction())
+    .enableSassLoader()
+    .enableTypeScriptLoader()
+    .enableIntegrityHashes(Encore.isProduction());
+
+module.exports = Encore.getWebpackConfig();
