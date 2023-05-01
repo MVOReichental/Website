@@ -12,7 +12,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "": "src/main/php"
+            "App\\": "src/"
         }
     },
     "require": {
@@ -22,21 +22,43 @@
         "ext-gd": "*",
         "ext-json": "*",
         "ext-pdo": "*",
-        "altorouter/altorouter": "^1.1",
         "programie/pini": "^1.4",
         "eluceo/ical": "^0.10.0",
         "erusev/parsedown": "^1.6",
         "kelunik/two-factor": "^1.0",
-        "twig/twig": "^2.4",
+        "twig/twig": "^3.5",
         "symfony/mailer": "^6.2",
         "jaybizzle/crawler-detect": "^1.2",
         "google/apiclient": "^2.2",
         "ezyang/htmlpurifier": "^4.10",
-        "symfony/finder": "^4.1",
-        "symfony/filesystem": "^4.1",
+        "symfony/finder": "^6.2",
+        "symfony/filesystem": "^6.2",
         "johngrogg/ics-parser": "^2.1",
         "guzzlehttp/guzzle": "^6.3",
         "influxdb/influxdb-php": "^1.14",
-        "symfony/asset": "^v5.4.0"
+        "symfony/framework-bundle": "^6.2",
+        "symfony/twig-bundle": "^6.2",
+        "symfony/security-bundle": "^6.2",
+        "symfony/flex": "^2.2",
+        "symfony/runtime": "^6.2",
+        "twig/extra-bundle": "^3.5",
+        "symfony/yaml": "^6.2",
+        "symfony/asset": "^6.2",
+        "doctrine/orm": "^2.14",
+        "doctrine/doctrine-bundle": "^2.9",
+        "doctrine/doctrine-migrations-bundle": "^3.2",
+        "symfony/webpack-encore-bundle": "^1.16"
+    },
+    "config": {
+        "allow-plugins": {
+            "symfony/flex": true,
+            "symfony/runtime": true
+        }
+    },
+    "scripts": {
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        }
     }
 }

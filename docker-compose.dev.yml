@@ -1,8 +1,12 @@
-version: '3.7'
+version: "3.8"
 
 services:
   app:
-    build:
-      context: .
     volumes:
-      - .:/app
+      - .:/app:ro
+      - var:/app/var
+    environment:
+      APP_ENV: dev
+
+volumes:
+  var:

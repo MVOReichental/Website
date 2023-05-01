@@ -1,0 +1,46 @@
+{% extends "base/internal-public-switch.twig" %}
+
+{% block title %}Termine{{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ asset("css/dates.css") }}"/>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        $(function () {
+            var element = $("#ical-url");
+            element.text(element[0].href);
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+    <h1 class="page-header">Unsere n&auml;chsten Termine</h1>
+
+    {% if dates.count %}
+        {% include("dates/list.twig") %}
+    {% else %}
+        <div class="alert alert-danger"><i class="fas fa-exclamation-triangle"></i> Keine Termine verf&uuml;gbar!</div>
+    {% endif %}
+
+    <p class="text-muted d-print-none">
+        Diese Termine können im iCalendar-Format abgerufen werden, um sie in einer Kalenderanwendung wie z.B. Outlook oder einer Kalender-App auf dem Smartphone anzuzeigen.<br/>
+        F&uuml;gen Sie hierzu folgenden Link in der Kalenderanwendung ein: <a href="termine.ics" id="ical-url"></a>
+    </p>
+
+    <h2 class="page-header">Unsere j&auml;hrlichen Veranstaltungen</h2>
+
+    {% for date in yearlyDates %}
+        <p>
+            <strong>{{ date.event }}</strong>
+            {% if date.when|default(null) %} <span>{{ date.when }}</span>{% endif %}
+            <br/>
+            <span class="text-muted">{{ date.location }}</span>
+        </p>
+    {% endfor %}
+{% endblock %}

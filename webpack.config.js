@@ -1,6 +1,5 @@
-const path = require("path");
 const Encore = require("@symfony/webpack-encore");
-const scriptRoot = "./src/main/resources/assets/script";
+const scriptRoot = "./assets/script";
 
 const entryPoints = [
     "public",
@@ -8,10 +7,7 @@ const entryPoints = [
 ];
 
 Encore
-    .configureManifestPlugin((options) => {
-        options.fileName = path.resolve(__dirname, "webpack.assets.json");
-    })
-    .setOutputPath("httpdocs/assets")
+    .setOutputPath("public/assets")
     .setPublicPath("/assets");
 
 entryPoints.forEach((entryPoint) => {

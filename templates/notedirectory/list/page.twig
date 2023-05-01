@@ -1,0 +1,77 @@
+{% extends "base/internal-public-switch.twig" %}
+
+{% block title %}{{ title }} - Notenverzeichnis{{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ asset("css/notedirectory.css") }}"/>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+
+    <script type="text/javascript" src="js/notedirectory.js"></script>
+{% endblock %}
+
+{% block content %}
+    <h1 class="page-header d-print-none">
+        Notenverzeichnis<br/>
+        <span class="small">{{ title }}</span>
+    </h1>
+
+    <h1 class="page-header d-none d-print-block" id="notedirectory-header">
+        <p>Musikverein Orgelfels Reichental e.V.</p>
+        <div style="margin-right: 100px">{{ title }}<small class="float-right">Stand: {{ now.format("d.m.Y") }}</small></div>
+
+        <img src="{{ asset("assets/images/logo.svg") }}" id="notedirectory-logo"/>
+    </h1>
+
+    <div class="btn-toolbar mb-3 d-print-none" id=" notedirectory-button-toolbar">
+        <div class="btn-group mr-3">
+            {% if currentUser.hasPermission("notedirectory.edit") %}
+                <a href="internal/notedirectory/editor" class="btn btn-secondary"><i class="fas fa-edit"></i> Editor</a>
+                {% if editPage %}
+                    <a href="internal/notedirectory/editor/{{ editPage }}?origin={{ path }}" class="btn btn-secondary"><i class="fas fa-pencil-alt"></i> Bearbeiten</a>
+                {% endif %}
+            {% endif %}
+        </div>
+
+        <div class="btn-group mr-3">
+            <div class="btn-group">
+                <button type="button" class="btn btn-secondary dropdown-toggle {% if active starts with "programs/" %}active{% endif %}" data-toggle="dropdown" data-flip="false">Programme <span class="caret"></span></button>
+
+                <div class="dropdown-menu">
+                    {% for year in programs %}
+                        {% if not loop.first %}
+                            <div class="dropdown-divider"></div>
+                        {% endif %}
+
+                        <h6 class="dropdown-header">{{ year.year }}</h6>
+                        {% for program in year.programs %}
+                            {% set path = "programs/" ~ program.year ~ "/" ~ program.name %}
+                            <a class="dropdown-item{% if active == path %} active{% endif %}" href="internal/notedirectory/{{ path }}">{{ program.title }}</a>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <a href="internal/notedirectory/titles" class="btn btn-secondary {% if active == "titles" %}active{% endif %}">Alle Titel</a>
+        </div>
+
+        <div class="btn-group mr-3">
+            <select class="show-tick" id="notedirectory-columns" multiple></select>
+        </div>
+
+        <form action="internal/notedirectory/search" class="ml-auto">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fas fa-search"></i></div>
+                </div>
+                <input type="text" class="form-control" name="query" placeholder="Suchen..." value="{{ searchQuery }}" {% if active == "search" %}autofocus{% endif %}/>
+            </div>
+        </form>
+    </div>
+
+    {{ list|raw }}
+{% endblock %}

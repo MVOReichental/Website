@@ -1,36 +1,31 @@
-version: '3.7'
+version: "3.8"
 
 services:
   app:
-    image: registry.gitlab.com/mvoreichental/website
-    hostname: app
+    build: .
     restart: unless-stopped
-    depends_on:
+    links:
       - mysql
-    networks:
-      - network
     ports:
       - '8080:80'
     volumes:
       - ./data:/app/data
+    environment:
+      TZ: Europe/Berlin
+      APP_URL: "http://localhost:8080"
+      DATABASE_DRIVER: pdo_mysql
+      DATABASE_HOST: mysql
+      DATABASE_NAME: mvo
+      DATABASE_USERNAME: mvo
+      DATABASE_PASSWORD: mvo
+      DATABASE_SERVER_VERSION: "mariadb-10.10.2"
 
   mysql:
     image: mariadb
-    hostname: mysql
-    restart: unless-stopped
-    networks:
-      - network
     volumes:
-      - mysql:/var/lib/mysql
-      - ./src/main/resources/database.sql:/docker-entrypoint-initdb.d/database.sql:ro
+      - ./database.sql:/docker-entrypoint-initdb.d/10-db.sql:ro
     environment:
-      MYSQL_RANDOM_ROOT_PASSWORD: 'true'
+      MYSQL_RANDOM_ROOT_PASSWORD: "true"
       MYSQL_DATABASE: mvo
       MYSQL_USER: mvo
       MYSQL_PASSWORD: mvo
-
-networks:
-  network:
-
-volumes:
-  mysql:

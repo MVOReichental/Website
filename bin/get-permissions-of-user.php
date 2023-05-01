@@ -1,8 +1,8 @@
 #! /usr/bin/env php
 <?php
-use de\mvo\Database;
-use de\mvo\model\permissions\GroupList;
-use de\mvo\model\users\User;
+use src\Database;
+use src\model\permissions\GroupList;
+use src\model\users\User;
 
 require_once __DIR__ . "/../bootstrap.php";
 

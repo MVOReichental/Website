@@ -1,6 +1,9 @@
 *.git*
 /.idea/
-/data/
-/httpdocs/node_modules/
+/var/data/forms
+/var/data/mail-queue
+/var/data/pictures
+/var/data/profile-pictures
+/var/data/uploads
+/node_modules/
 /vendor/
-/version

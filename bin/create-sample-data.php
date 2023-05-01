@@ -1,20 +1,6 @@
 #! /usr/bin/env php
 <?php
-use de\mvo\Database;
-use de\mvo\model\permissions\Group;
-use de\mvo\model\permissions\GroupList;
-use de\mvo\model\users\User;
-
 require_once __DIR__ . "/../bootstrap.php";
-
-Database::init();
-
-$locations = array
-(
-    array(48.7301, 8.39091, "Schulhof / Festhalle"),
-    array(48.7298, 8.39214, "Grüner Baum"),
-    array(48.7626, 8.33657, "Gernsbach - Schloßstrasse")
-);
 
 $dates = array
 (

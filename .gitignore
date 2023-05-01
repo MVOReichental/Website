@@ -1,10 +1,8 @@
+/.env.local
 /.idea/
-/data/config.ini
-/data/news.html
-/data/news-internal.html
-/data/*.serialized
-/httpdocs/assets/
+/config/config.yaml
+/config/secrets/prod/prod.decrypt.private.php
 /node_modules/
+/public/assets/
+/var/
 /vendor/
-/version
-/webpack.assets.json

@@ -1,8 +1,8 @@
 #! /usr/bin/env php
 <?php
-use de\mvo\Database;
-use de\mvo\Date;
-use de\mvo\model\visits\Visit;
+use src\Database;
+use src\Date;
+use src\model\visits\Visit;
 
 require_once __DIR__ . "/../bootstrap.php";
 

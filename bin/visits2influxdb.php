@@ -1,12 +1,12 @@
 #! /usr/bin/env php
 <?php
-use de\mvo\Config;
-use de\mvo\Database;
-use de\mvo\Date;
-use de\mvo\model\visits\Visit;
 use InfluxDB\Client;
 use InfluxDB\Exception;
 use InfluxDB\Point;
+use src\Config;
+use src\Database;
+use src\Date;
+use src\model\visits\Visit;
 
 require_once __DIR__ . "/../bootstrap.php";
 
