@@ -63,6 +63,12 @@ class Endpoints
             ->method("get")
             ->arguments("verein/bisherige_erste_vorsitzende");
 
+        Endpoint::create(HttpMethod::GET, "/in_memoriam")
+            ->target()
+            ->className(StaticView::class)
+            ->method("get")
+            ->arguments("verein/in_memoriam");
+
         Endpoint::create(HttpMethod::GET, "/chronik")
             ->target()
             ->className(StaticView::class)

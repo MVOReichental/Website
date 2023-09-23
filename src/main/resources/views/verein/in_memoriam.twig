@@ -1,0 +1,24 @@
+{% extends "base/internal-public-switch.twig" %}
+
+{% block title %}In Memoriam{{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="text-center">
+        <h1 class="page-header">In Memoriam</h1>
+
+        <h2 class="pt-3">Josef Kottler</h2>
+        <p>1968 - 2023</p>
+
+        <div class="gallery-source">
+            {% set images = ["bild.jpg", "traueranzeige.jpg"] %}
+
+            {% for image in images %}
+                <div class="p-2">
+                    <a href="{{ asset("img/in_memoriam/josef_kottler/" ~ image) }}">
+                        <img class="single-image rounded" src="{{ asset("img/in_memoriam/josef_kottler/" ~ image) }}" loading="lazy"/>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
