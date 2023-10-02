@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   app:
-    image: registry.gitlab.com/mvoreichental/website
+    image: ghcr.io/mvoreichental/website
     hostname: app
     restart: unless-stopped
     depends_on:
