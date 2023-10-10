@@ -17,37 +17,18 @@ WORKDIR /app
 RUN npm install
 
 
-FROM php:8.1-apache
+FROM ghcr.io/programie/dockerimages/php
 
+ENV WEB_ROOT=/app/httpdocs
 ENV TZ=Europe/Berlin
+
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
-    echo $TZ > /etc/timezone && \
-    echo "date.timezone=\"$TZ\"" > $PHP_INI_DIR/conf.d/timezone.ini
-
-RUN savedAptMark="$(apt-mark showmanual)" && \
-    apt-get update && \
-    apt-get install -y --no-install-recommends libfreetype6-dev libjpeg-dev libpng-dev && \
-    docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ && \
-    docker-php-ext-install -j "$(nproc)" gd pdo_mysql && \
-    apt-mark auto '.*' > /dev/null && \
-    apt-mark manual $savedAptMark && \
-    ldd "$(php -r 'echo ini_get("extension_dir");')"/*.so \
-        | awk '/=>/ { print $3 }' \
-        | sort -u \
-        | xargs -r dpkg-query -S \
-        | cut -d: -f1 \
-        | sort -u \
-        | xargs -rt apt-mark manual && \
-    apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
-    rm -rf /var/lib/apt/lists/*
-
-RUN sed -ri -e 's!/var/www/html!/app/httpdocs!g' /etc/apache2/sites-available/*.conf && \
-    sed -ri -e 's!/var/www/!/app/httpdocs!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf && \
-    echo "ServerTokens Prod" > /etc/apache2/conf-enabled/z-server-tokens.conf && \
+    install-php 8.1 gd mbstring pdo-mysql && \
     a2enmod rewrite && \
-    mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" && \
+    echo $TZ > /etc/timezone && \
+    echo "date.timezone=\"$TZ\"" > /etc/php/current/global.ini && \
     mkdir -p /app/twig-cache && \
-    chown www-data: /app/twig-cache
+    chown www-data:www-data /app/twig-cache
 
 COPY --from=composer /app/vendor /app/vendor
 COPY --from=npm /app/node_modules /app/httpdocs/node_modules
