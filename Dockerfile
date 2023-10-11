@@ -22,11 +22,8 @@ FROM ghcr.io/programie/dockerimages/php
 ENV WEB_ROOT=/app/httpdocs
 ENV TZ=Europe/Berlin
 
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
-    install-php 8.1 gd mbstring pdo-mysql && \
+RUN install-php 8.1 gd mbstring pdo-mysql && \
     a2enmod rewrite && \
-    echo $TZ > /etc/timezone && \
-    echo "date.timezone=\"$TZ\"" > /etc/php/current/global.ini && \
     mkdir -p /app/twig-cache && \
     chown www-data:www-data /app/twig-cache
 
