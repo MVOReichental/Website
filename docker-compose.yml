@@ -3,6 +3,7 @@ version: '3.7'
 services:
   app:
     image: ghcr.io/mvoreichental/website
+    build: .
     hostname: app
     restart: unless-stopped
     depends_on:
