@@ -22,7 +22,7 @@ FROM ghcr.io/programie/dockerimages/php
 ENV WEB_ROOT=/app/httpdocs
 ENV TZ=Europe/Berlin
 
-RUN install-php 8.1 gd mbstring pdo-mysql && \
+RUN install-php 8.1 dom gd mbstring pdo-mysql && \
     a2enmod rewrite && \
     mkdir -p /app/twig-cache && \
     chown www-data:www-data /app/twig-cache
