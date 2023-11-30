@@ -1,5 +1,5 @@
 {
-  "date": "17.10.2023",
+  "date": "30.11.2023",
   "columns": [
     {
       "title": "Blockfl\u00f6tengruppen",
@@ -18,6 +18,13 @@
               "students": [
                 "Amelie Ronecker",
                 "Clara Weber"
+              ]
+            },
+            {
+              "trainer": "Vitus Balensiefen",
+              "students": [
+                "Emil Bode",
+                "Tom Heller"
               ]
             }
           ]
