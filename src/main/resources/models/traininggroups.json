@@ -1,5 +1,5 @@
 {
-  "date": "01.03.2024",
+  "date": "04.10.2024",
   "columns": [
     {
       "title": "Blockfl\u00f6tengruppen",
@@ -7,13 +7,7 @@
         {
           "groups": [
             {
-              "trainer": "Liana Knapp",
-              "students": [
-                "Lotte Bervoets"
-              ]
-            },
-            {
-              "trainer": "Liana Knapp",
+              "trainer": "Gisela Wieland",
               "students": [
                 "Amelie Ronecker",
                 "Clara Weber"
@@ -39,7 +33,6 @@
             {
               "trainer": "Gisela Wieland",
               "students": [
-                "Hanna Weber",
                 "Lara Merkel"
               ]
             }
@@ -64,17 +57,6 @@
               "students": [
                 "Emma Wieland",
                 "Giulia Viviani"
-              ]
-            }
-          ]
-        },
-        {
-          "name": "Schlagzeug",
-          "groups": [
-            {
-              "trainer": "Jonathan Friedel",
-              "students": [
-                "Jonas Melcher"
               ]
             }
           ]
