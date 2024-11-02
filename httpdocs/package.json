@@ -26,5 +26,8 @@
     "popper.js": "^1.14.3",
     "pwstrength-bootstrap": "^2.2.1",
     "zxcvbn": "^4.4.2"
+  },
+  "volta": {
+    "node": "17.9.1"
   }
 }
