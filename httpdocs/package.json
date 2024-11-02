@@ -22,6 +22,7 @@
     "jquery-cropper": "^1.0.0",
     "jquery-ui": "^1.12.1",
     "jstree-bootstrap-theme": "^1.0.1",
+    "moment": "^2.30.1",
     "mustache": "^2.3.0",
     "popper.js": "^1.14.3",
     "pwstrength-bootstrap": "^2.2.1",
