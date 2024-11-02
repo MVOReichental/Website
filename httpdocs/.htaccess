@@ -41,7 +41,6 @@ RedirectMatch 301 ^/internalarea/notedirectory/all$ /internal/notedirectory/titl
 RedirectMatch 301 ^/internalarea/notedirectory/search/(.*)$ /internal/notedirectory/search?query=$1
 RedirectMatch 301 ^/internalarea/notedirectory/ /internal/notedirectory
 RedirectMatch 301 ^/internalarea/notedirectoryeditor$ /internal/notedirectory/editor
-RedirectMatch 301 ^/internalarea/roomoccupancyplan$ /internal/roomoccupancyplan
 RedirectMatch 301 ^/internalarea/protocols$ /internal/protocols
 RedirectMatch 301 ^/internalarea/ /internal
 

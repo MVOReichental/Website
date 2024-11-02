@@ -102,9 +102,6 @@
                         {% if currentUser.hasPermission("notedirectory.*") %}
                             {{ this.navbar_link("internal/notedirectory", "Notenverzeichnis") }}
                         {% endif %}
-                        {% if currentUser.hasPermission("roomoccupancyplan.*") %}
-                            {{ this.navbar_link("internal/roomoccupancyplan", "Proberaumbelegung") }}
-                        {% endif %}
                         {% if currentUser.hasPermission("protocols.*") %}
                             {{ this.navbar_link("internal/protocols", "Protokolle") }}
                         {% endif %}

@@ -38,7 +38,3 @@
 
 * `protocols.upload.$group`
 * `protocols.view.$group`
-
-# Room occupancy plan
-
-* `roomoccupancyplan.view`

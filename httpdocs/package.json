@@ -18,7 +18,6 @@
     "bootstrap-sortable": "git://github.com/drvic10k/bootstrap-sortable.git",
     "ckeditor": "^4.12.1",
     "cropperjs": "^1.3.5",
-    "fullcalendar": "^3.9.0",
     "highcharts": "^6.1.0",
     "jquery-cropper": "^1.0.0",
     "jquery-ui": "^1.12.1",

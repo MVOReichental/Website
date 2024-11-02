@@ -17,7 +17,6 @@ use de\mvo\service\Pictures;
 use de\mvo\service\ProfilePicture;
 use de\mvo\service\Protocols;
 use de\mvo\service\Redirect;
-use de\mvo\service\RoomOccupancyPlan;
 use de\mvo\service\StaticView;
 use de\mvo\service\Uploads;
 use de\mvo\service\UserManagement;
@@ -573,21 +572,6 @@ class Endpoints
             ->permission("protocols.upload.*");
     }
 
-    private static function mapRoomOccupancyPlanEndpoints()
-    {
-        Endpoint::create(HttpMethod::GET, "/internal/roomoccupancyplan")
-            ->target()
-            ->className(RoomOccupancyPlan::class)
-            ->method("getCalendar")
-            ->permission("roomoccupancyplan.view");
-
-        Endpoint::create(HttpMethod::GET, "/internal/roomoccupancyplan/entries.json")
-            ->target()
-            ->className(RoomOccupancyPlan::class)
-            ->method("getEntries")
-            ->permission("roomoccupancyplan.view");
-    }
-
     private static function mapUploadEndpoints()
     {
         Endpoint::create(HttpMethod::GET, "/uploads/[i:id]/[:key]/[*:filename]")
@@ -713,7 +697,6 @@ class Endpoints
         self::mapNoteDirectoryEndpoints();
         self::mapNoteDirectoryEditorEndpoints();
         self::mapProtocolsEndpoints();
-        self::mapRoomOccupancyPlanEndpoints();
         self::mapUploadEndpoints();
         self::mapVideosEndpoints();
         self::mapAdminEndpoints();
