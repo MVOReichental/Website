@@ -17,7 +17,7 @@ WORKDIR /app
 RUN npm install
 
 
-FROM ghcr.io/programie/dockerimages/php
+FROM ghcr.io/programie/php-docker
 
 ENV WEB_ROOT=/app/httpdocs
 ENV TZ=Europe/Berlin
