@@ -6,9 +6,13 @@
     <h1 class="page-header">Kontakt</h1>
 
     {% for contact in json %}
-        <address>
-            <strong>{{ contact.name }}</strong><br/>
-            <span class="pre">{{ contact.text }}</span>
+        <address{% if contact.class %} class="{{ contact.class }}"{% endif %}>
+            <strong>{{ contact.name }}</strong>
+
+            {% if contact.text %}
+                <br/>
+                <span class="pre">{{ contact.text }}</span>
+            {% endif %}
 
             {% if contact.mailbox %}
                 <br/>

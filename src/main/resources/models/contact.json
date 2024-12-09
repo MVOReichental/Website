@@ -1,32 +1,42 @@
 [
   {
     "name": "postalisch",
-    "text": "Musikverein Orgelfels Reichental e.V.\nBirgit Engel\nNeuer Weg 13/1\n76593 Gernsbach - Reichental"
+    "text": "Musikverein Orgelfels Reichental e.V.\nHeike Kast\nKaltenbronnerstr. 24\n76593 Gernsbach - Reichental"
   },
   {
-    "name": "Vorstand (Gleichberechtigt)",
-    "text": "Birgit Engel (07224 99 69 822)\nKatrin H\u00f6rth (07224 40280)",
+    "name": "Email-Adresse",
     "mailbox": "vorstand"
   },
   {
-    "name": "Musikervorstand",
-    "text": "Jasmin Melcher\nPhilipp Wieland",
-    "mailbox": "musikervorstand"
+    "name": "Vorstand Organisation",
+    "text": "Katrin Hörth",
+    "mailbox": "organisation",
+    "class": "mt-5"
   },
   {
-    "name": "Kassenverwalter",
-    "text": "Florian Wieland",
-    "mailbox": "kassier"
-  },
-  {
-    "name": "Schriftf\u00fchrer",
+    "name": "Vorstand Verwaltung",
     "text": "Heike Kast",
-    "mailbox": "schriftfuehrer"
+    "mailbox": "verwaltung"
   },
   {
-    "name": "Jugendleiter",
-    "text": "Gisela Wieland",
-    "mailbox": "jugendleiter"
+    "name": "Vorstand Finanzen",
+    "text": "Florian Wieland",
+    "mailbox": "finanzen"
+  },
+  {
+    "name": "Vorstand Musik",
+    "text": "Diana Jourdan",
+    "mailbox": "musik"
+  },
+  {
+    "name": "Vorstand Jugend",
+    "text": "Daniela Merz",
+    "mailbox": "jugend"
+  },
+  {
+    "name": "Vorstand Marketing",
+    "text": "Edith Wieland",
+    "mailbox": "marketing"
   },
   {
     "name": "Webmaster",
