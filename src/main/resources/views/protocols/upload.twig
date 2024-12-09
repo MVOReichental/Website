@@ -26,7 +26,9 @@
 
             <select class="selectpicker form-control" id="protocols-upload-groups" name="groups[]" data-actions-box="true" multiple required>
                 {% for name, title in groups %}
-                    <option value="{{ name }}">{{ title|raw }}</option>
+                    {% if currentUser.hasPermission("protocols.upload.#{name}") %}
+                        <option value="{{ name }}">{{ title|raw }}</option>
+                    {% endif %}
                 {% endfor %}
             </select>
         </div>
