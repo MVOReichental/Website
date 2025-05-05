@@ -111,10 +111,18 @@
                             <li class="nav-item">
                                 <span class="nav-link">Admin</span>
                                 <ul class="nav flex-column nav-submenu">
-                                    {{ this.navbar_link("internal/admin/usermanagement", "Benutzerverwaltung") }}
-                                    {{ this.navbar_link("internal/admin/newseditor", "Aktuell") }}
-                                    {{ this.navbar_link("internal/admin/visits", "Besucherstatistik") }}
-                                    {{ this.navbar_link("internal/messages/all", "Alle Nachrichten") }}
+                                    {% if currentUser.hasPermission("admin.userManagement") %}
+                                        {{ this.navbar_link("internal/admin/usermanagement", "Benutzerverwaltung") }}
+                                    {% endif %}
+                                    {% if currentUser.hasPermission("admin.newsEditor") %}
+                                        {{ this.navbar_link("internal/admin/newseditor", "Aktuell") }}
+                                    {% endif %}
+                                    {% if currentUser.hasPermission("admin.visits") %}
+                                        {{ this.navbar_link("internal/admin/visits", "Besucherstatistik") }}
+                                    {% endif %}
+                                    {% if currentUser.hasPermission("messages.all") %}
+                                        {{ this.navbar_link("internal/messages/all", "Alle Nachrichten") }}
+                                    {% endif %}
                                 </ul>
                             </li>
                         {% endif %}
