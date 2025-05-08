@@ -19,13 +19,16 @@ RUN npm install
 
 FROM ghcr.io/programie/php-docker
 
+ARG APP_VERSION=dev
+
 ENV WEB_ROOT=/app/httpdocs
 ENV TZ=Europe/Berlin
 
 RUN install-php 8.1 dom gd mbstring pdo-mysql && \
     a2enmod rewrite && \
     mkdir -p /app/twig-cache && \
-    chown www-data:www-data /app/twig-cache
+    chown www-data:www-data /app/twig-cache && \
+    echo "${APP_VERSION}" > /app/version
 
 COPY --from=composer /app/vendor /app/vendor
 COPY --from=npm /app/node_modules /app/httpdocs/node_modules

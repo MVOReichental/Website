@@ -29,3 +29,5 @@ jobs:
           context: .
           tags: ghcr.io/mvoreichental/website
           labels: ${{ steps.metadata.outputs.labels }}
+          build-args:
+            APP_VERSION: ${{ github.sha }}
