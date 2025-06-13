@@ -5,6 +5,11 @@ class Url
 {
     public static function getBaseUrl()
     {
+        $baseUrl = getenv("APP_BASE_URL");
+        if ($baseUrl !== false) {
+            return $baseUrl;
+        }
+
         if (isset($_SERVER["HTTPS"]) and $_SERVER["HTTPS"]) {
             $scheme = "https";
             $defaultPort = 443;
