@@ -1,12 +1,14 @@
 <?php
 namespace de\mvo\utils;
 
+use de\mvo\Config;
+
 class Url
 {
     public static function getBaseUrl()
     {
-        $baseUrl = getenv("APP_BASE_URL");
-        if ($baseUrl !== false) {
+        $baseUrl = Config::getValue("general", "base-url");
+        if ($baseUrl !== null) {
             return $baseUrl;
         }
 
