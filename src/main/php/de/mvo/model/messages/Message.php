@@ -143,11 +143,12 @@ class Message
         $query = Database::prepare("
             INSERT INTO `messages`
             SET
-                `date` = NOW(),
+                `date` = :now,
                 `senderUserId` = :senderUserId,
                 `text` = :text
         ");
 
+        $query->bindValue(":now", (new Date)->toDatabase());
         $query->bindValue(":senderUserId", $this->sender->id, PDO::PARAM_INT);
         $query->bindValue(":text", $this->text);
 

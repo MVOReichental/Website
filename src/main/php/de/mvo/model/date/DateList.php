@@ -14,11 +14,12 @@ class DateList extends ArrayObject
         $query = Database::prepare("
             SELECT *
             FROM `dates`
-            WHERE `startDate` >= NOW() OR (`endDate` IS NOT NULL AND `endDate` > NOW())
+            WHERE `startDate` >= :now OR (`endDate` IS NOT NULL AND `endDate` > :now)
             ORDER BY `startDate` ASC
             LIMIT :limit
         ");
 
+        $query->bindValue(":now", (new Date)->toDatabase());
         $query->bindValue(":limit", $limit, PDO::PARAM_INT);
 
         $query->execute();
@@ -40,11 +41,12 @@ class DateList extends ArrayObject
         $query = Database::prepare("
             SELECT *
             FROM `dates`
-            WHERE `isPublic` AND (`startDate` >= NOW() OR (`endDate` IS NOT NULL AND `endDate` > NOW()))
+            WHERE `isPublic` AND (`startDate` >= :now OR (`endDate` IS NOT NULL AND `endDate` > :now))
             ORDER BY `startDate` ASC
             LIMIT :limit
         ");
 
+        $query->bindValue(":now", (new Date)->toDatabase());
         $query->bindValue(":limit", $limit, PDO::PARAM_INT);
 
         $query->execute();
