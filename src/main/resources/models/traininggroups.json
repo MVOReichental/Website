@@ -1,5 +1,5 @@
 {
-  "date": "04.10.2024",
+  "date": "03.11.2025",
   "columns": [
     {
       "title": "Blockfl\u00f6tengruppen",
@@ -9,8 +9,9 @@
             {
               "trainer": "Gisela Wieland",
               "students": [
-                "Amelie Ronecker",
-                "Clara Weber"
+                "Elli Bervoets",
+                "Tamara Fray",
+                "Carolina Morcocean"
               ]
             },
             {
@@ -27,17 +28,6 @@
     {
       "title": "Instrumentalausbildung",
       "types": [
-        {
-          "name": "Klarinette",
-          "groups": [
-            {
-              "trainer": "Gisela Wieland",
-              "students": [
-                "Lara Merkel"
-              ]
-            }
-          ]
-        },
         {
           "name": "Posaune",
           "groups": [
